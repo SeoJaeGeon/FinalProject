@@ -23,4 +23,5 @@ public class Movie {
    private String movieVodStatus; // vod 구분
    
    	/* 모야 모야 */
+   	/* 왜 안되는거야 이거*/
 }
