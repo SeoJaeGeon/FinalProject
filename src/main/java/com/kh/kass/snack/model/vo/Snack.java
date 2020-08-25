@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class Snack {
-	private int sCateNo; // ½º³¼ Ä«Å×°í¸®
-	private String sCateName; // ½º³¼ Ä«Å×°í¸® ¸í
-	private int snackNo; // ½º³¼ ¹øÈ£
-	private String snackName; // ½º³¼ »óÇ°¸í
-	private String snackMemo; // ½º³¼ »óÇ° ¼³¸í
-	private int snackPrice; // ½º³¼ °¡°İ
-	private String snackStatus; // ½º³¼ »èÁ¦ ¿©ºÎ
+   private int sCateNo; // ìŠ¤ë‚µ ì¹´í…Œê³ ë¦¬
+   private String sCateName; // ìŠ¤ë‚µ ì¹´í…Œê³ ë¦¬ ëª…
+   private int snackNo; // ìŠ¤ë‚µ ë²ˆí˜¸
+   private String snackName; // ìŠ¤ë‚µ ìƒí’ˆëª…
+   private String snackMemo; // ìŠ¤ë‚µ ìƒí’ˆ ì„¤ëª…
+   private int snackPrice; // ìŠ¤ë‚µ ê°€ê²©
+   private String snackStatus; // ìŠ¤ë‚µ ì‚­ì œ ì—¬ë¶€
 }

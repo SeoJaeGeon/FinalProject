@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class Cart {
-	// cart ÃßÈÄ¿¡ Ãß°¡
-	private int cNo; // Àå¹Ù±¸´Ï ¹øÈ£
-	private int userNo; // À¯Àú ¹øÈ£
-	private int cartCount; // Àå¹Ù±¸´Ï ¼ö·®
-	private String cCartYN; // Àå¹Ù±¸´Ï ¿©ºÎ
+	// cart ì¶”í›„ì— ì¶”ê°€
+	private int cNo; // ì¥ë°”êµ¬ë‹ˆ ë²ˆí˜¸
+	private int userNo; // ìœ ì € ë²ˆí˜¸
+	private int cartCount; // ì¥ë°”êµ¬ë‹ˆ ìˆ˜ëŸ‰
+	private String cCartYN; // ì¥ë°”êµ¬ë‹ˆ ì—¬ë¶€
 }

@@ -1,23 +1,23 @@
 package com.kh.kass.common;
 
 public class PaginationA {
-	public static PageInfo getPageInfo(int currentPage, int listCount) {
-	      PageInfo pi = null;   // ÆäÀÌÁö Á¤º¸¸¦ ´ã¾Æ ÁÙ PageInfo ÂüÁ¶º¯¼ö ¼±¾ğ
-	      
-	      int pageLimit = 5;   // ÇÑ ÆäÀÌÁö¿¡ º¸¿©Áú ÆäÀÌÂ¡¹ÙÀÇ °¹¼ö
-	      int boardLimit = 10;   // ÇÑ ÆäÀÌÁö º¸¿©Áú °Ô½Ã±Û °³¼ö
-	      
-	      int maxPage = (int)Math.ceil((double)listCount / boardLimit);
-	      int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-	      int endPage = startPage + pageLimit - 1;
-	      
-	      // ¸¶Áö¸· ÆäÀÌÁö°¡ ÃÑ ÆäÀÌÁö ¼öº¸´Ù Å¬ °æ¿ì
-	      if(maxPage < endPage) {
-	         endPage = maxPage;
-	      }
-	      
-	      pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
+   public static PageInfo getPageInfo(int currentPage, int listCount) {
+         PageInfo pi = null;   // í˜ì´ì§€ ì •ë³´ë¥¼ ë‹´ì•„ ì¤„ PageInfo ì°¸ì¡°ë³€ìˆ˜ ì„ ì–¸
+         
+         int pageLimit = 5;   // í•œ í˜ì´ì§€ì— ë³´ì—¬ì§ˆ í˜ì´ì§•ë°”ì˜ ê°¯ìˆ˜
+         int boardLimit = 10;   // í•œ í˜ì´ì§€ ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ ê°œìˆ˜
+         
+         int maxPage = (int)Math.ceil((double)listCount / boardLimit);
+         int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+         int endPage = startPage + pageLimit - 1;
+         
+         // ë§ˆì§€ë§‰ í˜ì´ì§€ê°€ ì´ í˜ì´ì§€ ìˆ˜ë³´ë‹¤ í´ ê²½ìš°
+         if(maxPage < endPage) {
+            endPage = maxPage;
+         }
+         
+         pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 
-	      return pi;
-	   }
+         return pi;
+      }
 }

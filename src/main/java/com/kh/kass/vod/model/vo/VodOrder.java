@@ -3,13 +3,13 @@ package com.kh.kass.vod.model.vo;
 import java.sql.Date;
 
 public class VodOrder {
-	private int orderNo; // ÁÖ¹®ÀÌ·Â¹øÈ£
-	private int orderNum; // ÁÖ¹®¹øÈ£
-	private Date orderDate; // ÁÖ¹®³¯Â¥
-	private Date expDate; // À¯È¿±âÇÑ
-	private int userNo; // È¸¿ø¹øÈ£
-	private String vodPoster; // ¿µÈ­ Æ÷½ºÅÍ
-	private String vodName; // ¿µÈ­ÀÌ¸§ 
-	private String vodStatus; // vod±¸ºĞ
-	private String rStatus; // ¸®ºäÁ¸Àç¿©ºÎ
+   private int orderNo; // ì£¼ë¬¸ì´ë ¥ë²ˆí˜¸
+   private int orderNum; // ì£¼ë¬¸ë²ˆí˜¸
+   private Date orderDate; // ì£¼ë¬¸ë‚ ì§œ
+   private Date expDate; // ìœ íš¨ê¸°í•œ
+   private int userNo; // íšŒì›ë²ˆí˜¸
+   private String vodPoster; // ì˜í™” í¬ìŠ¤í„°
+   private String vodName; // ì˜í™”ì´ë¦„ 
+   private String vodStatus; // vodêµ¬ë¶„
+   private String rStatus; // ë¦¬ë·°ì¡´ì¬ì—¬ë¶€
 }

@@ -4,15 +4,15 @@ import lombok.Data;
 
 @Data
 public class Review {
-	private int rNo; // ¸®ºä¹øÈ£
-	private int userNo; // È¸¿ø¹øÈ£
-	private String movieName; // ¿µÈ­ÀÌ¸§
-	private String moviePoster; // ¿µÈ­ Æ÷½ºÅÍ
-	private String rSort; // ¿µÈ­, VOD ±¸ºĞ
-	private String rWriter; // ±Û¾´ÀÌ
-	private String rScore; // ÆòÁ¡
-	private String rContent; // ³»¿ë
-	private String rEnrollDate; // µî·ÏÀÏ
-	private String rModifyDate; // ¼öÁ¤ÀÏ
-	private String rStatus; // ¸®ºä»óÅÂ
+   private int rNo; // ë¦¬ë·°ë²ˆí˜¸
+   private int userNo; // íšŒì›ë²ˆí˜¸
+   private String movieName; // ì˜í™”ì´ë¦„
+   private String moviePoster; // ì˜í™” í¬ìŠ¤í„°
+   private String rSort; // ì˜í™”, VOD êµ¬ë¶„
+   private String rWriter; // ê¸€ì“´ì´
+   private String rScore; // í‰ì 
+   private String rContent; // ë‚´ìš©
+   private String rEnrollDate; // ë“±ë¡ì¼
+   private String rModifyDate; // ìˆ˜ì •ì¼
+   private String rStatus; // ë¦¬ë·°ìƒíƒœ
 }

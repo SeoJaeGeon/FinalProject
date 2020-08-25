@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 public class Movie_Res {
-	private int resNo; // ¿µÈ­»ó¿µ¹øÈ£
-	private int movieNo; // ¿µÈ­¹øÈ£
-	private Date resDate; // »ó¿µ³¯Â¥
-	private int roomNo; // »ó¿µ°ü¹øÈ£
-	private String resInfo; // ÁÂ¼ºÇöÈ²
-	private String startTime; // »ó¿µ½ÃÀÛ ½Ã°£
-	private String endTime; // »ó¿µÁ¾·á ½Ã°£
+   private int resNo; // ì˜í™”ìƒì˜ë²ˆí˜¸
+   private int movieNo; // ì˜í™”ë²ˆí˜¸
+   private Date resDate; // ìƒì˜ë‚ ì§œ
+   private int roomNo; // ìƒì˜ê´€ë²ˆí˜¸
+   private String resInfo; // ì¢Œì„±í˜„í™©
+   private String startTime; // ìƒì˜ì‹œì‘ ì‹œê°„
+   private String endTime; // ìƒì˜ì¢…ë£Œ ì‹œê°„
 }

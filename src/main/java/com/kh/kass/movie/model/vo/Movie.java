@@ -6,19 +6,23 @@ import lombok.Data;
 
 @Data
 public class Movie {
-	private int movieNo; // ¿µÈ­¹øÈ£
-	private String mobieName; // ¿µÈ­ÀÌ¸§
-	private int movieAge; // ¿µÈ­¿¬·É
-	private int genreCode; // Àå¸£ÄÚµå
-	private Date Rdate; // °³ºÀ³¯Â¥
-	private String Rstatus; // °³ºÀ»óÅÂ
-	private int moviePrice; // ¿µÈ­°¡°İ
-	private String movieLink; // ¿¹°íÆí¸µÅ©
-	private String movieForeman; // °¨µ¶
-	private String movieProducer; // ÇÁ·Îµà¼­
-	private String movieActor; // ¹è¿ì
-	private String movieStime; // »ó¿µ½Ã°£
-	private String movieCountry; // ±¹°¡
-	private String movieContent; // ¿µÈ­³»¿ë
-	private String movieVodStatus; // vod ±¸ºĞ
+   private int movieNo; // ì˜í™”ë²ˆí˜¸
+   private String mobieName; // ì˜í™”ì´ë¦„
+   private int movieAge; // ì˜í™”ì—°ë ¹
+   private int genreCode; // ì¥ë¥´ì½”ë“œ
+   private Date Rdate; // ê°œë´‰ë‚ ì§œ
+   private String Rstatus; // ê°œë´‰ìƒíƒœ
+   private int moviePrice; // ì˜í™”ê°€ê²©
+   private String movieLink; // ì˜ˆê³ í¸ë§í¬
+   private String movieForeman; // ê°ë…
+   private String movieProducer; // í”„ë¡œë“€ì„œ
+   private String movieActor; // ë°°ìš°
+   private String movieStime; // ìƒì˜ì‹œê°„
+   private String movieCountry; // êµ­ê°€
+   private String movieContent; // ì˜í™”ë‚´ìš©
+   private String movieVodStatus; // vod êµ¬ë¶„
+   
+   /*   
+    * 
+    * */
 }
