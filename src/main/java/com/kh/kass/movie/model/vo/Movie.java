@@ -20,5 +20,5 @@ public class Movie {
 	private String movieStime; // 상영시간
 	private String movieCountry; // 국가
 	private String movieContent; // 영화내용
-	private String movieVod_Status; // vod 구분
+	private String movieVodStatus; // vod 구분
 }
