@@ -12,4 +12,6 @@ public class Goods {
 	private int goodsStock; // 굿즈 재고
 	private String goodsMemo; // 굿즈 상품 설명
 	private String goodsStatus; // 굿즈 존재 여부
+	
+	/* TEST 하는 중입니다. */
 }
