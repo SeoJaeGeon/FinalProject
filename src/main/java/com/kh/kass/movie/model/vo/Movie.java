@@ -23,6 +23,6 @@ public class Movie {
    private String movieVodStatus; // vod 구분
    
    /*   
-    * 
+    * 수정사항입니다 확인해보세요 이게 보이면 됩니다.
     * */
 }
