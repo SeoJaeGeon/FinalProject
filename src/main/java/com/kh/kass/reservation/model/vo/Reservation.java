@@ -26,6 +26,10 @@ public class Reservation {
 	 * 	3 : 다음 칸으로 넘어가기 <br>
 	 */
 	
+	/*
+	 * PULL 테스트 해보겠습니다 이게 뜬다면 성공입니다.
+	 * */
+	
 	// 상영 정보
 	private int resNo; // 영화 상영 번호
 	private Date resDate; // 영화 상영 날짜
