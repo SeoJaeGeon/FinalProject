@@ -24,4 +24,33 @@ public class Movie {
    
    	/* 모야 모야 */
    	/* 왜 안되는거야 이거*/
+
+	public Movie(int movieNo, String mobieName, int movieAge, int genreCode, Date rdate, String rstatus, int moviePrice,
+			String movieLink, String movieForeman, String movieProducer, String movieActor, String movieStime,
+			String movieCountry, String movieContent, String movieVodStatus) {
+		super();
+		this.movieNo = movieNo;
+		this.mobieName = mobieName;
+		this.movieAge = movieAge;
+		this.genreCode = genreCode;
+		Rdate = rdate;
+		Rstatus = rstatus;
+		this.moviePrice = moviePrice;
+		this.movieLink = movieLink;
+		this.movieForeman = movieForeman;
+		this.movieProducer = movieProducer;
+		this.movieActor = movieActor;
+		this.movieStime = movieStime;
+		this.movieCountry = movieCountry;
+		this.movieContent = movieContent;
+		this.movieVodStatus = movieVodStatus;
+	}
+
+	/*
+	 * 수정사항입니다 확인해보세요 이게 보이면 됩니다.
+	 */
+
+	/*
+	 * 수정사항입니다 확인해보세요 이게 보이면 됩니다. 22222222222
+	 */
 }
