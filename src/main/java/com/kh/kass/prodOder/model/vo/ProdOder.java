@@ -5,15 +5,15 @@ import lombok.Data;
 
 @Data
 public class ProdOder {
-	private int userId; // È¸¿ø¾ÆÀÌµğ
-	private int orderNo; // ÁÖ¹®ÀÌ·Â¹øÈ£
-	private int orderNum; // ÁÖ¹®¹øÈ£ 
-	private int count; //¼ö·®
-	private int dNo; // ¹è¼ÛÁ¤º¸ ¹øÈ£
-	private String dName; // ¼ö·ÉÀÎ
-	private String dPhone; // ÀüÈ­¹øÈ£
-	private String dAddress; // ÁÖ¼ÒÁö
-	private String dMemo; // ¹è¼Û ¸Ş¸ğ
-	private Date codeTerm; // ÄÚµå±â°£
-	private String codeStatus; // ÄÚµåÀ¯È¿»óÅÂ
+   private int userId; // íšŒì›ì•„ì´ë””
+   private int orderNo; // ì£¼ë¬¸ì´ë ¥ë²ˆí˜¸
+   private int orderNum; // ì£¼ë¬¸ë²ˆí˜¸ 
+   private int count; //ìˆ˜ëŸ‰
+   private int dNo; // ë°°ì†¡ì •ë³´ ë²ˆí˜¸
+   private String dName; // ìˆ˜ë ¹ì¸
+   private String dPhone; // ì „í™”ë²ˆí˜¸
+   private String dAddress; // ì£¼ì†Œì§€
+   private String dMemo; // ë°°ì†¡ ë©”ëª¨
+   private Date codeTerm; // ì½”ë“œê¸°ê°„
+   private String codeStatus; // ì½”ë“œìœ íš¨ìƒíƒœ
 }

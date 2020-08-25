@@ -4,14 +4,12 @@ import lombok.Data;
 
 @Data
 public class Goods {
-	private int gCateNo; // ±ÂÁî Ä«Å×°í¸®
-	private String gCateName; // ±ÂÁî Ä«Å×°í¸® ¸í
-	private int goodsNo; // ±ÂÁî ¹øÈ£
-	private String goodsName; // ±ÂÁî »óÇ°¸í
-	private int goodsPrice; // ±ÂÁî °¡°İ
-	private int goodsStock; // ±ÂÁî Àç°í
-	private String goodsMemo; // ±ÂÁî »óÇ° ¼³¸í
-	private String goodsStatus; // ±ÂÁî Á¸Àç ¿©ºÎ
-	
-	/* TEST ÇÏ´Â ÁßÀÔ´Ï´Ù. */
+   private int gCateNo; // êµ¿ì¦ˆ ì¹´í…Œê³ ë¦¬
+   private String gCateName; // êµ¿ì¦ˆ ì¹´í…Œê³ ë¦¬ ëª…
+   private int goodsNo; // êµ¿ì¦ˆ ë²ˆí˜¸
+   private String goodsName; // êµ¿ì¦ˆ ìƒí’ˆëª…
+   private int goodsPrice; // êµ¿ì¦ˆ ê°€ê²©
+   private int goodsStock; // êµ¿ì¦ˆ ì¬ê³ 
+   private String goodsMemo; // êµ¿ì¦ˆ ìƒí’ˆ ì„¤ëª…
+   private String goodsStatus; // êµ¿ì¦ˆ ì¡´ì¬ ì—¬ë¶€
 }

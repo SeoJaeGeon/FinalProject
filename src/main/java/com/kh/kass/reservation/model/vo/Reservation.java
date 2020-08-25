@@ -8,42 +8,40 @@ import lombok.Data;
 
 @Data
 public class Reservation {
-	// ¿µÈ­ Á¤º¸
+	// ì˜í™” ì •ë³´
 	private Movie movie;
-	
-	// »ó¿µ°ü Á¤º¸
-	private int mocNo; // Áö¿ª ¹øÈ£
-	private String mocName; // Áö¿ª¸í
-	
-	private int maNo; // ÁöÁ¡ ¹øÈ£
-	private String maName; // ÁöÁ¡¸í
-	
-	private int roomNo; // »ó¿µ°ü ¹øÈ£
-	private String roomchair; // »ó¿µ°ü ÀÚ¸® ÃÊ±â°ª (0,0,1,2,3,....)
-	/*	0 : ºóÀÚ¸®
-	 * 	1 : ¿¹¾àµÈ ÀÚ¸®
-	 * 	2 : Åë·Î
-	 * 	3 : ´ÙÀ½ Ä­À¸·Î ³Ñ¾î°¡±â <br>
-	 */
-	
+
+	// ìƒì˜ê´€ ì •ë³´
+	private int mocNo; // ì§€ì—­ ë²ˆí˜¸
+	private String mocName; // ì§€ì—­ëª…
+
+	private int maNo; // ì§€ì  ë²ˆí˜¸
+	private String maName; // ì§€ì ëª…
+
+	private int roomNo; // ìƒì˜ê´€ ë²ˆí˜¸
+	private String roomchair; // ìƒì˜ê´€ ìë¦¬ ì´ˆê¸°ê°’ (0,0,1,2,3,....)
 	/*
-	 * PULL Å×½ºÆ® ÇØº¸°Ú½À´Ï´Ù ÀÌ°Ô ¶á´Ù¸é ¼º°øÀÔ´Ï´Ù.
-	 * */
-	
-	// »ó¿µ Á¤º¸
-	private int resNo; // ¿µÈ­ »ó¿µ ¹øÈ£
-	private Date resDate; // ¿µÈ­ »ó¿µ ³¯Â¥
-	private String resInfo; // ¿µÈ­°ü ÁÂ¼® ÇöÈ²
-	private String startTime; // »ó¿µ ½ÃÀÛ ½Ã°£
-	private String endTime; // »ó¿µ Á¾·á ½Ã°£
-	
-	// »ç¿ëÀÚ ¿µÈ­ ¿¹¸Å
-	private int urNo; // ¿µÈ­ ¿¹¸Å ¹øÈ£
-	private Date urDate; // ¿¹¸Å³¯Â¥
-	private String uraddress; // ÀÚ¸® ÁÖ¼Ò°ª ex)13,14
-	private String urRes; // ÀÚ¸® ¿¹¸Å¹øÈ£(ex= J1,J2)
-	private int urPeople1; // ÀÏ¹İÀÎ ¸î¸í
-	private int urPeople2; // Ã»¼Ò³â ¸î¸í
-	private int urPrice; // °áÁ¦ ±İ¾×
-	
+	 * 0 : ë¹ˆìë¦¬ 1 : ì˜ˆì•½ëœ ìë¦¬ 2 : í†µë¡œ 3 : ë‹¤ìŒ ì¹¸ìœ¼ë¡œ ë„˜ì–´ê°€ê¸° <br>
+	 */
+
+	/*
+	 * PULL í…ŒìŠ¤íŠ¸ í•´ë³´ê² ìŠµë‹ˆë‹¤ ì´ê²Œ ëœ¬ë‹¤ë©´ ì„±ê³µì…ë‹ˆë‹¤.
+	 */
+
+	// ìƒì˜ ì •ë³´
+	private int resNo; // ì˜í™” ìƒì˜ ë²ˆí˜¸
+	private Date resDate; // ì˜í™” ìƒì˜ ë‚ ì§œ
+	private String resInfo; // ì˜í™”ê´€ ì¢Œì„ í˜„í™©
+	private String startTime; // ìƒì˜ ì‹œì‘ ì‹œê°„
+	private String endTime; // ìƒì˜ ì¢…ë£Œ ì‹œê°„
+
+	// ì‚¬ìš©ì ì˜í™” ì˜ˆë§¤
+	private int urNo; // ì˜í™” ì˜ˆë§¤ ë²ˆí˜¸
+	private Date urDate; // ì˜ˆë§¤ë‚ ì§œ
+	private String uraddress; // ìë¦¬ ì£¼ì†Œê°’ ex)13,14
+	private String urRes; // ìë¦¬ ì˜ˆë§¤ë²ˆí˜¸(ex= J1,J2)
+	private int urPeople1; // ì¼ë°˜ì¸ ëª‡ëª…
+	private int urPeople2; // ì²­ì†Œë…„ ëª‡ëª…
+	private int urPrice; // ê²°ì œ ê¸ˆì•¡
+
 }
