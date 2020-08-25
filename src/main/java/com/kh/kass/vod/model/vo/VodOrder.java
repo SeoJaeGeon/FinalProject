@@ -2,6 +2,9 @@ package com.kh.kass.vod.model.vo;
 
 import java.sql.Date;
 
+import lombok.Data;
+
+@Data
 public class VodOrder {
    private int orderNo; // 주문이력번호
    private int orderNum; // 주문번호

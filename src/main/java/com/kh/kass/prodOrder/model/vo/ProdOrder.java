@@ -1,10 +1,10 @@
-package com.kh.kass.prodOder.model.vo;
+package com.kh.kass.prodOrder.model.vo;
 
 import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class ProdOder {
+public class ProdOrder {
    private int userId; // 회원아이디
    private int orderNo; // 주문이력번호
    private int orderNum; // 주문번호 

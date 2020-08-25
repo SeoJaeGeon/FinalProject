@@ -1,3 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
-<configuration></configuration>
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.kh.kass.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.kass.goods.model.vo.Goods" alias="Goods"/>
+		<typeAlias type="com.kh.kass.movie.model.vo.Movie" alias="Movie"/>
+		<typeAlias type="com.kh.kass.reservation.model.vo.Reservation" alias="Reservation"/>
+		<typeAlias type="com.kh.kass.review.model.vo.Review" alias="Review"/>
+		<typeAlias type="com.kh.kass.snack.model.vo.Snack" alias="Snack"/>
+		<!-- <typeAlias type="com.kh.kass.vod.model.vo.Vod" alias="Vod"/> -->
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/goods-mapper.xml" />
+		<mapper resource="mappers/movie-mapper.xml" />
+		<mapper resource="mappers/reservation-mapper.xml" />
+		<mapper resource="mappers/review-mapper.xml" />
+		<mapper resource="mappers/snack-mapper.xml" />
+		<mapper resource="mappers/vod-mapper.xml" />
+	</mappers>
+	
+</configuration>
