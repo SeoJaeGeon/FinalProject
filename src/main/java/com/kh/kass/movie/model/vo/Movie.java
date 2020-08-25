@@ -22,6 +22,11 @@ public class Movie {
    private String movieContent; // 영화내용
    private String movieVodStatus; // vod 구분
    
+   /* 깃 에러 테스트입니다.*/
+   /* 깃 에러 테스트입니다.*/
+   /* 깃 에러 테스트입니다.*/
+   /* 깃 에러 테스트입니다.*/
+   
    	/* 모야 모야 */
    	/* 왜 안되는거야 이거*/
 
