@@ -22,7 +22,5 @@ public class Movie {
    private String movieContent; // 영화내용
    private String movieVodStatus; // vod 구분
    
-   /*   
-    * 실험용 pull 제대로 되는지 확인용
-    * */
+   	/* 모야 모야 */
 }
