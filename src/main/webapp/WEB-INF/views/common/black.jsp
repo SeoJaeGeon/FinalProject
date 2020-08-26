@@ -139,7 +139,7 @@
     background: rgb(31, 69, 97);
 }
 
-.title {
+.loginTitle {
     padding: 10px;
     float: left;
     /* border: 1px solid blue; */
@@ -262,7 +262,7 @@ input {
         <!-- Modal content -->
         <div class="modal-content">
             <div class="header">
-                <span class="title">로그인</span>
+                <span class="loginTitle">로그인</span>
                 <span class="close" onclick="close_pop();">X</span>
             </div>
             <div>
