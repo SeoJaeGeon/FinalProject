@@ -18,6 +18,7 @@
    crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
    href="https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@1.0/nanumbarungothicsubset.css">
+    <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 
 <style>
 header, nav, section, article, aside, footer {
@@ -222,16 +223,16 @@ header>section {
                <div id="demo" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                      <div class="carousel-item active">
-                        <img class="d-block w-100" src="<%= request.getContextPath() %>/resources/images/devil.jpg"
+                        <img class="d-block w-100" src="${ contextPath }/resources/images/devil.jpg"
                            alt="First slide" id="img1">
                         <div class="carousel-caption d-none d-md-bl ock"></div>
                      </div>
                      <div class="carousel-item">
-                        <img class="d-block w-100" src="<%= request.getContextPath() %>/resources/images/rain.jpeg"
+                        <img class="d-block w-100" src="${ contextPath }/resources/images/rain.jpeg"
                            alt="Second slide" id="img2">
                      </div>
                      <div class="carousel-item">
-                        <img class="d-block w-100" src="<%= request.getContextPath() %>/resources/images/alive.jpg"
+                        <img class="d-block w-100" src="${ contextPath }/resources/images/alive.jpg"
                            alt="Third slide" id="img3">
                      </div>
                      <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -254,7 +255,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/rain.jpeg" class="poster">
+                        <img src="${ contextPath }/resources/images/rain.jpeg" class="poster">
                      </div>
                   </a>
                   <div class="onScrenn">상영중</div>
@@ -263,7 +264,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/devil.jpg" class="poster">
+                        <img src="${ contextPath }/resources/images/devil.jpg" class="poster">
                      </div>
                   </a>
                   <div class="onScrenn">상영중</div>
@@ -272,7 +273,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/alive.jpg" class="poster">
+                        <img src="${ contextPath }/resources/images/alive.jpg" class="poster">
                      </div>
                   </a>
                   <div class="onScrenn">상영중</div>
@@ -288,7 +289,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/pop1.jpeg" class="poster">
+                        <img src="${ contextPath }/resources/images/pop1.jpeg" class="poster">
                         <p>팝콘</p>
                      </div>
                   </a>
@@ -296,7 +297,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/pop2.jpeg" class="poster">
+                        <img src="${ contextPath }/resources/images/pop2.jpeg" class="poster">
                         <p>토르망치</p>
                      </div>
                   </a>
@@ -305,7 +306,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/pop3.jpeg" class="poster">
+                        <img src="${ contextPath }/resources/images/pop3.jpeg" class="poster">
                         <p>뱃지</p>
                      </div>
                   </a>
@@ -321,7 +322,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/aladin.jpeg" class="poster">
+                        <img src="${ contextPath }/resources/images/aladin.jpeg" class="poster">
                         <p>알라딘</p>
                      </div>
                   </a>
@@ -329,7 +330,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/spirit.jpg" class="poster">
+                        <img src="${ contextPath }/resources/images/spirit.jpg" class="poster">
                         <p>미녀와 야수</p>
                      </div>
                   </a>
@@ -337,7 +338,7 @@ header>section {
                <article class="movie">
                   <a href="#">
                      <div class="photoDiv">
-                        <img src="<%= request.getContextPath() %>/resources/images/begina.jpeg" class="poster">
+                        <img src="${ contextPath }/resources/images/begina.jpeg" class="poster">
                         <p>비긴어게인</p>
                      </div>
                   </a>
