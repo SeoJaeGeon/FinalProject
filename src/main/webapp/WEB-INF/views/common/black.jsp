@@ -286,8 +286,8 @@ input {
                             <td colspan="2"><button id="loginBtn" class="loginBtn">로그인</button></td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="find_bar"><span class="aFind"><a href="#">ID/PW 찾기</a></span><span class="aJoin"><a
-                                        href="#">회원가입</a></span></td>
+                            <td colspan="2" class="find_bar"><span class="aFind"><a href="findUserInfo.do">ID/PW 찾기</a></span><span class="aJoin"><a
+                                        href="minsertView.do">회원가입</a></span></td>
                         </tr>
                     </table>
                 </form>
