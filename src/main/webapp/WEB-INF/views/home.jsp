@@ -157,7 +157,7 @@ header>section {
 
 .movie {
    display: inline-block;
-   margin: 0px 50px;
+   margin: 50px 50px;
    margin-bottom: 50px;
    width: 250px;
    height: 380px;
@@ -259,7 +259,7 @@ header>section {
                      </div>
                   </a>
                   <div class="onScrenn">상영중</div>
-                  <button class="resevation">예매</button>
+                  <button class="resevation">예매하기</button>
                </article>
                <article class="movie">
                   <a href="#">
@@ -268,7 +268,7 @@ header>section {
                      </div>
                   </a>
                   <div class="onScrenn">상영중</div>
-                  <button class="resevation">예매</button>
+                  <button class="resevation">예매하기</button>
                </article>
                <article class="movie">
                   <a href="#">
@@ -277,7 +277,7 @@ header>section {
                      </div>
                   </a>
                   <div class="onScrenn">상영중</div>
-                  <button class="resevation">예매</button>
+                  <button class="resevation">예매하기</button>
                </article>
             </div>
          </div>
