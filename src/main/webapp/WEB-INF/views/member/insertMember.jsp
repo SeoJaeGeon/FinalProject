@@ -15,7 +15,7 @@
 <body>
 <div class="wrap">
         <div class="content">
-            <div class="logoDiv"><img src="${ contextPath }/resources/images/logo_navy.png" class="logo"></div>
+            <div class="logoDiv"><a href="${ contextPath }"><img src="${ contextPath }/resources/images/logo_navy.png" class="logo"></a></div>
             <div class="title">회원가입</div>
 
             <form action="minsert.do" id="joinFrm" method="post" onsubmit="return join();">
@@ -201,24 +201,24 @@
             }
 
 			/* 인증번호 이메일 전송 */
-			function emailSend() {
+			 function emailSend() {
 				$("#certifyCode").removeAttr("disabled");
-				let clientEmail = document.getElementById("email").value;
+			// 	let clientEmail = document.getElementById("email").value;
 
-                console.log("입력이메일 : " + clientEmail);
+            //     console.log("입력이메일 : " + clientEmail);
 
-                    $.ajax({
-                       type:"POST",
-                       url:"sendEmail.do",
-                       data:{userEmail:clientEmail},
-                       success : function(data) {
-                           alert("이메일 전송이 완료되었습니다. 메일을 확인해주세요");
-                       }, 
-                       error: function(e) {
-                           alert("오류입니다. 잠시 후 다시 시도해 주세요.");
-                       }
-                    });
-                }
+            //         $.ajax({
+            //            type:"POST",
+            //            url:"sendEmail.do",
+            //            data:{userEmail:clientEmail},
+            //            success : function(data) {
+            //                alert("이메일 전송이 완료되었습니다. 메일을 확인해주세요");
+            //            }, 
+            //            error: function(e) {
+            //                alert("오류입니다. 잠시 후 다시 시도해 주세요.");
+            //            }
+            //         });
+                 }
 			
 			
 			/* 인증번호 확인 */

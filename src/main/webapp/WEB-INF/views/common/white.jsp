@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 <title>KASS CINEMA</title>
 
 <style>
@@ -126,6 +128,11 @@ header>section {
 </style>
 </head>
 <body>
+<c:if test="${ !empty msg }">
+		<script>alert('${msg}');</script>
+		<c:remove var="msg"/>
+	
+	</c:if>
    <header>
         <section id="header-1">
             <form id="search-form">
@@ -139,8 +146,13 @@ header>section {
             <img src="<%= request.getContextPath() %>/resources/images/logo_navy.png" id="logo_img">
         </section>
         <section id="header-3">
-            <a href="#" class="login_bar">회원가입</a>
-            <a href="#" class="login_bar">로그인</a>
+            <c:if test="${ empty sessionScope.loginUser }">
+            <a href="minsertView.do" class="login_bar">회원가입</a> <a href="javascript:login_bar();" class="login_bar" id="login_bar">로그인</a>
+        </c:if>
+        
+        <c:if test="${ !empty sessionScope.loginUser }">
+        <a href="myKass.do" class="login_bar">MY KASS</a> <a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
+        </c:if>
         </section>
     </header>
 
@@ -153,5 +165,38 @@ header>section {
             <li><a href="#">스토어</a></li>
         </ul>
     </nav>
+    
+    <script>
+        function login_bar() {
+            document.getElementById("myModal").style.display="block";
+        }
+       
+        function back() {
+            document.getElementById("myModal").style.display="none";
+        }
+
+        function close_pop(){
+            document.getElementById("myModal").style.display="none";
+        }
+        
+        /* 로그인  */
+        function login() {
+        	// 로그인 유효성검사
+            var id = $.trim($("#userId").val());
+            var pwd = $.trim($("#userPwd").val());
+
+            if (!id) {
+                alert("아이디를 입력하세요.");
+                $("#userId").focus();
+                return false;
+            } else if (!pwd) {
+                alert("비밀번호를 입력하세요.");
+                $("#userPwd").focus();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 </html>

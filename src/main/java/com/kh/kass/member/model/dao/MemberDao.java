@@ -20,8 +20,17 @@ public class MemberDao {
 	}
 
 	public int checkIdDup(String id) {
-		System.out.println("dao id"+id);
 		return sqlSession.selectOne("memberMapper.idCheck", id);
+	}
+
+	// 아이디 찾기
+	public Member selectMemberId(Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
+
+	// 본인확인
+	public String selectPwdQ(Member m) {
+		return sqlSession.selectOne("memberMapper.findPwdQ", m);
 	}
 	
 	
