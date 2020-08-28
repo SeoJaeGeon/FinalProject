@@ -1,7 +1,5 @@
 package com.kh.kass.member.model.service;
 
-import javax.servlet.http.HttpSession;
-
 import com.kh.kass.member.model.vo.Member;
 
 public interface MemberService {
@@ -21,5 +19,25 @@ public interface MemberService {
 	public int checkIdDup(String id);
 
 	// 6. 이메일 전송
-	public void mailSend(HttpSession session, String userEmail);
+//	public void mailSend(HttpSession session, String userEmail);
+
+	// 7. 아이디 찾기
+	public Member findId(Member m);
+
+	// 8. 비밀번호 찾기
+	public String findMember(Member m);
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

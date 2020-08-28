@@ -37,5 +37,22 @@
 		FROM MEMBER
 		WHERE USER_ID=#{userId}
 	</select>
+	
+	<select id="findId" parameterType="Member" resultMap="memberResultSet">
+		SELECT USER_ID, USER_ENROLL_DATE
+		FROM MEMBER
+		WHERE USER_NAME = #{userName}
+		AND USER_BIRTH = #{userBirth}
+		AND USER_PHONE = #{userPhone}
+		AND USER_STATUS = 'Y'
+	</select>
+	
+	<select id="findPwdQ" parameterType="Member" resultType="string">
+		SELECT USER_PWD_Q
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		AND USER_NAME = #{userName}
+		AND USER_STATUS = 'Y'
+	</select>
 
 </mapper>
