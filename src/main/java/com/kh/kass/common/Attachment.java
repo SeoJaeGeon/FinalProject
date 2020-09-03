@@ -15,4 +15,6 @@ public class Attachment {
 	private int snackNo; // 상품번호
 	private int goodsNo; // 굿즈번호
 	
+	// 09:46 실험용1
+	
 }
