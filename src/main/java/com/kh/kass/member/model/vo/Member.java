@@ -19,4 +19,27 @@ public class Member {
 	private String userStatus;
 	private Date userEnrollDate;
 	private Date userModifyDate;
+	
+	public Member() {}
+
+	public Member(int userNo, String userId, String userPwd, String userPwdQ, String userPwdA, String userName,
+			String userBirth, String userAddr, String userPhone, String userEmail, String userStatus,
+			Date userEnrollDate, Date userModifyDate) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userPwdQ = userPwdQ;
+		this.userPwdA = userPwdA;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userAddr = userAddr;
+		this.userPhone = userPhone;
+		this.userEmail = userEmail;
+		this.userStatus = userStatus;
+		this.userEnrollDate = userEnrollDate;
+		this.userModifyDate = userModifyDate;
+	}
+	
+	
 }
