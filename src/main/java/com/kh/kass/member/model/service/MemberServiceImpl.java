@@ -3,9 +3,12 @@ package com.kh.kass.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.support.SessionStatus;
 
+import com.kh.kass.common.Attachment;
 import com.kh.kass.member.model.dao.MemberDao;
 import com.kh.kass.member.model.vo.Member;
+import com.kh.kass.member.model.vo.Withdrawal;
 
 
 @Service("mService")
@@ -77,16 +80,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int updateMember(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mDao.updateMember(m);
 	}
-
-	@Override
-	public int deleteMember(String id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	
 	@Override
 	public Member findId(Member m) {
@@ -97,13 +92,57 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String findMember(Member m) {
-		String pwdQ = mDao.selectPwdQ(m);
-		
+		String pwdQ = mDao.selectPwdQ(m);	
 		return pwdQ;
 	}
 
+	@Override
+	public int findPwd(Member m) {
+		// TODO Auto-generated method stub
+		return mDao.findPwd(m);
+	}
 
-	
-	
+	@Override
+	public int updatePwd(Member m) {
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		m.setUserPwd(encPwd);
+		return mDao.updatePwd(m);
+	}
+
+	@Override
+	public int checkPwd(Member m) {
+		Member loginUser = mDao.selectMember(m);
+		int result = 1;
+		if(!bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+			result = 0;
+		}
+		return result;
+	}
+
+	@Override
+	public int insertReason(Withdrawal wd) {
+		return mDao.insertReason(wd);
+	}
+
+	@Override
+	public int deleteMember(Withdrawal wd) {
+		return mDao.deleteMember(wd);
+	}
+
+	@Override
+	public int uploadImg(Attachment at) {
+		return mDao.uploadImg(at);
+	}
+
+	@Override
+	public int deleteImg(Withdrawal wd) {
+		return mDao.deleteImg(wd);
+	}
+
+	@Override
+	public Attachment selectAtt(int userNo) {
+		return mDao.selectAtt(userNo);
+	}
+
 	
 }

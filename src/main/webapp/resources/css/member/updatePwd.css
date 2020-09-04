@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* content */
+/* content-1 */
+.content-1 {
+    /* border:1px solid rebeccapurple; */
+}
+.rightContent {
+    width: 900px;
+    /* border: 1px solid teal; */
+    margin-left: 100px;
+    float: left;
+}
+.content-1-1 {
+    position: relative;
+    display:inline;   
+}
+
+/* <h2> title */
+.title {
+    color:rgb(70, 70, 70);
+}
+.contentTable {
+    width: 900px;
+    border-collapse: collapse;
+    border-top: 1px solid black;
+
+}
+
+.contentTable td {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d1d5dd;
+
+}
+
+
+.left {
+    background: #f7f8f9;
+    width: 160px;
+    height: 40px;
+}
+
+.contentTable input {
+    /* margin-left: 15px; */
+    size: 20px;
+    width: 250px;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+.pwdGuide {
+    font-size: 14px;
+    
+}
+
+span {
+    color: red;
+}
+
+.buttons {
+    margin-top: 70px;
+    /* border: 1px solid firebrick; */
+    width:900px;
+    text-align: center;
+}
+
+.next{
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    background: rgb(31, 69, 97);
+    font-weight: bold;
+    color: white;
+    margin: 0px 20px;
+}
+
+.cancel {
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    background: white(31, 69, 97);
+    font-weight: bold;
+    background: white;
+    color: rgb(31, 69, 97);
+    border: 1px solid rgb(31, 69, 97);
+    margin: 0px 20px;
+}
+/* content-1 */
+/* content */
