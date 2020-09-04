@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
-<link href="${ contextPath }/resources/css/myPage.css"
-	rel="stylesheet" type="text/css">
+<link href="${ contextPath }/resources/css/member/myPage.css?after" rel="stylesheet"
+	type="text/css">
+<title>MY KASS</title>
 <style>
 header, nav, section, article, aside, footer {
 	box-sizing: border-box;
@@ -32,10 +33,10 @@ nav {
 
 .content {
 	width: 100%;
-	heigt:100%;
-	margin:auto;
+	heigt: 100%;
+	margin: auto;
 	border: 1px solid red;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 footer {
@@ -96,9 +97,9 @@ header>section {
 #stay_footer_inner {
 	width: 1500px;
 	height: 150px;
-	display:block;
-	margin:auto;
-} 
+	display: block;
+	margin: auto;
+}
 
 #wrap_stay {
 	width: 1500px;
@@ -106,110 +107,117 @@ header>section {
 }
 /* 영역 나누기 */
 </style>
-<title>Insert title here</title>
+
 </head>
 <body>
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/white.jsp" />
-	
 
-	<div class="content">
-        <div class="listArrangeDiv">
-        <p class="listArrange">My KASS</p>
-      </div>
-		<jsp:include page="../../views/common/memberMenu.jsp" />
-       
-        <section class="rightContent">
-            <section class="content-1">
-                <section class="content-1-1">
-                    <div class="my-1">
-                        <div class="my-1-1">
-                            <img src="${ contextPath }/resources/images/defaultPropfieImg.png" class="profileImg">
-                        </div>
-                        <div class="my-1-2">
-                            <span class="userName">${ loginUser.userName }님 </span><span>반가워요!</span>
-                            <p><a href="mupdateView.do">개인정보수정 > </a></p>
-                        </div>
-                    </div>
-                    <div class="back"></div>
-                </section>
-            </section>
 
-            <section class="content-2">
-                <section class="content-2-1">
-                    <div class="my-2">
-                        <div class="my-2-1">
-                            <div class="movieRecommendDiv">
-                                <h2 class="myTitle">▶ 회원님이 최근에 본 영화와 장르가 비슷해요!</h2>
-                                <div class="movies">
-                                    <article class="movie">
-                                        <a href="#">
-                                            <img src="${ contextPath }/resources/images/겨울왕국2.jpg" class="poster">
-                                            <p>겨울왕국2</p>
-                                        </a>
-                                    </article>
-                                    <article class="movie">
-                                        <a href="#">
-                                            <img src="${ contextPath }/resources/images/토이스토리4.jpg" class="poster">
-                                            <p>토이스토리4</p>
-                                        </a>
-                                    </article>
-                                    <article class="movie">
-                                        <a href="#">
-                                            <img src="${ contextPath }/resources/images/반도.jpg" class="poster">
-                                            <p>반도</p>
-                                        </a>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="my-2-2">
-                            <h2 class="myTitle">▶ My Movie</h2>
-                            <div class="myMovie">
-                            <article class="myCount">
-                                <a href="#">
-                                    <p class="count">0</p>
-                                    <p class="text">본영화</p>
-                                </a>
-                            </article>
-                            <article class="myCount">
-                                <a href="#">
-                                    <p class="count">0</p>
-                                    <p class="text">본VOD</p>
-                                </a>
-                            </article>
-                            <article class="myCount">
-                                <a href="#">
-                                    <p class="count">0</p>
-                                    <p class="text">영화 한줄평</p>
-                                </a>
-                            </article>
-                            <article class="myCount">
-                                <a href="#">
-                                    <p class="count">0</p>
-                                    <p class="text">VOD 한줄평</p>
-                                </a>
-                            </article>
-                            <article class="myCount">
-                                <a href="#">
-                                    <p class="count">0</p>
-                                    <p class="text">찜한 VOD</p>
-                                </a>
-                            </article>
-                        </div>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </section>
-    </div>
-</div>
-	
-	
-	 <div id="stay_footer">
-	 	<div id="stay_footer_inner">
-			<jsp:include page="../../views/common/footer.jsp" />
+		<div class="content">
+			<div class="listArrangeDiv">
+				<p class="listArrange">My KASS</p>
 			</div>
-	 </div>
+			<jsp:include page="../../views/common/memberMenu.jsp" />
+
+			<section class="rightContent">
+				<section class="content-1">
+					<section class="content-1-1">
+						<div class="my-1">
+							<div class="my-1-1">
+								<img
+									src="${ contextPath }/resources/images/defaultPropfieImg.png"
+									class="profileImg">
+							</div>
+							<div class="my-1-2">
+								<span class="userName">${ loginUser.userName }님 </span><span>반가워요!</span>
+								<p>
+									<a href="mupdatePwdCheckView.do">개인정보수정 > </a>
+								</p>
+							</div>
+						</div>
+						<div class="back"></div>
+					</section>
+				</section>
+
+				<section class="content-2">
+					<section class="content-2-1">
+						<div class="my-2">
+							<div class="my-2-1">
+								<div class="movieRecommendDiv">
+									<h2 class="myTitle">▶ 회원님이 최근에 본 영화와 장르가 비슷해요!</h2>
+									<div class="movies">
+										<article class="movie">
+											<a href="#"> <img
+												src="${ contextPath }/resources/images/겨울왕국2.jpg"
+												class="poster">
+												<p>겨울왕국2</p>
+											</a>
+										</article>
+										<article class="movie">
+											<a href="#"> <img
+												src="${ contextPath }/resources/images/토이스토리4.jpg"
+												class="poster">
+												<p>토이스토리4</p>
+											</a>
+										</article>
+										<article class="movie">
+											<a href="#"> <img
+												src="${ contextPath }/resources/images/반도.jpg"
+												class="poster">
+												<p>반도</p>
+											</a>
+										</article>
+									</div>
+								</div>
+							</div>
+							<div class="my-2-2">
+								<h2 class="myTitle">▶ My Movie</h2>
+								<div class="myMovie">
+									<article class="myCount">
+										<a href="#">
+											<p class="count">0</p>
+											<p class="text">본영화</p>
+										</a>
+									</article>
+									<article class="myCount">
+										<a href="#">
+											<p class="count">0</p>
+											<p class="text">본VOD</p>
+										</a>
+									</article>
+									<article class="myCount">
+										<a href="#">
+											<p class="count">0</p>
+											<p class="text">영화 한줄평</p>
+										</a>
+									</article>
+									<article class="myCount">
+										<a href="#">
+											<p class="count">0</p>
+											<p class="text">VOD 한줄평</p>
+										</a>
+									</article>
+									<article class="myCount">
+										<a href="#">
+											<p class="count">0</p>
+											<p class="text">찜한 VOD</p>
+										</a>
+									</article>
+								</div>
+							</div>
+						</div>
+					</section>
+				</section>
+			</section>
+		</div>
+	</div>
+
+
+	<div id="stay_footer">
+		<div id="stay_footer_inner">
+			<jsp:include page="../../views/common/footer.jsp" />
+		</div>
+	</div>
 </body>
 </html>
