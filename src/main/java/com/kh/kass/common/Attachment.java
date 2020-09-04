@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class Attachment {
+
+
   private int fileNo; // 파일번호
 	private String sortCode; // 구분코드
 	private String filePath; // 파일경로

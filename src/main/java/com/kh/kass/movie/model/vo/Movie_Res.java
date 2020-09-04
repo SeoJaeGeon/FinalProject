@@ -12,4 +12,5 @@ public class Movie_Res {
    private String resInfo; // 좌성현황
    private String startTime; // 상영시작 시간
    private String endTime; // 상영종료 시간
+   
 }
