@@ -233,7 +233,9 @@ input {
             </form>
         </section>
         <section id="header-2">
-            <img src="${ contextPath }/resources/images/logo_white.png" id="logo_img">
+        	<a href="${ contextPath }">
+            	<img src="${ contextPath }/resources/images/logo_white.png" id="logo_img">        
+        	</a>
         </section>
         
         <section id="header-3">
@@ -249,8 +251,8 @@ input {
     </header>
     <nav>
         <ul id="navi">
-            <li><a href="#">영화</a></li>
-            <li><a href="#">예매</a></li>
+            <li><a href="movieList.do">영화</a></li>
+            <li><a href="resList.do">예매</a></li>
             <li><a href="#">극장</a></li>
             <li><a href="#">VOD</a></li>
             <li><a href="#">스토어</a></li>

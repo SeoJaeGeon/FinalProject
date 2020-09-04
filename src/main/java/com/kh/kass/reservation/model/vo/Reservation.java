@@ -2,12 +2,17 @@ package com.kh.kass.reservation.model.vo;
 
 import java.sql.Date;
 
+import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.movie.model.vo.Movie;
 
 import lombok.Data;
 
 @Data
 public class Reservation {
+	public Reservation() {}
+	// 유저 정보
+	private Member member;
+	
 	// 영화 정보
 	private Movie movie;
 
@@ -19,7 +24,8 @@ public class Reservation {
 	private String maName; // 지점명
 
 	private int roomNo; // 상영관 번호
-	private String roomchair; // 상영관 자리 초기값 (0,0,1,2,3,....)
+	private String roomNumber; // 상영관 명
+	private String roomChair; // 상영관 자리 초기값 (0,0,1,2,3,....)
 	/*
 	 * 0 : 빈자리 1 : 예약된 자리 2 : 통로 3 : 다음 칸으로 넘어가기 <br>
 	 */
@@ -43,5 +49,44 @@ public class Reservation {
 	private int urPeople1; // 일반인 몇명
 	private int urPeople2; // 청소년 몇명
 	private int urPrice; // 결제 금액
+	
+	public Reservation(Member member, Movie movie, int mocNo, String mocName, int maNo, String maName, int roomNo,
+			String roomNumber, String roomChair, int resNo, Date resDate, String resInfo, String startTime,
+			String endTime, int urNo, Date urDate, String uraddress, String urRes, int urPeople1, int urPeople2,
+			int urPrice) {
+		super();
+		this.member = member;
+		this.movie = movie;
+		this.mocNo = mocNo;
+		this.mocName = mocName;
+		this.maNo = maNo;
+		this.maName = maName;
+		this.roomNo = roomNo;
+		this.roomNumber = roomNumber;
+		this.roomChair = roomChair;
+		this.resNo = resNo;
+		this.resDate = resDate;
+		this.resInfo = resInfo;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.urNo = urNo;
+		this.urDate = urDate;
+		this.uraddress = uraddress;
+		this.urRes = urRes;
+		this.urPeople1 = urPeople1;
+		this.urPeople2 = urPeople2;
+		this.urPrice = urPrice;
+	}
 
+	public Reservation(Movie movie, int mocNo, int maNo, Date resDate) {
+		super();
+		this.movie = movie;
+		this.mocNo = mocNo;
+		this.maNo = maNo;
+		this.resDate = resDate;
+	}
+	
+
+	
+	
 }
