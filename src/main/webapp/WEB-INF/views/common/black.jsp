@@ -233,7 +233,9 @@ input {
             </form>
         </section>
         <section id="header-2">
-            <img src="${ contextPath }/resources/images/logo_white.png" id="logo_img">
+        	<a href="${ contextPath }">
+            	<img src="${ contextPath }/resources/images/logo_white.png" id="logo_img">        
+        	</a>
         </section>
         
         <section id="header-3">
@@ -249,8 +251,8 @@ input {
     </header>
     <nav>
         <ul id="navi">
-            <li><a href="#">영화</a></li>
-            <li><a href="#">예매</a></li>
+            <li><a href="movieList.do">영화</a></li>
+            <li><a href="resList.do">예매</a></li>
             <li><a href="#">극장</a></li>
             <li><a href="#">VOD</a></li>
             <li><a href="#">스토어</a></li>
@@ -271,7 +273,7 @@ input {
                 </a>
             </div>
             <div class="content">
-                <form id="joinFrm" action="login.do" method="POST" onsubmit="return login();" enctype="multipart/form-data">
+                <form id="joinFrm" action="login.do" method="POST" onsubmit="return login();">
                     <table align="center">
                         <tr>
                             <td class="left">아이디</td>
@@ -283,7 +285,7 @@ input {
                                     placeholder=" 비밀번호"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><button id="loginBtn" class="loginBtn">로그인</button></td>
+                            <td colspan="2"><button type="submit" id="loginBtn" class="loginBtn">로그인</button></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="find_bar"><span class="aFind"><a href="findUserInfoView.do">ID/PW 찾기</a></span><span class="aJoin"><a

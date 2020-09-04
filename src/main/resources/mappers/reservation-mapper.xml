@@ -1,5 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="resMapper">
+	<resultMap id="resResultSet" type="Reservation">
+		<id property="resNo" column="RES_NO" />
+		<result property="resDate" column="RES_DATE" />
+		<result property="roomNo" column="ROOM_NO" />
+		<result property="resInfo" column="RES_INFO" />
+		<result property="startTime" column="START_TIME" />
+		<result property="endTime" column="END_TIME" />
+		
+		<result property="mocNo" column="MOC_NO" />
+		<result property="mocName" column="MOC_NAME" />
+		
+		<result property="maNo" column="MA_NO" />
+		<result property="maName" column="MA_NAME" />
+		
+		<result property="roomNo" column="ROOM_NO" />
+		<result property="roomNumber" column="ROOM_NUMBER" />
+		<result property="roomChair" column="ROOM_CHAIR" />
+		
+		<result property="urNo" column="UR_NO" />
+		<result property="urDate" column="UR_DATE" />
+		<result property="uraddress" column="UR_ADDRESS" />
+		<result property="urRes" column="UR_RES" />
+		<result property="urPeople1" column="UR_PEOPLE" />
+		<result property="urPeople2" column="UR_PEOPLE2" />
+		<result property="urPrice" column="UR_PRICE" />
+		
+		<association property="member" javaType="Member">
+			<result property="userNo" column="USER_NO" />
+			<result property="userId" column="USER_ID" />
+			<result property="userName" column="USER_NAME" />
+			<result property="userBirth" column="USER_BIRTH" />
+		</association>
+		
+		<association property="movie" javaType="Movie">
+			<result property="movieNo" column="MOVIE_NO" />
+			<result property="movieName" column="MOVIE_NAME" />
+			<result property="movieAge" column="MOVIE_AGE" />
+			<result property="genreCode" column="GENRE_CODE" />
+			<result property="movieRdate" column="MOVIE_RDATE" />
+			<result property="movieRstatus" column="MOVIE_RSTATUS" />
+			<result property="moviePrice" column="MOVIE_PRICE" />
+			<result property="movieLink" column="MOVIE_LINK" />
+			<result property="movieForeman" column="MOVIE_FOREMAN" />
+			<result property="movieProducer" column="MOVIE_PRODUCER" />
+			<result property="movieActor" column="MOVIE_ACTOR" />
+			<result property="movieStime" column="MOVIE_STIME" />
+			<result property="movieCountry" column="MOVIE_COUNTRY" />
+			<result property="movieContent" column="MOVIE_CONTENT" />
+			<result property="movieVodStatus" column="MOVIE_VOD_STATUS" />
+			<result property="genreName" column="GENRE_NAME" />
+			<collection property="attachList" javaType="java.util.ArrayList" resultMap="attachmentResultSet"/>
+		</association>
+	</resultMap>
+	
+	<resultMap id="attachmentResultSet" type="Attachment">
+			<id property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<result property="movieNo" column="MOVIE_NO" />
+			<result property="userNo" column="USER_NO" />
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+	</resultMap>
+	
+	<resultMap id="reviewResultSet" type="Review">
+			<id property="rNo" column="R_NO" />
+			<result property="rSort" column="R_SORT" />
+			<result property="rScore" column="R_SCORE" />
+			<result property="rContent" column="R_CONTENT" />
+			<result property="rEnrollDate" column="RENAME_FILENAME" />
+			<result property="rModifyDate" column="R_ENROLL_DATE" />
+			<result property="rStatus" column="R_MODIFY_DATE" />
+			<result property="userNo" column="USER_NO" />
+			<result property="movieNo" column="MOVIE_NO" />
+			<result property="rWriter" column="USER_ID" />
+			<result property="moviePosterPath" column="FILE_PATH" />
+			<result property="movieName" column="RENAME_FILENAME" />
+			<result property="moviePoster" column="GOODS_NO" />
+	</resultMap>
+	
+	<resultMap id="movResultSet" type="Movie">
+		<id property="movieNo" column="MOVIE_NO" />
+		<result property="movieName" column="MOVIE_NAME" />
+		<result property="movieAge" column="MOVIE_AGE" />
+		<result property="genreCode" column="GENRE_CODE" />
+		<result property="movieRdate" column="MOVIE_RDATE" />
+		<result property="movieRstatus" column="MOVIE_RSTATUS" />
+		<result property="moviePrice" column="MOVIE_PRICE" />
+		<result property="movieLink" column="MOVIE_LINK" />
+		<result property="movieForeman" column="MOVIE_FOREMAN" />
+		<result property="movieProducer" column="MOVIE_PRODUCER" />
+		<result property="movieActor" column="MOVIE_ACTOR" />
+		<result property="movieStime" column="MOVIE_STIME" />
+		<result property="movieCountry" column="MOVIE_COUNTRY" />
+		<result property="movieContent" column="MOVIE_CONTENT" />
+		<result property="movieVodStatus" column="MOVIE_VOD_STATUS" />
+		<result property="genreName" column="GENRE_NAME" />
+		<collection property="attachList" javaType="java.util.ArrayList" resultMap="attachmentResultSet"/>
+		<collection property="review" javaType="java.util.ArrayList" resultMap="reviewResultSet"/>
+	</resultMap>
+	
+	<select id="resSelectAll" resultMap="resResultSet">
+		SELECT *
+		FROM MOVIE_RES
+		JOIN MOVIE USING(MOVIE_NO)
+		JOIN MOVIE_ROOM USING(ROOM_NO)
+		JOIN MOVIE_AREA USING(MA_NO)
+		JOIN MOVIE_CITY USING(MOC_NO)
+	</select>
+	
+	<select id="movSelectAll" resultMap="movResultSet">
+		SELECT DISTINCT(MOVIE_NO),MOVIE_NO,MOVIE_NAME,MOVIE_AGE,GENRE_CODE,MOVIE_RDATE,MOVIE_RSTATUS,MOVIE_PRICE,MOVIE_LINK,MOVIE_FOREMAN,MOVIE_PRODUCER,MOVIE_ACTOR,MOVIE_STIME,MOVIE_COUNTRY,MOVIE_CONTENT,MOVIE_VOD_STATUS, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS
+		FROM MOVIE_RES
+		JOIN MOVIE USING (MOVIE_NO)
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE MOVIE_RSTATUS = 'Y'
+		AND RES_DATE > SYSDATE
+		AND FILE_STATUS = 'Y'
+		AND SORT_CODE = 20
+	</select>
+	
+	<select id="aSelectAll" resultMap="resResultSet">
+		SELECT *
+		FROM MOVIE_CITY
+	</select>
+	
+	<select id="pSelect" resultMap="resResultSet">
+		SELECT MA_NO, MA_NAME
+		FROM MOVIE_AREA
+		JOIN MOVIE_CITY USING(MOC_NO)
+		WHERE MOC_NO = #{num}
+	</select>
+	
+	<select id="playMovie" resultMap="resResultSet">
+		SELECT *
+		FROM MOVIE_RES
+		JOIN MOVIE USING (MOVIE_NO)
+		JOIN MOVIE_ROOM USING (ROOM_NO)
+		JOIN MOVIE_AREA USING (MA_NO)
+		JOIN MOVIE_CITY USING (MOC_NO)
+		WHERE MOVIE_NO = #{movie.movieNo}
+		AND MOC_NO = #{mocNo}
+		AND MA_NO = #{maNo}
+		AND RES_DATE = #{resDate}
+	</select>
+	
+	<select id="movListOn" resultMap="movResultSet">
+		SELECT DISTINCT(MOVIE_NO),MOVIE_NO,MOVIE_NAME,MOVIE_AGE,GENRE_CODE,MOVIE_RDATE,MOVIE_RSTATUS,MOVIE_PRICE,MOVIE_LINK,MOVIE_FOREMAN,MOVIE_PRODUCER,MOVIE_ACTOR,MOVIE_STIME,MOVIE_COUNTRY,MOVIE_CONTENT,MOVIE_VOD_STATUS, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS
+		FROM MOVIE_RES
+		JOIN MOVIE USING (MOVIE_NO)
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE MOVIE_RSTATUS = 'Y'
+		AND RES_DATE > SYSDATE
+		AND FILE_STATUS = 'Y'
+		AND SORT_CODE = 20
+	</select>
+	
+	<select id="movListWait" resultMap="movResultSet">
+		SELECT DISTINCT(MOVIE_NO),MOVIE_NO,MOVIE_NAME,MOVIE_AGE,GENRE_CODE,MOVIE_RDATE,MOVIE_RSTATUS,MOVIE_PRICE,MOVIE_LINK,MOVIE_FOREMAN,MOVIE_PRODUCER,MOVIE_ACTOR,MOVIE_STIME,MOVIE_COUNTRY,MOVIE_CONTENT,MOVIE_VOD_STATUS, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS
+		FROM MOVIE_RES
+		JOIN MOVIE USING (MOVIE_NO)
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE MOVIE_RSTATUS = 'Y'
+		AND MOVIE_RDATE > SYSDATE
+		AND FILE_STATUS = 'Y'
+		AND SORT_CODE = 20
+	</select>
+	
+	<select id="movListOff" resultMap="movResultSet">
+		SELECT *
+		FROM MOVIE
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE MOVIE_RSTATUS = 'N'
+		AND FILE_STATUS = 'Y'
+		AND SORT_CODE = 20
+	</select>
+	
+	<select id="movieInfo" resultMap="movResultSet">
+		SELECT *
+		FROM MOVIE
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		JOIN GENRE USING(GENRE_CODE)
+		WHERE FILE_STATUS = 'Y'
+		AND MOVIE_NO = #{movieNum}
+		ORDER BY FILE_NO
+	</select>
+	
+	<select id="reviewList" resultMap="movResultSet">
+		SELECT R_NO,R_SORT,R_SCORE,R_CONTENT,R_ENROLL_DATE,R_MODIFY_DATE,R_STATUS,USER_NO,MOVIE_NO
+		FROM MOVIE
+		JOIN REVIEW USING(MOVIE_NO)
+		WHERE MOVIE_NO = #{movieNum}
+		AND R_SORT = 'M'
+	</select>
+	
 </mapper>
