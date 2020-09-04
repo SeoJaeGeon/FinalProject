@@ -60,8 +60,8 @@ public class Movie {
       this.attachList = attachList;
       this.review = review;
    }
-
-	public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
+  
+  public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
 			int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
 			String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName,
 			ArrayList<Attachment> attachList) {
@@ -84,22 +84,4 @@ public class Movie {
 		this.genreName = genreName;
 		this.attachList = attachList;
 	}
-	   
-   
-   
-
-   /* 깃 에러 테스트입니다. */
-   /* 깃 에러 테스트입니다. */
-   /* 깃 에러 테스트입니다. */
-   /* 깃 에러 테스트입니다. */
-
-   /* 모야 모야 */
-   /* 왜 안되는거야 이거 */
-
-   /* 다 지워버렸습니다 */
-
-   /* 3시 17분 수정 1 */
-   /* 3시 20분에 올렸습니다 2 */
-   
-   /* 3시 56분 수정1*/
 }

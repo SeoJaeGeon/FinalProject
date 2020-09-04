@@ -3,12 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
-<link href="${ contextPath }/resources/css/member/myPage.css?after" rel="stylesheet"
-	type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="${ contextPath }/resources/css/member/updatePwdCheck.css?after"
+	rel="stylesheet" type="text/css">
 <title>MY KASS</title>
 <style>
 header, nav, section, article, aside, footer {
@@ -106,9 +109,11 @@ header>section {
 	margin: auto;
 }
 /* 영역 나누기 */
+
 </style>
 
 </head>
+
 <body>
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/white.jsp" />
@@ -116,7 +121,7 @@ header>section {
 
 		<div class="content">
 			<div class="listArrangeDiv">
-				<p class="listArrange">My KASS</p>
+				<p class="listArrange">My KASS > 회원 정보</p>
 			</div>
 			<jsp:include page="../../views/common/memberMenu.jsp" />
 
@@ -144,75 +149,66 @@ header>section {
 					<section class="content-2-1">
 						<div class="my-2">
 							<div class="my-2-1">
-								<div class="movieRecommendDiv">
-									<h2 class="myTitle">▶ 회원님이 최근에 본 영화와 장르가 비슷해요!</h2>
-									<div class="movies">
-										<article class="movie">
-											<a href="#"> <img
-												src="${ contextPath }/resources/images/겨울왕국2.jpg"
-												class="poster">
-												<p>겨울왕국2</p>
-											</a>
-										</article>
-										<article class="movie">
-											<a href="#"> <img
-												src="${ contextPath }/resources/images/토이스토리4.jpg"
-												class="poster">
-												<p>토이스토리4</p>
-											</a>
-										</article>
-										<article class="movie">
-											<a href="#"> <img
-												src="${ contextPath }/resources/images/반도.jpg"
-												class="poster">
-												<p>반도</p>
-											</a>
-										</article>
+								<h2>회원정보를 수정하시려면 비밀번호를 입력하셔야 합니다.</h2>
+								<p>회원님의 개인정보 보호를 위한 본인 확인 절차이오니, KASS CINEMA 로그인 시 사용하시는
+									비밀번호를 입력해 주세요.</p>
+								<form id="pwdCheckForm" name="pwdCheckForm" method="post"
+									action="mupdateView.do">
+									<input type="password" name="userPwd" class="userPwd" id="userPwd">
+									<input type="hidden" name="userId" value="${loginUser.userId }">
+									<div class="buttons">
+										<button type="button" class="noBack">취소</button>
+										<button type="button" class="okNext"
+											onclick="return checkPwd();">확인</button>
 									</div>
-								</div>
-							</div>
-							<div class="my-2-2">
-								<h2 class="myTitle">▶ My Movie</h2>
-								<div class="myMovie">
-									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
-											<p class="text">본영화</p>
-										</a>
-									</article>
-									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
-											<p class="text">본VOD</p>
-										</a>
-									</article>
-									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
-											<p class="text">영화 한줄평</p>
-										</a>
-									</article>
-									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
-											<p class="text">VOD 한줄평</p>
-										</a>
-									</article>
-									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
-											<p class="text">찜한 VOD</p>
-										</a>
-									</article>
-								</div>
+								</form>
 							</div>
 						</div>
 					</section>
 				</section>
 			</section>
+
+			<script>
+				function checkPwd() {
+
+					var pwd = $.trim($("#userPwd").val());
+
+					if (!pwd) {
+						alert("비밀번호를 입력해주세요.");
+						$("#userPwd").focus();
+						return false;
+					}
+
+					var pwdCheckString = $("form[name=pwdCheckForm]")
+							.serialize();
+
+					$.ajax({
+						url : "checkPwd.do",
+						data : pwdCheckString,
+						dataType : "json",
+						//async : false,
+						success : function(data) {
+							/* console.log(data + " - ajax");
+							console.log(data.isEmpty); */
+							if (data.isEmpty == false) {
+								$("#pwdCheckForm").submit();
+							} else {
+								alert("비밀번호가 일치하지 않습니다.");
+							}
+						},
+						error : function(e) {
+							alert("통신실패!" + e);
+							console.log("ajax 통신 실패" + e);
+						}
+					});
+					
+					return true;
+											
+				}
+		
+			</script>
 		</div>
 	</div>
-
 
 	<div id="stay_footer">
 		<div id="stay_footer_inner">
@@ -220,4 +216,5 @@ header>section {
 		</div>
 	</div>
 </body>
+
 </html>
