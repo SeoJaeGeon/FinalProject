@@ -21,7 +21,7 @@ public class Member {
 	private String userStatus;
 	private Date userEnrollDate;
 	private Date userModifyDate;
-	private Attachment attachment;
+  private Attachment attachment;
 	
 	public Member() {}
 	
@@ -72,7 +72,6 @@ public class Member {
 		this.userId = userId;
 		this.userPwd = userPwd;
 	}
-	
 	
 	
 	
