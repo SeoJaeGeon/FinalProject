@@ -111,7 +111,7 @@ header>section {
 	margin-bottom: 40px;
 }
 
-.chk_input {
+.radio {
 	margin-right: 5px;
 	width: 20px;
 	height: 20px;
@@ -187,21 +187,22 @@ header>section {
 				<h2
 					style="border-bottom: 1px solid white; color: white; padding-bottom: 10px; width: 100%;">결제
 					방식 선택</h2>
-				<label class="chk_label"> <input class="chk_input"
-					type="radio" name="chk_pay" value="card" checked>카드
-				</label> <label class="chk_label"> <input class="chk_input"
-					type="radio" name="chk_pay" value="money">무통장
+				<label class="chk_label">
+					<input class="radio" type="radio" name="chk_pay" value="card" checked>카드
+				</label>
+				<label class="chk_label"> 
+					<input class="radio" type="radio" name="chk_pay" value="money">무통장
 				</label>
 
 				<div class="pay_Info">
 					<div class="movie-img">
 						<div style="width: 100%; height: 80%; padding: 5px;">
-							<img src="image/devil.jpg" style="width: 100%; height: 100%;">
+							<img src="<%=request.getContextPath()%>${ resInfo.movie.attachList[0].filePath }${ resInfo.movie.attachList[0].originFileName }" style="width: 100%; height: 100%;">
 						</div>
 						<div style="width: 100%; height: 20%;">
-							<span
-								style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px;">
-								다만 악에서 구하소서 </span>
+							<span style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px;">
+								${ resInfo.movie.movieName }
+							</span>
 						</div>
 					</div>
 					<div class="movie-line">
@@ -214,7 +215,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									KASS 상봉 </span>
+									KASS ${ resInfo.maName } </span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 15%;">
@@ -226,7 +227,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									2020.08.01(토) 15:00 </span>
+									${ resDate } ${ resInfo.startTime } </span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 15%;">
@@ -238,7 +239,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									1관 </span>
+									${ resInfo.roomNumber }관 </span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 20%;">
@@ -250,19 +251,19 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									일반 1명, 청소년 1명 </span>
+									${ people }</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 20%;">
 							<div style="width: 30%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 25px;">
-									좌석 </span>
+									좌석</span>
 							</div>
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									A1,A2 </span>
+									${ placeValue }</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 15%;">
@@ -274,17 +275,17 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									16000 원 </span>
+									${ price }원</span>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<button class="movie_nextBtn">
-					<img
-						src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
-						class="movie_nextImg"> <br>결제하기
+				
+				<button class="movie_nextBtn" onclick="payment();" type="button">
+					<img src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
+						class="movie_nextImg"><br>결제하기
 				</button>
+				
 			</div>
 		</section>
 	</div>
@@ -294,5 +295,29 @@ header>section {
 			<jsp:include page="../../views/common/footer.jsp" />
 		</div>
 	</div>
+	
+	<script>
+		function payment(){
+			var radioVal = $('input[name="chk_pay"]:checked').val();
+			
+			var userNo = ${ loginUser.userNo };
+			var resNo = ${ resInfo.resNo };
+			var time = '${ resDate } ${ resInfo.startTime }';
+			var people = '${ people }';
+			var index_array = new Array('${ index_array }');
+			var placeValue = new Array('${ placeValue }');
+			var people1 = ${ val1 };
+			var people2 = ${ val2 };
+			var price = ${ price };
+	        
+			if(radioVal == 'card'){
+				console.log(index_array);
+				console.log(placeValue);
+				console.log(userNo);
+			}else{
+				location.href="moneyPay.do?userNo="+userNo+"&resNo="+resNo+"&index_array="+index_array+"&placeValue="+placeValue+"&people1="+people1+"&people2="+people2+"&price="+price+"&time="+time+"&people="+people;
+			}
+		}
+	</script>
 </body>
 </html>

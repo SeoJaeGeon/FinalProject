@@ -97,6 +97,7 @@ header>section {
 .movie-introduce {
 	width: 100%;
 	height: 500px;
+	background : white;
 }
 
 .movie-story {
@@ -114,6 +115,7 @@ header>section {
 
 .movie-preview iframe {
 	width: 100%;
+	height : 800px;
 }
 
 .movie-steelImg {
@@ -331,10 +333,10 @@ header>section {
 					<br clear="left"> <span class="movie_statusY">상영중</span>
 					<br><br><br>
 					<span class="like-view" style="color: blue; margin-right: 100px;">
-						<strong>재밌어요 : </strong><b>0</b>
+						<strong>재밌어요 : </strong><b>${ reviewUp }</b>
 					</span> 
 					<span class="like-view" style="color: red">
-						<strong>별로에요 : </strong><b>0</b>
+						<strong>별로에요 : </strong><b>${ reviewDown }</b>
 					</span>
 				</div>
 				<div class="movie-in3">

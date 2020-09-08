@@ -11,7 +11,7 @@ import lombok.Data;
 public class Reservation {
 	public Reservation() {}
 	// 유저 정보
-	private Member member;
+	private int memNo;
 	
 	// 영화 정보
 	private Movie movie;
@@ -44,18 +44,18 @@ public class Reservation {
 	// 사용자 영화 예매
 	private int urNo; // 영화 예매 번호
 	private Date urDate; // 예매날짜
-	private String uraddress; // 자리 주소값 ex)13,14
+	private String urAddress; // 자리 주소값 ex)13,14
 	private String urRes; // 자리 예매번호(ex= J1,J2)
 	private int urPeople1; // 일반인 몇명
 	private int urPeople2; // 청소년 몇명
 	private int urPrice; // 결제 금액
 	
-	public Reservation(Member member, Movie movie, int mocNo, String mocName, int maNo, String maName, int roomNo,
+	public Reservation(int memNo, Movie movie, int mocNo, String mocName, int maNo, String maName, int roomNo,
 			String roomNumber, String roomChair, int resNo, Date resDate, String resInfo, String startTime,
-			String endTime, int urNo, Date urDate, String uraddress, String urRes, int urPeople1, int urPeople2,
+			String endTime, int urNo, Date urDate, String urAddress, String urRes, int urPeople1, int urPeople2,
 			int urPrice) {
 		super();
-		this.member = member;
+		this.memNo = memNo;
 		this.movie = movie;
 		this.mocNo = mocNo;
 		this.mocName = mocName;
@@ -71,7 +71,7 @@ public class Reservation {
 		this.endTime = endTime;
 		this.urNo = urNo;
 		this.urDate = urDate;
-		this.uraddress = uraddress;
+		this.urAddress = urAddress;
 		this.urRes = urRes;
 		this.urPeople1 = urPeople1;
 		this.urPeople2 = urPeople2;
@@ -85,8 +85,26 @@ public class Reservation {
 		this.maNo = maNo;
 		this.resDate = resDate;
 	}
-	
 
+	public Reservation(int resNo, String resInfo) {
+		super();
+		this.resNo = resNo;
+		this.resInfo = resInfo;
+	}
+
+	public Reservation(int memNo, int resNo, String urAddress, String urRes, int urPeople1, int urPeople2,
+			int urPrice) {
+		super();
+		this.memNo = memNo;
+		this.resNo = resNo;
+		this.urAddress = urAddress;
+		this.urRes = urRes;
+		this.urPeople1 = urPeople1;
+		this.urPeople2 = urPeople2;
+		this.urPrice = urPrice;
+	}
+	
+	
 	
 	
 }

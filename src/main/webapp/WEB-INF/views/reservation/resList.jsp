@@ -511,11 +511,22 @@ header>section {
 							</div>
 						</div>
 						<div class="movie_sale5">
-							<button class="movie_nextBtn">
+						<c:choose>
+						<c:when test="${ loginUser != null }">
+							<button class="movie_nextBtn" onclick="nextBtn();">
 								<img
 									src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
 									class="movie_nextImg"> <br>자리선택
 							</button>
+						</c:when>
+						<c:otherwise>
+							<button class="movie_nextBtn" onclick="login();">
+								<img
+									src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
+									class="movie_nextImg"> <br>자리선택
+							</button>
+						</c:otherwise>
+						</c:choose>
 						</div>
 					</div>
 				</div>
@@ -758,6 +769,7 @@ header>section {
 					
 					if(data.length > 0){
 						for(i in data){
+							var $input = $("<input type='hidden' id='resNo'/>").text(data[i].resNo);
 							var $li = $("<li class='movie_time_list'>");
 							var $playBtn = $("<button class='movie_play'>");
 							var $firstDiv = $("<div class='time' align='center'>")
@@ -780,16 +792,16 @@ header>section {
 							var seatLeft = data[i].resInfo.split(",");
 							
 							for(var i=0; i<seatInitial.length; i++) {
-								if(seatInitial[i] = "0") {
+								if(seatInitial[i] == 0) {
 									initialCount++;
 								}
-								if(seatLeft[i] = "0") {
+								if(seatLeft[i] == 0) {
 									leftCount++;
 								}
 							}
 
-							var $thirdStrong = $("<strong style='color: red'>").text(initialCount);
-							var $thirdEm = $("<em style='font-style: inherit'>").text("/"+leftCount);
+							var $thirdStrong = $("<strong style='color: red'>").text(leftCount);
+							var $thirdEm = $("<em style='font-style: inherit'>").text("/"+initialCount);
 							
 							
 							$firstDiv.append($firstStrong);
@@ -812,6 +824,7 @@ header>section {
 							$playBtn.append($secondSpan);
 							$playBtn.append($thirdDiv);
 							
+							$li.append($input);
 							$li.append($playBtn);
 							
 							$ul.append($li);
@@ -825,7 +838,8 @@ header>section {
 
 							selectPlace.text(child1);
 							placeText = child1;
-
+							
+							placeValue = $(this).children('#resNo').text();
 						});
 						
 						
@@ -839,15 +853,13 @@ header>section {
 			});
 		}
 		
-		function playMovieCheck(dateInput){
-			/* var dayLength = $(".movie_DateUl").children('.movie_day_list').children('button').length;
-			
-			for(var i=0; i<dayLength; i++){
-				console.log($(".movie_DateUl").children('.movie_day_list').children('button').eq(i).val());
-			} */
-			console.log(dateInput);
+		function nextBtn(){
+			location.href="resSeat.do?placeValue="+placeValue;
 		}
 		
+		function login(){
+			alert("로그인 해주세요.");
+		}
 	</script>
 
 </body>

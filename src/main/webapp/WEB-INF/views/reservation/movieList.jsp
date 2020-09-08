@@ -439,6 +439,12 @@ input:checked+.slider:before {
 	width: 1500px;
 	margin: auto;
 }
+
+.viewChk{
+	width : 300px;
+	height : 100%;
+	float : left;
+}
 /* 내가 쓴 코드 */
 </style>
 </head>
@@ -457,12 +463,13 @@ input:checked+.slider:before {
 					</ul>
 				</div>
 				<div class="movie-list-util">
+				<div class="viewChk">
 					<p>개봉순</p>
 					<label class="switch"> <input type="checkbox"> <span
 						class="slider round"></span>
 					</label>
 					<p>인기순</p>
-
+				</div>
 					<form id="search-form2">
 						<input type="text" id="search_Text2" name="search_Text"
 							placeholder="영화제목 입력">
@@ -532,7 +539,6 @@ input:checked+.slider:before {
 						</li>
 					</c:forEach>
 					</ol>
-					<button class="plusBtn" onclick="plus();">더보기</button>
 				</div>
 			</div>
 		</section>
@@ -575,14 +581,17 @@ input:checked+.slider:before {
 		
 		function test(menu_value){
 			if(menu_value == 'a'){
+				$('.viewChk').css('display','');
 				$('.high').css('display','');
 				$('.middle').css('display','none');
 				$('.low').css('display','none');
 			}else if(menu_value == 'b'){
+				$('.viewChk').css('display','none');
 				$('.high').css('display','none');
 				$('.middle').css('display','');
 				$('.low').css('display','none');
 			}else{
+				$('.viewChk').css('display','none');
 				$('.high').css('display','none');
 				$('.middle').css('display','none');
 				$('.low').css('display','');
