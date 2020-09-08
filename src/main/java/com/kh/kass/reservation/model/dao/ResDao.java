@@ -52,8 +52,24 @@ public class ResDao {
 		return (ArrayList)sqlSession.selectList("resMapper.movieInfo", movieNum);
 	}
 
-	public ArrayList<Movie> reviewList(int movieNum) {
+	public ArrayList<Review> reviewList(int movieNum) {
 		return (ArrayList)sqlSession.selectList("resMapper.reviewList", movieNum);
+	}
+
+	public Reservation resSeatSelect(int placeValue) {
+		return (Reservation)sqlSession.selectOne("resMapper.resSeatSelect", placeValue);
+	}
+
+	public int updateResInfo(Reservation seatUpdate) {
+		return sqlSession.update("resMapper.updateResInfo", seatUpdate);
+	}
+
+	public int updateRes(Reservation res) {
+		return sqlSession.insert("resMapper.updateRes", res);
+	}
+
+	public int updateRes2(Reservation res) {
+		return sqlSession.insert("resMapper.updatePay", res);
 	}
 	
 	

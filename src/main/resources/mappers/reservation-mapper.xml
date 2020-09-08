@@ -21,18 +21,13 @@
 		
 		<result property="urNo" column="UR_NO" />
 		<result property="urDate" column="UR_DATE" />
-		<result property="uraddress" column="UR_ADDRESS" />
+		<result property="urAddress" column="UR_ADDRESS" />
 		<result property="urRes" column="UR_RES" />
 		<result property="urPeople1" column="UR_PEOPLE" />
 		<result property="urPeople2" column="UR_PEOPLE2" />
 		<result property="urPrice" column="UR_PRICE" />
 		
-		<association property="member" javaType="Member">
-			<result property="userNo" column="USER_NO" />
-			<result property="userId" column="USER_ID" />
-			<result property="userName" column="USER_NAME" />
-			<result property="userBirth" column="USER_BIRTH" />
-		</association>
+		<result property="memNo" column="USER_NO" />
 		
 		<association property="movie" javaType="Movie">
 			<result property="movieNo" column="MOVIE_NO" />
@@ -78,6 +73,7 @@
 			<result property="rStatus" column="R_MODIFY_DATE" />
 			<result property="userNo" column="USER_NO" />
 			<result property="movieNo" column="MOVIE_NO" />
+			
 			<result property="rWriter" column="USER_ID" />
 			<result property="moviePosterPath" column="FILE_PATH" />
 			<result property="movieName" column="RENAME_FILENAME" />
@@ -191,12 +187,41 @@
 		ORDER BY FILE_NO
 	</select>
 	
-	<select id="reviewList" resultMap="movResultSet">
-		SELECT R_NO,R_SORT,R_SCORE,R_CONTENT,R_ENROLL_DATE,R_MODIFY_DATE,R_STATUS,USER_NO,MOVIE_NO
-		FROM MOVIE
-		JOIN REVIEW USING(MOVIE_NO)
+	<select id="reviewList" resultMap="reviewResultSet">
+		SELECT R_NO,R_SORT,R_SCORE,R_CONTENT,R_ENROLL_DATE,R_MODIFY_DATE,R_STATUS,USER_NO,MOVIE_NO, USER_ID, MOVIE_NAME
+		FROM REVIEW
+		JOIN MOVIE USING(MOVIE_NO)
+		JOIN MEMBER USING(USER_NO)
 		WHERE MOVIE_NO = #{movieNum}
 		AND R_SORT = 'M'
 	</select>
+	
+	<select id="resSeatSelect" resultMap="resResultSet">
+		SELECT *
+		FROM MOVIE_RES
+		JOIN MOVIE USING(MOVIE_NO)
+		JOIN MOVIE_ROOM USING (ROOM_NO)
+		JOIN MOVIE_AREA USING (MA_NO)
+		JOIN MOVIE_CITY USING(MOC_NO)
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE RES_NO = #{placeValue}
+		AND SORT_CODE = 20
+	</select>
+	
+	<update id="updateResInfo">
+		UPDATE MOVIE_RES
+   		SET RES_INFO = #{resInfo}
+   		WHERE RES_NO = #{resNo}
+	</update>
+	
+	<insert id="updateRes" parameterType="Reservation">
+		INSERT INTO USER_RESMOVIE
+		VALUES(SEQ_UR_NO.NEXTVAL , #{memNo},#{resNo},SYSDATE, #{urAddress}, #{urRes}, #{urPeople1}, #{urPeople2}, #{urPrice} )
+	</insert>
+	
+	<insert id="updatePay" parameterType="Reservation">
+		INSERT INTO PAYMENT
+		VALUES(SEQ_PAY_NO.NEXTVAL , SEQ_UR_NO.CURRVAL ,NULL,#{urPrice}, '무통장', SYSDATE, DEFAULT )
+	</insert>
 	
 </mapper>

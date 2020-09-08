@@ -179,12 +179,12 @@ header>section {
 				<div class="pay_Info">
 					<div class="movie-img">
 						<div style="width: 100%; height: 80%; padding: 5px;">
-							<img src="image/devil.jpg" style="width: 100%; height: 100%;">
+							<img src="<%=request.getContextPath()%>${ resInfo.movie.attachList[0].filePath }${ resInfo.movie.attachList[0].originFileName }" style="width: 100%; height: 100%;">
 						</div>
 						<div style="width: 100%; height: 20%;">
 							<span
 								style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px;">
-								다만 악에서 구하소서 </span>
+								${ resInfo.movie.movieName }</span>
 						</div>
 					</div>
 					<div class="movie-line">
@@ -197,7 +197,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									KASS 상봉 </span>
+									KASS ${ resInfo.maName }</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 15%;">
@@ -209,7 +209,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									2020.08.01(토) 15:00 </span>
+									${ time }</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 15%;">
@@ -221,7 +221,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									1관 </span>
+									${ resInfo.roomNumber }관</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 20%;">
@@ -233,7 +233,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									일반 1명, 청소년 1명 </span>
+									${ people }</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 20%;">
@@ -245,7 +245,7 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									A1,A2 </span>
+									${ placeValue }</span>
 							</div>
 						</div>
 						<div style="width: 100%; height: 15%;">
@@ -257,13 +257,13 @@ header>section {
 							<div style="width: 70%; height: 100%; float: left;">
 								<span
 									style="display: block; color: white; font-size: 20px; width: 100%; height: 100%; text-align: center; padding: 5px; margin-top: 20px;">
-									16000 원 </span>
+									${ price } 원 </span>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<button class="movie_nextBtn">메인으로</button>
+				<button class="movie_nextBtn" onclick="goMain();">메인으로</button>
 			</div>
 		</section>
 	</div>
@@ -273,6 +273,12 @@ header>section {
 			<jsp:include page="../../views/common/footer.jsp" />
 		</div>
 	</div>
+	
+	<script>
+		function goMain(){
+			location.href="${ contextPath }";
+		}
+	</script>
 
 </body>
 </html>

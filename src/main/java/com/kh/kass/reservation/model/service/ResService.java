@@ -25,6 +25,12 @@ public interface ResService {
 
 	public ArrayList<Movie> movieInfo(int movieNum);
 
-	public ArrayList<Movie> reviewList(int movieNum);
+	public ArrayList<Review> reviewList(int movieNum);
+
+	public Reservation resSeatSelect(int placeValue);
+
+	public int updateResInfo(Reservation seatUpdate);
+
+	public int updateRes(Reservation res);
 	
 }
