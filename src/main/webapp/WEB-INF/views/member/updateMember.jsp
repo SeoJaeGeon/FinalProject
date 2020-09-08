@@ -112,7 +112,6 @@ header>section {
 	margin: auto;
 }
 /* 영역 나누기 */
-
 </style>
 
 </head>
@@ -135,28 +134,33 @@ header>section {
 						<ul style="-webkit-padding-start: 20px;">
 							<li><p>회원님의 정보를 정확히 기입해주세요.</p></li>
 						</ul>
-						<form action="mupdate.do" id="updateFrm" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="userName" value="${ loginUser.userName }">
-							<input type="hidden" name="userBirth" value="${ loginUser.userBirth }">
-							<input type="hidden" name="userNo" value="${ loginUser.userNo }">
-							
+						<form action="mupdate.do" id="updateFrm" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" name="userName"
+								value="${ loginUser.userName }"> <input type="hidden"
+								name="userBirth" value="${ loginUser.userBirth }"> <input
+								type="hidden" name="userNo" value="${ loginUser.userNo }">
+
 							<table class="contentTable">
 								<tr class="topLine">
 									<td class="left">프로필사진</td>
 									<td>
 										<div class="imgAlign">
-											 <c:if test="${ loginUser.attachment.renameFileName != null }">
-											<img
-												src="${ contextPath }/resources/muploadFiles/${ loginUser.attachment.renameFileName }"
-												class="profileImg" id="profileImg">
-											</c:if> 
-											 <c:if test="${ loginUser.attachment.renameFileName == null }"> 
-												<img src="${ contextPath }/resources/images/defaultPropfieImg.png" class="profileImg" id="profileImg">
-									</c:if> 
+											<c:if test="${ loginUser.attachment.renameFileName != null }">
+												<img
+													src="${ contextPath }/resources/images/muploadFiles/${ loginUser.attachment.renameFileName }"
+													class="profileImg" id="profileImg">
+											</c:if>
+											<c:if test="${ loginUser.attachment.renameFileName == null }">
+												<img
+													src="${ contextPath }/resources/images/defaultPropfieImg.png"
+													class="profileImg" id="profileImg">
+											</c:if>
 										</div>
 										<div class="imgAlign">
-											<input type="file" name="uploadfile" id="img" style="display:none;"/>
-											<label for="img"><span class="changeImgBtn">이미지 변경</span></label>
+											<input type="file" name="uploadfile" id="img"
+												style="display: none;" /> <label for="img"><span
+												class="changeImgBtn">이미지 변경</span></label>
 										</div>
 										<div class="imgAlign" style="font-size: 14px;">&nbsp;&nbsp;※
 											개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</div>
@@ -165,12 +169,14 @@ header>section {
 								<tr>
 									<td class="left">아이디</td>
 									<td>${ loginUser.userId }</td>
-									<td><input type="hidden" name="userId" value="${ loginUser.userId }"></td>
+									<td><input type="hidden" name="userId"
+										value="${ loginUser.userId }"></td>
 								</tr>
 								<tr>
 									<td class="left">비밀번호</td>
 									<td>
-										<button type="button" class="pwdUpdateBtn" onclick="location.href='updatePwdView.do'">비밀번호 변경</button>
+										<button type="button" class="pwdUpdateBtn"
+											onclick="location.href='updatePwdView.do'">비밀번호 변경</button>
 									</td>
 								</tr>
 								<tr>
@@ -184,19 +190,35 @@ header>section {
 
 								<tr>
 									<td class="left"><span>* </span>비밀번호 확인 질문</td>
-									<td class="center" colspan="2">
-										<select name="userPwdQ">
-											<option value="기억에 남는 추억의 장소는?" <c:if test="${ loginUser.userPwdQ eq '기억에 남는 추억의 장소는?'}">selected</c:if>>기억에 남는 추억의 장소는?</option>
-											<option value="자신의 인생 좌우명은?" <c:if test="${ loginUser.userPwdQ eq '자신의 인생 좌우명은?'}">selected</c:if>>자신의 인생 좌우명은?</option>
-											<option value="자신의 보물 제 1호는?" <c:if test="${ loginUser.userPwdQ eq '자신의 보물 제 1호는?'}">selected</c:if>>자신의 보물 제 1호는?</option>
-											<option value="추억하고 싶은 날짜가 있다면?" <c:if test="${ loginUser.userPwdQ eq '추억하고 싶은 날짜가 있다면?'}">selected</c:if>>추억하고 싶은 날짜가 있다면?</option>
-											<option value="자신이 두번째로 존경하는 인물은?" <c:if test="${ loginUser.userPwdQ eq '자신이 두번째로 존경하는 인물은?'}">selected</c:if>>자신이 두번째로 존경하는 인물은?</option>
-											<option value="인상 깊게 읽은 책 이름은?" <c:if test="${ loginUser.userPwdQ eq '인상 깊게 읽은 책 이름은?'} ">selected</c:if>>인상 깊게 읽은 책 이름은?</option>
-											<option value="다시 태어나면 되고 싶은 것은?" <c:if test="${ loginUser.userPwdQ eq '다시 태어나면 되고 싶은 것은?'}">selected</c:if>>다시 태어나면 되고 싶은 것은?</option>
-											<option value="유년시절 가장 생각나는 친구 이름은?" <c:if test="${ loginUser.userPwdQ eq '유년시절 가장 생각나는 친구 이름은?'}">selected</c:if>>유년시절 가장 생각나는 친구 이름은?</option>
-											<option value="내가 좋아하는 캐릭터는?" <c:if test="${ loginUser.userPwdQ eq '내가 좋아하는 캐릭터는?'}">selected</c:if>>내가 좋아하는 캐릭터는?</option>
-										</select>
-									</td>
+									<td class="center" colspan="2"><select name="userPwdQ">
+											<option value="기억에 남는 추억의 장소는?"
+												<c:if test="${ loginUser.userPwdQ eq '기억에 남는 추억의 장소는?'}">selected</c:if>>기억에
+												남는 추억의 장소는?</option>
+											<option value="자신의 인생 좌우명은?"
+												<c:if test="${ loginUser.userPwdQ eq '자신의 인생 좌우명은?'}">selected</c:if>>자신의
+												인생 좌우명은?</option>
+											<option value="자신의 보물 제 1호는?"
+												<c:if test="${ loginUser.userPwdQ eq '자신의 보물 제 1호는?'}">selected</c:if>>자신의
+												보물 제 1호는?</option>
+											<option value="추억하고 싶은 날짜가 있다면?"
+												<c:if test="${ loginUser.userPwdQ eq '추억하고 싶은 날짜가 있다면?'}">selected</c:if>>추억하고
+												싶은 날짜가 있다면?</option>
+											<option value="자신이 두번째로 존경하는 인물은?"
+												<c:if test="${ loginUser.userPwdQ eq '자신이 두번째로 존경하는 인물은?'}">selected</c:if>>자신이
+												두번째로 존경하는 인물은?</option>
+											<option value="인상 깊게 읽은 책 이름은?"
+												<c:if test="${ loginUser.userPwdQ eq '인상 깊게 읽은 책 이름은?'} ">selected</c:if>>인상
+												깊게 읽은 책 이름은?</option>
+											<option value="다시 태어나면 되고 싶은 것은?"
+												<c:if test="${ loginUser.userPwdQ eq '다시 태어나면 되고 싶은 것은?'}">selected</c:if>>다시
+												태어나면 되고 싶은 것은?</option>
+											<option value="유년시절 가장 생각나는 친구 이름은?"
+												<c:if test="${ loginUser.userPwdQ eq '유년시절 가장 생각나는 친구 이름은?'}">selected</c:if>>유년시절
+												가장 생각나는 친구 이름은?</option>
+											<option value="내가 좋아하는 캐릭터는?"
+												<c:if test="${ loginUser.userPwdQ eq '내가 좋아하는 캐릭터는?'}">selected</c:if>>내가
+												좋아하는 캐릭터는?</option>
+									</select></td>
 								</tr>
 
 								<tr>
@@ -275,6 +297,8 @@ header>section {
                 }
             }
         });
+		
+		
 		/* 다음 주소 API */
 		function addressAPI() {
 			new daum.Postcode({

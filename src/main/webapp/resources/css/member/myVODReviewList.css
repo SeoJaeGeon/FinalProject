@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* content */
+/* content-1 */
+.content-1 {
+    /* border:1px solid rebeccapurple; */
+}
+.rightContent {
+    width: 900px;
+    /* border: 1px solid teal; */
+    margin-left: 100px;
+    float: left;
+}
+
+/* <h2> title */
+.title {
+    font-size: 25px;
+    color:rgb(70, 70, 70);
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.contentTable {
+    border-collapse: collapse;
+    border-top: 1px solid black;
+    width: 100%;
+}
+
+.contentTable td {
+    padding: 3px 23px;
+    border-bottom: 1px solid #d1d5dd;
+    /* border: 1px solid blue; */
+    height: 200px;
+}
+
+
+.left {
+    width: 100px;
+    height: 40px;
+}
+
+.right {
+    width: 700px;
+}
+
+.poster{
+    width:110px;
+    height: 154.59px;
+    /* border: 1px solid hotpink; */
+}
+
+.movieTitle{
+    /* border: 1px solid yellow; */
+    width:100%;
+    font-size: 22px;
+    font-weight: bold;
+
+}
+
+.idDate{
+    /* border: 1px solid paleturquoise; */
+    width:100%;
+}
+
+.userId{
+    /* border: 1px solid saddlebrown; */
+}
+
+.writerDate{
+    /* border: 1px solid tan; */
+    font-size: 12px;
+
+}
+
+.reviewContent {
+    /* border: 1px solid cornflowerblue; */
+    width:100%;
+    height: 70px;
+    font-size: 13px;
+}
+
+.buttons {
+    /* border: 1px solid firebrick; */
+    width: 100px;
+    float: right;
+}
+
+.scoreDiv{
+    float: left;
+    /* border: 1px solid rgb(89, 0, 255); */
+}
+.score {
+    width:20px;
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    /* border:1px solid salmon; */
+}
+
+.scoreText {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    /* border: 1px solid navy; */
+}
+
+.bottomTdDiv{
+    text-align: right;
+    width:100%;
+    /* border: 1px solid chartreuse; */
+}
+.update, .delete{
+    margin-left: 10px;
+}
+
+/* 페이징 바 */
+.pagingbar {
+    margin: 50px auto;
+    text-align: center;
+    width:240px;
+    /* border:1px solid lightcoral; */
+}
+/* 페이징 바 */
+
+
+/* content-1 */
+/* content */

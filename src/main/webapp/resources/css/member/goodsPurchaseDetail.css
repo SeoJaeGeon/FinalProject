@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* content */
+/* content-1 */
+.content-1 {
+    /* border:1px solid rebeccapurple; */
+}
+.rightContent {
+    width: 900px;
+    /* border: 1px solid teal; */
+    margin-left: 100px;
+    margin-bottom: 100px;
+    float: left;
+}
+
+/* <h2> title */
+.title {
+    font-size: 25px;
+    color:rgb(70, 70, 70);
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+/* <h2> title */
+.table {
+    border-top: 1px solid black;
+    border-bottom: 1px solid #dee2e6;;
+}
+
+.contentTable {
+    border-collapse: collapse;
+    border-top: 1px solid black;
+    width:100%;
+}
+.purchaseInfo {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    width: 100%;
+    /* border: 1px solid green; */
+}
+.purchaseNo, .deliveryInfo {
+    font-size: 22px;
+    /* border: 1px lightcoral solid; */
+}
+
+.purchaseDate{
+    float: right;
+    font-size: 18px;
+    /* border: 1px solid rebeccapurple; */
+}
+
+.proName{
+    width:60%;
+    /* border: 1px solid violet; */
+}
+
+.count{
+   width: 20%;
+   text-align: right;
+   /* border: 1px solid rgb(0, 255, 98); */
+}
+
+.price{
+    width: 20%;
+    /* border: 1px solid rgb(130, 238, 215); */
+    text-align: right;
+}
+
+.thCount,.thCrice {
+    text-align: center;
+}
+
+.th {
+    background: rgb(31 , 69 ,97);
+    color: white;
+}
+
+.table tr:last-child{
+   border-bottom: 1px solid black;
+}
+
+.all {
+    border-bottom: 1px solid black;
+    height: 40px;
+    position: relative;
+}
+.allPriceText {
+    position: absolute;
+    left: 695px;
+/* border: 1px saddlebrown solid; */
+}
+
+.allPrice{
+    position: absolute;
+    right: 12px;
+/* border: 1px solid tan; */
+}
+/* 리스트 */
+
+/* 배송지 정보 */
+.deliveryTable{
+    width: 100%;
+}
+.deliveryInfo {
+    width:100%;
+    border-bottom: 1px solid black;
+    padding-top: 100px;
+
+}
+.topLine {
+    padding-bottom: 20px;
+}
+
+.deliveryTable tr td {
+    border-bottom: 1px solid rgb(201, 201, 201);
+}
+.left{
+    width: 20%;
+    height: 50px;
+}
+
+.zipCode {
+    margin-right: 10px;
+}
+/* 배송지 정보 */
+/* content-1 */
+/* content */

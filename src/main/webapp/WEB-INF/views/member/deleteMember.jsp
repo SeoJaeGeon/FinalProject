@@ -5,13 +5,16 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>회원탈퇴</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
-	<link href="${ contextPath }/resources/css/member/deleteMember.css" rel="stylesheet" type="text/css">
-	<style>
-		header, nav, section, article, aside, footer {
+<meta charset="UTF-8">
+<title>회원탈퇴</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<link href="${ contextPath }/resources/css/member/deleteMember.css"
+	rel="stylesheet" type="text/css">
+<style>
+header, nav, section, article, aside, footer {
 	box-sizing: border-box;
 	display: block;
 }
@@ -106,6 +109,7 @@ header>section {
 }
 /* 영역 나누기 */
 </style>
+
 </head>
 
 <body>
@@ -127,7 +131,8 @@ header>section {
 								<p>KASS CINEMA 회원 탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
 							</li>
 						</ul>
-						<form id="deleteForm" name="deleteForm" action="mdelete.do" method="post">
+						<form id="deleteForm" name="deleteForm" action="mdelete.do"
+							method="post">
 							<table class="contentTable">
 								<tr class="topLine">
 									<td>
@@ -151,16 +156,27 @@ header>section {
 									</td>
 								</tr>
 								<tr>
-									<td>
-										<label><input type="radio" name="wdReason" class="reason" value="서비스 장애가 잦아서" checked>서비스 장애가 잦아서</label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="이벤트 및 무료 이벤트 서비스의 혜택이 적어서">이벤트 및 무료 이벤트 서비스의 혜택이 적어서</label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="불만 및 불편사항에 대한 고객 응대가 나빠서">불만 및 불편사항에 대한 고객 응대가 나빠서</label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="영화관람 시 시설 및 가격 등의 불만 때문에">영화관람 시 시설 및 가격 등의 불만 때문에</label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="이용 빈도가 낮고 개인 정보 유출이 우려되어">이용 빈도가 낮고 개인 정보 유출이 우려되어</label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="탈퇴 후 재 가입을 위해">탈퇴 후 재 가입을 위해</label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="기타" id="etc">기타<input type="text" class="reasonText" id="reasonText" disabled></label><br>
-										<label><input type="radio" name="wdReason" class="reason" value="휴먼 계정 만료">휴먼 계정 만료</label><br>
-									</td>
+									<td><label><input type="radio" name="wdReason"
+											class="reason" value="서비스 장애가 잦아서" checked>서비스 장애가
+											잦아서</label><br> <label><input type="radio"
+											name="wdReason" class="reason"
+											value="이벤트 및 무료 이벤트 서비스의 혜택이 적어서">이벤트 및 무료 이벤트 서비스의
+											혜택이 적어서</label><br> <label><input type="radio"
+											name="wdReason" class="reason"
+											value="불만 및 불편사항에 대한 고객 응대가 나빠서">불만 및 불편사항에 대한 고객 응대가
+											나빠서</label><br> <label><input type="radio"
+											name="wdReason" class="reason"
+											value="영화관람 시 시설 및 가격 등의 불만 때문에">영화관람 시 시설 및 가격 등의 불만
+											때문에</label><br> <label><input type="radio"
+											name="wdReason" class="reason"
+											value="이용 빈도가 낮고 개인 정보 유출이 우려되어">이용 빈도가 낮고 개인 정보 유출이
+											우려되어</label><br> <label><input type="radio"
+											name="wdReason" class="reason" value="탈퇴 후 재 가입을 위해">탈퇴
+											후 재 가입을 위해</label><br> <label><input type="radio"
+											name="wdReason" class="reason" value="기타" id="etc">기타<input
+											type="text" class="reasonText" id="reasonText" disabled></label><br>
+										<label><input type="radio" name="wdReason"
+											class="reason" value="휴먼 계정 만료">휴먼 계정 만료</label><br></td>
 								</tr>
 								<tr>
 									<td>
@@ -173,17 +189,19 @@ header>section {
 										<table class="pwdTable">
 											<tr>
 												<td class="left">비밀번호</td>
-												<td><input type="password" name="userPwd" class="userPwd" id="userPwd"></td>
+												<td><input type="password" name="userPwd"
+													class="userPwd" id="userPwd"></td>
 											</tr>
-										</table>
-										<input type="hidden" name="userNo" value="${ loginUser.userNo }">
-										<input type="hidden" name="userId" value="${ loginUser.userId }">
+										</table> <input type="hidden" name="userNo"
+										value="${ loginUser.userNo }"> <input type="hidden"
+										name="userId" value="${ loginUser.userId }">
 									</td>
 								</tr>
 							</table>
 							<div class="buttons">
 								<button type="button" class="cancel">취소</button>
-								<button type="button" class="next" onclick="return deleteMember();">탈퇴</button>
+								<button type="button" class="next"
+									onclick="return deleteMember();">탈퇴</button>
 							</div>
 						</form>
 					</section>
@@ -192,8 +210,15 @@ header>section {
 		</div>
 	</div>
 	<script>
-		
-		
+		$("input[name=wdReason]").change(function() {
+			if ($("input[name=wdReason]:checked").val() == "기타") {
+				$("#reasonText").removeAttr("disabled");
+			} else {
+				$("#reasonText").attr("disabled", "true").val("");
+				;
+			}
+		});
+
 		function deleteMember() {
 			var input = $("#reasonText").val();
 			console.log(input);
@@ -204,39 +229,38 @@ header>section {
 			} else {
 				$("#reasonText").attr("disabled", "false");
 			}
-		
 
-		/* 공란 검사 변수*/
-		var pwd = $.trim($("#userPwd").val());
+			/* 공란 검사 변수*/
+			var pwd = $.trim($("#userPwd").val());
 
-		/* 공란 검사 */
-		if (!pwd) {
-			alert("비밀번호를  입력해주세요.");
-			$("#userPwd").focus();
-			return false;
-		}
-
-		var userPwdString = $("form[name=deleteForm]").serialize();
-
-		$.ajax({
-			url : "checkPwd.do",
-			data : userPwdString,
-			type : "post",
-			dataType : "json",
-			success : function(data) {
-				if (data.isEmpty == false) {
-					$("#deleteForm").submit();
-				} else {
-					alert("비밀번호가 일치하지 않습니다.");
-				}
-			},
-			error : function(e) {
-				console.log(e);
-				console.log("통신 실패!");
+			/* 공란 검사 */
+			if (!pwd) {
+				alert("비밀번호를  입력해주세요.");
+				$("#userPwd").focus();
+				return false;
 			}
-		});
 
-		return true;
+			var userPwdString = $("form[name=deleteForm]").serialize();
+
+			$.ajax({
+				url : "checkPwd.do",
+				data : userPwdString,
+				type : "post",
+				dataType : "json",
+				success : function(data) {
+					if (data.isEmpty == false) {
+						$("#deleteForm").submit();
+					} else {
+						alert("비밀번호가 일치하지 않습니다.");
+					}
+				},
+				error : function(e) {
+					console.log(e);
+					console.log("통신 실패!");
+				}
+			});
+
+			return true;
 		}
 	</script>
 

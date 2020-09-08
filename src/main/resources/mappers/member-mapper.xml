@@ -38,7 +38,7 @@
 		<result property="wdDate" column="WD_DATE" />
 	</resultMap> 
 	
-	<resultMap id="Attachment" type="Attachment">
+	<resultMap id="AttachmentResultSet" type="Attachment">
 		<id property="fileNo" column="FILE_NO" />
 		<result property="sortCode" column="SORT_CODE" />
 		<result property="filePath" column="FILE_PATH" />
@@ -50,7 +50,13 @@
 		<result property="snackNo" column="SNACK_NO" />
 		<result property="goodsNo" column="GOODS_NO" />
 	</resultMap>
-
+	
+	<resultMap id="AuthResultSet" type="Auth">
+		<id property="userEmail" column="EMAIL" />
+		<result property="auth" column="AUTH_NUM" />
+	</resultMap>
+	
+	
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
 		VALUES(SEQ_USER_NO.NEXTVAL, #{userId}, #{userPwd}, #{userPwdQ},
@@ -186,9 +192,27 @@
 		WHERE USER_NO = #{userNo}
 	</delete>
 
-	<select id="selectAtt" parameterType="string" resultType="Attachment">
+	<select id="selectAtt" parameterType="_int" resultMap="AttachmentResultSet">
 		SELECT *
 		FROM ATTACHMENT
 		WHERE USER_NO = #{userNo}
 	</select>
+	
+	<insert id="insertAuthNum" parameterType="Auth">
+		INSERT INTO AUTH
+		VALUES(#{userEmail}, #{authNum})
+	</insert>
+
+	<select id="emailCheck" parameterType="Auth" resultType="_int">
+		SELECT COUNT(*)
+		FROM AUTH
+		WHERE EMAIL = #{userEmail}
+		AND AUTH_NUM = #{authNum}
+	</select>
+	
+	<delete id="deleteAuth" parameterType="Auth">
+		DELETE AUTH
+		WHERE EMAIL = #{userEmail}
+	</delete>
+
 </mapper>
