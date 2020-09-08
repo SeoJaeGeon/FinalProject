@@ -132,7 +132,7 @@ header>section {
 							<div class="my-1-1">
 								<c:if test="${ loginUser.attachment.renameFileName != null }">
 									<img
-										src="${ contextPath }/resources/muploadFiles/${ loginUser.attachment.renameFileName }"
+										src="${ contextPath }/resources/images/muploadFiles/${ loginUser.attachment.renameFileName }"
 										class="profileImg">
 								</c:if>
 								<c:if test="${ loginUser.attachment.renameFileName == null }">

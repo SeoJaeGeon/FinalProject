@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/* content */
+/* content-1 */
+.content-1 {
+    /* border:1px solid rebeccapurple; */
+}
+.rightContent {
+    width: 900px;
+    /* border: 1px solid teal; */
+    margin-left: 100px;
+    float: left;
+}
+
+/* <h2> title */
+.title {
+    font-size: 25px;
+    color:rgb(70, 70, 70);
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+/* <h2> title */
+
+/* 리스트 */
+.table {
+    border-top: 1px solid black;
+    border-bottom: 1px solid #dee2e6;;
+}
+
+.contentTable {
+    border-collapse: collapse;
+    border-top: 1px solid black;
+    width:100%;
+}
+
+.th {
+    background: rgb(31 , 69 ,97);
+    color: white;
+}
+
+.no {
+    width: 20%;
+    /* border: 1px solid goldenrod; */
+}
+
+.proName {
+    width:40%;
+    /* border: 1px solid goldenrod; */
+}
+
+.purchaseDate {
+    width:20%;
+    /* border: 1px solid goldenrod; */
+}
+
+.expDate {
+    width:30%;
+    /* border: 1px solid goldenrod; */
+}
+/* 리스트 */
+
+/* 페이징 바 */
+.pagingbar {
+    margin: 50px auto;
+    text-align: center;
+    width:240px;
+    /* border:1px solid lightcoral; */
+}
+.page-link {
+    color: black;
+}
+/* 페이징 바 */
+
+/* content-1 */
+/* content */

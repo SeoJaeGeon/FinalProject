@@ -11,7 +11,8 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
-<link href="${ contextPath }/resources/css/member/insertMember.css?after"
+<link
+	href="${ contextPath }/resources/css/member/insertMember.css?after"
 	rel="stylesheet" type="text/css">
 
 <title>회원가입</title>
@@ -138,9 +139,10 @@
 								id="certifyReq" onclick="emailSend();">인증요청</button></td>
 					</tr>
 					<tr>
-						<td class="center"><input type="text" name="certifyCode"
-							class="certifyCode" id="certifyCode" placeholder="인증 코드"
-							data-name="인증코드" disabled></td>
+						<td class="center"><input type="text" name="authNum"
+							class="certifyCode" id="authNum" placeholder="인증 코드"
+							data-name="인증코드" disabled> <input type="text"
+							id="authNumCheck" value="0"></td>
 						<td class="right"><button type="button" class="certifyRes"
 								id="certifyRes" onclick="emailCheck();">인증확인</button></td>
 					</tr>
@@ -169,7 +171,8 @@
 				return false;
 
 			else {
-				$.ajax({
+				$
+						.ajax({
 							url : "idDupCheck.do",
 							data : {
 								userId : userId
@@ -193,7 +196,7 @@
 							error : function() {
 								console.log("ajax 통신 실패");
 							}
-						})
+						});
 			}
 
 		}
@@ -233,35 +236,56 @@
 
 		/* 인증번호 이메일 전송 */
 		function emailSend() {
-			$("#certifyCode").removeAttr("disabled");
-			/* var userEmail = $("#email").val().trim();
+			$("#authNum").removeAttr("disabled");
+			var userEmail = $("#email").val().trim();
+
 			$.ajax({
 				url : "emailSend.do",
 				data : {
-					userEmail : userEmail
+					userEmail : userEmail,
 				},
 				success : function(data) {
-					console.log(data + " - ajax");
-					
-					
+					console.log(data);
+					alert("입력한 이메일로 인증번호가 발송되었습니다. 인증번호를 입력해 주세요.");
+					//emailCheck(data);
 				},
 				error : function(e) {
 					console.log("ajax 통신 실패" + e);
 				}
-			}) */
+			})
 		}
 
 		/* 인증번호 확인 */
+
 		function emailCheck() {
-			/* var certifyCode = $("#certifyCode").val()
-			if(certifyCode != authNum) {
-				alert("인증번호가 일치하지 않습니다. 인증번호를 다시입력해 주세요.");
-				certifyCode = "";
-				certifyCode.focus();
-				return false
-			} else {
-				alert("인증이 완료되었습니다.");
-			} */
+			var userEmail = $("#email").val().trim();
+			var authNum = $("#authNum").val().trim();
+			console.log(authNum);
+			$.ajax({
+				url : "emailCheck.do",
+
+				data : {
+					userEmail : userEmail,
+					authNum : authNum
+				},
+				success : function(data) {
+					console.log(data + " - ajax");
+					console.log(data.isEmpty);
+
+					if (data.isEmpty == true) {
+						alert("인증번호가 일치합니다.");
+						$("#authNum").attr("readonly", true);
+						$("#authNumCheck").val(1);
+					} else {
+						alert("인증번호가 일치하지 않습니다. 인증요청을 다시 시도해주세요.");
+						$("#authNumCheck").val(0);
+						$("#authNum").focus();
+					}
+				},
+				error : function() {
+					console.log("ajax 통신 실패");
+				}
+			});
 		}
 
 		/* 회원가입 유효성 검사 */
@@ -275,7 +299,7 @@
 			var birth = $.trim($("#birth").val());
 			var phone = $.trim($("#phone").val());
 			var email = $.trim($("#email").val());
-			var certifyCode = $.trim($("#certifyCode").val());
+			var certifyCode = $.trim($("#authNum").val());
 
 			/* 공란 검사 */
 			if (!id) {
@@ -311,8 +335,8 @@
 				$("#email").focus();
 				return false;
 			} else if (!certifyCode) {
-				alert($("#certifyCode").attr("data-name") + " 항목을 입력하세요.");
-				$("#certifyCode").focus();
+				alert($("#authNum").attr("data-name") + " 항목을 입력하세요.");
+				$("#authNum").focus();
 				return false;
 			}
 
@@ -361,10 +385,17 @@
 					"휴대폰 번호는 '-'를 제외한 숫자만 입력해주세요."))
 				return false;
 
-			/* 아이디 중복 체크 여부 */
+			// 아이디 중복 체크 여부 
 			if ($("#idDuplicateCheck").val() == 0) {
 				alert("사용 가능한 아이디를 입력해 주세요.");
 				$("#userId").focus();
+				return false;
+			}
+			
+			// 이메일 인증 여부
+			if ($("#authCheck").val() == 0) {
+				alert("이메 인증을 해주세요.");
+				$("#email").focus();
 				return false;
 			}
 

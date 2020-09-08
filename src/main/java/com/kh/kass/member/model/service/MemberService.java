@@ -1,6 +1,7 @@
 package com.kh.kass.member.model.service;
 
 import com.kh.kass.common.Attachment;
+import com.kh.kass.common.Auth;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.Withdrawal;
 
@@ -49,6 +50,15 @@ public interface MemberService {
 
 	// 프로필사진 select
 	public Attachment selectAtt(int userNo);
+
+	// 인증번호 임시 저장
+	public int insertAuthNum(Auth au);
+
+	// 인증번호 조회
+	public int emailCheck(Auth au);
+
+	// 인증번호 삭제
+	public int deleteAuth(Auth au);
 
 	
 	
