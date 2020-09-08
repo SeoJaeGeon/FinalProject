@@ -62,8 +62,27 @@ public class ResServiceImpl implements ResService {
 	}
 
 	@Override
-	public ArrayList<Movie> reviewList(int movieNum) {
+	public ArrayList<Review> reviewList(int movieNum) {
 		return resDao.reviewList(movieNum);
 	}
+
+	@Override
+	public Reservation resSeatSelect(int placeValue) {
+		return resDao.resSeatSelect(placeValue);
+	}
+
+	@Override
+	public int updateResInfo(Reservation seatUpdate) {
+		return resDao.updateResInfo(seatUpdate);
+	}
+
+	@Override
+	public int updateRes(Reservation res) {
+		int result =  resDao.updateRes(res);
+		int result2 = resDao.updateRes2(res);
+		
+		return result+result2;
+	}
+
 
 }
