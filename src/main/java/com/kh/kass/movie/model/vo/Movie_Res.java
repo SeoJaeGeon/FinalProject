@@ -15,7 +15,7 @@ public class Movie_Res {
 
    private String maName; // 영화관지점 이름
    
-   
+   	
    
    
     public Movie_Res(){}

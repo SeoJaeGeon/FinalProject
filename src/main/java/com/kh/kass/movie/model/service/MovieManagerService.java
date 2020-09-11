@@ -61,6 +61,6 @@ public interface MovieManagerService {
 	public ArrayList<Movie_Res> selectmovResList2(Movie_Res movie_ResList2);
 
 	public int insertMovieRes(MovieResListAjax movieResListAjax);
-
+	//
 	
 }

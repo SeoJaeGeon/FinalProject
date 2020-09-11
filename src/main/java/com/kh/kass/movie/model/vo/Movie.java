@@ -40,7 +40,7 @@ public class Movie {
       super();
       this.movieNo = movieNo;
    }
-   
+   	
    public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
             int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
             String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName) {

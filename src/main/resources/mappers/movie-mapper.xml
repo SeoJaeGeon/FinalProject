@@ -230,7 +230,7 @@
 	where room_no=#{roomNo})
 	,#{startTime}
 	,#{endTime})
-	</insert>
+	</insert> 
 </mapper>
 
 

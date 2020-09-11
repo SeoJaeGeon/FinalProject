@@ -26,5 +26,5 @@ public class MovieResListAjax {
 		this.resDate = resDate;
 	}
 	
-	
+		
 }

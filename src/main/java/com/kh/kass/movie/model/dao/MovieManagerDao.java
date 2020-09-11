@@ -93,7 +93,7 @@ public class MovieManagerDao {
 	public int insertMovieRes(MovieResListAjax movieResListAjax) {
 		return sqlSession.insert("movieManagerMapper.insertMovieResInfo",movieResListAjax);
 	}
-
+	//
 	
 	
 }

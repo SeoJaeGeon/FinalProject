@@ -778,7 +778,7 @@ font-size:20px;
                                     var tableDatas = []
                                     function table_make(){
                                     // 특정 버튼을 누르면 테이블의 td 가 1줄씩 추가되는데 이 모든것을 다 controller로 가져가야함
-                                    
+                                     
                                     	var num1 = document.getElementById("dropdownMenu1").value; // 영화 이름
                                     	var num2 = document.getElementById("dropdownMenu3").value; // 영화관 지역
                                     	var num3 = document.getElementById("dropdownMenu4").value; // 영화관 번호

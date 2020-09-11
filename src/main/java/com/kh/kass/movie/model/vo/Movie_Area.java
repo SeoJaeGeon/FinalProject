@@ -21,6 +21,6 @@ public class Movie_Area {
 		this.maName = maName;
 		this.mocNo = mocNo;
 	}
-	
+		
 	
 }

@@ -565,7 +565,7 @@
                     	function movieNameChange(obj){   		
                   		return location.href="MovieManagerUpdatePageName.do?MovieName="+obj;
                     	}
-                    	
+                    	 
                     	
                     	</script>
                     

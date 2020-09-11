@@ -119,6 +119,6 @@ public class MovieManagerServiceImpl implements MovieManagerService{
 	public int insertMovieRes(MovieResListAjax movieResListAjax) {
 		return mDao.insertMovieRes(movieResListAjax);
 	}
-
+	
 
 }
