@@ -26,6 +26,35 @@ public class Attachment {
 		this.renameFileName = renameFileName;
 		this.userNo = userNo;
 	}
+
+	public Attachment(int fileNo, String sortCode, String filePath, String originFileName, String renameFileName,
+			String fileStatus, int movieNo) {
+		super();
+		this.fileNo = fileNo;
+		this.sortCode = sortCode;
+		this.filePath = filePath;
+		this.originFileName = originFileName;
+		this.renameFileName = renameFileName;
+		this.fileStatus = fileStatus;
+		this.movieNo = movieNo;
+	}
+
+	public Attachment(int fileNo, String sortCode, String filePath, String originFileName, String renameFileName,
+			String fileStatus, int movieNo, int userNo, int snackNo, int goodsNo) {
+		super();
+		this.fileNo = fileNo;
+		this.sortCode = sortCode;
+		this.filePath = filePath;
+		this.originFileName = originFileName;
+		this.renameFileName = renameFileName;
+		this.fileStatus = fileStatus;
+		this.movieNo = movieNo;
+		this.userNo = userNo;
+		this.snackNo = snackNo;
+		this.goodsNo = goodsNo;
+	}
+	
+	
 	
 	
 	

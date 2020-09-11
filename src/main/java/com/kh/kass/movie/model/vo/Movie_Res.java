@@ -12,5 +12,36 @@ public class Movie_Res {
    private String resInfo; // 좌성현황
    private String startTime; // 상영시작 시간
    private String endTime; // 상영종료 시간
+
+   private String maName; // 영화관지점 이름
+   
+   
+   
+   
+    public Movie_Res(){}
+
+
+
+
+	public Movie_Res(int resNo, int movieNo, Date resDate, int roomNo, String resInfo, String startTime, String endTime,
+			String maName) {
+		super();
+		this.resNo = resNo;
+		this.movieNo = movieNo;
+		this.resDate = resDate;
+		this.roomNo = roomNo;
+		this.resInfo = resInfo;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.maName = maName;
+	}
+
+
+
+
+
+	
+
+	
    
 }
