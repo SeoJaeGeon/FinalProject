@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
-<link href="${ contextPath }/resources/css/member/myPage.css?after" rel="stylesheet"
-	type="text/css">
+<link href="${ contextPath }/resources/css/member/myPage.css?after"
+	rel="stylesheet" type="text/css">
 <title>MY KASS</title>
 <style>
 header, nav, section, article, aside, footer {
@@ -125,9 +125,16 @@ header>section {
 					<section class="content-1-1">
 						<div class="my-1">
 							<div class="my-1-1">
-								<img
-									src="${ contextPath }/resources/images/defaultPropfieImg.png"
-									class="profileImg">
+								<c:if test="${ loginUser.attachment.renameFileName != null }">
+									<img
+										src="${ contextPath }/resources/images/muploadFiles/${ loginUser.attachment.renameFileName }"
+										class="profileImg">
+								</c:if>
+								<c:if test="${ loginUser.attachment.renameFileName == null }">
+									<img
+										src="${ contextPath }/resources/images/defaultPropfieImg.png"
+										class="profileImg" id="profileImg">
+								</c:if>
 							</div>
 							<div class="my-1-2">
 								<span class="userName">${ loginUser.userName }님 </span><span>반가워요!</span>

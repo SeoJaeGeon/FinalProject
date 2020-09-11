@@ -419,7 +419,7 @@ header>section {
 										<span class="movie_old">${ mov.movieAge }</span>
 										<span class="movie_name">${ mov.movieName }</span>
 										<input type="hidden" value="${ mov.movieNo }" id="movieNo"/>
-										<input type="hidden" value="${ mov.attachList[0].filePath }${ mov.attachList[0].originFileName }" id="movPoster"/>
+										<input type="hidden" value="${ mov.attachList[0].filePath }${ mov.attachList[0].renameFileName }" id="movPoster"/>
 									</button>
 								</li>
 							</c:forEach>
@@ -511,11 +511,21 @@ header>section {
 							</div>
 						</div>
 						<div class="movie_sale5">
-							<button class="movie_nextBtn">
+						<c:choose>
+						<c:when test="${ loginUser != null }">
+							<button class="movie_nextBtn" onclick="nextBtn();">
 								<img
 									src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
 									class="movie_nextImg"> <br>자리선택
 							</button>
+						</c:when>
+						<c:otherwise>
+							<button class="movie_nextBtn" onclick="login();" type="button">
+								<img src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
+									class="movie_nextImg"> <br>자리선택
+							</button>
+						</c:otherwise>
+						</c:choose>
 						</div>
 					</div>
 				</div>
@@ -646,6 +656,7 @@ header>section {
 			
 			titleValue = child.children('#movieNo').val();
 			
+			placeValue = 0;
 			playMovie();
 		});
 
@@ -662,6 +673,7 @@ header>section {
 			areaNumber = $(this).children('button').children('input').val();
 			areaValue = child1.children('#mocNo').val();
 			
+			placeValue = 0;
 			playMovie();
 		});
 
@@ -675,7 +687,9 @@ header>section {
 			selectTime.text(child1.val());
 			timeValue = child1.val();
 			
-			console.log("날짜 : " + child1.val());				
+			console.log("날짜 : " + child1.val());		
+			
+			placeValue = 0;
 			playMovie();
 		});
 		
@@ -720,6 +734,8 @@ header>section {
 								cinemaText = child2.text();
 								cinemaValue = child1.children('#maNo').val();
 								
+								placeValue = 0;
+								
 								playMovie();
 							})
 							
@@ -742,6 +758,7 @@ header>section {
 			console.log("골라진 지역 : " + areaValue);
 			console.log("골라진 영화관 : " + cinemaValue);
 			console.log("골라진 영화 시간 : " + timeValue);
+			console.log("골라진 영화 보는곳 : " + placeValue);
 			console.log("---------------------------------")
 			
 			$.ajax({
@@ -758,6 +775,7 @@ header>section {
 					
 					if(data.length > 0){
 						for(i in data){
+							var $input = $("<input type='hidden' id='resNo'/>").text(data[i].resNo);
 							var $li = $("<li class='movie_time_list'>");
 							var $playBtn = $("<button class='movie_play'>");
 							var $firstDiv = $("<div class='time' align='center'>")
@@ -780,16 +798,16 @@ header>section {
 							var seatLeft = data[i].resInfo.split(",");
 							
 							for(var i=0; i<seatInitial.length; i++) {
-								if(seatInitial[i] = "0") {
+								if(seatInitial[i] == 0) {
 									initialCount++;
 								}
-								if(seatLeft[i] = "0") {
+								if(seatLeft[i] == 0) {
 									leftCount++;
 								}
 							}
 
-							var $thirdStrong = $("<strong style='color: red'>").text(initialCount);
-							var $thirdEm = $("<em style='font-style: inherit'>").text("/"+leftCount);
+							var $thirdStrong = $("<strong style='color: red'>").text(leftCount);
+							var $thirdEm = $("<em style='font-style: inherit'>").text("/"+initialCount);
 							
 							
 							$firstDiv.append($firstStrong);
@@ -812,6 +830,7 @@ header>section {
 							$playBtn.append($secondSpan);
 							$playBtn.append($thirdDiv);
 							
+							$li.append($input);
 							$li.append($playBtn);
 							
 							$ul.append($li);
@@ -825,7 +844,8 @@ header>section {
 
 							selectPlace.text(child1);
 							placeText = child1;
-
+							
+							placeValue = $(this).children('#resNo').text();
 						});
 						
 						
@@ -839,15 +859,17 @@ header>section {
 			});
 		}
 		
-		function playMovieCheck(dateInput){
-			/* var dayLength = $(".movie_DateUl").children('.movie_day_list').children('button').length;
-			
-			for(var i=0; i<dayLength; i++){
-				console.log($(".movie_DateUl").children('.movie_day_list').children('button').eq(i).val());
-			} */
-			console.log(dateInput);
+		function nextBtn(){
+			if(placeValue != 0){
+				location.href="resSeat.do?placeValue="+placeValue;				
+			}else{
+				alert("영화를 선택하지 않으셨습니다.");
+			}
 		}
 		
+		function login(){
+			alert("로그인 해주세요.");
+		}
 	</script>
 
 </body>

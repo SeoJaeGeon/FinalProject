@@ -3,9 +3,7 @@ package com.kh.kass.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,13 +35,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.kass.common.Attachment;
+import com.kh.kass.common.Auth;
 import com.kh.kass.member.model.exception.MemberException;
 import com.kh.kass.member.model.service.MemberService;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.Withdrawal;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
-
-import net.sf.json.JSONObject;
 
 @SessionAttributes({ "loginUser", "msg" })
 @Controller
@@ -64,7 +62,6 @@ public class MemberController {
 	@RequestMapping("minsert.do")
 	public String insertMember(Member m, RedirectAttributes rd, @RequestParam("zipCode") String zipCode,
 			@RequestParam("address1") String address1, @RequestParam("address2") String address2) {
-		System.out.println("MemberController m : " + m);
 		m.setUserAddr(zipCode + "," + address1 + "," + address2);
 
 		int result = mService.insertMember(m);
@@ -81,8 +78,7 @@ public class MemberController {
 	@RequestMapping("idDupCheck.do")
 	public ModelAndView idDuplicateCheck(String userId, ModelAndView mv) {
 		boolean isUsable = mService.checkIdDup(userId) == 0 ? true : false;
-//		System.out.println("result : " + mService.checkIdDup(userId));
-//		System.out.println("isUsable:" + isUsable);
+
 		Map map = new HashMap();
 		map.put("isUsable", isUsable);
 		mv.addAllObjects(map);
@@ -92,52 +88,62 @@ public class MemberController {
 		return mv;
 	}
 
-	// 회원가입 후
-	@RequestMapping("minserAfter.do")
-	public String mInsertafter() {
-		return "redirect:home.do";
-	}
-
 	// 이메일 인증
-	
-	@RequestMapping("emailSend.do")
-	public ModelAndView emailAuth(String userEmail, ModelAndView mv, HttpServletRequest response, HttpServletRequest request) {
-//		String email = request.getParameter("userEmail");
-		System.out.println(userEmail);
-		
-		String authNum = "";
+	@GetMapping("emailSend.do")
+	public ModelAndView emailAuth(Auth au, ModelAndView mv) {
+		String userEmail = au.getUserEmail();
+		String authNum = RandomNum();
+		au.setAuthNum(authNum);
 
-		authNum = RandomNum();
+		System.out.println(au);
+		sendEmail(userEmail, authNum);
 
-		sendEmail(userEmail.toString(), authNum);
+		int result = mService.insertAuthNum(au);
 
-		mv.setViewName("memeber/insertMember.jsp");
-		mv.addObject("email", userEmail);
-		mv.addObject("code", authNum);
+		Map map = new HashMap();
+		map.put("emailSendResult", result);
+		mv.addAllObjects(map);
+
+		mv.setViewName("jsonView");
 
 		return mv;
+	}
 
+	@RequestMapping("emailCheck.do")
+	public ModelAndView emailCheck(Auth au, ModelAndView mv) {
+		System.out.println(au);
+
+		boolean isEmpty = mService.emailCheck(au) == 1 ? true : false;
+
+		Map map = new HashMap();
+		map.put("isEmpty", isEmpty);
+		mv.addAllObjects(map);
+
+		mv.setViewName("jsonView");
+		int result2 = mService.deleteAuth(au);
+
+		return mv;
 	}
 
 	private void sendEmail(String email, String authNum) {
-		String host = "stmp.gmail.com"; // smtp 서버 String subject = "KASS CINEMA 인증코드 "; String
+		// String host = "smtp.gmail.com"; // smtp 서버
 		String subject = "KASS CINEMA 인증 코드";
 		String fromName = "KASS CINEMA";
-		String from = "    ";
+		String from = "sssamba.zzeong@gmail.com";
 		String to1 = email;
 
-		String content = "인증번호 [ " + authNum + " ]";
+		String content = "KASS CINEMA 인증번호 [ " + authNum + " ]";
 
-		
 		try {
 			Properties props = new Properties(); // G-Mail STMP 사용시
-			props.put("mail.stmp.starttls.enable", "true");
-			props.put("mail.transport.protocol", "stmp");
-			props.put("mail.stmp.host", host);
-			props.setProperty("mail.smtp.socketFactory.clss", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.stmp.port", "456");
-			props.put("mail.stmp.user", from);
-			props.put("mail.stmp.auth", "true");
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.port", "465");
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.socketFactory.port", "465");
+			props.put("mail.smtp.socketFactory.fallback", "false");
+			props.put("mail.smtp.ssl.trust", "*");
 
 			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -145,52 +151,50 @@ public class MemberController {
 				}
 			});
 			Message msg = new MimeMessage(mailSession);
-			
+
 			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
 			// 보내는 사람 설정
-			
-			InternetAddress[] address1 = { new InternetAddress(to1) };
-			msg.setRecipients(Message.RecipientType.TO, address1);
+
+//			InternetAddress[] address1 = { new InternetAddress(to1) };
+			InternetAddress receiveUser = new InternetAddress(to1);
+			msg.setRecipient(Message.RecipientType.TO, receiveUser);
 			msg.setSubject(subject); // 제목 설정
 			msg.setSentDate(new java.util.Date()); // 보내는 날짜 설정
-			msg.setContent(content, "text/html;cherset=euc-kr"); // 내용 설정(HTML 형식)
-			
+			msg.setContent(content, "text/html;charset=euc-kr"); // 내용 설정(HTML 형식)
+
 			Transport.send(msg); // 메일보내기
-		
-		
+
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
-	 
+
 	public String RandomNum() {
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < 6; i++) {
-			int n = (int)(Math.random() * 10);
+			int n = (int) (Math.random() * 10);
 			buffer.append(n);
 		}
-		
 		return buffer.toString();
-		
 	}
+
 	// 2. 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String memberLogin(@RequestParam("userId") String userId, @RequestParam("userPwd") String userPwd, Model model, RedirectAttributes rd) {
+	public String memberLogin(@RequestParam("userId") String userId, @RequestParam("userPwd") String userPwd,
+			Model model, RedirectAttributes rd) {
 		Member m = new Member(userId, userPwd);
-		
-		System.out.println("m?:"+m);
+
 		Member loginUser = mService.loginMember(m);
-		
-		System.out.println(loginUser);
+
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 		} else {
-			// rd.addFlashAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
-			throw new MemberException("로그인실패");
+			rd.addFlashAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
+
 		}
 		return "redirect:home.do";
 	}
@@ -216,8 +220,6 @@ public class MemberController {
 		Member findResult = mService.findId(m);
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-
-		System.out.println(findResult);
 
 		return gson.toJson(findResult);
 	}
@@ -257,8 +259,6 @@ public class MemberController {
 	// 비밀번호 재설정
 	@RequestMapping("pwdReset.do")
 	public String resetPwd(Member m, RedirectAttributes rd) throws Exception {
-		System.out.println("Member?" + m);
-
 		int result = mService.updatePwd(m);
 
 		if (result > 0) {
@@ -313,39 +313,69 @@ public class MemberController {
 			@RequestParam("address1") String address1, @RequestParam("address2") String address2,
 			HttpServletRequest request, @RequestParam(value = "uploadfile", required = false) MultipartFile file) {
 
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\muploadFiles";
-		File folder = new File(savePath);
-		
-		m.setUserAddr(zipCode + "," + address1 + "," + address2);
+		Attachment att = mService.selectAtt(m.getUserNo());
 
-		int result2 = mService.updateMember(m);
-		
-		if (!file.getOriginalFilename().equals("")) {
-			// 파일이 업로드 되었다면 별도의 메소드를 통해 파일 저장
-			String renameFileName = saveFile(file, request);
-			String renamePath = folder + "\\" + renameFileName;
-			System.out.println("f:"+folder);
-			System.out.println("r:"+renamePath);
+		String renameFileName;
+		if (att == null) {
+			if (!file.getOriginalFilename().equals("")) {
+				renameFileName = saveFile(file, request);
 
-			if (renameFileName != null) {
-				Attachment att = new Attachment(renamePath, file.getOriginalFilename(), renameFileName, m.getUserNo());
-				System.out.println(att);
-				int result1 = mService.uploadImg(att);
+				if (renameFileName != null) {
+					att = new Attachment();
+					String renamePath = "\\resources\\images\\muploadFiles\\";
+					att.setFilePath(renamePath);
+					att.setOriginFileName(file.getOriginalFilename());
+					att.setRenameFileName(renameFileName);
+					att.setUserNo(m.getUserNo());
 
-				if (result1 > 0) {
-					m.setAttachment(att);
-					model.addAttribute("loginUser", m);
-				} else {
-					throw new MemberException("사진업로드 실패");
+					int result1 = mService.uploadImg(att);
+
+					if (result1 > 0) {
+						m.setAttachment(att);
+						model.addAttribute("loginUser", m);
+					} else {
+						throw new MemberException("사진업로드 실패");
+					}
+				}
+			}
+		} else {
+
+			if (file != null && !file.isEmpty()) {
+				renameFileName = saveFile(file, request);
+
+				if (att.getRenameFileName() != null) {
+					deleteFile(att.getRenameFileName(), request);
+				}
+				// 파일이 업로드 되었다면 별도의 메소드를 통해 파일 저장
+
+				if (renameFileName != null) {
+					String renamePath = "\\resources\\images\\muploadFiles\\";
+
+					att.setFilePath(renamePath);
+					att.setOriginFileName(file.getOriginalFilename());
+					att.setRenameFileName(renameFileName);
+					att.setUserNo(m.getUserNo());
+
+					int result1 = mService.uploadImg(att);
+
+					if (result1 > 0) {
+						m.setAttachment(att);
+						model.addAttribute("loginUser", m);
+					} else {
+						throw new MemberException("사진업로드 실패");
+					}
 				}
 			}
 		}
-		
+
+		m.setUserAddr(zipCode + "," + address1 + "," + address2);
+
+		int result2 = mService.updateMember(m);
+
 		if (result2 <= 0) {
 			throw new MemberException("회원정보 수정에 실패하였습니다.");
 		}
-		
+
 		rd.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
 		model.addAttribute("loginUser", m);
 		return "redirect:myKass.do";
@@ -356,8 +386,7 @@ public class MemberController {
 		// 파일이 저장 될 경로 설정
 		// 해당 resources는 webapp 하위의 resources
 		String root = request.getSession().getServletContext().getRealPath("resources");
-
-		String savePath = root + "\\muploadFiles";
+		String savePath = root + "\\images\\muploadFiles";
 
 		File folder = new File(savePath); // savePath 폴더를 불러와서
 		// 해당 폴더 경로가 존재하는지 확인하고
@@ -374,11 +403,22 @@ public class MemberController {
 
 		try {
 			file.transferTo(new File(renamePath));
-		} catch (IllegalStateException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		return renameFileName;
+	}
+
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\images\\muploadFiles";
+
+		File deleteFile = new File(savePath + "\\" + fileName);
+
+		if (deleteFile.exists()) {
+			deleteFile.delete();
+		}
 	}
 
 	// 비밀번호 변경 뷰
@@ -415,19 +455,24 @@ public class MemberController {
 	// 회원탈퇴
 	@RequestMapping("mdelete.do")
 	public String deleteMember(Withdrawal wd, SessionStatus status, HttpServletRequest request, RedirectAttributes rd) {
+		Attachment att = mService.selectAtt(wd.getUserNo());
 		int result = mService.deleteMember(wd);
-		//int userNo = wd.getUserNo();
-		
-		//Attachment att = mService.selectAtt(userNo); //프로필사진 select
+		// int userNo = wd.getUserNo();
+
+		// Attachment att = mService.selectAtt(userNo); //프로필사진 select
 
 		int result2 = mService.insertReason(wd);
-		
+
 		int result3 = mService.deleteImg(wd);
 
-		if (result > 0 && result2 > 0 && result3 >= 0) {
-			/*if(att.getRenameFileName() != null) {
+		if (att != null) {
+			if (att.getRenameFileName() != null) {
 				deleteFile(att.getRenameFileName(), request);
-			}*/
+			}
+		}
+
+		if (result > 0 && result2 > 0 && result3 >= 0) {
+
 			rd.addFlashAttribute("msg", "회원탈퇴가 완료되었습니다.");
 			status.setComplete();
 
@@ -436,16 +481,49 @@ public class MemberController {
 			throw new MemberException("회원 탈퇴에 실패하였습니다.");
 		}
 	}
-	
-	public void deleteFile(String fileName, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\muploadFiles";
-		
-		File deleteFile = new File(savePath + "\\" + fileName);
-		
-		if(deleteFile.exists()) {
-			deleteFile.delete();
-		}
+
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+	// 영화 예매 내역 리스트 뷰
+	@RequestMapping("moviePurchaseListView.do")
+	public String moviePurchaseListView() {
+		return "member/moviePurchaseList";
 	}
 
+	// 영화 예매 리스트
+	@RequestMapping("moviePurchaseList.do")
+	public String moviePurchase() {
+		
+		return "";
+	}
+	
+	
+	// vod 구매 내역 리스트 뷰
+	@RequestMapping("vodPurchaseListView.do")
+	public String vodPurchaseListView() {
+		return "member/vodPurchaseList";
+	}
+
+	// 리뷰 등록
+	@RequestMapping("insertReview.do")
+	public String insertReview() {
+		
+		return "";
+	}
+	
+	
+	// 스낵 구매 내역 리스트 뷰
+	@RequestMapping("snackPurchaseListView.do")
+	public String snackPurchaseListView() {
+		return "member/snackPurchaseList";
+	}
+	
+	
+	
+
+	// 굿즈 구매 내역 리스트 뷰
+	@RequestMapping("goodsPurchaseListView.do")
+	public String goddsPurchaseListView() {
+		return "member/goodsPurchaseList";
+	}
 }

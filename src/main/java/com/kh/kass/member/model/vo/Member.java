@@ -21,14 +21,15 @@ public class Member {
 	private String userStatus;
 	private Date userEnrollDate;
 	private Date userModifyDate;
-  private Attachment attachment;
+	private Attachment attachment;
+	private String authNum;
 	
 	public Member() {}
 	
 	// 전체
 	public Member(int userNo, String userId, String userPwd, String userPwdQ, String userPwdA, String userName,
 			String userBirth, String userAddr, String userPhone, String userEmail, String userStatus,
-			Date userEnrollDate, Date userModifyDate, Attachment attachment) {
+			Date userEnrollDate, Date userModifyDate, Attachment attachment, String authNum) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -44,6 +45,7 @@ public class Member {
 		this.userEnrollDate = userEnrollDate;
 		this.userModifyDate = userModifyDate;
 		this.attachment = attachment;
+		this.authNum = authNum;
 	}
 
 	// attachment 제외

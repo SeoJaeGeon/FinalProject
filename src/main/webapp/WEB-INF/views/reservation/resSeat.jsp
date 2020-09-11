@@ -368,6 +368,23 @@ header>section {
 	width: 1500px;
 	margin: auto;
 }
+
+#movie_poster{
+	float : left;
+	width : 100%;
+	heigth : 70%;
+}
+
+#movie_title{
+	float : left;
+	width : 100%;
+	heigth : 30%;
+}
+
+.posterImg{
+	display : block;
+	margin: auto;
+}
 /* 내가 쓴 코드 */
 </style>
 </head>
@@ -378,7 +395,7 @@ header>section {
 		<section id="content">
 			<div class="content1">
 				<div class="movie_content">
-					<button class="resBack">예매 다시하기</button>
+					<button class="resBack" onclick="tryResBtn();">예매 다시하기</button>
 					<button class="tryPerson" onclick="tryPersonBtn();">인원 초기화</button>
 					<div class="movie_station">
 						<div class="res_station1">
@@ -450,16 +467,16 @@ header>section {
 							</div>
 							<div class="selectMovieInfo">
 								<span
-									style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver;">건대</span>
+									style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver;">${ seatList.maName }</span>
 								<span
-									style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver">1관</span>
+									style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver">${ seatList.roomNumber }관</span>
 								<span
 									style="display: block; float: left; width: 100px; font-size: 20px; text-align: center; border-right: 1px solid silver">
-									<strong style="color: red">101</strong> / <em
-									style="font-style: inherit">101</em>
+									<strong style="color: red">${ num1 }</strong> / <em
+									style="font-style: inherit">${ num2 }</em>
 								</span> <span
 									style="display: block; width: 400px; font-size: 30px; text-align: center; margin-top: 60px;">
-									<strong>2020.08.18</strong> <strong>(월)</strong> <strong>13:00~14:55</strong>
+									<strong>${ resDate }</strong><strong>${ seatList.startTime }~${ seatList.endTime }</strong>
 								</span>
 							</div>
 						</div>
@@ -469,150 +486,83 @@ header>section {
 							</div>
 							<div class="seat_station">
 								<div class="seat_select">
+								
+								
+								<c:set var="count" value="0"/>
+								<c:set var="sCount" value="0"/>
+								<c:set var="seatIndex" value="0"/>
+								<c:set var="aList" value="${ alpha }"/>
+								
+								<c:forEach var="seat" items="${ seatInfo }" varStatus="status">
+								
+								<c:if test="${ seat == 0 }">
+									<button class="no" value="${ aList[sCount] }${ count+1 }">
+										<input value="${ seatIndex }" hidden>${ count+1 }
+									</button>
+									<c:set var="count" value="${ count+1 }"/>
+									<c:set var="seatIndex" value="${ seatIndex+1 }"/>
+								</c:if>
+								
+								<c:if test="${ seat == 1 }">
+									<div class="noSeat">
+										<input value="${ seatIndex }" hidden>X
+									</div>
+									<c:set var="count" value="${ count+1 }"/>
+									<c:set var="seatIndex" value="${ seatIndex+1 }"/>
+								</c:if>
+								
+								<c:if test="${ seat == 2 }">
+									<div class="way">
+										<input value="${ seatIndex }" hidden>
+									</div>
+									<c:set var="seatIndex" value="${ seatIndex+1 }"/>
+								</c:if>
+								
+								<c:if test="${ seat == 3 }">
+									<input value="${ seatIndex }" hidden><br>
+									<c:set var="seatIndex" value="${ seatIndex+1 }"/>
+								</c:if>
+								
+								<c:if test="${ seat == 4 }">
+									<c:if test="${ not status.first }">
+										<c:set var="sCount" value="${ sCount+1 }"/>
+									</c:if>
 									<div class="label">
-										<input value="0" hidden>A
+										<input value="${ seatIndex }" hidden>${ aList[sCount] }
 									</div>
-									<button class="no" value="A1">
-										<input value="1" hidden>1
-									</button>
-									<div class="noSeat">
-										<input value="2" hidden>X
-									</div>
-									<div class="noSeat">
-										<input value="3" hidden>X
-									</div>
-									<button class="no" value="A4">
-										<input value="4" hidden>4
-									</button>
-									<div class="way">
-										<input value="5" hidden>
-									</div>
-									<button class="no" value="A5">
-										<input value="6" hidden>5
-									</button>
-									<button class="no" value="A6">
-										<input value="7" hidden>6
-									</button>
-									<button class="no" value="A7">
-										<input value="8" hidden>7
-									</button>
-									<button class="no" value="A8">
-										<input value="9" hidden>8
-									</button>
-									<div class="way">
-										<input value="10" hidden>
-									</div>
-									<button class="no" value="A9">
-										<input value="11" hidden>9
-									</button>
-									<button class="no" value="A10">
-										<input value="12" hidden>10
-									</button>
-									<input value="13" hidden><br>
-									<div class="label">
-										<input value="14" hidden>B
-									</div>
-									<button class="no" value="B1">
-										<input value="15" hidden>1
-									</button>
-									<button class="no" value="B2">
-										<input value="16" hidden>2
-									</button>
-									<button class="no" value="B3">
-										<input value="17" hidden>3
-									</button>
-									<button class="no" value="B4">
-										<input value="18" hidden>4
-									</button>
-									<div class="way">
-										<input value="19" hidden>
-									</div>
-									<button class="no" value="B5">
-										<input value="20" hidden>5
-									</button>
-									<button class="no" value="B6">
-										<input value="21" hidden>6
-									</button>
-									<div class="noSeat">
-										<input value="22" hidden>X
-									</div>
-									<button class="no" value="B8">
-										<input value="23" hidden>8
-									</button>
-									<div class="way">
-										<input value="24" hidden>
-									</div>
-									<button class="no" value="B9">
-										<input value="25" hidden>9
-									</button>
-									<button class="no" value="B10">
-										<input value="26" hidden>10
-									</button>
-									<input value="27" hidden><br>
-									<div class="label">
-										<input value="28" hidden>C
-									</div>
-									<button class="no" value="C1">
-										<input value="29" hidden>1
-									</button>
-									<button class="no" value="C2">
-										<input value="30" hidden>2
-									</button>
-									<button class="no" value="C3">
-										<input value="31" hidden>3
-									</button>
-									<button class="no" value="C4">
-										<input value="32" hidden>4
-									</button>
-									<div class="way">
-										<input value="33" hidden>
-									</div>
-									<button class="no" value="C5">
-										<input value="34" hidden>5
-									</button>
-									<div class="noSeat">
-										<input value="35" hidden>X
-									</div>
-									<div class="noSeat">
-										<input value="36" hidden>X
-									</div>
-									<button class="no" value="C8">
-										<input value="37" hidden>8
-									</button>
-									<div class="way">
-										<input value="38" hidden>
-									</div>
-									<button class="no" value="C9">
-										<input value="39" hidden>9
-									</button>
-									<button class="no" value="C10">
-										<input value="40" hidden>10
-									</button>
+									<c:set var="count" value="0"/>
+									<c:set var="seatIndex" value="${ seatIndex+1 }"/>
+								</c:if>
+								
+								</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="movie_info">
 						<div class="movie_sale1">
-							<img
-								src="<%=request.getContextPath()%>/resources/images/devil.jpg"
-								width="50%" height="70%"
-								style="display: block; margin: auto; margin-top: 10px;"> <span
-								style="display: block; text-align: center; margin-top: 10px;">
-							</span>
+							<div id="movie_poster">
+							
+								<img class="posterImg" width="150px" height="200px" 
+								src="<%=request.getContextPath()%>${ seatList.movie.attachList[0].filePath }${ seatList.movie.attachList[0].renameFileName }">
+							 
+							</div>
+							<div id="movie_title">
+                            	<span style="display: block; text-align: center; margin-top: 10px;">${ seatList.movie.movieName }</span>
+							</div>
 						</div>
 						<div class="movie_sale2">
 							<div style="width: 100%; height: 20%;">
 								<span style="width: 25%; height: 100%; float: left;">극장</span> <span
-									style="width: 75%; height: 100%; display: inline-block;"></span>
+									style="width: 75%; height: 100%; display: inline-block;">${ seatList.maName }</span>
 							</div>
 							<div style="width: 100%; height: 20%;">
 								<span style="width: 25%; height: 100%; float: left;">일시</span> <span
-									style="width: 75%; height: 100%; display: inline-block;"></span>
+									style="width: 75%; height: 100%; display: inline-block;">${ bottomDate }</span>
 							</div>
 							<div style="width: 100%; height: 20%;">
 								<span style="width: 25%; height: 100%; float: left;">상영관</span>
-								<span style="width: 75%; height: 100%; display: inline-block;"></span>
+								<span style="width: 75%; height: 100%; display: inline-block;">${ seatList.roomNumber }관</span>
 							</div>
 							<div style="width: 100%; height: 20%;">
 								<span style="width: 25%; height: 100%; float: left;">인원</span> <span
@@ -648,9 +598,8 @@ header>section {
 							</div>
 						</div>
 						<div class="movie_sale5">
-							<button class="movie_nextBtn">
-								<img
-									src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
+							<button class="movie_nextBtn" onclick="goPayPage();">
+								<img src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
 									class="movie_nextImg"> <br>결제하기
 							</button>
 						</div>
@@ -715,21 +664,20 @@ header>section {
 
 		function peopleDiv(val1, val2) {
 			if (val2 > 0 && val1 > 0) {
-				peopleCount
-						.text("일반 : " + val1 + "명" + ", 청소년 : " + val2 + "명");
+				peopleCount.text("일반 : " + val1 + "명" + ", 청소년 : " + val2 + "명");
 				people1.text('9000 * ' + val1);
 				people2.text('7000 * ' + val2);
-				totalPrice.text((9000 * val1) + (7000 * val2) + " 원");
+				totalPrice.text((9000 * val1) + (7000 * val2) + "원");
 			} else if (val1 > 0 && val2 == 0) {
 				peopleCount.text("일반 : " + val1 + "명");
 				people1.text('9000 * ' + val1);
 				people2.text('0');
-				totalPrice.text((9000 * val1) + " 원");
+				totalPrice.text((9000 * val1) + "원");
 			} else if (val1 == 0 && val2 > 0) {
 				peopleCount.text("청소년 : " + val2 + "명");
 				people1.text('0');
-				people2.text('9000 * ' + val2);
-				totalPrice.text((7000 * val2) + " 원");
+				people2.text('7000 * ' + val2);
+				totalPrice.text((7000 * val2) + "원");
 			} else {
 				peopleCount.text("");
 				people1.text("");
@@ -763,11 +711,10 @@ header>section {
 
 								console.log("count < sum : " + count);
 								console.log(seat_array);
+								console.log(index_array);
 							}
-							$('.movie_sale3').children('div').eq(0).children(
-									'span').eq(1).text("일반석");
-							$('.movie_sale3').children('div').eq(1).children(
-									'span').eq(1).text(seat_array);
+							$('.movie_sale3').children('div').eq(0).children('span').eq(1).text("일반석");
+							$('.movie_sale3').children('div').eq(1).children('span').eq(1).text(seat_array);
 						}
 
 					} else {
@@ -782,6 +729,7 @@ header>section {
 		function tryPersonBtn() {
 			count = 0;
 			seat_array = new Array();
+			index_array = new Array();
 			val1 = 0;
 			val2 = 0;
 			sum = 0;
@@ -801,12 +749,33 @@ header>section {
 			$('.movie_sale3').children('div').eq(1).children('span').eq(1)
 					.text("");
 
+			people1.text("");
+			people2.text("");
+			totalPrice.text("");
+			
 			console.log("count : " + count);
+			console.log("index_array : " + index_array);
 			console.log("seat_array : " + seat_array);
 			console.log("val1 : " + val1);
 			console.log("val2 : " + val2);
 			console.log("sum : " + sum);
-			console.log("seatStr : " + seatStr);
+		}
+		
+		function goPayPage(){
+			var people = peopleCount.text();
+			var price = totalPrice.text();
+			
+			if(sum == count && sum != 0 && count != 0){
+				location.href="goPayPage.do?seat_array="+seat_array+"&index_array="+index_array+"&resNo="+${seatList.resNo}+"&people="+people+"&price="+price+"&val1="+val1+"&val2="+val2;				
+			}else if(sum == 0){
+				alert("인원을 선택해주세요.");
+			}else{
+				alert("좌석을 선택하주세요.");
+			}
+		}
+		
+		function tryResBtn(){
+			location.href="resList.do";
 		}
 	</script>
 

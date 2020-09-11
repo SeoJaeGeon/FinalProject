@@ -36,10 +36,10 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">내가 쓴 영화 리뷰</a></li>
-							<li><a href="#">내가 쓴 VOD 리뷰</a></li>
-							<li><a href="#">내가 찜한 VOD</a></li>
-							<li><a href="#">장바구니</a></li>
+							<li><a href="myMovieReviewView.do">내가 쓴 영화 리뷰</a></li>
+							<li><a href="myVODReviewView.do">내가 쓴 VOD 리뷰</a></li>
+							<li><a href="wishVODView.do">내가 찜한 VOD</a></li>
+							<li><a href="myCartView.do">장바구니</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -51,8 +51,8 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">영화 구매 내역</a></li>
-							<li><a href="#">VOD 구매 내역</a></li>
+							<li><a href="moviePurchaseListView.do">영화 구매 내역</a></li>
+							<li><a href="vodPurchaseListView.do">VOD 구매 내역</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -64,8 +64,8 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">스낵 구매 내역</a></li>
-							<li><a href="#">굿즈 구매 내역</a></li>
+							<li><a href="snackPurchaseListView.do">스낵 구매 내역</a></li>
+							<li><a href="goodsPurchaseListView.do">굿즈 구매 내역</a></li>
 						</ul>
 					</td>
 				</tr>

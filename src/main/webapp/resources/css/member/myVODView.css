@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+/* content */
+/* content-1 */
+.content-1 {
+    /* border:1px solid rebeccapurple; */
+}
+.rightContent {
+    width: 900px;
+    /* border: 1px solid teal; */
+    margin-left: 100px;
+    float: left;
+}
+
+
+/* <h2> title */
+.title {
+    color:rgb(70, 70, 70);
+}
+
+.movieTitle {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(70, 70, 70);
+}
+
+.contentTable {
+    width: 900px;
+    border-collapse: collapse;
+    border-top: 1px solid black;
+
+}
+
+.vodDiv {
+    text-align: center;
+}
+
+.vod {
+    width:800px;
+    height: 480px;
+    /* border: 1px solid fuchsia; */
+    background: black;
+}
+
+
+.buttons {
+    margin-top: 70px;
+    /* border: 1px solid firebrick; */
+    width:100%;
+    text-align: center;
+}
+
+
+.goList, .insertReview {
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    background: white(31, 69, 97);
+    font-weight: bold;
+    background: white;
+    color: rgb(31, 69, 97);
+    border: 1px solid rgb(31, 69, 97);
+    margin: 0px 20px;
+}
+/* content-1 */
+/* content */

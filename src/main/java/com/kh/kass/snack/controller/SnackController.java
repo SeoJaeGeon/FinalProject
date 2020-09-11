@@ -19,7 +19,7 @@ import com.kh.kass.snack.model.vo.Snack;
 
 @Controller
 public class SnackController {
-	@Autowired
+	/*@Autowired
 	private SnackService sService;
 	
 	// 스낵 목록 출력
@@ -98,7 +98,7 @@ public class SnackController {
 		model.addAttribute("snack", s);
 		return "snack/snackUpdateView";
 	}
-	
+
 	// 스낵 수정(파일 수정 있다면 서버에서 삭제, 새롭게 저장)
 	@RequestMapping("supView.do")
 	public String snackUpdateView(Snack s, HttpServletRequest request, 
@@ -159,5 +159,6 @@ public class SnackController {
 		}
 	}
 				
-
+*/
 }
+

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kass.common.Attachment;
+import com.kh.kass.common.Auth;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.Withdrawal;
 
@@ -81,6 +82,21 @@ public class MemberDao {
 	// 프로필사진 select
 	public Attachment selectAtt(int userNo) {
 		return sqlSession.selectOne("memberMapper.selectAtt", userNo);
+	}
+
+	// 인증번호 임시저장
+	public int insertAuthNum(Auth au) {
+		return sqlSession.update("memberMapper.insertAuthNum", au);
+	}
+
+	// 인증번호 확인
+	public int emailCheck (Auth au) {
+		return sqlSession.selectOne("memberMapper.emailCheck", au);
+	}
+
+	// 인증번호 삭제
+	public int deleteAuth(Auth au) {
+		return sqlSession.delete("memberMapper.deleteAuth", au);
 	}
 
 	

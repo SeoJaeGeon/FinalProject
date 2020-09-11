@@ -97,6 +97,7 @@ header>section {
 .movie-introduce {
 	width: 100%;
 	height: 500px;
+	background : white;
 }
 
 .movie-story {
@@ -114,6 +115,7 @@ header>section {
 
 .movie-preview iframe {
 	width: 100%;
+	height : 800px;
 }
 
 .movie-steelImg {
@@ -123,7 +125,8 @@ header>section {
 
 .movie-review {
 	width: 100%;
-	height: 800px;
+	max-height: 800px;
+	margin-bottom : 20px;
 }
 
 .movie-in1 {
@@ -198,8 +201,6 @@ header>section {
 .like-view {
 	padding-top: 5px;
 	font-size: 20px;
-	width: 200px;
-	height: 50px;
 }
 
 .movie-grade {
@@ -273,26 +274,6 @@ header>section {
 	height: 33.33%;
 }
 
-.review-sort li div {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-.review-sort li div img {
-	width: 100px;
-	height: 100px;
-	border-radius: 100%;
-	border: 1px solid silver;
-	margin-top: 20px;
-	margin-left: 20px;
-}
-
-.pagingbar {
-	width: 250px;
-	margin: auto;
-}
-
 #stay_footer {
 	width: 100%;
 	height: 150px;
@@ -310,6 +291,100 @@ header>section {
 	width: 1500px;
 	margin: auto;
 }
+
+.rView1 {
+width : 30%;
+height : 100%;
+float : left;
+}
+
+.rView2 {
+width : 50%;
+height : 100%;
+padding-top : 50px;
+padding-left : 5px;
+float : left;
+overflow: hidden;
+}
+
+.rView3 {
+width : 20%;
+height : 100%;
+text-align:center;
+float : left;
+padding-top : 50px;
+}
+
+.rView1-top{
+	width : 100%;
+	height : 70%;
+}
+
+.rView1-top > img {
+	width: 150px;
+	height: 150px;
+	margin-left : 35px;
+	border-radius: 150px;
+}
+
+.rView1-bottom{
+	width : 100%;
+	height : 30%;
+	text-align : center;
+}
+
+.none-Review{
+	width : 100%;
+	height : 300px;
+	padding-top : 100px;
+	text-align : center;
+}
+
+
+/* 페이징 바 */
+.pagination {
+    /* border: 1px solid rgb(16, 157, 182); */
+    display : block;
+    width: 200px;
+    height: 40px;
+    margin : 0 auto;
+    text-align : center;
+    padding-top : 4px;
+}
+
+.pageOne {
+    border: 1px solid rgb(224, 224, 224);
+    text-decoration: none;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding-top: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+}
+
+.pageOne:hover {
+    border: 1px solid rgb(151, 151, 151);
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+}
+
+.pageNone {
+    border: 1px solid rgb(224, 224, 224);
+    background: rgb(241, 241, 241);
+    text-decoration: none;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding-top: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+}
+/* 페이징 바 */
 /* 내가 작성한 코드*/
 </style>
 </head>
@@ -328,13 +403,24 @@ header>section {
 				<div class="movie-in2">
 					<p class="movie-grade">${ movInfo[0].movieAge }</p>
 					<h3>${ movInfo[0].movieName }</h3>
-					<br clear="left"> <span class="movie_statusY">상영중</span>
+					<br clear="left">
+					<c:choose>
+						<c:when test="${ movInfo[0].movieRstatus == 'Y' && movieStatus == false }">
+							<span class="movie_statusY">상영중</span>
+						</c:when>
+						<c:when test="${ movInfo[0].movieRstatus == 'Y' && movieStatus == true }">
+							<span class="movie_statusW">개봉예정</span>
+						</c:when>
+						<c:otherwise>
+							<span class="movie_statusN">상영종료</span>
+						</c:otherwise>
+					</c:choose>
 					<br><br><br>
-					<span class="like-view" style="color: blue; margin-right: 100px;">
-						<strong>재밌어요 : </strong><b>0</b>
+					<span class="like-view" style="color: black; margin-right: 100px;">
+						<img src="<%=request.getContextPath()%>/resources/images/good.png" style="width:30px; height:30px;"><b> : ${ reviewUp }</b>
 					</span> 
-					<span class="like-view" style="color: red">
-						<strong>별로에요 : </strong><b>0</b>
+					<span class="like-view" style="color: black">
+						<img src="<%=request.getContextPath()%>/resources/images/bad.png" style="width:30px; height:30px;"><b> : ${ reviewDown }</b>
 					</span>
 				</div>
 				<div class="movie-in3">
@@ -348,13 +434,17 @@ header>section {
 							국가 : </strong><b>${ movInfo[0].movieCountry }</b>
 					</span><br> <br> <span class="intro-text"> <strong>개봉일
 							: </strong><b>${ movInfo[0].movieRdate }</b>
-					</span><br> <a class="resBtn" href="#">예매하기</a>
+					</span><br>
+					<c:choose>
+						<c:when test="${ movInfo[0].movieRstatus == 'Y' }">
+							<a class="resBtn" href="resList.do">예매하기</a>
+						</c:when>
+					</c:choose>
 
 				</div>
 			</div>
 
-			<h3
-				style="margin-top: 25px;; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px">줄거리</h3>
+			<h3 style="margin-top: 25px; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px">줄거리</h3>
 			<div class="movie-story">
 				${ movInfo[0].movieContent }
 			</div>
@@ -365,22 +455,21 @@ header>section {
 				${ movInfo[0].movieLink }
 			</div>
 
-			<h3
-				style="margin-top: 25px;; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px">스틸컷</h3>
+			<h3 style="margin-top: 25px; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px">스틸컷</h3>
 			<div class="movie-steelImg">
 				<div id="demo" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[1].filePath }${ movInfo[0].attachList[1].originFileName }"
+							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[1].filePath }${ movInfo[0].attachList[1].renameFileName }"
 								alt="First slide" id="img1">
 							<div class="carousel-caption d-none d-md-bl ock"></div>
 						</div>
 						<div class="carousel-item">
-							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[2].filePath }${ movInfo[0].attachList[2].originFileName }"
+							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[2].filePath }${ movInfo[0].attachList[2].renameFileName }"
 								alt="Second slide" id="img2">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[3].filePath }${ movInfo[0].attachList[3].originFileName }"
+							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[3].filePath }${ movInfo[0].attachList[3].renameFileName }"
 								alt="Third slide" id="img3">
 						</div>
 						<a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -397,118 +486,86 @@ header>section {
 				</div>
 			</div>
 
-			<h3
-				style="margin-top: 25px;; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px">감상평</h3>
+			<h3 style="margin-top: 25px; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px;">감상평</h3>
+			<c:choose>
+			<c:when test="${ reviewList.size() > 0 }">
 			<div class="movie-review">
 				<ul class="review-sort">
+				<c:forEach var="r" items="${reviewList}">
 					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: blue; margin-top: 20px; float: right;">별로에요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br>
-								노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br>
-								dddddd<br> bbbbb
+						<div class="rView1">
+						<div class="rView1-top">
+							<img src="<%=request.getContextPath()%>${r.filePath}${r.renameFileName}">
+						</div>
+						<div class="rView1-bottom">
+							<strong>${r.reWriter}</strong>					
+						</div>
+						</div>
+						<div class="rView2">
+							<span>
+								${r.reContent}
 							</span>
 						</div>
-					</li>
-					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: red; margin-top: 20px; float: right;">재밌어요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								허니잼 꿀잼 개꿀잼<br> 졸잼개잼굳잼<br>
-							</span>
+						<div class="rView3">
+						<c:if test="${ r.reScore == 'B' }">
+							<img src="<%=request.getContextPath()%>/resources/images/bad.png" style="width:50px; height:50px;">
+						</c:if>
+						<c:if test="${ r.reScore == 'G' }">
+							<img src="<%=request.getContextPath()%>/resources/images/good.png" style="width:50px; height:50px;">
+						</c:if>
 						</div>
 					</li>
-					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: red; margin-top: 20px; float: right;">재밌어요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								허니잼 꿀잼 개꿀잼<br> 졸잼개잼굳잼<br>
-							</span>
-						</div style="overflow: auto;">
-					</li>
-					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: blue; margin-top: 20px; float: right;">별로에요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br>
-								노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br>
-							</span>
-						</div>
-					</li>
-					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: red; margin-top: 20px; float: right;">재밌어요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								허니잼 꿀잼 개꿀잼<br> 졸잼개잼굳잼<br>
-							</span>
-						</div>
-					</li>
-					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: blue; margin-top: 20px; float: right;">별로에요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br>
-								노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br>
-							</span>
-						</div>
-					</li>
-					<li>
-						<div style="overflow: auto;">
-							<img src="image/myimage.png" style="float: left;"> <strong
-								style="float: left; margin-top: 20px; margin-left: 15px;">wjdgus0825</strong>
-							<span class="like-view"
-								style="color: blue; margin-top: 20px; float: right;">별로에요</span><br>
-							<br> <span
-								style="margin-top: 20px; margin-left: 15px; float: left;">
-								그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br>
-								노잼노잼노잼<br> 그냥 개노잼이고 개연성이 없어요<br> 노잼노잼노잼<br>
-							</span>
-						</div>
-					</li>
+				</c:forEach> 
 				</ul>
-				<div class="pagingbar">
-					<nav aria-label="Page navigation example" class="text">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</nav>
-				</div>
+				
+				<c:choose>
+				<c:when test="${ reviewList.size() >= 6}">
+				<div class="pagination">
+					<c:if test="${ pi.currentPage <= 1 }">
+						
+					</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="movieInfo.do">
+							<c:param name="page" value="${ pi.currentPage - 1 }"/>
+							<c:param name="movieNo" value="${ movInfo[0].movieNo }"/>
+						</c:url>
+						<button onclick="location.href='${ before }'" class="pageOne" type="button">&lt;</button>
+					</c:if>
+					<!-- 페이지 숫자 -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq pi.currentPage }">
+							<button class="pageNone">${ p }</button>
+						</c:if>
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="pagination" value="movieInfo.do">
+								<c:param name="page" value="${ p }" />
+								<c:param name="movieNo" value="${ movInfo[0].movieNo }"/>
+							</c:url>
+							<button onclick="location.href='${ pagination }'" class="pageOne">${ p }</button>
+						</c:if>
+					</c:forEach>
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="movieInfo.do">
+							<c:param name="page" value="${ pi.currentPage + 1 }"/>
+							<c:param name="movieNo" value="${ movInfo[0].movieNo }"/>
+						</c:url>
+						<button onclick="location.href='${ after }'" class="pageOne">&gt;</button>
+					</c:if>
+                 </div>
+                 </c:when>
+				</c:choose>
 			</div>
+				</c:when>
+				
+				<c:otherwise>
+				<div class="none-Review">
+					<h1>현재 등록된 리뷰가 없습니다.</h1>
+				</div>
+				</c:otherwise>
+			</c:choose>
 
 		</section>
 	</div>

@@ -2,6 +2,7 @@ package com.kh.kass.reservation.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.kass.common.PageInfo;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.reservation.model.vo.Reservation;
 import com.kh.kass.review.model.vo.Review;
@@ -25,6 +26,18 @@ public interface ResService {
 
 	public ArrayList<Movie> movieInfo(int movieNum);
 
-	public ArrayList<Movie> reviewList(int movieNum);
+	public ArrayList<Review> reviewList(int movieNum);
+
+	public Reservation resSeatSelect(int placeValue);
+
+	public int updateResInfo(Reservation seatUpdate);
+
+	public int updateRes(Reservation res, String radioVal);
+
+	public ArrayList<Review> rSelectList(PageInfo pi, int movieNum);
+
+	public ArrayList<Movie> searchMovie(String searchText);
+
+	public ArrayList<Movie> movListFavor();
 	
 }

@@ -40,6 +40,7 @@ public class Movie {
       super();
       this.movieNo = movieNo;
    }
+
    	
    public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
             int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
@@ -62,5 +63,6 @@ public class Movie {
          this.movieVodStatus = movieVodStatus;
          this.genreName = genreName;
       }
+
 
 }
