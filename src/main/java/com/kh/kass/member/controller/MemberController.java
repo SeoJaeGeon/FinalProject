@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,10 +38,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
+import com.kh.kass.common.PageInfo;
+import com.kh.kass.common.PaginationA;
 import com.kh.kass.member.model.exception.MemberException;
 import com.kh.kass.member.model.service.MemberService;
 import com.kh.kass.member.model.vo.Member;
+import com.kh.kass.member.model.vo.MoviePurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
+import com.kh.kass.review.model.vo.MyMovieReview;
+import com.kh.kass.review.model.vo.Review;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 @SessionAttributes({ "loginUser", "msg" })
@@ -52,7 +59,7 @@ public class MemberController {
 //	private JavaMailSenderImpl mailSender;
 
 	// 1. 회원가입
-	// 회원가입 뷰로
+	// 회원가입 뷰
 	@RequestMapping("minsertView.do")
 	public String mInsertView() {
 		return "member/insertMember";
@@ -484,45 +491,169 @@ public class MemberController {
 
 	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-	// 영화 예매 내역 리스트 뷰
-	@RequestMapping("moviePurchaseListView.do")
-	public String moviePurchaseListView() {
-		return "member/moviePurchaseList";
-	}
-
 	// 영화 예매 리스트
 	@RequestMapping("moviePurchaseList.do")
-	public String moviePurchase() {
+	public ModelAndView moviePurchaseList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		int listCount = mService.selectMovieListCount(userNo);
+
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+
+		System.out.println(listCount);
+
+		ArrayList<MoviePurchase> list = mService.selectMovieList(userNo, pi);
+		System.out.println("리스트!" + list);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("member/moviePurchaseList");
+		} else {
+			throw new MemberException("리스트 조회 실패");
+		}
+
+		return mv;
+	}
+
+
+	// 내가 쓴 영화 리뷰
+	@RequestMapping("movieReviewList.do")
+	public ModelAndView movieReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
 		
-		return "";
+		int currentPage = page != null ? page : 1;
+
+		int listCount = mService.selectMovieReviewListCount(userNo);
+
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+
+		System.out.println(userNo);
+
+		ArrayList<MyMovieReview> list = mService.selectMovieReviewList(userNo, pi);
+		System.out.println("리스트!" + list);
+		System.out.println(listCount + " 리스트카운트");
+		System.out.println("pi"+pi);
+
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("member/myMovieReviewList");
+		} else {
+			throw new MemberException("리스트 조회 실패");
+		}
+
+		return mv;
+	}
+
+	// 영화 리뷰 등록
+	@RequestMapping("mrinsert.do")
+	public String insertMovieReview(@RequestParam("tabs") String reScore, @RequestParam("reContent") String reContent,
+			@RequestParam("movieNo") int movieNo, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		Review r = new Review();
+		r.setUserNo(m.getUserNo());
+		r.setReScore(reScore);
+		r.setReContent(reContent);
+		r.setMovieNo(movieNo);
+
+		System.out.println(r);
+		int result = mService.insertMovieReview(r);
+
+		if (result > 0) {
+			return "member/moviePurchaseList";
+		} else {
+			throw new MemberException("리뷰등록실패");
+		}
+	}
+
+	// 영화 리뷰 수정
+	@RequestMapping("mrupdate.do")
+	public String updateMovieReview(@RequestParam("tabs") String reScore, @RequestParam("reContent") String reContent,
+			@RequestParam("movieNo") int movieNo, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		Review r = new Review();
+		r.setUserNo(m.getUserNo());
+		r.setReScore(reScore);
+		r.setReContent(reContent);
+		r.setMovieNo(movieNo);
+
+		System.out.println(r);
+		int result = mService.updateMovieReview(r);
+
+		if (result > 0) {
+			return "member/myMovieReviewList";
+		} else {
+			throw new MemberException("리뷰수정실패");
+		}
+	}
+
+	// 영화 리뷰 삭제
+	@RequestMapping("mrdelete.do")
+	public String deleteMovieReview(int movieNo, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		Review r = new Review();
+		r.setUserNo(m.getUserNo());
+		r.setMovieNo(movieNo);
+		
+		int result = mService.deleteMovieReview(r);
+		
+		if (result > 0) {
+			return "redirect:movieReviewList.do";
+		} else {
+			throw new MemberException("리뷰삭제실패");
+		}
 	}
 	
-	
+	// 내가 쓴 vod 리뷰
+		@RequestMapping("vodReviewList.do")
+		public String vodReviewList() {
+			return "member/myVODReviewList";
+		}
 	// vod 구매 내역 리스트 뷰
-	@RequestMapping("vodPurchaseListView.do")
+	@RequestMapping("vodPurchaseList.do")
 	public String vodPurchaseListView() {
 		return "member/vodPurchaseList";
 	}
 
-	// 리뷰 등록
-	@RequestMapping("insertReview.do")
-	public String insertReview() {
-		
-		return "";
-	}
-	
-	
 	// 스낵 구매 내역 리스트 뷰
-	@RequestMapping("snackPurchaseListView.do")
-	public String snackPurchaseListView() {
-		return "member/snackPurchaseList";
-	}
-	
-	
-	
+	/*@RequestMapping("snackPurchaseList.do")
+	public String snackPurchaseListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		int listCount = mService.selectSnackPurchaseListCount(userNo);
+
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+
+		System.out.println(listCount);
+
+		ArrayList<MyMovieReview> list = mService.selectSnackPurchaseList(userNo, pi);
+		System.out.println("리스트!" + list);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("member/snackPurchaseList");
+		} else {
+			throw new MemberException("리스트 조회 실패");
+		}
+
+		return mv;
+	}*/
 
 	// 굿즈 구매 내역 리스트 뷰
-	@RequestMapping("goodsPurchaseListView.do")
+	@RequestMapping("goodsPurchaseList.do")
 	public String goddsPurchaseListView() {
 		return "member/goodsPurchaseList";
 	}

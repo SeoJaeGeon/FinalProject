@@ -1,14 +1,20 @@
 package com.kh.kass.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
+import com.kh.kass.common.PageInfo;
 import com.kh.kass.member.model.dao.MemberDao;
 import com.kh.kass.member.model.vo.Member;
+import com.kh.kass.member.model.vo.MoviePurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
+import com.kh.kass.review.model.vo.MyMovieReview;
+import com.kh.kass.review.model.vo.Review;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
@@ -122,5 +128,42 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteAuth(Auth au) {
 		return mDao.deleteAuth(au);
 	}
+
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	@Override
+	public int selectMovieListCount(int userNo) {
+		return mDao.selectMovieListCount(userNo);
+	}
+
+	@Override
+	public ArrayList<MoviePurchase> selectMovieList(int userNo, PageInfo pi) {
+		return mDao.selectMovieList(userNo, pi);
+	}
+
+	@Override
+	public int insertMovieReview(Review r) {
+		return mDao.insertMovieReview(r);
+	}
+
+	@Override
+	public int selectMovieReviewListCount(int userNo) {
+		return mDao.selectMovieReviewListCount(userNo);
+	}
+
+	@Override
+	public ArrayList<MyMovieReview> selectMovieReviewList(int userNo, PageInfo pi) {
+		return mDao.selectMovieReviewList(userNo, pi);
+	}
+
+	@Override
+	public int updateMovieReview(Review r) {
+		return mDao.updateMovieReview(r);
+	}
+
+	@Override
+	public int deleteMovieReview(Review r) {
+		return mDao.deleteMovieReview(r);
+	}
+
 
 }

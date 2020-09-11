@@ -3,112 +3,116 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<c:set var="contextPath"
-	value="${ pageContext.servletContext.contextPath }" scope="application" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="${ contextPath }/resources/css/member/goodsPurchaseList.jsp"
-	rel="stylesheet" type="text/css">
-<title>굿즈 구매 내역</title>
-<style>
-header, nav, section, article, aside, footer {
-	box-sizing: border-box;
-	display: block;
-}
+	<meta charset="UTF-8">
+	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="${ contextPath }/resources/css/member/goodsPurchaseList.css" rel="stylesheet" type="text/css">
+	<title>굿즈 구매 내역</title>
+	<style>
+		header,
+		nav,
+		section,
+		article,
+		aside,
+		footer {
+			box-sizing: border-box;
+			display: block;
+		}
 
-body {
-	width: 100%;
-	margin: auto;
-}
+		body {
+			width: 100%;
+			margin: auto;
+		}
 
-header {
-	width: 100%;
-	height: 150px;
-}
+		header {
+			width: 100%;
+			height: 150px;
+		}
 
-nav {
-	width: 100%;
-	height: 50px;
-}
+		nav {
+			width: 100%;
+			height: 50px;
+		}
 
-.content {
-	width: 100%;
-	heigt: 100%;
-	margin: auto;
-	border: 1px solid red;
-	overflow: hidden;
-}
+		.content {
+			width: 100%;
+			heigt: 100%;
+			margin: auto;
+			border: 1px solid red;
+			overflow: hidden;
+		}
 
-footer {
-	width: 100%;
-	height: 150px;
-	float: left;
-	background: lightgray;
-}
+		footer {
+			width: 100%;
+			height: 150px;
+			float: left;
+			background: lightgray;
+		}
 
-header>section {
-	float: left;
-}
+		header>section {
+			float: left;
+		}
 
-#header-1 {
-	width: 25%;
-	height: 100%;
-	position: relative;
-}
+		#header-1 {
+			width: 25%;
+			height: 100%;
+			position: relative;
+		}
 
-#header-2 {
-	width: 50%;
-	height: 100%;
-	position: relative;
-}
+		#header-2 {
+			width: 50%;
+			height: 100%;
+			position: relative;
+		}
 
-#header-3 {
-	width: 25%;
-	height: 100%;
-}
+		#header-3 {
+			width: 25%;
+			height: 100%;
+		}
 
-#footer1 {
-	width: 80%;
-	height: 30%;
-	padding: 1px;
-	width: 80%;
-	float: left;
-}
+		#footer1 {
+			width: 80%;
+			height: 30%;
+			padding: 1px;
+			width: 80%;
+			float: left;
+		}
 
-#footer2 {
-	width: 80%;
-	height: 70%;
-	width: 80%;
-	float: left;
-}
+		#footer2 {
+			width: 80%;
+			height: 70%;
+			width: 80%;
+			float: left;
+		}
 
-#footer3 {
-	width: 20%;
-	height: 70%;
-	float: left;
-}
+		#footer3 {
+			width: 20%;
+			height: 70%;
+			float: left;
+		}
 
-#stay_footer {
-	width: 100%;
-	height: 150px;
-	background: lightgray;
-}
+		#stay_footer {
+			width: 100%;
+			height: 150px;
+			background: lightgray;
+		}
 
-#stay_footer_inner {
-	width: 1500px;
-	height: 150px;
-	display: block;
-	margin: auto;
-}
+		#stay_footer_inner {
+			width: 1500px;
+			height: 150px;
+			display: block;
+			margin: auto;
+		}
 
-#wrap_stay {
-	width: 1500px;
-	margin: auto;
-}
-/* 영역 나누기 */
-</style>
+		#wrap_stay {
+			width: 1500px;
+			margin: auto;
+		}
+
+		/* 영역 나누기 */
+	</style>
 
 </head>
 
@@ -129,15 +133,14 @@ header>section {
 						<table class="contentTable">
 							<tr class="topLine">
 								<td>
-									<table class="table table-hover">
-										<thead>
 
-											<tr>
-												<td scope="col" class="th no">주문 NO.</td>
-												<td scope="col" class="th proName">상품명</td>
-												<td scope="col" class="th purchaseDate">구매일</td>
-											</tr>
-										</thead>
+									<table class="table">
+										<tr>
+											<th>주문 NO.</th>
+											<th>상품명</th>
+											<th>구매일</th>
+										</tr>
+
 										<tr>
 											<td scope="row" class="no">800123456</td>
 											<td class="proName">토이스토리 텀블러 외 5개</td>
@@ -188,24 +191,19 @@ header>section {
 											<td class="proName">스파이더맨 그립톡 외 10 개</td>
 											<td class="purchaseDate">2020.07.30</td>
 										</tr>
-										</tbody>
-									</table> <!-- 페이징바 -->
-									<div class="pagingbar">
-										<nav aria-label="Page navigation example" class="text">
-											<ul class="pagination">
-												<li class="page-item"><a class="page-link" href="#"
-													aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-												</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">4</a></li>
-												<li class="page-item"><a class="page-link" href="#">5</a></li>
-												<li class="page-item"><a class="page-link" href="#"
-													aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-												</a></li>
-											</ul>
-										</nav>
+									</table>
+									<!-- 페이징바 -->
+									<div class="pagination">
+										<a class="pageOne" href="#">&lt;</a>
+										<a class="pageOne" href="#">1</a>
+										<a class="pageOne" href="#">2</a>
+										<a class="pageOne" href="#">3</a>
+										<a class="pageOne" href="#">4</a>
+										<a class="pageOne" href="#">5</a>
+										<a class="pageOne" href="#">&gt;</a>
+
+										<!-- 버튼 비활성화 일 때-->
+										<!-- <a class="pageNone">&lt;&lt;</a> -->
 									</div>
 								</td>
 							</tr>
@@ -221,4 +219,5 @@ header>section {
 		</div>
 	</div>
 </body>
+
 </html>

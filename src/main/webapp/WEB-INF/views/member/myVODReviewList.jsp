@@ -4,112 +4,116 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<c:set var="contextPath"
-	value="${ pageContext.servletContext.contextPath }" scope="application" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="${ contextPath }/resources/css/member/myVODReviewList.css"
-	rel="stylesheet" type="text/css">
-<title>내가 쓴 VOD 리뷰</title>
-<style>
-header, nav, section, article, aside, footer {
-	box-sizing: border-box;
-	display: block;
-}
+	<meta charset="UTF-8">
+	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="${ contextPath }/resources/css/member/myVODReviewList.css" rel="stylesheet" type="text/css">
+	<title>내가 쓴 VOD 리뷰</title>
+	<style>
+		header,
+		nav,
+		section,
+		article,
+		aside,
+		footer {
+			box-sizing: border-box;
+			display: block;
+		}
 
-body {
-	width: 100%;
-	margin: auto;
-}
+		body {
+			width: 100%;
+			margin: auto;
+		}
 
-header {
-	width: 100%;
-	height: 150px;
-}
+		header {
+			width: 100%;
+			height: 150px;
+		}
 
-nav {
-	width: 100%;
-	height: 50px;
-}
+		nav {
+			width: 100%;
+			height: 50px;
+		}
 
-.content {
-	width: 100%;
-	heigt: 100%;
-	margin: auto;
-	border: 1px solid red;
-	overflow: hidden;
-}
+		.content {
+			width: 100%;
+			heigt: 100%;
+			margin: auto;
+			border: 1px solid red;
+			overflow: hidden;
+		}
 
-footer {
-	width: 100%;
-	height: 150px;
-	float: left;
-	background: lightgray;
-}
+		footer {
+			width: 100%;
+			height: 150px;
+			float: left;
+			background: lightgray;
+		}
 
-header>section {
-	float: left;
-}
+		header>section {
+			float: left;
+		}
 
-#header-1 {
-	width: 25%;
-	height: 100%;
-	position: relative;
-}
+		#header-1 {
+			width: 25%;
+			height: 100%;
+			position: relative;
+		}
 
-#header-2 {
-	width: 50%;
-	height: 100%;
-	position: relative;
-}
+		#header-2 {
+			width: 50%;
+			height: 100%;
+			position: relative;
+		}
 
-#header-3 {
-	width: 25%;
-	height: 100%;
-}
+		#header-3 {
+			width: 25%;
+			height: 100%;
+		}
 
-#footer1 {
-	width: 80%;
-	height: 30%;
-	padding: 1px;
-	width: 80%;
-	float: left;
-}
+		#footer1 {
+			width: 80%;
+			height: 30%;
+			padding: 1px;
+			width: 80%;
+			float: left;
+		}
 
-#footer2 {
-	width: 80%;
-	height: 70%;
-	width: 80%;
-	float: left;
-}
+		#footer2 {
+			width: 80%;
+			height: 70%;
+			width: 80%;
+			float: left;
+		}
 
-#footer3 {
-	width: 20%;
-	height: 70%;
-	float: left;
-}
+		#footer3 {
+			width: 20%;
+			height: 70%;
+			float: left;
+		}
 
-#stay_footer {
-	width: 100%;
-	height: 150px;
-	background: lightgray;
-}
+		#stay_footer {
+			width: 100%;
+			height: 150px;
+			background: lightgray;
+		}
 
-#stay_footer_inner {
-	width: 1500px;
-	height: 150px;
-	display: block;
-	margin: auto;
-}
+		#stay_footer_inner {
+			width: 1500px;
+			height: 150px;
+			display: block;
+			margin: auto;
+		}
 
-#wrap_stay {
-	width: 1500px;
-	margin: auto;
-}
-/* 영역 나누기 */
-</style>
+		#wrap_stay {
+			width: 1500px;
+			margin: auto;
+		}
+
+		/* 영역 나누기 */
+	</style>
 
 </head>
 
@@ -129,8 +133,7 @@ header>section {
 						<h2 class="title">내가 쓴 VOD 리뷰</h2>
 						<table class="contentTable">
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -145,13 +148,11 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
@@ -170,20 +171,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">별로에요</span>
+												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/토이스토리4.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/토이스토리4.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">토이스토리4</div>
@@ -195,13 +193,11 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
@@ -222,20 +218,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">별로에요</span>
+												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -247,20 +240,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -272,20 +262,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">별로에요</span>
+												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -297,20 +284,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -322,20 +306,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -347,20 +328,17 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg"
-									class="poster"></td>
+								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
 								<td class="right">
 									<div>
 										<div class="movieTitle">겨울왕국2</div>
@@ -372,35 +350,28 @@ header>section {
 									<div class="bottomTdDiv">
 										<div>
 											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span
-													class="scoreText">좋았어요</span>
+												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 											</div>
 										</div>
 										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#"
-												id="delete" class="delete">삭제</a>
+											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 						</table>
 						<!-- 페이징바 -->
-						<div class="pagingbar">
-							<nav aria-label="Page navigation example" class="text">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#"
-										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item"><a class="page-link" href="#"
-										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-									</a></li>
-								</ul>
-							</nav>
+						<div class="pagination">
+							<a class="pageOne" href="#">&lt;</a>
+							<a class="pageOne" href="#">1</a>
+							<a class="pageOne" href="#">2</a>
+							<a class="pageOne" href="#">3</a>
+							<a class="pageOne" href="#">4</a>
+							<a class="pageOne" href="#">5</a>
+							<a class="pageOne" href="#">&gt;</a>
+
+							<!-- 버튼 비활성화 일 때-->
+							<!-- <a class="pageNone">&lt;&lt;</a> -->
 						</div>
 					</section>
 				</section>
@@ -413,4 +384,5 @@ header>section {
 		</div>
 	</div>
 </body>
+
 </html>

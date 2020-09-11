@@ -107,7 +107,7 @@
 
 /* 모달 */
 /* The Modal (background) */
-.modal {
+.myloginModal{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
@@ -121,7 +121,7 @@
 }
 
 /* Modal Content/Box */
-.modal-content {
+.loginmodal-content {
 	background-color: #fefefe;
 	margin: 13% auto; /* 15% from the top and centered */
 	/* padding: 20px; */
@@ -177,7 +177,7 @@
 	cursor: pointer;
 }
 
-.content {
+.logincontent {
 	margin-top: 20px;
 }
 
@@ -202,7 +202,7 @@
 	float: left;
 }
 
-input {
+.userId, .userPwd {
 	width: 250px;
 	height: 40px;
 	font-size: 15px;
@@ -218,7 +218,9 @@ a {
 <body>
 
 	<c:if test="${ !empty msg }">
-		<script>alert('${msg}');</script>
+		<script>
+			alert('${msg}');
+		</script>
 		<c:remove var="msg" />
 
 	</c:if>
@@ -248,14 +250,13 @@ a {
 
 			<c:if test="${ !empty sessionScope.loginUser }">
 				<c:if test="${ loginUser.userId eq 'admin' }">
-					<a href="myKass.do" class="login_bar">관리</a>
+					<a href="MovieManagerSalesPage.do" class="login_bar">관리</a>
 					<a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
 				</c:if>
 				<c:if test="${ loginUser.userId != 'admin' }">
 					<a href="myKass.do" class="login_bar">MY KASS</a>
 					<a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
 				</c:if>
-
 			</c:if>
 		</section>
 
@@ -271,9 +272,9 @@ a {
 	</nav>
 
 
-	<div id="myModal" class="modal">
+		<div id="myloginModal" class="myloginModal">
 		<!-- Modal content -->
-		<div class="modal-content">
+		<div class="loginmodal-content">
 			<div class="header">
 				<span class="loginTitle">로그인</span> <span class="close"
 					onclick="close_pop();">X</span>
@@ -283,7 +284,7 @@ a {
 					src="${ contextPath }/resources/images/logo_navy.png">
 				</a>
 			</div>
-			<div class="content">
+			<div class="logincontent">
 				<form id="joinFrm" action="login.do" method="POST"
 					onsubmit="return login();">
 					<table align="center">
@@ -313,37 +314,37 @@ a {
 	</div>
 
 	<script>
-        function login_bar() {
-            document.getElementById("myModal").style.display="block";
-        }
-       
-        function back() {
-            document.getElementById("myModal").style.display="none";
-        }
+		function login_bar() {
+			document.getElementById("myloginModal").style.display = "block";
+		}
 
-        function close_pop(){
-            document.getElementById("myModal").style.display="none";
-        }
-        
-        /* 로그인  */
-        function login() {
-        	// 로그인 유효성검사
-            var id = $.trim($("#userId").val());
-            var pwd = $.trim($("#userPwd").val());
+		function back() {
+			document.getElementById("myloginModal").style.display = "none";
+		}
 
-            if (!id) {
-                alert("아이디를 입력하세요.");
-                $("#userId").focus();
-                return false;
-            } else if (!pwd) {
-                alert("비밀번호를 입력하세요.");
-                $("#userPwd").focus();
-                return false;
-            }
+		function close_pop() {
+			document.getElementById("myloginModal").style.display = "none";
+		}
 
-            return true;
-        }
-    </script>
+		/* 로그인  */
+		function login() {
+			// 로그인 유효성검사
+			var id = $.trim($("#userId").val());
+			var pwd = $.trim($("#userPwd").val());
+
+			if (!id) {
+				alert("아이디를 입력하세요.");
+				$("#userId").focus();
+				return false;
+			} else if (!pwd) {
+				alert("비밀번호를 입력하세요.");
+				$("#userPwd").focus();
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 </body>
 
 </html>

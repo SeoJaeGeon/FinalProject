@@ -83,6 +83,7 @@ public class ResDao {
 		// 몇 개의 게시글을 건너 뛸 것인지
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		System.out.println("mn"+movieNum);
 		return (ArrayList)sqlSession.selectList("resMapper.rSelectList", movieNum, rowBounds);
 	}
 

@@ -218,7 +218,7 @@
 	<insert id="insertMovieResInfo">
 	insert into movie_res
 	(res_no, movie_no, res_date, room_no, res_info, start_time, end_time)
-	values(SEQ_MOVIE_RES_NO.NEXTVAL,
+	values(SEQ_RES_NO.NEXTVAL,
 	(select movie_no
 	from movie
 	where movie_name=#{movieName})

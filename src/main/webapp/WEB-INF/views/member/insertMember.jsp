@@ -141,7 +141,7 @@
 					<tr>
 						<td class="center"><input type="text" name="authNum"
 							class="certifyCode" id="authNum" placeholder="인증 코드"
-							data-name="인증코드" disabled> <input type="text"
+							data-name="인증코드" disabled> <input type="hidden"
 							id="authNumCheck" value="0"></td>
 						<td class="right"><button type="button" class="certifyRes"
 								id="certifyRes" onclick="emailCheck();">인증확인</button></td>

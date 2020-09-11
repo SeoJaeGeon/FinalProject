@@ -2,22 +2,19 @@
 /* My KASS */
 
 .MyKASS {
-    
     padding: 0px;
-    /* border: 1px solid blueviolet; */
     width: 12%;
     height: 95%;
-    /* display: inline-block; */
     float: left;
     margin-left: 100px;
-    
-
 }
+
 .listArrangeDiv {
     width:100%;
     height: 5%;
     /* border:1px solid rebeccapurple; */
 }
+
 .listArrange {
     font-size: 14px;
     margin-top: 15px;
@@ -37,13 +34,18 @@
     /* border: 2px solid black; */
 }
 
-a {
+.aMenu {
     color: rgb(114, 114, 114);
     text-decoration: none;
 }
 
-a:hover {
+.aMenu:hover {
     color: rgb(30, 100, 190);
+}
+
+a:visited {
+    text-decoration: none;
+    color: rgb(114, 114, 114);
 }
 
 .menuTitle {
@@ -51,11 +53,12 @@ a:hover {
     padding-bottom: 0px;
 }
 
+/* 
 h4 {
     margin-bottom: 0px;
 }
 
 ul>li {
     font-size: 16px;
-}
+} */
 /* My KASS */

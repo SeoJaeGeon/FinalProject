@@ -125,6 +125,113 @@ header>section {
 	border-bottom: 2px solid rgb(31, 69, 97);
 }
 /* 네비게이션 바*/
+/* 모달 */
+/* The Modal (background) */
+.myloginModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.loginmodal-content {
+	background-color: #fefefe;
+	margin: 13% auto; /* 15% from the top and centered */
+	/* padding: 20px; */
+	border: 1px solid #888;
+	width: 600px; /* Could be more or less, depending on screen size */
+	height: 400px;
+	text-align: center;
+}
+
+.header {
+	width: 100%;
+	height: 40px;
+	/* border: 1px solid red; */
+	text-align: center;
+	background: rgb(31, 69, 97);
+}
+
+.loginTitle {
+	padding: 10px;
+	float: left;
+	/* border: 1px solid blue; */
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.close {
+	padding: 10px;
+	float: right;
+	/* border: 1px solid rgb(108, 255, 40); */
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.logoImg {
+	width: 70%;
+	margin-top: 20px;
+	/* border: 1px solid violet; */
+}
+
+.loginBtn {
+	width: 300px;
+	height: 50px;
+	margin: 20px;
+	background: rgb(31, 69, 97);
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.logincontent {
+	margin-top: 20px;
+}
+
+.left {
+	width: 100px;
+	text-align: left;
+}
+
+.right {
+	width: 300px;
+}
+
+.find_bar {
+	padding-top: 10px;
+}
+
+.aFind {
+	float: right;
+}
+
+.aJoin {
+	float: left;
+}
+
+.userId, .userPwd {
+	width: 250px;
+	height: 40px;
+	font-size: 15px;
+	size: 50px;
+}
+
+a {
+	color: black;
+}
 </style>
 </head>
 <body>
@@ -148,10 +255,12 @@ header>section {
 			</form>
 		</section>
 		<section id="header-2">
-			<a href="${ contextPath }"> 
-				<img src="<%=request.getContextPath()%>/resources/images/logo_navy.png" id="logo_img">
+			<a href="${ contextPath }"> <img
+				src="<%=request.getContextPath()%>/resources/images/logo_navy.png"
+				id="logo_img">
 			</a>
 		</section>
+
 		<section id="header-3">
 			<c:if test="${ empty sessionScope.loginUser }">
 				<a href="minsertView.do" class="login_bar">회원가입</a>
@@ -159,8 +268,14 @@ header>section {
 			</c:if>
 
 			<c:if test="${ !empty sessionScope.loginUser }">
-				<a href="myKass.do" class="login_bar">MY KASS</a>
-				<a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
+				<c:if test="${ loginUser.userId eq 'admin' }">
+					<a href="MovieManagerSalesPage.do" class="login_bar">관리</a>
+					<a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
+				</c:if>
+				<c:if test="${ loginUser.userId != 'admin' }">
+					<a href="myKass.do" class="login_bar">MY KASS</a>
+					<a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
+				</c:if>
 			</c:if>
 		</section>
 	</header>
@@ -168,24 +283,64 @@ header>section {
 	<nav>
 		<ul id="navi">
 			<li><a href="movieList.do">영화</a></li>
-            <li><a href="resList.do">예매</a></li>
+			<li><a href="resList.do">예매</a></li>
 			<li><a href="#">극장</a></li>
 			<li><a href="#">VOD</a></li>
 			<li><a href="#">스토어</a></li>
 		</ul>
 	</nav>
 
+	<div id="myloginModal" class="myloginModal">
+		<!-- Modal content -->
+		<div class="loginmodal-content">
+			<div class="header">
+				<span class="loginTitle">로그인</span> <span class="close"
+					onclick="close_pop();">X</span>
+			</div>
+			<div>
+				<a href="javascript:back();"> <img class="logoImg"
+					src="${ contextPath }/resources/images/logo_navy.png">
+				</a>
+			</div>
+			<div class="logincontent">
+				<form id="joinFrm" action="login.do" method="POST"
+					onsubmit="return login();">
+					<table align="center">
+						<tr>
+							<td class="left">아이디</td>
+							<td class="right"><input type="text" id="userId"
+								class="userId" name="userId" placeholder=" 아이디"></td>
+						</tr>
+						<tr>
+							<td class="left">비밀번호</td>
+							<td class="right"><input type="password" id="userPwd"
+								class="userPwd" name="userPwd" placeholder=" 비밀번호"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><button type="submit" id="loginBtn"
+									class="loginBtn">로그인</button></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="find_bar"><span class="aFind"><a
+									href="findUserInfoView.do">ID/PW 찾기</a></span><span class="aJoin"><a
+									href="minsertView.do">회원가입</a></span></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
 	<script>
 		function login_bar() {
-			document.getElementById("myModal").style.display = "block";
+			document.getElementById("myloginModal").style.display = "block";
 		}
 
 		function back() {
-			document.getElementById("myModal").style.display = "none";
+			document.getElementById("myloginModal").style.display = "none";
 		}
 
 		function close_pop() {
-			document.getElementById("myModal").style.display = "none";
+			document.getElementById("myloginModal").style.display = "none";
 		}
 
 		/* 로그인  */

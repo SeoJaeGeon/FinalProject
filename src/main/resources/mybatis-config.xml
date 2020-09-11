@@ -8,10 +8,12 @@
 	<typeAliases>
 		<typeAlias type="com.kh.kass.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.kass.common.Auth" alias="Auth"/>
+		<typeAlias type="com.kh.kass.member.model.vo.Withdrawal" alias="Withdrawal"/>
+		<typeAlias type="com.kh.kass.member.model.vo.MoviePurchase" alias="MoviePurchase"/>
+		<typeAlias type="com.kh.kass.review.model.vo.MyMovieReview" alias="MyMovieReview"/>
 		
 
 		<typeAlias type="com.kh.kass.goods.model.vo.Goods" alias="Goods"/>
-		<typeAlias type="com.kh.kass.member.model.vo.Withdrawal" alias="Withdrawal"/>
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
 		
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Res" alias="Movie_Res"/>
