@@ -40,27 +40,29 @@ public class Movie {
       super();
       this.movieNo = movieNo;
    }
-   
+
+   	
    public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
-		      int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
-		      String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName) {
-		   super();
-		   this.movieNo = movieNo;
-		   this.movieName = movieName;
-		   this.movieAge = movieAge;
-		   this.genreCode = genreCode;
-		   this.movieRdate = movieRdate;
-		   this.movieRstatus = movieRstatus;
-		   this.moviePrice = moviePrice;
-		   this.movieLink = movieLink;
-		   this.movieForeman = movieForeman;
-		   this.movieProducer = movieProducer;
-		   this.movieActor = movieActor;
-		   this.movieStime = movieStime;
-		   this.movieCountry = movieCountry;
-		   this.movieContent = movieContent;
-		   this.movieVodStatus = movieVodStatus;
-		   this.genreName = genreName;
-	}
+            int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
+            String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName) {
+         super();
+         this.movieNo = movieNo;
+         this.movieName = movieName;
+         this.movieAge = movieAge;
+         this.genreCode = genreCode;
+         this.movieRdate = movieRdate;
+         this.movieRstatus = movieRstatus;
+         this.moviePrice = moviePrice;
+         this.movieLink = movieLink;
+         this.movieForeman = movieForeman;
+         this.movieProducer = movieProducer;
+         this.movieActor = movieActor;
+         this.movieStime = movieStime;
+         this.movieCountry = movieCountry;
+         this.movieContent = movieContent;
+         this.movieVodStatus = movieVodStatus;
+         this.genreName = genreName;
+      }
+
 
 }

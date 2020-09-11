@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="WEB-INF/views/home.jsp"/>
+	<jsp:include page="WEB-INF/views/MovieManager/MovieManagrInsert.jsp"/>
 	
 	<%-- <jsp:include page="WEB-INF/views/reservation/reservation.jsp"/> --%>
 </body>

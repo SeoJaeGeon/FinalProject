@@ -1,5 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="movieManagerMapper">
+  <resultMap id="movieManagerResultSet" type="Movie">
+		<id property="movieNo" column="MOVIE_NO" />
+		<result property="movieName" column="MOVIE_NAME" />
+		<result property="movieAge" column="MOVIE_AGE" />
+		<result property="genreCode" column="GENRE_CODE" />
+		<result property="movieRdate" column="MOVIE_RDATE" />
+		<result property="movieRstatus" column="MOVIE_RSTATUS" />
+		<result property="moviePrice" column="MOVIE_PRICE" />
+		<result property="movieLink" column="MOVIE_LINK" />
+		<result property="movieForeman" column="MOVIE_FOREMAN" />
+		<result property="movieProducer" column="MOVIE_PRODUCER" />
+		<result property="movieActor" column="MOVIE_ACTOR" />
+		<result property="movieStime" column="MOVIE_STIME" />
+		<result property="movieCountry" column="MOVIE_COUNTRY" />
+		<result property="movieContent" column="MOVIE_CONTENT" />
+		<result property="movieVodStatus" column="MOVIE_VOD_STATUS" />
+	</resultMap>
+	
+	<resultMap id="movieAreafile" type="Movie_Area">
+		<id property="maNo" column="MA_NO"/>
+		<result property="maName" column="MA_NAME"/>
+		<result property="mocNo" column="MOC_NO"/>
+	</resultMap>
+	
+	<resultMap id="movieResList" type="Movie_Res">
+		<id property="resNo" column="RES_NO"></id>
+		<result property="movieNo" column="MOVIE_NO"/>
+		<result property="resDate" column="RES_DATE"/>
+		<result property="roomNo" column="ROOM_NO"/>
+		<result property="resInfo" column="RES_INFO"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="maName" column="MA_NAME"/>
+	</resultMap>
+	
+	
+	
+	<resultMap id="attachmentResultSet" type="Attachment">
+			<id property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<result property="movieNo" column="MOVIE_NO" />
+			<result property="userNo" column="USER_NO" />
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+	</resultMap>
+	
+	<resultMap id="movResultSet" type="Movie">
+		<id property="movieNo" column="MOVIE_NO" />
+		<result property="movieName" column="MOVIE_NAME" />
+		<result property="movieAge" column="MOVIE_AGE" />
+		<result property="genreCode" column="GENRE_CODE" />
+		<result property="movieRdate" column="MOVIE_RDATE" />
+		<result property="movieRstatus" column="MOVIE_RSTATUS" />
+		<result property="moviePrice" column="MOVIE_PRICE" />
+		<result property="movieLink" column="MOVIE_LINK" />
+		<result property="movieForeman" column="MOVIE_FOREMAN" />
+		<result property="movieProducer" column="MOVIE_PRODUCER" />
+		<result property="movieActor" column="MOVIE_ACTOR" />
+		<result property="movieStime" column="MOVIE_STIME" />
+		<result property="movieCountry" column="MOVIE_COUNTRY" />
+		<result property="movieContent" column="MOVIE_CONTENT" />
+		<result property="movieVodStatus" column="MOVIE_VOD_STATUS" />
+		<result property="genreName" column="GENRE_NAME" />
+		<collection property="attachList" javaType="java.util.ArrayList" resultMap="attachmentResultSet"/>
+	</resultMap>
+	
+	<select id="movieList" resultMap="movieManagerResultSet">
+	SELECT *
+	FROM MOVIE
+	</select>
+	
+	<select id="selectMovieList1" resultMap="movieManagerResultSet">
+	SELECT *
+	FROM MOVIE
+	where movie_No=1
+	</select>
+	<insert id="movieInsert" parameterType="Movie">
+	INSERT INTO MOVIE VALUES(SEQ_MOVIE_NO.nextval, #{movieName}, #{movieAge}, #{genreCode}, 
+	#{movieRdate},
+	#{movieRstatus}, 
+	#{moviePrice}, 
+	#{movieLink}, 
+	#{movieForeman},
+	#{movieProducer}, 
+	#{movieActor},
+	#{movieStime},
+	#{movieCountry},
+	#{movieContent},
+	DEFAULT)
+	</insert>
+	
+	<select id="selectMovieNo" resultMap="movieManagerResultSet">
+	select *
+	from movie
+	where movie_Name=#{movieName}
+	
+	</select>
+	<select id="selectMovieName" resultMap="movieManagerResultSet">
+	select *
+	from movie
+	where movie_Name=#{movieName}
+	</select>
+	
+	
+	
+	<insert id="movieFileInsert" parameterType="map" >
+	INSERT INTO ATTACHMENT 
+	(FILE_NO, SORT_CODE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS, MOVIE_NO, USER_NO, SNACK_NO, GOODS_NO)
+	 VALUES(SEQ_FILE_NO.NEXTVAL, #{name1},#{name2},#{name3},#{name4},'Y',#{name5},null,null,null)
+	</insert>
+	
+	<!-- AttachmentList 불러오는 sql 포스터-->
+	<select id="AttachmentList1" resultMap="attachmentResultSet">
+	select *
+	from ATTACHMENT
+	where movie_No=#{movieNo}
+	and SORT_CODE=20
+	</select>
+	
+	<!-- AttachmentList 불러오는 sql 스틸컷-->
+	<select id="AttachmentList2" resultMap="attachmentResultSet">
+	select *
+	from ATTACHMENT
+	where movie_No=#{movieNo}
+	and SORT_CODE=30
+	</select>
+	
+	<!-- AttachmentList 불러오는 sql vod-->
+	<select id="AttachmentList3" resultMap="attachmentResultSet">
+	select *
+	from ATTACHMENT
+	where movie_No=#{movieNo}
+	and SORT_CODE=40
+	</select>
+	
+	<update id="updateMovie">
+	UPDATE MOVIE SET
+	MOVIE_NAME=#{movieName},
+	MOVIE_AGE=#{movieAge},
+	GENRE_CODE=#{genreCode}, 
+	MOVIE_RDATE=#{movieRdate},
+	MOVIE_RSTATUS=#{movieRstatus}, 
+	MOVIE_PRICE=#{moviePrice}, 
+	MOVIE_LINK=#{movieLink}, 
+	MOVIE_FOREMAN=#{movieForeman},
+	MOVIE_PRODUCER=#{movieProducer}, 
+	MOVIE_ACTOR=#{movieActor},
+	MOVIE_STIME=#{movieStime},
+	MOVIE_COUNTRY=#{movieCountry},
+	MOVIE_CONTENT=#{movieContent}
+	WHERE MOVIE_NO=#{movieNo}
+	</update>
+	
+	<update id="testupdate">
+	update movie set
+	movie_name='이걸로 변신해라'
+	where movie_no=6
+	</update>
+	
+	
+	<!-- 어태치의 파일 삭제 -->
+	<delete id="deleteMovieFile">
+	delete from ATTACHMENT where movie_No=#{movieNo}
+	</delete>
+	<!--  movie의 정보 삭제 -->
+	<delete id="deleteMovieInfo">
+	delete from movie where movie_No=#{movieNo}
+	</delete>
+	
+	<select id="movListOn" resultMap="movResultSet">
+	SELECT *
+		FROM MOVIE
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE FILE_STATUS = 'Y'
+		and SORT_CODE = 20
+	</select>
+	
+	<select id="deleteSelectMovie" resultMap="movieManagerResultSet">
+	select *
+	from movie
+	where movie_No=#{movieNo}
+	</select>
+	
+	<select id="selectAreaList" resultMap="movieAreafile">
+	select *
+	from movie_area
+	</select>
+	
+	<select id="selectMovieResList" resultMap="movieResList">
+	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
+	from MOVIE_RES
+	join movie_room USING(room_no)
+    join movie_area using(ma_no)
+    where movie_No=#{movieNo}
+    and RES_DATE > sysdate
+    ORDER by res_date ASC
+	</select>
+	<select id="selectMovieResList2" resultMap="movieResList">
+	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
+	from MOVIE_RES
+	join movie_room USING(room_no)
+    join movie_area using(ma_no)
+    where movie_No=#{movieNo}
+    and RES_DATE > sysdate
+    and MA_NAME =#{maName}
+    ORDER by res_date ASC
+	    
+	</select>
+	
+	<!-- movie_res 리스트 추가하는 sql문 재건이랑 sql 시퀸스 이름을 맞춰야함 -->
+	<insert id="insertMovieResInfo">
+	insert into movie_res
+	(res_no, movie_no, res_date, room_no, res_info, start_time, end_time)
+	values(SEQ_MOVIE_RES_NO.NEXTVAL,
+	(select movie_no
+	from movie
+	where movie_name=#{movieName})
+	,#{resDate}
+	,#{roomNo}
+	,(select room_chair
+	from movie_area
+	join MOVIE_ROOM using(ma_no)
+	where room_no=#{roomNo})
+	,#{startTime}
+	,#{endTime})
+	</insert> 
 </mapper>
+
+

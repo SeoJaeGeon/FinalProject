@@ -4,7 +4,7 @@
  
 <!doctype html>
 <html lang="ko">
-
+ 
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
 <head>
@@ -120,22 +120,6 @@
             float: left;
         }
 
-        #header-1 {
-            width: 25%;
-            height: 100%;
-            position: relative;
-        }
-
-        #header-2 {
-            width: 50%;
-            height: 100%;
-            position: relative;
-        }
-
-        #header-3 {
-            width: 25%;
-            height: 100%;
-        }
 
         #footer1 {
             width: 80%;
@@ -178,44 +162,8 @@
         }
 
 
-        /* 검색 창 */
-        #Manager-form1 {
-            height: 50px;
-            width: 300px;
-            margin: auto;
-            margin-top: 40px;
-        }
-
-        #Manager-p1 {
-            align-content: center;
-            color: white;
-            font-size: 40px;
-            margin-left: 20px;
-
-        }
-
-        #search_Text {
-            font-size: 16px;
-            width: 80%;
-            padding: 10px;
-            border: 0px;
-            outline: none;
-            float: left;
-            font-family: 'NanumBarunGothic', sans-serif;
-        }
-
-        #search_Btn {
-            width: 20%;
-            height: 100%;
-            border: 0px;
-            background: purple;
-            outline: none;
-            float: right;
-            color: #ffffff;
-            font-family: 'NanumBarunGothic', sans-serif;
-        }
-
-        /* 검색 창 */
+      
+      
 
         /* 로고 */
         #logo_img {
@@ -225,52 +173,7 @@
         }
 
         /* 로고 */
-        /* 로그인, 회원가입 */
-        .login_bar {
-            float: right;
-            text-decoration: none;
-            color: silver;
-            font-weight: bold;
-            font-size: 21px;
-            margin-right: 50px;
-            margin-top: 20px;
-            font-family: 'NanumBarunGothic', sans-serif;
-        }
-
-        .login_bar:hover {
-            text-decoration: none;
-            color: gray;
-        }
-
-        /* 로그인, 회원가입 */
-
-        /* 네비게이션 바*/
-        #navi {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #navi>li {
-            float: left;
-            width: 20%;
-        }
-
-        #navi li a {
-            display: block;
-            text-decoration: none;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            font-size: 21px;
-            line-height: 40px;
-        }
-
-        #navi li a:hover {
-            color: red;
-        }
-
-        /* 네비게이션 바*/
+       
 
         /* 하단 풋터 부분 */
         #footer1>a {
@@ -318,7 +221,7 @@
 
         #stay_footer {
             width: 100%;
-            height: 500px;
+            height: 150px;
             border: 1px black solid;
             background: rgb(145, 145, 145);
         }
@@ -340,7 +243,7 @@
         #content1-1 {
             width: 80%;
             margin: auto;
-            margin-top: 30px;
+            margin-top: 130px;
         }
 
         #content1-h1-1 {
@@ -436,6 +339,9 @@
             width: 330px;
         }
 
+
+
+
         /* 달력 부분 */
 
         #container-1{
@@ -444,7 +350,7 @@
         }
 
         .datepicker{
-            top:420px !important;
+            top:520px !important;
             width: 650px;
             height: 620px;
         }
@@ -474,36 +380,8 @@
 
 
 <body>
-
-    <div id="stay1">
-        <div id="wrap_stay">
-            <header>
-                <section id="header-1">
-                    <form id="Manager-form1">
-                        <!-- 왼쪽 상단 관리자 페이지 부분 -->
-                        <p id=Manager-p1>관리자 페이지</p>
-                    </form>
-                </section>
-                <section id="header-2">
-                    <img src="${ contextPath }/resources/images/logo_white.png" id="logo_img">
-                </section>
-                <section id="header-3">
-                    <a href="#" class="login_bar">회원가입</a>
-                    <a href="#" class="login_bar">로그인</a>
-                </section>
-            </header>
-
-            <nav>
-                <ul id="navi">
-                    <li><a href="#">영화설정</a></li>
-                    <li><a href="#">VOD 설정</a></li>
-                    <li><a href="#">스낵 설정</a></li>
-                    <li><a href="#">굿즈 설정</a></li>
-                    <li><a href="#">관리</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+	
+    <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
             <div id="wrap_stay">
@@ -596,6 +474,8 @@
 
 
 </body>
+
+
 
 </html>
 

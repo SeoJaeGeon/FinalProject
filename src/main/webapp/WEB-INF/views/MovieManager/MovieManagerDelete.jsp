@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.kh.kass.common.*" %>
+<%@ page import="com.kh.kass.movie.model.vo.*" %>
 <!doctype html>
 <html lang="ko">
-
+ 
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
 <head>
@@ -75,22 +78,7 @@
             float: left;
         }
 
-        #header-1 {
-            width: 25%;
-            height: 100%;
-            position: relative;
-        }
-
-        #header-2 {
-            width: 50%;
-            height: 100%;
-            position: relative;
-        }
-
-        #header-3 {
-            width: 25%;
-            height: 100%;
-        }
+       
 
         #footer1 {
             width: 80%;
@@ -115,7 +103,7 @@
 
         .content1 {
             width: 100%;
-            height: 1000px;
+            height: 2000px;
             /* border: 1px rgb(236, 159, 159) solid;  */
 
         }
@@ -133,44 +121,7 @@
         }
 
 
-        /* 검색 창 */
-        #Manager-form1 {
-            height: 50px;
-            width: 300px;
-            margin: auto;
-            margin-top: 40px;
-        }
-
-        #Manager-p1 {
-            align-content: center;
-            color: white;
-            font-size: 40px;
-            margin-left: 20px;
-
-        }
-
-        #search_Text {
-            font-size: 16px;
-            width: 80%;
-            padding: 10px;
-            border: 0px;
-            outline: none;
-            float: left;
-            font-family: 'NanumBarunGothic', sans-serif;
-        }
-
-        #search_Btn {
-            width: 20%;
-            height: 100%;
-            border: 0px;
-            background: purple;
-            outline: none;
-            float: right;
-            color: #ffffff;
-            font-family: 'NanumBarunGothic', sans-serif;
-        }
-
-        /* 검색 창 */
+       
 
         /* 로고 */
         #logo_img {
@@ -180,52 +131,8 @@
         }
 
         /* 로고 */
-        /* 로그인, 회원가입 */
-        .login_bar {
-            float: right;
-            text-decoration: none;
-            color: silver;
-            font-weight: bold;
-            font-size: 21px;
-            margin-right: 50px;
-            margin-top: 20px;
-            font-family: 'NanumBarunGothic', sans-serif;
-        }
-
-        .login_bar:hover {
-            text-decoration: none;
-            color: gray;
-        }
-
-        /* 로그인, 회원가입 */
-
-        /* 네비게이션 바*/
-        #navi {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #navi>li {
-            float: left;
-            width: 20%;
-        }
-
-        #navi li a {
-            display: block;
-            text-decoration: none;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            font-size: 21px;
-            line-height: 40px;
-        }
-
-        #navi li a:hover {
-            color: red;
-        }
-
-        /* 네비게이션 바*/
+      
+       
 
         /* 하단 풋터 부분 */
         #footer1>a {
@@ -273,7 +180,7 @@
 
         #stay_footer {
             width: 100%;
-            height: 500px;
+            height: 150px;
             border: 1px black solid;
             background: rgb(145, 145, 145);
         }
@@ -295,7 +202,7 @@
         #content1-1 {
             width: 80%;
             margin: auto;
-            margin-top: 30px;
+            margin-top: 130px;
         }
 
         #content1-h1-1 {
@@ -331,6 +238,80 @@
             /* 위 까지가 캘린더 */
 
         /* 영화 상영 선택 */
+        
+        /*리스트 불러오기 대기*/
+.movie-list-info {
+	width: 230px;
+	height: 600px;
+	margin:30px;
+	float:left;
+}
+.tit-area {
+	text-align:center;
+	width: 100%;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+
+.age {
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	width: 220px;
+	white-space: nowrap;
+}
+
+
+.btn-util {
+	width: 100%;
+	height: 10%;
+}
+
+
+/* 이미지 크기 설정 */
+.deleteImg{ 
+	width: 240px;
+	height:300px;
+}
+
+/* h1 크기 설정 */
+.movie_list-h1{
+	font-size:25px;
+	width:240px;
+	height:80px;
+	float:left;
+}
+/* 상영 종료 버튼 */
+.movie_statusN {
+	float: left;
+	margin-top: 2px;
+	margin-left:75px;
+	padding-top: 7px;
+	background: rgb(231, 76, 60);
+	color: white;
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	font-size: 19px;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
+
+/* 모달창 세팅 */
+#Xspan{
+margin-top:-20px;
+}
+/* 모달 창에서의 이미지 크기 설정*/
+.deleteImgModal{
+	width : 500px;
+	height : 600px;
+}
+/*모달창 자체 크기 설정*/
+.modal-content{
+	width:530px;
+	
+}
+
 
     </style>
 </head>
@@ -338,35 +319,7 @@
 
 
 <body>
-    <div id="stay1">
-        <div id="wrap_stay">
-            <header>
-                <section id="header-1">
-                    <form id="Manager-form1">
-                        <!-- 왼쪽 상단 관리자 페이지 부분 -->
-                        <p id=Manager-p1>관리자 페이지</p>
-                    </form>
-                </section>
-                <section id="header-2">
-                    <img src="${ contextPath }/resources/images/logo_white.png" id="logo_img">
-                </section>
-                <section id="header-3">
-                    <a href="#" class="login_bar">회원가입</a>
-                    <a href="#" class="login_bar">로그인</a>
-                </section>
-            </header>
-
-            <nav>
-                <ul id="navi">
-                    <li><a href="#">영화설정</a></li>
-                    <li><a href="#">VOD 설정</a></li>
-                    <li><a href="#">스낵 설정</a></li>
-                    <li><a href="#">굿즈 설정</a></li>
-                    <li><a href="#">관리</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+     <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
             <div id="wrap_stay">
@@ -375,44 +328,54 @@
                     <div id="content1-1">
                         <h1 id="content1-h1-1" style="align-content: center">영화정보 삭제</h1>
                     </div>
-                    <div id="manager01">
-                        <div class="manager-formQ1" id="manager02" style="overflow: auto">
-                                <table class="table" id="movie-table">
-                                        <thead class="thead-light" id="movie-table1">
-                                          <tr>
-                                            <th scope="col">영화 번호</th>
-                                            <th scope="col">영화 제목</th>
-                                            <th scope="col"></th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>태극기 휘날리며</td>
-                                            <td><button type="button" class="btn btn-primary">정보 삭제</button></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">2</th>
-                                            <td>반도</td>
-                                            <td><button type="button" class="btn btn-primary">정보 삭제</button></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3</th>
-                                            <td>컨저링</td>
-                                            <td><button type="button" class="btn btn-primary">정보 삭제</button></td>
-                                          </tr>
-                                          
-                                        </tbody>
-                                      </table>
-                            <!--아래부터 캘린더 코드-->
-                            <div id="calendar-wrap">
-                                
-                            </div>
-                        </div>
-                        <!-- 위 까지가 캘린더 코드 -->
-            
-
-                        
+                <div id="manager01">
+                    <div class="manager-formQ1" id="manager02" style="overflow: auto">
+						<c:forEach var="movListFile" items="${ movListFile }">
+							<div class="movie-list-info">
+								<h1 class="movie_list-h1">${ movListFile.movieName }</h1>
+									<img class="deleteImg" src="<%=request.getContextPath()%>${ movListFile.attachList[0].filePath }${ movListFile.attachList[0].renameFileName }">
+									<input type="hidden" value="${ movListFile.movieNo }" id="movieNo"/>
+								<div class="tit-area">
+									<p class="age">${ movListFile.movieAge }세 이용가</p>
+								</div>
+								<div class="btn-util">
+									<span class="movie_statusN" data-toggle="modal" data-target="#staticBackdrop2${movListFile.movieNo }">영화 삭제</span>
+								</div>
+								
+								
+							</div>
+							    <!-- 삭제하기 버튼을 누르면 생기는 모달창 -->
+							<div class="modal fade" id="staticBackdrop2${movListFile.movieNo }" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="staticBackdropLabel">영화 정보 삭제하기</h5>
+							        <button type="button" id="Xspan" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							       	<div id="modalbodysns1">
+							       		<h1 id="snsh1_1">${ movListFile.movieName }&nbsp의<br>정보를 정말 삭제하시겠습니까?</h1><br><br>
+							       		<img class="deleteImgModal" src="<%=request.getContextPath()%>${ movListFile.attachList[0].filePath }${ movListFile.attachList[0].renameFileName }">
+										<br>
+							       	</div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+							        <button type="button" class="btn btn-danger" id="${movListFile.movieNo }" onclick="movieDelete(this.id)">삭제하기</button>
+							        <!-- 삭제버튼을 누르면 실행되는 function -->
+										<script>
+										function movieDelete(id){
+											return location.href="MoviemanagerDeletePageFile.do?MovieNo="+id;
+										}
+										</script>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							<!-- 삭제하기 버튼을 누르면 생기는 모달창 여기까지 -->
+						</c:forEach>
                     </div>
                 </div>
             </div>
@@ -443,9 +406,10 @@
             </footer>
         </div>
     </div>
+    
 
-
-
+    
+    
 </body>
 
 </html>

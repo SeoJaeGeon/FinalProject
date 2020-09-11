@@ -14,6 +14,8 @@
 		<typeAlias type="com.kh.kass.member.model.vo.Withdrawal" alias="Withdrawal"/>
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
 		
+		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Res" alias="Movie_Res"/>
+		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Area" alias="Movie_Area"/>
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie" alias="Movie"/>
 		<typeAlias type="com.kh.kass.reservation.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
@@ -21,11 +23,11 @@
 		<!-- <typeAlias type="com.kh.kass.snack.model.vo.Snack" alias="Snack"/>
 		<typeAlias type="com.kh.kass.vod.model.vo.Vod" alias="Vod"/> -->
 	</typeAliases>
-
+ 
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
-		<!-- <mapper resource="mappers/goods-mapper.xml" />
-		<mapper resource="mappers/movie-mapper.xml" /> -->
+		<!-- <mapper resource="mappers/goods-mapper.xml" />-->
+		<mapper resource="mappers/movie-mapper.xml" />
 		<mapper resource="mappers/reservation-mapper.xml" />
 		<!-- <mapper resource="mappers/review-mapper.xml" />
 		<mapper resource="mappers/snack-mapper.xml" />
