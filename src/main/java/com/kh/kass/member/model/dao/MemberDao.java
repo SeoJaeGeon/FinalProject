@@ -1,13 +1,20 @@
 package com.kh.kass.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
+import com.kh.kass.common.PageInfo;
 import com.kh.kass.member.model.vo.Member;
+import com.kh.kass.member.model.vo.MoviePurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
+import com.kh.kass.review.model.vo.MyMovieReview;
+import com.kh.kass.review.model.vo.Review;
 
 @Repository("mDao")
 public class MemberDao {
@@ -97,6 +104,38 @@ public class MemberDao {
 	// 인증번호 삭제
 	public int deleteAuth(Auth au) {
 		return sqlSession.delete("memberMapper.deleteAuth", au);
+	}
+
+	public int selectMovieListCount(int userNo) {
+		return sqlSession.selectOne("memberMapper.selectMovieListCount", userNo);
+	}
+
+	public ArrayList<MoviePurchase> selectMovieList(int userNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMovieList", userNo, rowBounds);
+	}
+
+	public int insertMovieReview(Review r) {
+		return sqlSession.insert("memberMapper.insertMovieReview", r);
+	}
+
+	public ArrayList<MyMovieReview> selectMovieReviewList(int userNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMovieReviewList", userNo, rowBounds);
+	}
+
+	public int selectMovieReviewListCount(int userNo) {
+		return sqlSession.selectOne("memberMapper.selectMovieReviewListCount", userNo);
+	}
+
+	public int updateMovieReview(Review r) {
+		return sqlSession.update("memberMapper.updateMovieReview", r);
+	}
+
+	public int deleteMovieReview(Review r) {
+		return  sqlSession.update("memberMapper.deleteMovieReview", r);
 	}
 
 	

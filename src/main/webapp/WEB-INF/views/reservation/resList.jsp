@@ -511,21 +511,11 @@ header>section {
 							</div>
 						</div>
 						<div class="movie_sale5">
-						<c:choose>
-						<c:when test="${ loginUser != null }">
-							<button class="movie_nextBtn" onclick="nextBtn();">
+							<button class="movie_nextBtn" onclick="nextBtn();" type="button">
 								<img
 									src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
 									class="movie_nextImg"> <br>자리선택
 							</button>
-						</c:when>
-						<c:otherwise>
-							<button class="movie_nextBtn" onclick="login();" type="button">
-								<img src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
-									class="movie_nextImg"> <br>자리선택
-							</button>
-						</c:otherwise>
-						</c:choose>
 						</div>
 					</div>
 				</div>
@@ -550,7 +540,7 @@ header>section {
 				test2.eq(i).css('background', 'orange');
 			} else if (test2.eq(i).text() == '12') {
 				test2.eq(i).css('background', 'skyblue');
-			} else if (test2.eq(i).text() == 'All') {
+			} else if (test2.eq(i).text() == '0') {
 				test2.eq(i).text("All");
                 test2.eq(i).css('background', 'green');
 			}
@@ -860,16 +850,16 @@ header>section {
 		}
 		
 		function nextBtn(){
-			if(placeValue != 0){
-				location.href="resSeat.do?placeValue="+placeValue;				
-			}else{
-				alert("영화를 선택하지 않으셨습니다.");
-			}
-		}
-		
-		function login(){
-			alert("로그인 해주세요.");
-		}
+	         if($("loginUser") != null){
+	            if(placeValue != 0){
+	               location.href="resSeat.do?placeValue="+placeValue;            
+	            }else{
+	               alert("영화를 선택하지 않으셨습니다.");
+	            }
+	         }else{
+	            alert("로그인 해주세요.");
+	         }
+	      }
 	</script>
 
 </body>

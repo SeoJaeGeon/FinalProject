@@ -398,7 +398,7 @@ padding-top : 50px;
 				상세페이지</h2>
 			<div class="movie-introduce">
 				<div class="movie-in1">
-					<img src="<%=request.getContextPath()%>${ movInfo[0].attachList[0].filePath }${ movInfo[0].attachList[0].originFileName }">
+					<img src="<%=request.getContextPath()%>${ movInfo[0].attachList[0].filePath }${ movInfo[0].attachList[0].renameFileName }">
 				</div>
 				<div class="movie-in2">
 					<p class="movie-grade">${ movInfo[0].movieAge }</p>
@@ -495,7 +495,12 @@ padding-top : 50px;
 					<li>
 						<div class="rView1">
 						<div class="rView1-top">
+						<c:if test="${ r.renameFileName eq null }">
+						<img src="${ contextPath }/resources/images/defaultPropfieImg.png">
+						</c:if>
+						<c:if test="${ r.renameFileName ne null }">
 							<img src="<%=request.getContextPath()%>${r.filePath}${r.renameFileName}">
+						</c:if>
 						</div>
 						<div class="rView1-bottom">
 							<strong>${r.reWriter}</strong>					

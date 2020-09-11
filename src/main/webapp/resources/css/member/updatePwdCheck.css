@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* content */
 /* content-1 */
+a:visited {
+    text-decoration: none;
+    color: rgb(114, 114, 114);
+}
 .content-1 {
     /* border:1px solid rebeccapurple; */
     width: 100%;

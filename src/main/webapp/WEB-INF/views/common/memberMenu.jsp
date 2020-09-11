@@ -22,6 +22,15 @@
 <body>
 	<section class="MyKASS">
 		<aside class="myMenu">
+			<c:url var="mrlist" value="movieReviewList.do" />
+			<c:url var="vrlist" value="vodReviewList.do" />
+			<c:url var="wishlist" value="ddd.do" />
+			<c:url var="mlist" value="moviePurchaseList.do" />
+			<c:url var="vlist" value="vodPurchaseList.do" />
+			<c:url var="slist" value="snackPurchaseList.do" />
+			<c:url var="glist" value="goodsPurchaseList.do" />
+			
+
 			<table>
 				<tr>
 					<td>
@@ -36,10 +45,12 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="myMovieReviewView.do">내가 쓴 영화 리뷰</a></li>
-							<li><a href="myVODReviewView.do">내가 쓴 VOD 리뷰</a></li>
-							<li><a href="wishVODView.do">내가 찜한 VOD</a></li>
-							<li><a href="myCartView.do">장바구니</a></li>
+							<li><a class="aMenu" href="${mrlist}">내가 쓴 영화
+									리뷰</a></li>
+							<li><a class="aMenu" href="${vrlist}">내가 쓴 VOD
+									리뷰</a></li>
+							<li><a class="aMenu" href="wishlist">내가 찜한 VOD</a></li>
+							<li><a class="aMenu" href="myCartView.do">장바구니</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -51,8 +62,10 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="moviePurchaseListView.do">영화 구매 내역</a></li>
-							<li><a href="vodPurchaseListView.do">VOD 구매 내역</a></li>
+							<li><a class="aMenu" href="${mlist}">영화
+									예매 내역</a></li>
+							<li><a class="aMenu" href="${vlist}">VOD
+									구매 내역</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -64,8 +77,10 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="snackPurchaseListView.do">스낵 구매 내역</a></li>
-							<li><a href="goodsPurchaseListView.do">굿즈 구매 내역</a></li>
+							<li><a class="aMenu" href="${slist}">스낵
+									구매 내역</a></li>
+							<li><a class="aMenu" href="${glist}">굿즈
+									구매 내역</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -77,8 +92,9 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="mupdatePwdCheckView.do">개인정보 수정</a></li>
-							<li><a href="mdeleteView.do">회원 탈퇴</a></li>
+							<li><a class="aMenu" href="mupdatePwdCheckView.do">개인정보
+									수정</a></li>
+							<li><a class="aMenu" href="mdeleteView.do">회원 탈퇴</a></li>
 						</ul>
 					</td>
 				</tr>

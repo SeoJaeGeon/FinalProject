@@ -1,9 +1,15 @@
 package com.kh.kass.member.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
+import com.kh.kass.common.PageInfo;
 import com.kh.kass.member.model.vo.Member;
+import com.kh.kass.member.model.vo.MoviePurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
+import com.kh.kass.review.model.vo.MyMovieReview;
+import com.kh.kass.review.model.vo.Review;
 
 public interface MemberService {
 	// 회원 로그인 서비스를 위한 메소드
@@ -59,6 +65,27 @@ public interface MemberService {
 
 	// 인증번호 삭제
 	public int deleteAuth(Auth au);
+
+	// 영화 예매 리스트 개수
+	public int selectMovieListCount(int userNo);
+
+	// 영화 예매 내역 조회
+	public ArrayList<MoviePurchase> selectMovieList(int userNo, PageInfo pi);
+
+	// 내가 쓴 영화 리뷰 개수
+	public int selectMovieReviewListCount(int userNo);
+	
+	// 내가 쓴 영화 리뷰
+	public ArrayList<MyMovieReview> selectMovieReviewList(int userNo, PageInfo pi);
+	// 리뷰 등록
+	public int insertMovieReview(Review r);
+
+	// 리뷰 수정
+	public int updateMovieReview(Review r);
+
+	// 리뷰 삭제
+	public int deleteMovieReview(Review r);
+
 
 	
 	

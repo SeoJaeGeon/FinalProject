@@ -24,11 +24,11 @@
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
 			<result property="movieNo" column="MOVIE_NO" />
-<!-- 			<result property="userNo" column="USER_NO" />
- -->			<result property="snackNo" column="SNACK_NO" />
+			<!-- <result property="userNo" column="USER_NO" /> -->
+			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
-		
+
 	</resultMap>
 
 	<resultMap id="wdResultSet" type="Withdrawal">
@@ -36,8 +36,8 @@
 		<result property="userNo" column="USER_NO" />
 		<result property="wdReason" column="WD_REASON" />
 		<result property="wdDate" column="WD_DATE" />
-	</resultMap> 
-	
+	</resultMap>
+
 	<resultMap id="AttachmentResultSet" type="Attachment">
 		<id property="fileNo" column="FILE_NO" />
 		<result property="sortCode" column="SORT_CODE" />
@@ -50,13 +50,67 @@
 		<result property="snackNo" column="SNACK_NO" />
 		<result property="goodsNo" column="GOODS_NO" />
 	</resultMap>
-	
+
 	<resultMap id="AuthResultSet" type="Auth">
 		<id property="userEmail" column="EMAIL" />
 		<result property="auth" column="AUTH_NUM" />
 	</resultMap>
-	
-	
+
+	<resultMap id="moviePurchaseResultSet" type="MoviePurchase">
+		<id property="resNo" column="RES_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="urNo" column="UR_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="movieName" column="MOVIE_NAME" />
+		<result property="resDate" column="RES_DATE" />
+		<result property="startTime" column="START_TIME" />
+		<result property="endTime" column="END_TIME" />
+		<result property="maName" column="MA_NAME" />
+		<result property="roomNumber" column="ROOM_NUMBER" />
+		<result property="urRes" column="UR_RES" />
+		<result property="urPeople" column="UR_PEOPLE" />
+		<result property="urPeople2" column="UR_PEOPLE2" />
+		<result property="reScore" column="R_SCORE" />
+		<association property="attachment" javaType="Attachment">
+			<result property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
+			<!-- <result property="userNo" column="USER_NO" /> -->
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+		</association>
+	</resultMap>
+
+	<resultMap id="myReviewResultSet" type="MyMovieReview">
+		<id property="reNo" column="R_NO" />
+		<result property="reSort" column="R_SORT" />
+		<result property="reScore" column="R_SCORE" />
+		<result property="reContent" column="R_CONTENT" />
+		<result property="reEnrollDate" column="R_ENROLL_DATE" />
+		<result property="reModifyDate" column="R_MODIFY_DATE" />
+		<result property="userNo" column="USER_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="movieName" column="MOVIE_NAME" />
+
+		<association property="attachment" javaType="Attachment">
+			<result property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
+			<!-- <result property="userNo" column="USER_NO" /> -->
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+		</association>
+
+	</resultMap>
+
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
 		VALUES(SEQ_USER_NO.NEXTVAL, #{userId}, #{userPwd}, #{userPwdQ},
@@ -69,9 +123,10 @@
 		SELECT *
 		FROM MEMBER
 		LEFT JOIN ATTACHMENT USING(USER_NO)
-		WHERE USER_ID = #{userId}
+		WHERE
+		USER_ID = #{userId}
 		AND USER_STATUS='Y'
-		
+
 	</select>
 
 	<select id="idCheck" parameterType="string" resultType="_int">
@@ -85,7 +140,8 @@
 		resultMap="memberResultSet">
 		SELECT USER_ID, USER_ENROLL_DATE
 		FROM MEMBER
-		WHERE USER_NAME = #{userName}
+		WHERE USER_NAME =
+		#{userName}
 		AND USER_BIRTH = #{userBirth}
 		AND USER_PHONE = #{userPhone}
 		AND USER_STATUS = 'Y'
@@ -142,77 +198,166 @@
 		VALUES(SEQ_WD_NO.NEXTVAL, #{userNo}, #{wdReason}, DEFAULT)
 	</insert>
 
- 
+
 	<update id="deleteMember" parameterType="WithDrawal">
-		UPDATE MEMBER 
-		SET USER_STATUS = 'N'
+		UPDATE MEMBER
+		SET
+		USER_STATUS = 'N'
 		WHERE USER_NO=#{userNo}
 	</update>
-	
+
 	<update id="uploadImg" parameterType="Attachment">
 		MERGE INTO ATTACHMENT
-		USING DUAL
+		USING
+		DUAL
 		ON (USER_NO = #{userNo})
-		
-		 WHEN MATCHED THEN UPDATE SET
 
-			FILE_PATH=#{filePath},
-			ORIGIN_FILENAME=#{originFileName},
-			RENAME_FILENAME=#{renameFileName}
-		
+		WHEN MATCHED THEN UPDATE SET
+
+		FILE_PATH=#{filePath},
+		ORIGIN_FILENAME=#{originFileName},
+		RENAME_FILENAME=#{renameFileName}
+
 		WHEN NOT MATCHED THEN
-		
-			INSERT (
-			FILE_NO,
-			SORT_CODE,
-			FILE_PATH,
-			ORIGIN_FILENAME,
-			RENAME_FILENAME,
-			FILE_STATUS,
-			MOVIE_NO,
-			USER_NO,
-			SNACK_NO,
-			GOODS_NO)
-			
-			VALUES(
-			SEQ_FILE_NO.NEXTVAL,
-			10,
-			#{filePath},
-			#{originFileName},
-			#{renameFileName},
-			DEFAULT,
-			NULL,
-			#{userNo},
-			NULL,
-			NULL)
+
+		INSERT (
+		FILE_NO,
+		SORT_CODE,
+		FILE_PATH,
+		ORIGIN_FILENAME,
+		RENAME_FILENAME,
+		FILE_STATUS,
+		MOVIE_NO,
+		USER_NO,
+		SNACK_NO,
+		GOODS_NO)
+
+		VALUES(
+		SEQ_FILE_NO.NEXTVAL,
+		10,
+		#{filePath},
+		#{originFileName},
+		#{renameFileName},
+		DEFAULT,
+		NULL,
+		#{userNo},
+		NULL,
+		NULL)
 	</update>
-	
+
 	<delete id="deleteImg" parameterType="Attachment">
 		DELETE ATTACHMENT
-		WHERE USER_NO = #{userNo}
+		WHERE
+		USER_NO = #{userNo}
 	</delete>
 
-	<select id="selectAtt" parameterType="_int" resultMap="AttachmentResultSet">
+	<select id="selectAtt" parameterType="_int"
+		resultMap="AttachmentResultSet">
 		SELECT *
 		FROM ATTACHMENT
 		WHERE USER_NO = #{userNo}
 	</select>
-	
+
 	<insert id="insertAuthNum" parameterType="Auth">
 		INSERT INTO AUTH
 		VALUES(#{userEmail}, #{authNum})
 	</insert>
 
 	<select id="emailCheck" parameterType="Auth" resultType="_int">
-		SELECT COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM AUTH
 		WHERE EMAIL = #{userEmail}
 		AND AUTH_NUM = #{authNum}
 	</select>
-	
+
 	<delete id="deleteAuth" parameterType="Auth">
 		DELETE AUTH
-		WHERE EMAIL = #{userEmail}
+		WHERE EMAIL =
+		#{userEmail}
 	</delete>
 
+	<select id="selectMovieListCount" resultType="_int" parameterType="_int">
+		SELECT COUNT(*)
+		FROM USER_RESMOVIE UR
+		JOIN MOVIE_RES
+		USING(RES_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		JOIN ATTACHMENT USING(MOVIE_NO)
+		JOIN MOVIE_ROOM USING(ROOM_NO)
+		JOIN MOVIE_AREA USING(MA_NO)
+		LEFT JOIN
+		REVIEW USING(MOVIE_NO)
+		JOIN PAYMENT USING(UR_NO)
+		WHERE UR.USER_NO = #{
+		userNo }
+		AND REFUND = 'N'
+		AND SORT_CODE = 20
+	</select>
+
+	<select id="selectMovieList" resultMap="moviePurchaseResultSet">
+		SELECT UR.USER_NO,UR_NO,
+		RES_NO, MOVIE_NO, MOVIE_NAME, RENAME_FILENAME, RES_DATE
+		, START_TIME,
+		END_TIME, MA_NAME, ROOM_NUMBER, UR_RES, UR_PEOPLE, UR_PEOPLE2, R_SCORE
+		FROM USER_RESMOVIE UR
+		JOIN MOVIE_RES USING(RES_NO)
+		JOIN MOVIE
+		USING(MOVIE_NO)
+		JOIN ATTACHMENT USING(MOVIE_NO)
+		JOIN MOVIE_ROOM
+		USING(ROOM_NO)
+		JOIN MOVIE_AREA USING(MA_NO)
+		LEFT JOIN REVIEW
+		USING(MOVIE_NO)
+		JOIN PAYMENT USING(UR_NO)
+		WHERE UR.USER_NO = #{userNo}
+		AND REFUND = 'N'
+		AND SORT_CODE = 20
+		ORDER BY UR_NO DESC
+	</select>
+
+	<select id="selectMovieReviewListCount" resultType="_int" parameterType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW RV
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND RV.USER_NO = #{userNo}
+		AND R_SORT = 'M'
+	</select>
+
+	<select id="selectMovieReviewList" resultMap="myReviewResultSet">
+		SELECT RV.USER_NO,
+		MOVIE_NO, R_ENROLL_DATE, R_SCORE, MOVIE_NAME, RENAME_FILENAME, R_CONTENT
+		FROM REVIEW RV
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND RV.USER_NO = #{userNo}
+		AND R_SORT = 'M'
+	</select>
+	
+	<insert id="insertMovieReview" parameterType="Review">
+		INSERT INTO REVIEW
+		VALUES(SEQ_R_NO.NEXTVAL, 'M', #{reScore}, #{reContent}, DEFAULT,
+		DEFAULT, #{userNo}, #{movieNo})
+	</insert>
+	
+	<update id="updateMovieReview"  parameterType="Review">
+		UPDATE REVIEW SET
+		R_SCORE = #{reScore},
+		R_CONTENT = #{reContent},
+		R_MODIFY_DATE = SYSDATE
+		WHERE USER_NO = #{userNo}
+		AND R_SORT = 'M'
+		AND MOVIE_NO = #{movieNo}
+	</update>
+
+	<update id="deleteMovieReview" parameterType="Review">
+		DELETE REVIEW
+		WHERE USER_NO = #{userNo}
+		AND R_SORT = 'M'
+		AND MOVIE_NO = #{movieNo}
+	</update>
 </mapper>

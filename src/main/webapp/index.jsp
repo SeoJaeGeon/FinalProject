@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +9,10 @@
 </style>
 </head>
 <body>
-	<jsp:include page="WEB-INF/views/MovieManager/MovieManagrInsert.jsp"/>
-	
+
+	<jsp:include page="WEB-INF/views/home.jsp" />
+	<%-- <jsp:include page="WEB-INF/views/MovieManager/MovieManagrInsert.jsp"/> --%>
+
 	<%-- <jsp:include page="WEB-INF/views/reservation/reservation.jsp"/> --%>
 </body>
 </html>
