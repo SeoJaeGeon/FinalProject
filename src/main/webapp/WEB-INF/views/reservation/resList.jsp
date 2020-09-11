@@ -419,7 +419,7 @@ header>section {
 										<span class="movie_old">${ mov.movieAge }</span>
 										<span class="movie_name">${ mov.movieName }</span>
 										<input type="hidden" value="${ mov.movieNo }" id="movieNo"/>
-										<input type="hidden" value="${ mov.attachList[0].filePath }${ mov.attachList[0].originFileName }" id="movPoster"/>
+										<input type="hidden" value="${ mov.attachList[0].filePath }${ mov.attachList[0].renameFileName }" id="movPoster"/>
 									</button>
 								</li>
 							</c:forEach>
@@ -520,9 +520,8 @@ header>section {
 							</button>
 						</c:when>
 						<c:otherwise>
-							<button class="movie_nextBtn" onclick="login();">
-								<img
-									src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
+							<button class="movie_nextBtn" onclick="login();" type="button">
+								<img src="<%=request.getContextPath()%>/resources/images/nextBtn2.png"
 									class="movie_nextImg"> <br>자리선택
 							</button>
 						</c:otherwise>
@@ -657,6 +656,7 @@ header>section {
 			
 			titleValue = child.children('#movieNo').val();
 			
+			placeValue = 0;
 			playMovie();
 		});
 
@@ -673,6 +673,7 @@ header>section {
 			areaNumber = $(this).children('button').children('input').val();
 			areaValue = child1.children('#mocNo').val();
 			
+			placeValue = 0;
 			playMovie();
 		});
 
@@ -686,7 +687,9 @@ header>section {
 			selectTime.text(child1.val());
 			timeValue = child1.val();
 			
-			console.log("날짜 : " + child1.val());				
+			console.log("날짜 : " + child1.val());		
+			
+			placeValue = 0;
 			playMovie();
 		});
 		
@@ -731,6 +734,8 @@ header>section {
 								cinemaText = child2.text();
 								cinemaValue = child1.children('#maNo').val();
 								
+								placeValue = 0;
+								
 								playMovie();
 							})
 							
@@ -753,6 +758,7 @@ header>section {
 			console.log("골라진 지역 : " + areaValue);
 			console.log("골라진 영화관 : " + cinemaValue);
 			console.log("골라진 영화 시간 : " + timeValue);
+			console.log("골라진 영화 보는곳 : " + placeValue);
 			console.log("---------------------------------")
 			
 			$.ajax({
@@ -854,7 +860,11 @@ header>section {
 		}
 		
 		function nextBtn(){
-			location.href="resSeat.do?placeValue="+placeValue;
+			if(placeValue != 0){
+				location.href="resSeat.do?placeValue="+placeValue;				
+			}else{
+				alert("영화를 선택하지 않으셨습니다.");
+			}
 		}
 		
 		function login(){

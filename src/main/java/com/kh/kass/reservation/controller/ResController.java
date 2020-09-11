@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.kh.kass.common.PageInfo;
+import com.kh.kass.common.PaginationS;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.reservation.model.exception.ResException;
 import com.kh.kass.reservation.model.service.ResService;
@@ -35,24 +39,13 @@ public class ResController {
 		ArrayList<Movie> movListON = resService.movListON();
 		ArrayList<Movie> movListWait = resService.movListWait();
 		ArrayList<Movie> movListOff = resService.movListOff();
+		ArrayList<Movie> movListFavor = resService.movListFavor();
 		
-		/*
-		for (Movie movie : movListON) {
-			System.out.println("(개봉)영화 값 : "+movie.toString());
-		}
-		
-		for (Movie movie : movListWait) {
-			System.out.println("(미개봉)영화 값 : "+movie.toString());
-		}
-		
-		for (Movie movie : movListOff) {
-			System.out.println("(X)영화 값 : "+movie.toString());
-		}
-		*/
 		if (movListON != null || movListWait != null || movListOff != null) {
 			mv.addObject("movListON", movListON);
 			mv.addObject("movListWait", movListWait);
 			mv.addObject("movListOff", movListOff);
+			mv.addObject("movListFavor", movListFavor);
 			
 			mv.setViewName("reservation/movieList");
 		} else {
@@ -121,7 +114,7 @@ public class ResController {
 	}
 	
 	@RequestMapping("movieInfo.do")
-	public ModelAndView goMovieInfo(ModelAndView mv, @RequestParam("movieNo") int movieNum,
+	public ModelAndView goMovieInfo(ModelAndView mv, @RequestParam(value="movieNo", required=false) Integer movieNum,
 			@RequestParam(value="page", required=false) Integer page) {
 		int currentPage = page != null ? page : 1;
 		ArrayList<Movie> movInfo = resService.movieInfo(movieNum);
@@ -130,28 +123,62 @@ public class ResController {
 		
 		int reviewUp = 0;
 		int reviewDown = 0;
+		int listCount = reList.size();
+		System.out.println("movieNo : " + movieNum);
+		System.out.println("리뷰 리스트 갯수 : " + listCount);
+		PageInfo pi = PaginationS.getPageInfo(currentPage, listCount);
 		
 		if(reList.size() >= 1) {
-			int reListSize = reList.size();
-			
-			for(int i=0; i<reListSize; i++) {
-				if(reList.get(i).getRScore().equals("G")) {
+			for(int i=0; i<listCount; i++) {
+				if(reList.get(i).getReScore().equals("G")) {
 					reviewUp++;
-				}else if(reList.get(i).getRScore().equals("B")){
+				}else if(reList.get(i).getReScore().equals("B")){
 					reviewDown++;
 				}
 			}
-			
 		}
+		
+		ArrayList<Review> rList = resService.rSelectList(pi, movieNum);
+		System.out.println("rList : " + rList);
+		Calendar time = Calendar.getInstance();
+		Date movieDate = movInfo.get(0).getMovieRdate();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String format_time1 = dateFormat.format(time.getTime());
+		String format_time2 = dateFormat.format(movieDate);
+		java.util.Date today = null;
+		java.util.Date mDate = null;
+		
+		try {
+			today = dateFormat.parse(format_time1);
+			mDate = dateFormat.parse(format_time2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		int compare = today.compareTo(mDate);
+		boolean movieStatus = false;
+		if(compare > 0) {
+			System.out.println(" today > mDate");
+			movieStatus= false;
+		}else if(compare <0) {
+			System.out.println(" today < mDate");
+			movieStatus = true;
+		}else {
+			System.out.println(" today = mDate");
+			movieStatus = true;
+		}
+		
+		
 		
 		if (movInfo != null) {
 			mv.addObject("movInfo", movInfo);
 			mv.addObject("reviewUp", reviewUp);
 			mv.addObject("reviewDown", reviewDown);
-			mv.addObject("reList", reList);
+			mv.addObject("pi", pi);
+			mv.addObject("reviewList", rList);
+			mv.addObject("movieStatus", movieStatus);
 			mv.setViewName("reservation/movieInfo");
 		} else {
-			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");
+			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");// 다른거눌러서 그래요 리뷰가없어요
 		}
 		
 		return mv;
@@ -249,7 +276,8 @@ public class ResController {
 									@RequestParam("people2") int people2,
 									@RequestParam("price") int price,
 									@RequestParam("time") String time,
-									@RequestParam("people") String people
+									@RequestParam("people") String people,
+									@RequestParam("radioVal") String radioVal
 									) {
 		Reservation resInfo = resService.resSeatSelect(resNo);
 		System.out.println("[SEQ]UR_NO : " + "1");
@@ -263,6 +291,7 @@ public class ResController {
 		System.out.println("[DB]UR_PEOPLE : " + people1);
 		System.out.println("[DB]UR_PEOPLE2 : " + people2);
 		System.out.println("[DB]UR_PRICE : " + price);
+		System.out.println("radioVal : " + radioVal);
 		
 		Reservation res = new Reservation(userNo,resNo,index_array,placeValue,people1,people2,price);
 		
@@ -284,7 +313,7 @@ public class ResController {
 		if(upResult > 0) {
 			// 에약정보 등록
 			// 결제에 등록
-			int update = resService.updateRes(res);
+			int update = resService.updateRes(res, radioVal);
 			
 			if(update > 1) {
 				mv.addObject("resInfo", resInfo);
@@ -305,5 +334,28 @@ public class ResController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "searchMovie.do", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String searchMovie(String searchText) throws ParseException {
+		
+		System.out.println("들어온 값 : " + searchText);
+		
+		ArrayList<Movie> searchList = resService.searchMovie(searchText);
+		System.out.println(searchList);
+		
+		Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd").create();
+		
+		return gson.toJson(searchList);
+	}
+	
+	@RequestMapping(value = "movieCard.do", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String movieCardPay(int userNo, int resNo, String time, String people, String index_array, String placeValue, int people1, 
+			int people2, int price) throws ParseException {
+		
+		Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd").create();
+		
+		return "success";
+	}
 }
 	

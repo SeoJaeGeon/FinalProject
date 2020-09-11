@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.kass.common.PageInfo;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.reservation.model.dao.ResDao;
 import com.kh.kass.reservation.model.vo.Reservation;
@@ -77,11 +78,26 @@ public class ResServiceImpl implements ResService {
 	}
 
 	@Override
-	public int updateRes(Reservation res) {
+	public int updateRes(Reservation res, String radioVal) {
 		int result =  resDao.updateRes(res);
-		int result2 = resDao.updateRes2(res);
+		int result2 = resDao.updateRes2(res, radioVal);
 		
 		return result+result2;
+	}
+
+	@Override
+	public ArrayList<Review> rSelectList(PageInfo pi, int movieNum) {
+		return resDao.rSelectList(pi, movieNum);
+	}
+
+	@Override
+	public ArrayList<Movie> searchMovie(String searchText) {
+		return resDao.searchMovie(searchText);
+	}
+
+	@Override
+	public ArrayList<Movie> movListFavor() {
+		return resDao.movListFavor();
 	}
 
 

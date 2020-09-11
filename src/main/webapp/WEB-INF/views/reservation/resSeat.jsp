@@ -395,7 +395,7 @@ header>section {
 		<section id="content">
 			<div class="content1">
 				<div class="movie_content">
-					<button class="resBack">예매 다시하기</button>
+					<button class="resBack" onclick="tryResBtn();">예매 다시하기</button>
 					<button class="tryPerson" onclick="tryPersonBtn();">인원 초기화</button>
 					<div class="movie_station">
 						<div class="res_station1">
@@ -544,7 +544,7 @@ header>section {
 							<div id="movie_poster">
 							
 								<img class="posterImg" width="150px" height="200px" 
-								src="<%=request.getContextPath()%>${ seatList.movie.attachList[0].filePath }${ seatList.movie.attachList[0].originFileName }">
+								src="<%=request.getContextPath()%>${ seatList.movie.attachList[0].filePath }${ seatList.movie.attachList[0].renameFileName }">
 							 
 							</div>
 							<div id="movie_title">
@@ -713,10 +713,8 @@ header>section {
 								console.log(seat_array);
 								console.log(index_array);
 							}
-							$('.movie_sale3').children('div').eq(0).children(
-									'span').eq(1).text("일반석");
-							$('.movie_sale3').children('div').eq(1).children(
-									'span').eq(1).text(seat_array);
+							$('.movie_sale3').children('div').eq(0).children('span').eq(1).text("일반석");
+							$('.movie_sale3').children('div').eq(1).children('span').eq(1).text(seat_array);
 						}
 
 					} else {
@@ -767,7 +765,17 @@ header>section {
 			var people = peopleCount.text();
 			var price = totalPrice.text();
 			
-			location.href="goPayPage.do?seat_array="+seat_array+"&index_array="+index_array+"&resNo="+${seatList.resNo}+"&people="+people+"&price="+price+"&val1="+val1+"&val2="+val2;
+			if(sum == count && sum != 0 && count != 0){
+				location.href="goPayPage.do?seat_array="+seat_array+"&index_array="+index_array+"&resNo="+${seatList.resNo}+"&people="+people+"&price="+price+"&val1="+val1+"&val2="+val2;				
+			}else if(sum == 0){
+				alert("인원을 선택해주세요.");
+			}else{
+				alert("좌석을 선택하주세요.");
+			}
+		}
+		
+		function tryResBtn(){
+			location.href="resList.do";
 		}
 	</script>
 
