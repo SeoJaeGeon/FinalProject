@@ -6,9 +6,17 @@ import java.util.ArrayList;
 import com.kh.kass.common.Attachment;
 import com.kh.kass.review.model.vo.Review;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Movie {
    private int movieNo; // 영화번호
    private String movieName; // 영화이름
@@ -27,61 +35,32 @@ public class Movie {
    private String movieVodStatus; // vod 구분
    private String genreName; // 장르명
    private ArrayList<Attachment> attachList;
-   private ArrayList<Review> review;
    
-   public Movie() {}
-
    public Movie(int movieNo) {
       super();
       this.movieNo = movieNo;
    }
-
+   
    public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
-         int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
-         String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName,
-         ArrayList<Attachment> attachList, ArrayList<Review> review) {
-      super();
-      this.movieNo = movieNo;
-      this.movieName = movieName;
-      this.movieAge = movieAge;
-      this.genreCode = genreCode;
-      this.movieRdate = movieRdate;
-      this.movieRstatus = movieRstatus;
-      this.moviePrice = moviePrice;
-      this.movieLink = movieLink;
-      this.movieForeman = movieForeman;
-      this.movieProducer = movieProducer;
-      this.movieActor = movieActor;
-      this.movieStime = movieStime;
-      this.movieCountry = movieCountry;
-      this.movieContent = movieContent;
-      this.movieVodStatus = movieVodStatus;
-      this.genreName = genreName;
-      this.attachList = attachList;
-      this.review = review;
-   }
-  
-  public Movie(int movieNo, String movieName, int movieAge, int genreCode, Date movieRdate, String movieRstatus,
-			int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
-			String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName,
-			ArrayList<Attachment> attachList) {
-		super();
-		this.movieNo = movieNo;
-		this.movieName = movieName;
-		this.movieAge = movieAge;
-		this.genreCode = genreCode;
-		this.movieRdate = movieRdate;
-		this.movieRstatus = movieRstatus;
-		this.moviePrice = moviePrice;
-		this.movieLink = movieLink;
-		this.movieForeman = movieForeman;
-		this.movieProducer = movieProducer;
-		this.movieActor = movieActor;
-		this.movieStime = movieStime;
-		this.movieCountry = movieCountry;
-		this.movieContent = movieContent;
-		this.movieVodStatus = movieVodStatus;
-		this.genreName = genreName;
-		this.attachList = attachList;
+		      int moviePrice, String movieLink, String movieForeman, String movieProducer, String movieActor,
+		      String movieStime, String movieCountry, String movieContent, String movieVodStatus, String genreName) {
+		   super();
+		   this.movieNo = movieNo;
+		   this.movieName = movieName;
+		   this.movieAge = movieAge;
+		   this.genreCode = genreCode;
+		   this.movieRdate = movieRdate;
+		   this.movieRstatus = movieRstatus;
+		   this.moviePrice = moviePrice;
+		   this.movieLink = movieLink;
+		   this.movieForeman = movieForeman;
+		   this.movieProducer = movieProducer;
+		   this.movieActor = movieActor;
+		   this.movieStime = movieStime;
+		   this.movieCountry = movieCountry;
+		   this.movieContent = movieContent;
+		   this.movieVodStatus = movieVodStatus;
+		   this.genreName = genreName;
 	}
+
 }

@@ -179,7 +179,7 @@ header>section {
 				<div class="pay_Info">
 					<div class="movie-img">
 						<div style="width: 100%; height: 80%; padding: 5px;">
-							<img src="<%=request.getContextPath()%>${ resInfo.movie.attachList[0].filePath }${ resInfo.movie.attachList[0].originFileName }" style="width: 100%; height: 100%;">
+							<img src="<%=request.getContextPath()%>${ resInfo.movie.attachList[0].filePath }${ resInfo.movie.attachList[0].renameFileName }" style="width: 100%; height: 100%;">
 						</div>
 						<div style="width: 100%; height: 20%;">
 							<span
@@ -263,7 +263,7 @@ header>section {
 					</div>
 				</div>
 
-				<button class="movie_nextBtn" onclick="goMain();">메인으로</button>
+				<button class="movie_nextBtn" onclick="goMain();"  type="button">메인으로</button>
 			</div>
 		</section>
 	</div>

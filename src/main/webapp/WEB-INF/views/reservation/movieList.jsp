@@ -18,6 +18,7 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@1.0/nanumbarungothicsubset.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <style>
 header, nav, section, article, aside, footer {
@@ -445,6 +446,17 @@ input:checked+.slider:before {
 	height : 100%;
 	float : left;
 }
+
+.statusDiv{
+	width : 100%;
+	height : 100%;
+	border : 1px solid black;
+	text-align : center;
+	font-size : 25px;
+	color : white;
+	background : black;
+	user-select: none;
+}
 /* 내가 쓴 코드 */
 </style>
 </head>
@@ -465,25 +477,27 @@ input:checked+.slider:before {
 				<div class="movie-list-util">
 				<div class="viewChk">
 					<p>개봉순</p>
-					<label class="switch"> <input type="checkbox"> <span
-						class="slider round"></span>
+					<label class="switch">
+						<input type="checkbox" id='movieCheck'>
+						<span class="slider round"></span>
 					</label>
 					<p>인기순</p>
 				</div>
-					<form id="search-form2">
+					<div id="search-form2">
 						<input type="text" id="search_Text2" name="search_Text"
 							placeholder="영화제목 입력">
-						<button type="submit" id="search_Btn2" name="search_Btn">
+						<button id="search_Btn2" name="search_Btn" type="button" onclick="searchMovie();">
 							<img src="<%=request.getContextPath()%>/resources/images/search.png" id="search_img2">
 						</button>
-					</form>
+					</div>
 				</div>
 				<div class="movie-list">
-					<ol class="list">
+					<ol class="list no-search">
+					
 					<c:forEach var="movOn" items="${ movListON }">
 						<li class="no-img high">
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movOn.attachList[0].filePath }${ movOn.attachList[0].originFileName }">
+								<img src="<%=request.getContextPath()%>${ movOn.attachList[0].filePath }${ movOn.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movOn.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -495,7 +509,7 @@ input:checked+.slider:before {
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusY">상영중</span> 
-								<a class="resBtn" href="#">예매하기</a>
+								<a class="resBtn" href="resList.do">예매하기</a>
 							</div>
 						</li>
 					</c:forEach>
@@ -503,7 +517,7 @@ input:checked+.slider:before {
 					<c:forEach var="movWait" items="${ movListWait }">
 						<li class="no-img middle" style="display : none;">
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movWait.attachList[0].filePath }${ movWait.attachList[0].originFileName }">
+								<img src="<%=request.getContextPath()%>${ movWait.attachList[0].filePath }${ movWait.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movWait.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -515,7 +529,7 @@ input:checked+.slider:before {
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusW">개봉예정</span>
-                            <a class="resBtn" href="#">예매하기</a>
+                            <a class="resBtn" href="resList.do">예매하기</a>
 							</div>
 						</li>
 					</c:forEach>
@@ -523,7 +537,7 @@ input:checked+.slider:before {
 					<c:forEach var="movOff" items="${ movListOff }">
 						<li class="no-img low" style="display : none;">
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movOff.attachList[0].filePath }${ movOff.attachList[0].originFileName }">
+								<img src="<%=request.getContextPath()%>${ movOff.attachList[0].filePath }${ movOff.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movOff.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -538,6 +552,31 @@ input:checked+.slider:before {
 							</div>
 						</li>
 					</c:forEach>
+					
+					<c:forEach var="movFavor" items="${ movListFavor }">
+						<li class="no-img favor" style="display : none;">
+							<div class="movie-list-info">
+								<img src="<%=request.getContextPath()%>${ movFavor.attachList[0].filePath }${ movFavor.attachList[0].renameFileName }">
+								<input type="hidden" value="${ movFavor.movieNo }" id="movieNo"/>
+							</div>
+							<div class="tit-area">
+								<p class="movie-grade">${ movFavor.movieAge }</p>
+								<p class="tit">${ movFavor.movieName }</p>
+							</div>
+							<div class="rate-date">
+								<span class="date"> 개봉일 : ${ movFavor.movieRdate } </span>
+							</div>
+							<div class="btn-util">
+								<span class="movie_statusY">상영중</span> 
+                            <a class="resBtn" href="resList.do">예매하기</a>
+							</div>
+						</li>
+					</c:forEach>
+					
+					</ol>
+					
+					<ol class="list on-search" style="display : none;">
+						
 					</ol>
 				</div>
 			</div>
@@ -552,7 +591,7 @@ input:checked+.slider:before {
 
 	<script>
 		movie_check();
-
+		
 		$('.top_Menu li').click(function() {
 			$('.top_Menu li').removeClass('on');
 			var menu = $(this);
@@ -581,20 +620,33 @@ input:checked+.slider:before {
 		
 		function test(menu_value){
 			if(menu_value == 'a'){
-				$('.viewChk').css('display','');
-				$('.high').css('display','');
-				$('.middle').css('display','none');
-				$('.low').css('display','none');
+				if(tf == true){
+					$('.viewChk').css('display','');
+					$('.favor').css('display','');
+					$('.high').css('display','none');
+					$('.middle').css('display','none');
+					$('.low').css('display','none');
+					$('.searchView').css('display','none');	
+				}else{
+					$('.viewChk').css('display','');
+					$('.favor').css('display','none');
+					$('.high').css('display','');
+					$('.middle').css('display','none');
+					$('.low').css('display','none');
+					$('.searchView').css('display','none');					
+				}
 			}else if(menu_value == 'b'){
 				$('.viewChk').css('display','none');
 				$('.high').css('display','none');
 				$('.middle').css('display','');
 				$('.low').css('display','none');
+				$('.searchView').css('display','none');
 			}else{
 				$('.viewChk').css('display','none');
 				$('.high').css('display','none');
 				$('.middle').css('display','none');
 				$('.low').css('display','');
+				$('.searchView').css('display','none');
 			}
 		}
 		
@@ -603,6 +655,148 @@ input:checked+.slider:before {
 			console.log(movieNo);
 			location.href="movieInfo.do?movieNo="+movieNo;
 		});
+		
+		
+		
+		function searchMovie(){
+		var searchText = $('#search_Text2').val();
+		if(searchText != '' && searchText != ' '){
+			$('.top_Menu li').removeClass('on');
+			$('.viewChk').css('display','none');
+			$('.high').css('display','none');
+			$('.middle').css('display','none');
+			$('.low').css('display','none');
+			$('.no-search').css('display','none');
+			$('.on-search').css('display','');
+			$('.on-search').html('');
+			
+			$.ajax({
+				url : "searchMovie.do",
+				data : {searchText:searchText},
+				dataType : "json",
+				success : function(data){
+					$('#h').remove();
+					var $text = $(".movie-list-util");
+					var $h2 = $("<h2 id='h'>").text(searchText + " 에 대한 검색결과입니다.");
+					$text.append($h2);
+					
+					var $ol = $(".on-search");
+					
+					if(data.length > 0){
+						for(var i in data){
+							var path = '<%=request.getContextPath()%>';
+							
+							var $li = $("<li class='no-img searchView'>");
+							
+							var $firstDiv = $("<div class='movie-list-info'>");
+							var $img = $("<img src='"+path+data[i].attachList[0].filePath+data[i].attachList[0].renameFileName+"'>");
+							var $input = $("<input type='hidden' value="+data[i].movieNo+" id='movieNo'/>");
+							
+							var $secondDiv = $("<div class='tit-area'>");
+							var $firstP = $("<p class='movie-grade'>").text(data[i].movieAge);
+							var $secondP = $("<p class='tit'>").text(data[i].movieName);
+							
+							var $thirdDiv = $("<div class='rate-date'>");
+							
+							var myDate = moment(data[i].movieRdate).format('YYYY-MM-DD');
+							var yyyy = myDate.substr(0,4);
+						    var mm = myDate.substr(5,2);
+						    var dd = myDate.substr(8,2);
+						    var com_ymd = new Date(yyyy, mm-1, dd);
+
+							var today = new Date();
+							var diffTime = (com_ymd.getTime() - today.getTime()) / (1000*60*60*24);
+
+							var $span = $("<span class='date'>").text("개봉일 : " + myDate);
+							var $fourthDiv = $("<div class='btn-util'>");
+							var $secondSpan = '';
+							var $a = '';
+							
+							if(data[i].movieRstatus == 'Y' && com_ymd < 0){
+								$secondSpan = $("<span class='movie_statusY'>").text("상영중");
+								$a = $("<a class='resBtn' href='#'>").text("예매하기")
+							}else if(data[i].movieRstatus == 'Y' && com_ymd > 0 ){
+								$secondSpan = $("<span class='movie_statusW'>").text("개봉예정");
+								$a = $("<a class='resBtn' href='#'>").text("예매하기")
+							}else{
+								$secondSpan = $("<span class='movie_statusN'>").text("상영종료");
+							}
+							
+							
+							$firstDiv.append($img);
+							$firstDiv.append($input);
+							
+							$secondDiv.append($firstP);
+							$secondDiv.append($secondP);
+							
+							$thirdDiv.append($span);
+							
+							$fourthDiv.append($secondSpan);
+							$fourthDiv.append($a);
+							
+							$li.append($firstDiv);
+							$li.append($secondDiv);
+							$li.append($thirdDiv);
+							$li.append($fourthDiv);
+							
+							$ol.append($li);
+						}
+					}else{
+						var $h1 = $("<h1>").text("검색내용과 일치하는 영화가 없습니다.");
+						$ol.append($h1)
+					}
+					
+					$(".movie-list-info").on('click',function(){
+						var movieNo = $(this).children('#movieNo').val();
+						console.log(movieNo);
+						location.href="movieInfo.do?movieNo="+movieNo;
+					});
+					
+					movie_check();
+					
+					function movie_check() {
+						var grade_check = $('.list').children('.no-img').children('.tit-area').children('.movie-grade');
+						var titleSize = $('.no-img').length;
+
+						for (var i = 0; i < titleSize; i++) {
+							if (grade_check.eq(i).text() == '19') {
+								grade_check.eq(i).css('background', 'red');
+							} else if (grade_check.eq(i).text() == '15') {
+								grade_check.eq(i).css('background', 'orange');
+							} else if (grade_check.eq(i).text() == '12') {
+								grade_check.eq(i).css('background', 'skyblue');
+							} else if (grade_check.eq(i).text() == '0') {
+								grade_check.eq(i).text("All");
+				                grade_check.eq(i).css('background', 'green');
+							}
+						}
+					}
+					
+					$(".top_Menu").click(function(){
+						$('.no-search').css('display','');
+						$('.on-search').css('display','none');
+						$('#h').remove();
+					});
+					
+				},
+				error : function(e){
+					alert("error code : " + e.stauts + "\n"
+							+ "message" + e.responseText);
+				}
+			});
+			
+			$('#search_Text2').val('');
+		}else{
+			alert("검색내용을 입력해주세요.");
+		}
+		}
+		
+		var tf = false;
+		$("#movieCheck").click(function(){
+			tf = $("input:checkbox[id='movieCheck']").is(":checked");
+			test('a');
+		});
+		
 	</script>
 </body>
 

@@ -10,10 +10,10 @@ public class PageInfo {
    private int maxPage;
    private int startPage;
    private int endPage;
-   private int boadLimit;
+   private int boardLimit;
    
    public PageInfo(int currentPage, int listCount, int pageLimit, int maxPage, int startPage, int endPage,
-         int boadLimit) {
+         int boardLimit) {
       super();
       this.currentPage = currentPage;
       this.listCount = listCount;
@@ -21,7 +21,7 @@ public class PageInfo {
       this.maxPage = maxPage;
       this.startPage = startPage;
       this.endPage = endPage;
-      this.boadLimit = boadLimit;
+      this.boardLimit = boardLimit;
    }
    
 }
