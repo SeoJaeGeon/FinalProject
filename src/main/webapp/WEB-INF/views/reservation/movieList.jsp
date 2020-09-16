@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,6 +113,7 @@ header>section {
 	margin-left: 1px;
 	width: 100%;
 	height: 100%;
+	cursor: pointer;
 }
 
 .top_Menu li {
@@ -263,13 +265,7 @@ input:checked+.slider:before {
 	width: 100%;
 	min-height: 500px;
 }
-/*
-        .list 는 ol
-        .no-img 는 li 네
-        근데 display : inline-block 쓰면 ol이 같이 늘어나고
-        float : left 쓰면 저렇게 ol 올라가는데 뭐를 써야하나요??
-        근데 display : inline-block 쓰면 이미지가 오른쪽에는 없으면 뭉개져요
-        */
+
 .list {
 	list-style: none;
 	width: 100%;
@@ -287,6 +283,31 @@ input:checked+.slider:before {
 	width: 280px;
 	height: 520px;
 	border: 1px solid silver;
+	border-radius : 10px;
+	position : relative;
+}
+
+.no-rank {
+	position : absolute;
+	top : 10px;
+	left : 15px;
+	color : white;
+	font-size : 30px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
+
+.like{
+	position : absolute;
+	top : 10px;
+	right : 15px;
+	color : purple;
+	font-size : 25px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
+	text-align : left;
 }
 
 .movie-list-info {
@@ -295,8 +316,12 @@ input:checked+.slider:before {
 }
 
 .movie-list-info img {
-	width: 100%;
-	height: 100%;
+	width: 98%;
+	height: 98%;
+	margin-left : 1%;
+	margin-top : 1%;
+	border-radius : 10px;
+	cursor : pointer;
 }
 
 .tit-area {
@@ -334,12 +359,19 @@ input:checked+.slider:before {
 	height: 8%;
 }
 
-.date {
-	display: block;
-	margin-top: 7px;
-	text-align: center;
-	font-size: 15px;
+.res {
+	float : left;
+	font-size: 16px;
 	font-weight: bold;
+	font-family: 'NanumBarunGothic', sans-serif;
+	margin-left : 5px;
+}
+
+.date {
+	float : right;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right : 5px;
 }
 
 .btn-util {
@@ -347,19 +379,11 @@ input:checked+.slider:before {
 	height: 10%;
 }
 
-.plusBtn {
-	width: 100%;
-	height: 50px;
-	background: orange;
-	color: white;
-	font-weight: bold;
-	font-size: 17px;
-}
-
 /* 상영중 */
 .movie_statusY {
 	float: left;
-	margin-top: 2px;
+	margin-bottom: 5px;
+	margin-left : 5px;
 	padding-top: 7px;
 	background: rgb(46, 204, 113);
 	color: white;
@@ -368,12 +392,14 @@ input:checked+.slider:before {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
+	border-radius : 10px;
 }
 /* 상영중 */
 /* 개봉예정 */
 .movie_statusW {
 	float: left;
-	margin-top: 2px;
+	margin-bottom: 5px;
+	margin-left : 5px;
 	padding-top: 7px;
 	background: rgb(52, 152, 219);
 	color: white;
@@ -382,12 +408,14 @@ input:checked+.slider:before {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
+	border-radius : 10px;
 }
 /* 개봉예정 */
 /* 상영종료 */
 .movie_statusN {
 	float: left;
-	margin-top: 2px;
+	margin-bottom: 5px;
+	margin-left : 5px;
 	padding-top: 7px;
 	background: rgb(231, 76, 60);
 	color: white;
@@ -396,12 +424,14 @@ input:checked+.slider:before {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
+	border-radius : 10px;
 }
 /* 상영종료 */
 .resBtn {
 	float: right;
 	text-decoration: none;
-	margin-top: 2px;
+	margin-bottom: 5px;
+	margin-right : 5px;
 	padding-top: 7px;
 	color: white;
 	background: rgb(231, 76, 60);
@@ -469,35 +499,75 @@ input:checked+.slider:before {
 				<h2 style="margin-top: 30px;"># 전체 영화</h2>
 				<div class="tab_List">
 					<ul class="top_Menu">
-						<li class="on"><a onclick="test('a');"> 상영중 </a></li>
-						<li><a onclick="test('b');"> 상영예정작 </a></li>
-						<li><a onclick="test('c');"> 상영종료 </a></li>
+						<li class="on"><a onclick="test('a');"> 상영중 (${movListON.size()})</a></li>
+						<li><a onclick="test('b');"> 상영예정작 (${movListWait.size()})</a></li>
+						<li><a onclick="test('c');"> 상영종료 (${movListOff.size()})</a></li>
 					</ul>
 				</div>
 				<div class="movie-list-util">
 				<div class="viewChk">
-					<p>개봉순</p>
 					<label class="switch">
 						<input type="checkbox" id='movieCheck'>
 						<span class="slider round"></span>
 					</label>
-					<p>인기순</p>
+					<p>평점순</p>
 				</div>
 					<div id="search-form2">
-						<input type="text" id="search_Text2" name="search_Text"
-							placeholder="영화제목 입력">
+						<input type="text" id="search_Text2" name="search_Text" placeholder="영화제목 입력">
 						<button id="search_Btn2" name="search_Btn" type="button" onclick="searchMovie();">
-							<img src="<%=request.getContextPath()%>/resources/images/search.png" id="search_img2">
+							<img src="${ contextPath }/resources/images/search.png" id="search_img2">
 						</button>
 					</div>
 				</div>
 				<div class="movie-list">
+					<input type="hidden" value="${ searchText }" id="mainSearch"/>
 					<ol class="list no-search">
 					
+					<c:if test="${ searchList != null }">
+					<c:forEach var="sList" items="${ searchList }">
+						<input id="searchList" type="hidden" value="${ sList.movieNo }"/>
+						<li class="no-img sList">
+							<div class="movie-list-info">
+								<img src="${ contextPath }${ sList.attachList[0].filePath }${ sList.attachList[0].renameFileName }">
+								<input type="hidden" value="${ sList.movieNo }" id="movieNo"/>
+								<input type="hidden" id="resVal" value="404.0"/>
+							</div>
+							<div class="tit-area">
+								<p class="movie-grade">${ sList.movieAge }</p>
+								<p class="tit">${ sList.movieName }</p>
+							</div>
+							<div class="rate-date">
+								<span class="date"> 개봉일 : ${ sList.movieRdate } </span>
+							</div>
+							<div class="btn-util">
+								<jsp:useBean id="now" class="java.util.Date" />
+								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+								<fmt:formatDate value="${sList.movieRdate }" pattern="yyyy-MM-dd" var="write_dt"/>
+							<c:choose>
+								<c:when test="${ sList.movieRstatus == 'Y' && today > write_dt }">
+									<span class="movie_statusY">상영중</span> 
+									<a class="resBtn" href="resList.do">예매하기</a>
+								</c:when>
+								<c:when test="${ sList.movieRstatus == 'Y' && today < write_dt }">
+									<span class="movie_statusW">개봉예정</span>
+                            	<a class="resBtn" href="resList.do">예매하기</a>
+								</c:when>
+								<c:otherwise>
+									<span class="movie_statusN">상영종료</span>
+								</c:otherwise>
+							</c:choose>
+							</div>
+						</li>
+					</c:forEach>
+					</c:if>
+					
+					<c:set var="rankO" value="1"/>
 					<c:forEach var="movOn" items="${ movListON }">
 						<li class="no-img high">
+							<div class="no-rank"><I>${ rankO }위</I></div>
+							<div class="like"><b>👍</b><span> ${ movOn.score }%</span></div>
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movOn.attachList[0].filePath }${ movOn.attachList[0].renameFileName }">
+								<img src="${ contextPath }${ movOn.attachList[0].filePath }${ movOn.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movOn.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -505,19 +575,21 @@ input:checked+.slider:before {
 								<p class="tit">${ movOn.movieName }</p>
 							</div>
 							<div class="rate-date">
-								<span class="date"> 개봉일 : ${ movOn.movieRdate } </span>
+								<span class="res">예매율 ${ movOn.resPeople }%</span>
+								<span class="date">개봉일 : ${ movOn.movieRdate }</span>
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusY">상영중</span> 
 								<a class="resBtn" href="resList.do">예매하기</a>
 							</div>
 						</li>
+						<c:set var="rankO" value="${ rankO+1 }"/>
 					</c:forEach>
 					
 					<c:forEach var="movWait" items="${ movListWait }">
 						<li class="no-img middle" style="display : none;">
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movWait.attachList[0].filePath }${ movWait.attachList[0].renameFileName }">
+								<img src="${ contextPath }${ movWait.attachList[0].filePath }${ movWait.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movWait.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -525,11 +597,11 @@ input:checked+.slider:before {
 								<p class="tit">${ movWait.movieName }</p>
 							</div>
 							<div class="rate-date">
-								<span class="date"> 개봉일 : ${ movWait.movieRdate } </span>
+								<span class="date">개봉일 : ${ movWait.movieRdate }</span>
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusW">개봉예정</span>
-                            <a class="resBtn" href="resList.do">예매하기</a>
+                            	<a class="resBtn" href="resList.do">예매하기</a>
 							</div>
 						</li>
 					</c:forEach>
@@ -537,7 +609,7 @@ input:checked+.slider:before {
 					<c:forEach var="movOff" items="${ movListOff }">
 						<li class="no-img low" style="display : none;">
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movOff.attachList[0].filePath }${ movOff.attachList[0].renameFileName }">
+								<img src="${ contextPath }${ movOff.attachList[0].filePath }${ movOff.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movOff.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -545,7 +617,7 @@ input:checked+.slider:before {
 								<p class="tit">${ movOff.movieName }</p>
 							</div>
 							<div class="rate-date">
-								<span class="date"> 개봉일 : ${ movOff.movieRdate } </span>
+								<span class="date">개봉일 : ${ movOff.movieRdate }</span>
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusN">상영종료</span>
@@ -553,10 +625,13 @@ input:checked+.slider:before {
 						</li>
 					</c:forEach>
 					
+					<c:set var="rankF" value="1"/>
 					<c:forEach var="movFavor" items="${ movListFavor }">
 						<li class="no-img favor" style="display : none;">
+							<div class="no-rank"><I>${ rankF }위</I></div>
+							<div class="like"><b>👍</b><span> ${ movFavor.score }%</span></div>
 							<div class="movie-list-info">
-								<img src="<%=request.getContextPath()%>${ movFavor.attachList[0].filePath }${ movFavor.attachList[0].renameFileName }">
+								<img src="${ contextPath }${ movFavor.attachList[0].filePath }${ movFavor.attachList[0].renameFileName }">
 								<input type="hidden" value="${ movFavor.movieNo }" id="movieNo"/>
 							</div>
 							<div class="tit-area">
@@ -564,6 +639,7 @@ input:checked+.slider:before {
 								<p class="tit">${ movFavor.movieName }</p>
 							</div>
 							<div class="rate-date">
+								<span class="res">예매율 ${ movFavor.resPeople }%</span>
 								<span class="date"> 개봉일 : ${ movFavor.movieRdate } </span>
 							</div>
 							<div class="btn-util">
@@ -571,6 +647,7 @@ input:checked+.slider:before {
                             <a class="resBtn" href="resList.do">예매하기</a>
 							</div>
 						</li>
+						<c:set var="rankF" value="${ rankF+1 }"/>
 					</c:forEach>
 					
 					</ol>
@@ -590,6 +667,18 @@ input:checked+.slider:before {
 	</div>
 
 	<script>
+	if($("#searchList").val() != null){
+		var $text = $(".movie-list-util");
+		var $h2 = $("<h2 id='h'>").text($('#mainSearch').val() + " 에 대한 검색결과입니다.");
+		$text.append($h2);
+		$('.top_Menu li').removeClass('on')
+		$('.viewChk').css('display','none');
+		$('.favor').css('display','none');
+		$('.high').css('display','none');
+		$('.middle').css('display','none');
+		$('.low').css('display','none');
+		$('.searchView').css('display','none');			
+	}
 		movie_check();
 		
 		$('.top_Menu li').click(function() {
@@ -619,6 +708,8 @@ input:checked+.slider:before {
 		}
 		
 		function test(menu_value){
+			$('#h').remove();
+			$('.sList').css('display','none');
 			if(menu_value == 'a'){
 				if(tf == true){
 					$('.viewChk').css('display','');
@@ -637,12 +728,14 @@ input:checked+.slider:before {
 				}
 			}else if(menu_value == 'b'){
 				$('.viewChk').css('display','none');
+				$('.favor').css('display','none');
 				$('.high').css('display','none');
 				$('.middle').css('display','');
 				$('.low').css('display','none');
 				$('.searchView').css('display','none');
 			}else{
 				$('.viewChk').css('display','none');
+				$('.favor').css('display','none');
 				$('.high').css('display','none');
 				$('.middle').css('display','none');
 				$('.low').css('display','');
@@ -652,8 +745,8 @@ input:checked+.slider:before {
 		
 		$(".movie-list-info").on('click',function(){
 			var movieNo = $(this).children('#movieNo').val();
-			console.log(movieNo);
 			location.href="movieInfo.do?movieNo="+movieNo;
+			
 		});
 		
 		
@@ -712,10 +805,10 @@ input:checked+.slider:before {
 							var $secondSpan = '';
 							var $a = '';
 							
-							if(data[i].movieRstatus == 'Y' && com_ymd < 0){
+							if(data[i].movieRstatus == 'Y' && diffTime < 0){
 								$secondSpan = $("<span class='movie_statusY'>").text("상영중");
 								$a = $("<a class='resBtn' href='#'>").text("예매하기")
-							}else if(data[i].movieRstatus == 'Y' && com_ymd > 0 ){
+							}else if(data[i].movieRstatus == 'Y' && diffTime > 0){
 								$secondSpan = $("<span class='movie_statusW'>").text("개봉예정");
 								$a = $("<a class='resBtn' href='#'>").text("예매하기")
 							}else{
@@ -748,7 +841,6 @@ input:checked+.slider:before {
 					
 					$(".movie-list-info").on('click',function(){
 						var movieNo = $(this).children('#movieNo').val();
-						console.log(movieNo);
 						location.href="movieInfo.do?movieNo="+movieNo;
 					});
 					

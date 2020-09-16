@@ -39,5 +39,21 @@ public interface ResService {
 	public ArrayList<Movie> searchMovie(String searchText);
 
 	public ArrayList<Movie> movListFavor();
+
+	public ArrayList<Movie> searchList(String searchText);
+
+	public ArrayList<Movie> movieDateList();
+
+	public ArrayList<Movie> movieFavorList();
+
+	public ArrayList<Reservation> placeList();
+
+	public ArrayList<Movie> scoreList();
+
+	public ArrayList<Movie> totalScoreList();
+
+	public ArrayList<Movie> mScoreList();
+
+	public ArrayList<Movie> mTotalScoreList();
 	
 }

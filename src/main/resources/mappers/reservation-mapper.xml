@@ -95,6 +95,8 @@
 		<result property="movieContent" column="MOVIE_CONTENT" />
 		<result property="movieVodStatus" column="MOVIE_VOD_STATUS" />
 		<result property="genreName" column="GENRE_NAME" />
+		<result property="score" column="GOOD_SCORE" />
+		<result property="resPeople" column="RESPEOPLE" />
 		<collection property="attachList" javaType="java.util.ArrayList" resultMap="attachmentResultSet"/>
 	</resultMap>
 	
@@ -146,15 +148,16 @@
 	</select>
 	
 	<select id="movListOn" resultMap="movResultSet">
-		SELECT *
+		SELECT DISTINCT(MOVIE_NO), MOVIE_AGE, MOVIE_NAME, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, NVL((SUM(UR_PEOPLE)+SUM(UR_PEOPLE2)), 0) AS RESPEOPLE
 		FROM MOVIE
-		JOIN GENRE USING(GENRE_CODE)
-		JOIN ATTACHMENT USING (MOVIE_NO)
+		LEFT JOIN ATTACHMENT USING(MOVIE_NO)
+		LEFT JOIN MOVIE_RES USING(MOVIE_NO)
+		LEFT JOIN USER_RESMOVIE USING (RES_NO)
 		WHERE MOVIE_RSTATUS = 'Y'
 		AND SYSDATE > MOVIE_RDATE
-		AND FILE_STATUS = 'Y'
 		AND SORT_CODE = 20
-		ORDER BY MOVIE_RDATE DESC
+		GROUP BY MOVIE_NO, MOVIE_AGE, MOVIE_NAME, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME
+		ORDER BY RESPEOPLE DESC, MOVIE_RDATE DESC
 	</select>
 	
 	<select id="movListWait" resultMap="movResultSet">
@@ -267,6 +270,104 @@
         AND (R_SCORE = 'G' OR R_SCORE IS NULL)
         GROUP BY MOVIE_NO, MOVIE_NAME, MOVIE_AGE, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME
         ORDER BY  COUNT(R_SCORE) DESC
+	</select>
+	
+	<select id="searchList" resultMap="movResultSet">
+		SELECT *
+		FROM MOVIE
+		JOIN GENRE USING(GENRE_CODE)
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE MOVIE_NAME LIKE '%' ||  #{searchText} || '%'
+		AND FILE_STATUS = 'Y'
+		AND SORT_CODE = 20
+		ORDER BY MOVIE_RDATE DESC
+	</select>
+	
+	<select id="movieDateList" resultMap="movResultSet">
+		SELECT ROWNUM, a.*
+		FROM( 
+			SELECT DISTINCT(MOVIE_NO), MOVIE_AGE, MOVIE_NAME, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, NVL((SUM(UR_PEOPLE)+SUM(UR_PEOPLE2)), 0) AS RESPEOPLE
+			FROM MOVIE
+			LEFT JOIN ATTACHMENT USING(MOVIE_NO)
+			LEFT JOIN MOVIE_RES USING(MOVIE_NO)
+			LEFT JOIN USER_RESMOVIE USING (RES_NO)
+			WHERE MOVIE_RSTATUS = 'Y'
+			AND SYSDATE > MOVIE_RDATE
+			AND SORT_CODE = 20
+			GROUP BY MOVIE_NO, MOVIE_AGE, MOVIE_NAME, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME
+			ORDER BY RESPEOPLE DESC, MOVIE_RDATE DESC) a
+		WHERE 3 >= ROWNUM
+	</select>
+	
+	<select id="movieFavorList" resultMap="movResultSet">
+		SELECT ROWNUM, a.*
+	  		FROM( 
+	        SELECT MOVIE_NO, MOVIE_NAME, MOVIE_AGE, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME,  COUNT(R_SCORE) AS SCORE
+			FROM MOVIE
+			JOIN ATTACHMENT USING (MOVIE_NO)
+	        LEFT JOIN REVIEW USING (MOVIE_NO)
+	        WHERE MOVIE_RSTATUS = 'Y'
+			AND SYSDATE > MOVIE_RDATE
+			AND FILE_STATUS = 'Y'
+			AND SORT_CODE = 20
+	        AND (R_SORT = 'M' OR R_SORT IS NULL)
+	        AND (R_SCORE = 'G' OR R_SCORE IS NULL)
+	        GROUP BY MOVIE_NO, MOVIE_NAME, MOVIE_AGE, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME
+	        ORDER BY  COUNT(R_SCORE) DESC) a
+		WHERE 3 >= ROWNUM
+	</select>
+	
+	<select id="placeList" resultMap="resResultSet">
+		SELECT *
+		FROM MOVIE_CITY
+	</select>
+	
+	<select id="scoreList" resultMap="movResultSet">
+		SELECT MOVIE_NO,  COUNT(R_SCORE) AS GOOD_SCORE
+		FROM MOVIE
+        LEFT JOIN REVIEW USING(MOVIE_NO)
+        WHERE SYSDATE > MOVIE_RDATE
+        AND (R_SORT = 'M' OR R_SORT IS NULL)
+        AND (R_SCORE = 'G' OR R_SCORE IS NULL)
+        AND MOVIE_RSTATUS = 'Y'
+        GROUP BY MOVIE_NO
+        ORDER BY  COUNT(R_SCORE) DESC
+	</select>
+	
+	<select id="totalScoreList" resultMap="movResultSet">
+		SELECT MOVIE_NO,  COUNT(R_SCORE) AS GOOD_SCORE
+		FROM MOVIE
+        LEFT JOIN REVIEW USING(MOVIE_NO)
+        WHERE SYSDATE > MOVIE_RDATE
+        AND (R_SORT = 'M' OR R_SORT IS NULL)
+        AND MOVIE_RSTATUS = 'Y'
+        GROUP BY MOVIE_NO
+        ORDER BY  COUNT(R_SCORE) DESC
+	</select>
+	
+	<select id="mScoreList" resultMap="movResultSet">
+		SELECT ROWNUM, a.*
+		FROM(SELECT MOVIE_NO,  COUNT(R_SCORE) AS GOOD_SCORE
+				FROM MOVIE
+		        LEFT JOIN REVIEW USING(MOVIE_NO)
+		        WHERE SYSDATE > MOVIE_RDATE
+		        AND (R_SORT = 'M' OR R_SORT IS NULL)
+		        AND (R_SCORE = 'G' OR R_SCORE IS NULL)
+		        AND MOVIE_RSTATUS = 'Y'
+		        GROUP BY MOVIE_NO) a
+		WHERE 3 >= ROWNUM
+	</select>
+	
+	<select id="mTotalScoreList" resultMap="movResultSet">
+		SELECT ROWNUM, a.*
+		FROM(SELECT MOVIE_NO,  COUNT(R_SCORE) AS GOOD_SCORE
+				FROM MOVIE
+		        LEFT JOIN REVIEW USING(MOVIE_NO)
+		        WHERE SYSDATE > MOVIE_RDATE
+		        AND (R_SORT = 'M' OR R_SORT IS NULL)
+		        AND MOVIE_RSTATUS = 'Y'
+		        GROUP BY MOVIE_NO) a
+		WHERE 3 >= ROWNUM
 	</select>
 	
 </mapper>
