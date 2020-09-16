@@ -173,14 +173,14 @@ li a:hover {
            </li>
            <li><a href="#">스낵 설정</a>
            		<ul>
-	           		<li><a href="#">스낵 상품 등록</a></li>
-	           		<li><a href="#">스낵 상품 수정</a></li>
+	           		<li><a href="sInsertSnack.do">스낵 상품 등록</a></li>
+	           		<li><a href="sUpdateSnack.do">스낵 상품 수정</a></li>
 	           	</ul>
            </li>
            <li><a href="#">굿즈 설정</a>
 	           <ul>
-		         	<li><a href="#">굿즈 상품 등록</a></li>
-	           		<li><a href="#">굿즈 상품 등록</a></li>
+		         	<li><a href="gInsertGoods.do">굿즈 상품 등록</a></li>
+	           		<li><a href="gUpdateGoods.do">굿즈 상품 수정</a></li>
 		       </ul>
            </li>
            <li><a href="#">관리</a>

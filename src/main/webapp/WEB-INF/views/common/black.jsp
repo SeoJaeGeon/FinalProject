@@ -266,9 +266,8 @@ a {
 			<li><a href="movieList.do">영화</a></li>
 			<li><a href="resList.do">예매</a></li>
 			<li><a href="#">극장</a></li>
-			
 			<li><a href="vlist.do">VOD</a></li>
-			<li><a href="#">스토어</a></li>
+			<li><a href="productList.do">스토어</a></li>
 		</ul>
 	</nav>
 
