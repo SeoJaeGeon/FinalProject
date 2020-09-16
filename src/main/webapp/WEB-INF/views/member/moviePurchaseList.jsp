@@ -125,110 +125,112 @@ header>section {
 					<section class="content-1-1">
 						<h2 class="title">영화 예매 내역</h2>
 						<table class="contentTable">
-						<c:if test="${ empty list }">
+							<c:if test="${ empty list }">
 								<tr>
 									<td colspan="2">
-										<div class="emptyList"> 등록된 리뷰가 존재하지 않습니다.</div>
+										<div class="emptyList"> 예매한 영화가 존재하지 않습니다.</div>
 									</td>
 								</tr>
 							</c:if>
 							<c:if test="${ list ne null }">
-							<c:forEach var="mpl" items="${ list }">
-								<tr class="oneBox">
-									<td class="left"><img src="${ contextPath }/resources/images/movie_image/${ mpl.attachment.renameFileName }"
-										 class="poster"></td>
-									<td class="right">
-										<div>
-											<div class="movieTitle">${ mpl.movieName }</div>
-											<p class="datetime">
-												<span class="date startDate" id="startDate">${ mpl.resDate }</span> | <span class="time startTime" id="startTime">${
-													mpl.startTime }</span> -
-												<span class="time" id="endTime">${ mpl.endTime }</span>
-											</p>
-											<p class="areacount">
-												<span class="area">${ mpl.maName } ${ mpl.roomNumber }관</span>
-												/
-												<c:if test="${ mpl.urPeople gt 0 && mpl.urPeople2 eq 0}">
-													<span class="count">일반 ${ mpl.urPeople }명 관람 ( 좌석 : ${ mpl.urRes } )</span>
-												</c:if>
-												<c:if test="${ mpl.urPeople eq 0 && mpl.urPeople2 gt 0}">
-													<span class="count">청소년 ${ mpl.urPeople2 }명 관람 ( 좌석 : ${ mpl.urRes } )</span>
-												</c:if>
-												<c:if test="${ mpl.urPeople gt 0 && mpl.urPeople2 gt 0}">
-													<span class="count">일반 ${ mpl.urPeople }명, 청소년 ${ mpl.urPeople2 } 명 관람 ( 좌석 : ${ mpl.urRes } )</span>
-												</c:if>
-
-											</p>
-
-										</div>
-										<div class="bottomTdDiv">
+								<c:forEach var="mpl" items="${ list }">
+									<tr class="oneBox">
+										<td class="left"><img src="${ contextPath }/resources/images/movie_image/${ mpl.attachment.renameFileName }"
+											 class="poster"></td>
+										<td class="right">
 											<div>
-												<div class="scoreDiv1">
-													<c:if test="${ mpl.reScore eq null}">
-														<a href="javascript:openReviewInsertForm(${ mpl.movieNo }, '${ mpl.movieName }');" class="goReview">평가해
-															주세요!</a>
+												<div class="movieTitle">${ mpl.movieName }</div>
+												<p class="datetime">
+													<span class="date startDate" id="startDate">${ mpl.resDate }</span> | <span class="time startTime" id="startTime">${
+														mpl.startTime }</span> -
+													<span class="time" id="endTime">${ mpl.endTime }</span>
+												</p>
+												<p class="areacount">
+													<span class="area">${ mpl.maName } ${ mpl.roomNumber }관</span>
+													/
+													<c:if test="${ mpl.urPeople gt 0 && mpl.urPeople2 eq 0}">
+														<span class="count">일반 ${ mpl.urPeople }명 관람 ( 좌석 : ${ mpl.urRes } )</span>
 													</c:if>
-													<c:if test="${ mpl.reScore eq 'G'}">
-														<img src="${ contextPath }/resources/images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
+													<c:if test="${ mpl.urPeople eq 0 && mpl.urPeople2 gt 0}">
+														<span class="count">청소년 ${ mpl.urPeople2 }명 관람 ( 좌석 : ${ mpl.urRes } )</span>
 													</c:if>
-													<c:if test="${ mpl.reScore eq 'B'}">
-														<img src="${ contextPath }/resources/images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
+													<c:if test="${ mpl.urPeople gt 0 && mpl.urPeople2 gt 0}">
+														<span class="count">일반 ${ mpl.urPeople }명, 청소년 ${ mpl.urPeople2 } 명 관람 ( 좌석 : ${ mpl.urRes } )</span>
 													</c:if>
+
+												</p>
+
+											</div>
+											<div class="bottomTdDiv">
+												<div>
+													<div class="scoreDiv1">
+														<c:if test="${ mpl.reScore eq null}">
+															<a href="javascript:openReviewInsertForm(${ mpl.movieNo }, '${ mpl.movieName }');" class="goReview">평가해
+																주세요!</a>
+														</c:if>
+														<c:if test="${ mpl.reScore eq 'G'}">
+															<img src="${ contextPath }/resources/images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
+														</c:if>
+														<c:if test="${ mpl.reScore eq 'B'}">
+															<img src="${ contextPath }/resources/images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
+														</c:if>
+													</div>
+												</div>
+												<div>
+
+													<div class="buttons1">
+														<button id="movieCancel" class="cancel" onclick="movieCancel();">예매 취소</button>
+													</div>
 												</div>
 											</div>
-											<div>
-
-												<div class="buttons1">
-													<button id="movieCancel" class="cancel" onclick="movieCancel();">예매 취소</button>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-							</c:forEach>
+										</td>
+									</tr>
+								</c:forEach>
 							</c:if>
 						</table>
 						<!-- 페이징바 -->
 						<div class="pagination">
-						<div class="pageOuterDiv">
+							<div class="pageOuterDiv">
 								<div class="pageInnerDiv">
-							<!-- 이전 -->
-							<c:if test="${ pi.currentPage <= 1 }">
-								<a class="pageNone">&lt;</a>
-							</c:if>
-							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="moviePurchaseList.do">
-									<c:param name="page" value="${ pi.currentPage -1 }" />
-								</c:url>
-								<a class="pageOne" href="${ before }">&lt;</a>
-							</c:if>
+									<!-- 이전 -->
+									<c:if test="${ pi.currentPage <= 1 }">
+										<a class="pageNone">&lt;</a>
+									</c:if>
+									<c:if test="${ pi.currentPage > 1 }">
+										<c:url var="before" value="moviePurchaseList.do">
+											<c:param name="page" value="${ pi.currentPage -1 }" />
+										</c:url>
+										<a class="pageOne" href="${ before }">&lt;</a>
+									</c:if>
 
-							<!-- 페이지 숫자 -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
-									<a class="pageNone">${ p }</a>
-								</c:if>
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="moviePurchaseList.do">
-										<c:param name="page" value="${ p }" />
-									</c:url>
-									<a class="pageOne" href="${ pagination }">${ p }</a>
-								</c:if>
-							</c:forEach>
+									<!-- 페이지 숫자 -->
+									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+										<c:if test="${ p eq pi.currentPage }">
+											<a class="pageNone">${ p }</a>
+										</c:if>
+										<c:if test="${ p ne pi.currentPage }">
+											<c:url var="pagination" value="moviePurchaseList.do">
+												<c:param name="page" value="${ p }" />
+											</c:url>
+											<a class="pageOne" href="${ pagination }">${ p }</a>
+										</c:if>
+									</c:forEach>
 
-							<!-- 이후 -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }">
-								<a class="pageNone">&gt;</a>
-							</c:if>
-							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="after" value="moviePurchaseList.do">
-									<c:param name="page" value="${ pi.currentPage + 1 }" />
-								</c:url>
-								<a class="pageOne" href="${ after }">&gt;</a>
-							</c:if>
-							<!-- 버튼 비활성화 일 때-->
-							<!-- <a class="pageNone">&lt;&lt;</a> -->
-						</div></div></div>
+									<!-- 이후 -->
+									<c:if test="${ pi.currentPage >= pi.maxPage }">
+										<a class="pageNone">&gt;</a>
+									</c:if>
+									<c:if test="${ pi.currentPage < pi.maxPage }">
+										<c:url var="after" value="moviePurchaseList.do">
+											<c:param name="page" value="${ pi.currentPage + 1 }" />
+										</c:url>
+										<a class="pageOne" href="${ after }">&gt;</a>
+									</c:if>
+									<!-- 버튼 비활성화 일 때-->
+									<!-- <a class="pageNone">&lt;&lt;</a> -->
+								</div>
+							</div>
+						</div>
 					</section>
 				</section>
 			</section>
@@ -309,13 +311,13 @@ header>section {
 				var hour = startTime.split(":")[0];
 				var minute = startTime.split(":")[1];
 
-				console.log(year + "년"  + month + "월" + date + "일 " + hour + "시 " + minute + "분");
+				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
 
 				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
 				var today = new Date();
 				console.log(resultDate);
 
-				if (today.getTime() < resultDate.getTime()) {
+				if (today < resultDate) {
 					$(this).find(".cancel").show();
 				} else {
 					$(this).find(".cancel").hide();
@@ -327,6 +329,31 @@ header>section {
 
 		// 리뷰작성 view
 		function openReviewInsertForm(movieNo, movieName) {
+
+			$(".goReview").each(function () {
+				var startDate = $(this).find(".endDate").text();
+				var year = startDate.split("-")[0];
+				var month = startDate.split("-")[1];
+				var date = startDate.split("-")[2];
+
+				var endTime = $(this).find(".endTime").text();
+				var hour = startTime.split(":")[0];
+				var minute = startTime.split(":")[1];
+
+				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
+
+				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
+				var today = new Date();
+				console.log(resultDate);
+
+				if (today.getTime() < resultDate.getTime()) {
+					alert("상영이 시작되지 않은 영화입니다. 영화 관람 후 리뷰 작성이 가능합니다.");
+					return false;
+				} else {
+					return true;
+				}
+
+			});
 			$("#modalMovieNo").val(movieNo);
 			$("#modalMovieName").text(movieName);
 			document.getElementById("myModal").style.display = "block";
@@ -391,7 +418,7 @@ header>section {
 				type: "post",
 				success: function (data) {
 					document.getElementById("myModal").style.display = "none";
-					alert("리뷰가 등록되었습니다. 내가 쓴 영화 리뷰에서 확인해 주세요.")
+					alert("리뷰가 등록되었습니다. 내가 쓴 영화 리뷰에서 확인해 주세요.");
 				},
 				error: function (e) {
 					console.log(e);

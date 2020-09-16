@@ -120,5 +120,9 @@ p {
     margin: 0px 20px;
 }
 
+a {
+	text-decoration: none;
+}
+
 /* content-2 */
 /* content */

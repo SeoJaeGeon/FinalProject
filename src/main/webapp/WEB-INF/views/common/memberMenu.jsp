@@ -34,7 +34,7 @@
 			<table>
 				<tr>
 					<td>
-						<h2>My KASS</h2>
+						<h2 onclick="location.href='myKass.do'" style="cursor:pointer">My KASS</h2>
 					</td>
 				</tr>
 				<tr>

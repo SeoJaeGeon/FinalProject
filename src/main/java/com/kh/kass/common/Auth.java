@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 
 public class Auth {
-
-	private String userEmail;
+	private int authNo;
 	private String authNum;
+	private String userEmail;
 }

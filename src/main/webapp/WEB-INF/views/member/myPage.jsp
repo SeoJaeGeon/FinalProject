@@ -182,32 +182,32 @@ header>section {
 								<h2 class="myTitle">▶ My Movie</h2>
 								<div class="myMovie">
 									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
+										<a href="moviePurchaseList.do">
+											<p class="count">${ moviePurchaseCount }</p>
 											<p class="text">본영화</p>
 										</a>
 									</article>
 									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
+										<a href="vodPurchaseList.do">
+											<p class="count">${ vodPurchaseCount }</p>
 											<p class="text">본VOD</p>
 										</a>
 									</article>
 									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
+										<a href="movieReviewList.do">
+											<p class="count">${ movieReviewCount }</p>
 											<p class="text">영화 한줄평</p>
 										</a>
 									</article>
 									<article class="myCount">
-										<a href="#">
-											<p class="count">0</p>
+										<a href="vodReviewList.do">
+											<p class="count">${ vodReviewCount }</p>
 											<p class="text">VOD 한줄평</p>
 										</a>
 									</article>
 									<article class="myCount">
 										<a href="#">
-											<p class="count">0</p>
+											<p class="count">${ moviePurchaseCount }</p>
 											<p class="text">찜한 VOD</p>
 										</a>
 									</article>

@@ -180,9 +180,15 @@ header>section {
 }
 
 .logoImg {
+	display: block;
 	width: 70%;
+	margin: auto;
 	margin-top: 20px;
 	/* border: 1px solid violet; */
+}
+
+.imgDiv {
+	width: 100%;
 }
 
 .loginBtn {
@@ -230,6 +236,11 @@ header>section {
 }
 
 a {
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
 	color: black;
 }
 </style>
@@ -297,7 +308,7 @@ a {
 				<span class="loginTitle">로그인</span> <span class="close"
 					onclick="close_pop();">X</span>
 			</div>
-			<div>
+			<div class="imgDiv">
 				<a href="javascript:back();"> <img class="logoImg"
 					src="${ contextPath }/resources/images/logo_navy.png">
 				</a>

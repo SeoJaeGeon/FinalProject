@@ -108,7 +108,6 @@ header>section {
 	width: 1500px;
 	margin: auto;
 }
-/* 영역 나누기 */
 
 </style>
 

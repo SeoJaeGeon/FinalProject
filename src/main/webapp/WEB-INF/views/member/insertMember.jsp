@@ -134,14 +134,15 @@
 					<tr>
 						<td class="left" rowspan="2"><span>* </span>이메일</td>
 						<td class="center"><input type="email" name="userEmail"
-							class="email" id="email" placeholder="이메일" data-name="이메일"></td>
+							class="email" id="email" placeholder="이메일" data-name="이메일">
+							</td>
 						<td class="right"><button type="button" class="certifyReq"
 								id="certifyReq" onclick="emailSend();">인증요청</button></td>
 					</tr>
 					<tr>
 						<td class="center"><input type="text" name="authNum"
 							class="certifyCode" id="authNum" placeholder="인증 코드"
-							data-name="인증코드" disabled> <input type="hidden"
+							data-name="인증코드" disabled> <input type="text"
 							id="authNumCheck" value="0"></td>
 						<td class="right"><button type="button" class="certifyRes"
 								id="certifyRes" onclick="emailCheck();">인증확인</button></td>
@@ -238,7 +239,13 @@
 		function emailSend() {
 			$("#authNum").removeAttr("disabled");
 			var userEmail = $("#email").val().trim();
-
+			
+			if (!userEmail) {
+				alert("이메일을 입력 후 인증요청버튼을 클릭해주세요.");
+				$("#userId").focus();
+				return false;
+			}
+			
 			$.ajax({
 				url : "emailSend.do",
 				data : {
@@ -247,7 +254,6 @@
 				success : function(data) {
 					console.log(data);
 					alert("입력한 이메일로 인증번호가 발송되었습니다. 인증번호를 입력해 주세요.");
-					//emailCheck(data);
 				},
 				error : function(e) {
 					console.log("ajax 통신 실패" + e);
@@ -394,7 +400,7 @@
 			
 			// 이메일 인증 여부
 			if ($("#authCheck").val() == 0) {
-				alert("이메 인증을 해주세요.");
+				alert("이메일 인증을 해주세요.");
 				$("#email").focus();
 				return false;
 			}
