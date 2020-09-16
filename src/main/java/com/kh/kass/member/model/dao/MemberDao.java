@@ -10,10 +10,13 @@ import org.springframework.stereotype.Repository;
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
 import com.kh.kass.common.PageInfo;
+import com.kh.kass.member.model.vo.GoodsPurchase;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.MoviePurchase;
+import com.kh.kass.member.model.vo.MyMovieReview;
+import com.kh.kass.member.model.vo.SnackPurchase;
+import com.kh.kass.member.model.vo.VodPurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
-import com.kh.kass.review.model.vo.MyMovieReview;
 import com.kh.kass.review.model.vo.Review;
 
 @Repository("mDao")
@@ -135,8 +138,74 @@ public class MemberDao {
 	}
 
 	public int deleteMovieReview(Review r) {
-		return  sqlSession.update("memberMapper.deleteMovieReview", r);
+		return  sqlSession.delete("memberMapper.deleteMovieReview", r);
 	}
+
+	public int selectVodListCount(int userNo) {
+		return sqlSession.selectOne("memberMapper.selectVodPurchaseListCount", userNo);
+	}
+
+	public ArrayList<VodPurchase> selectVodList(int userNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectVodPurchaseList", userNo, rowBounds);
+	}
+
+	public VodPurchase selectVodPurchaseDetail(VodPurchase vp) {
+		return sqlSession.selectOne("memberMapper.selectVodPurchaseDetail", vp);
+	}
+
+	public int insertVodReview(Review r) {
+		return sqlSession.insert("memberMapper.insertVodReview", r);
+	}
+
+	public int updateVodReview(Review r) {
+		return sqlSession.update("memberMapper.updateVodReview", r);
+	}
+
+	public int deleteVodReview(Review r) {
+		return sqlSession.delete("memberMapper.deleteVodReview", r);
+	}
+	
+	public int selectVodReviewListCount(int userNo) {
+		return sqlSession.selectOne("memberMapper.selectVodReviewListCount", userNo);
+	}
+
+	public ArrayList<MyMovieReview> selectVodReviewList(int userNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectVodReviewList", userNo, rowBounds);
+	}
+
+	public int selectSnackPurchaseListCount(int userNo) {
+		return sqlSession.selectOne("memberMapper.selectSnackPurchaseListCount", userNo);
+	}
+
+	public ArrayList<SnackPurchase> selectSnackPurchaseList(int userNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSnackPurchaseList", userNo, rowBounds);
+	}
+
+	public ArrayList<SnackPurchase> selectSnackPurchaseDetail(SnackPurchase sp) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSnackPurchaseDetail", sp);
+	}
+	
+	public int selectGoodsPurchaseListCount(int userNo) {
+		return sqlSession.selectOne("memberMapper.selectGoodsPurchaseListCount", userNo);
+	}
+
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseList(int userNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectGoodsPurchaseList", userNo, rowBounds);
+	}
+	
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseDetail(GoodsPurchase gp) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectGoodsPurchaseDetail", gp);
+	}
+
+
 
 	
 }

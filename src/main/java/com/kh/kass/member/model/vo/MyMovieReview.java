@@ -1,4 +1,4 @@
-package com.kh.kass.review.model.vo;
+package com.kh.kass.member.model.vo;
 
 import java.sql.Date;
 

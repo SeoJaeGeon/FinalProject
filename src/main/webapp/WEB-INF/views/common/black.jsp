@@ -9,7 +9,7 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 
-<title>Insert title here</title>
+<title>KASS CINEMA</title>
 <style>
 /* 검색 창 */
 #search-form {
@@ -107,7 +107,7 @@
 
 /* 모달 */
 /* The Modal (background) */
-.myloginModal{
+.myloginModal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
@@ -160,9 +160,15 @@
 }
 
 .logoImg {
+	display: block;
 	width: 70%;
+	margin: auto;
 	margin-top: 20px;
 	/* border: 1px solid violet; */
+}
+
+.imgDiv {
+	width: 100%;
 }
 
 .loginBtn {
@@ -210,6 +216,11 @@
 }
 
 a {
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
 	color: black;
 }
 </style>
@@ -270,14 +281,14 @@ a {
 	</nav>
 
 
-		<div id="myloginModal" class="myloginModal">
+	<div id="myloginModal" class="myloginModal">
 		<!-- Modal content -->
 		<div class="loginmodal-content">
 			<div class="header">
 				<span class="loginTitle">로그인</span> <span class="close"
 					onclick="close_pop();">X</span>
 			</div>
-			<div>
+			<div class="imgDiv">
 				<a href="javascript:back();"> <img class="logoImg"
 					src="${ contextPath }/resources/images/logo_navy.png">
 				</a>

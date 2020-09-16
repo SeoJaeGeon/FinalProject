@@ -52,10 +52,40 @@
 	</resultMap>
 
 	<resultMap id="AuthResultSet" type="Auth">
-		<id property="userEmail" column="EMAIL" />
+		<id property="authNo" column="AUTH_NO" />
+		<result property="userEmail" column="EMAIL" />
 		<result property="auth" column="AUTH_NUM" />
+
+
 	</resultMap>
 
+	<!-- 리뷰 -->
+	<resultMap id="myReviewResultSet" type="MyMovieReview">
+		<id property="reNo" column="R_NO" />
+		<result property="reSort" column="R_SORT" />
+		<result property="reScore" column="R_SCORE" />
+		<result property="reContent" column="R_CONTENT" />
+		<result property="reEnrollDate" column="R_ENROLL_DATE" />
+		<result property="reModifyDate" column="R_MODIFY_DATE" />
+		<result property="userNo" column="USER_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="movieName" column="MOVIE_NAME" />
+
+		<association property="attachment" javaType="Attachment">
+			<result property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
+			<!-- <result property="userNo" column="USER_NO" /> -->
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+		</association>
+	</resultMap>
+
+	<!-- 영화예매 -->
 	<resultMap id="moviePurchaseResultSet" type="MoviePurchase">
 		<id property="resNo" column="RES_NO" />
 		<result property="userNo" column="USER_NO" />
@@ -85,17 +115,16 @@
 		</association>
 	</resultMap>
 
-	<resultMap id="myReviewResultSet" type="MyMovieReview">
-		<id property="reNo" column="R_NO" />
-		<result property="reSort" column="R_SORT" />
-		<result property="reScore" column="R_SCORE" />
-		<result property="reContent" column="R_CONTENT" />
-		<result property="reEnrollDate" column="R_ENROLL_DATE" />
-		<result property="reModifyDate" column="R_MODIFY_DATE" />
+	<!-- VOD -->
+	<resultMap id="vodPurchaseResultSet" type="VodPurchase">
+		<id property="orderNo" column="ORDER_NO" />
 		<result property="userNo" column="USER_NO" />
 		<result property="movieNo" column="MOVIE_NO" />
+		<result property="payNo" column="PAY_NO" />
 		<result property="movieName" column="MOVIE_NAME" />
-
+		<result property="payDate" column="PAY_DATE" />
+		<result property="moviePrice" column="MOVIE_PRICE" />
+		<result property="reScore" column="R_SCORE" />
 		<association property="attachment" javaType="Attachment">
 			<result property="fileNo" column="FILE_NO" />
 			<result property="sortCode" column="SORT_CODE" />
@@ -108,8 +137,69 @@
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
-
 	</resultMap>
+
+	<!-- 스낵 -->
+	<resultMap id="snackPurchaseResultSet" type="SnackPurchase">
+		<id property="payNo" column="PAY_NO" />
+		<result property="urNo" column="UR_NO" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="payPrice" column="PAY_PRICE" />
+		<result property="paySelect" column="PAY_SELECT" />
+		<result property="payDate" column="PAY_DATE" />
+		<result property="refund" column="REFUND" />
+		<collection property="prodOrderList"
+			javaType="java.util.ArrayList" resultMap="prodOrderResultSet" />
+	</resultMap>
+
+	<resultMap id="goodsPurchaseResultSet" type="GoodsPurchase">
+		<id property="payNo" column="PAY_NO" />
+		<result property="urNo" column="UR_NO" />
+		<result property="orderNum" column="ORDER_NUM" />
+		<result property="payPrice" column="PAY_PRICE" />
+		<result property="paySelect" column="PAY_SELECT" />
+		<result property="payDate" column="PAY_DATE" />
+		<result property="refund" column="REFUND" />
+		<!-- <association property="delivery" javaType="com.kh.kass.prodOrder.model.vo.Delivery"> 
+			<result property="deNo" column="D_NO" /> <result property="deName" column="D_NAME" 
+			/> <result property="dePhone" column="D_PHONE" /> <result property="deAddress" 
+			column="D_ADDRESS" /> <result property="deMemo" column="D_MEMO" /> </association> -->
+		<collection property="prodOrderList"
+			javaType="java.util.ArrayList" resultMap="prodOrderResultSet" />
+	</resultMap>
+
+	<resultMap id="prodOrderResultSet"
+		type="com.kh.kass.member.model.vo.ProductOrder">
+		<id property="orderNo" column="ORDER_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="snackNo" column="SNACK_NO" />
+		<result property="goodsNo" column="GOODS_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="orderCount" column="ORDER_COUNT" />
+		<result property="deNo" column="D_NO" />
+		<result property="payNo" column="PAY_NO" />
+
+		<result property="goodsName" column="GOODS_NAME" />
+		<result property="goodsPrice" column="GOODS_PRICE" />
+		<result property="goodsStatus" column="GOODS_STATUS" />
+
+		<result property="snackName" column="SNACK_NAME" />
+		<result property="snackPrice" column="SNACK_PRICE" />
+		<result property="snackStatus" column="SNACK_STATUS" />
+
+
+
+		<result property="codeNo" column="CODE_NO" />
+		<result property="codeTerm" column="CODE_TERM" />
+		<result property="codeStatus" column="CODE_STATUS" />
+		<result property="prodCode" column="PROD_CODE" />
+
+		<result property="deName" column="D_NAME" />
+		<result property="dePhone" column="D_PHONE" />
+		<result property="deAddress" column="D_ADDRESS" />
+		<result property="deMemo" column="D_MEMO" />
+	</resultMap>
+
 
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
@@ -126,7 +216,6 @@
 		WHERE
 		USER_ID = #{userId}
 		AND USER_STATUS='Y'
-
 	</select>
 
 	<select id="idCheck" parameterType="string" resultType="_int">
@@ -260,7 +349,7 @@
 
 	<insert id="insertAuthNum" parameterType="Auth">
 		INSERT INTO AUTH
-		VALUES(#{userEmail}, #{authNum})
+		VALUES(SEQ_AUTH_NO.NEXTVAL, #{authNum}, #{userEmail})
 	</insert>
 
 	<select id="emailCheck" parameterType="Auth" resultType="_int">
@@ -277,7 +366,8 @@
 		#{userEmail}
 	</delete>
 
-	<select id="selectMovieListCount" resultType="_int" parameterType="_int">
+	<select id="selectMovieListCount" resultType="_int"
+		parameterType="_int">
 		SELECT COUNT(*)
 		FROM USER_RESMOVIE UR
 		JOIN MOVIE_RES
@@ -317,34 +407,41 @@
 		ORDER BY UR_NO DESC
 	</select>
 
-	<select id="selectMovieReviewListCount" resultType="_int" parameterType="_int">
+	<select id="selectMovieReviewListCount" resultType="_int"
+		parameterType="_int">
 		SELECT COUNT(*)
 		FROM REVIEW RV
-		JOIN ATTACHMENT USING (MOVIE_NO)
+		JOIN ATTACHMENT USING
+		(MOVIE_NO)
 		JOIN MOVIE USING(MOVIE_NO)
 		WHERE SORT_CODE = 20
-		AND RV.USER_NO = #{userNo}
+		AND RV.USER_NO
+		= #{userNo}
 		AND R_SORT = 'M'
 	</select>
 
 	<select id="selectMovieReviewList" resultMap="myReviewResultSet">
 		SELECT RV.USER_NO,
-		MOVIE_NO, R_ENROLL_DATE, R_SCORE, MOVIE_NAME, RENAME_FILENAME, R_CONTENT
+		MOVIE_NO, R_ENROLL_DATE, R_SCORE, MOVIE_NAME, RENAME_FILENAME,
+		R_CONTENT
 		FROM REVIEW RV
 		JOIN ATTACHMENT USING (MOVIE_NO)
-		JOIN MOVIE USING(MOVIE_NO)
+		JOIN MOVIE
+		USING(MOVIE_NO)
 		WHERE SORT_CODE = 20
 		AND RV.USER_NO = #{userNo}
-		AND R_SORT = 'M'
+		AND
+		R_SORT = 'M'
+		ORDER BY R_NO DESC
 	</select>
-	
+
 	<insert id="insertMovieReview" parameterType="Review">
 		INSERT INTO REVIEW
 		VALUES(SEQ_R_NO.NEXTVAL, 'M', #{reScore}, #{reContent}, DEFAULT,
 		DEFAULT, #{userNo}, #{movieNo})
 	</insert>
-	
-	<update id="updateMovieReview"  parameterType="Review">
+
+	<update id="updateMovieReview" parameterType="Review">
 		UPDATE REVIEW SET
 		R_SCORE = #{reScore},
 		R_CONTENT = #{reContent},
@@ -354,10 +451,221 @@
 		AND MOVIE_NO = #{movieNo}
 	</update>
 
-	<update id="deleteMovieReview" parameterType="Review">
+	<delete id="deleteMovieReview" parameterType="Review">
 		DELETE REVIEW
-		WHERE USER_NO = #{userNo}
+		WHERE
+		USER_NO = #{userNo}
 		AND R_SORT = 'M'
 		AND MOVIE_NO = #{movieNo}
+	</delete>
+
+	<select id="selectVodPurchaseListCount" parameterType="_int"
+		resultType="_int">
+		SELECT COUNT(*)
+		FROM PROD_ORDER
+		JOIN PAYMENT USING(PAY_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		JOIN ATTACHMENT
+		USING(MOVIE_NO)
+		LEFT JOIN
+		REVIEW USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND PROD_ORDER.USER_NO =
+		#{userNo}
+		AND UR_NO IS NULL
+		AND ORDER_NUM IS
+		NULL
+		AND MOVIE_NO IS NOT NULL
+		ORDER BY PAY_NO DESC
+	</select>
+
+	<select id="selectVodPurchaseList"
+		resultMap="vodPurchaseResultSet">
+		SELECT *
+		FROM PROD_ORDER
+		JOIN PAYMENT USING(PAY_NO)
+		JOIN MOVIE
+		USING(MOVIE_NO)
+		JOIN ATTACHMENT
+		USING(MOVIE_NO)
+		LEFT JOIN REVIEW
+		USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND PROD_ORDER.USER_NO = #{userNo}
+		AND UR_NO IS NULL
+		AND ORDER_NUM IS
+		NULL
+		AND MOVIE_NO IS NOT NULL
+		ORDER BY
+		PAY_NO DESC
+	</select>
+
+	<select id="selectVodPurchaseDetail" parameterType="VodPurchase"
+		resultMap="vodPurchaseResultSet">
+		SELECT *
+		FROM PROD_ORDER
+		JOIN PAYMENT USING(PAY_NO)
+		JOIN MOVIE
+		USING(MOVIE_NO)
+		JOIN ATTACHMENT
+		USING(MOVIE_NO)
+		LEFT JOIN REVIEW
+		USING(MOVIE_NO)
+		WHERE
+		PROD_ORDER.USER_NO = #{userNo}
+		AND SORT_CODE = 40
+		AND MOVIE_NO =
+		#{movieNo}
+		AND UR_NO IS NULL
+		AND ORDER_NUM IS NULL
+		AND
+		MOVIE_NO IS NOT
+		NULL
+	</select>
+
+	<insert id="insertVodReview" parameterType="Review">
+		INSERT INTO REVIEW
+		VALUES(SEQ_R_NO.NEXTVAL, 'V', #{reScore}, #{reContent}, DEFAULT,
+		DEFAULT, #{userNo}, #{movieNo})
+	</insert>
+
+	<update id="updateVodReview" parameterType="Review">
+		UPDATE REVIEW SET
+		R_SCORE = #{reScore},
+		R_CONTENT = #{reContent},
+		R_MODIFY_DATE = SYSDATE
+		WHERE USER_NO = #{userNo}
+		AND MOVIE_NO = #{movieNo}
+		AND R_SORT = 'V'
 	</update>
+
+	<delete id="deleteVodReview" parameterType="Review">
+		DELETE REVIEW
+		WHERE
+		USER_NO = #{userNo}
+		AND MOVIE_NO = #{movieNo}
+		AND R_SORT = 'V'
+	</delete>
+
+	<select id="selectVodReviewListCount" parameterType="_int"
+		resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW RV
+		JOIN ATTACHMENT USING
+		(MOVIE_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND RV.USER_NO
+		= #{userNo}
+		AND R_SORT = 'V'
+		ORDER BY R_NO DESC
+	</select>
+
+	<select id="selectVodReviewList" parameterType="_int"
+		resultMap="myReviewResultSet">
+		SELECT RV.USER_NO,
+		MOVIE_NO, R_ENROLL_DATE, R_SCORE,
+		MOVIE_NAME, RENAME_FILENAME, R_CONTENT
+		FROM REVIEW RV
+		JOIN ATTACHMENT
+		USING (MOVIE_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND
+		RV.USER_NO = #{userNo}
+		AND R_SORT = 'V'
+		ORDER BY R_NO DESC
+	</select>
+
+	<select id="selectSnackPurchaseListCount" parameterType="_int"
+		resultType="_int">
+		SELECT COUNT(DISTINCT ORDER_NUM)
+		FROM PAYMENT
+		JOIN PROD_ORDER
+		USING(PAY_NO)
+		JOIN SNACK USING(SNACK_NO)
+		JOIN MEMBER USING(USER_NO)
+		WHERE UR_NO IS NULL
+		AND ORDER_NUM IS NOT NULL
+		AND USER_NO = #{userNo}
+	</select>
+
+	<select id="selectSnackPurchaseList"
+		resultMap="snackPurchaseResultSet">
+		SELECT *
+		FROM PAYMENT
+		JOIN PROD_ORDER USING(PAY_NO)
+		JOIN SNACK
+		USING(SNACK_NO)
+		JOIN SNACK_CODE USING(ORDER_NO)
+		WHERE UR_NO IS NULL
+		AND
+		ORDER_NUM IS NOT
+		NULL
+		AND USER_NO = #{userNo}
+		ORDER BY PAY_NO DESC,
+		ORDER_NO
+	</select>
+
+	<select id="selectSnackPurchaseDetail"
+		parameterType="com.kh.kass.member.model.vo.SnackPurchase"
+		resultMap="snackPurchaseResultSet">
+		SELECT *
+		FROM PAYMENT
+		JOIN PROD_ORDER USING(PAY_NO)
+		JOIN SNACK
+		USING(SNACK_NO)
+		JOIN SNACK_CODE USING(ORDER_NO)
+		WHERE UR_NO IS NULL
+		AND
+		ORDER_NUM IS NOT NULL
+		AND USER_NO = #{prodOrderList[0].userNo}
+		AND
+		ORDER_NUM = #{orderNum}
+		ORDER BY ORDER_NO
+	</select>
+
+	<select id="selectGoodsPurchaseListCount" parameterType="_int"
+		resultType="_int">
+		SELECT COUNT(DISTINCT ORDER_NUM)
+		FROM PAYMENT
+		JOIN PROD_ORDER
+		USING(PAY_NO)
+		JOIN GOODS USING(GOODS_NO)
+		JOIN DELIVERY USING(D_NO)
+		WHERE
+		USER_NO = #{userNo}
+	</select>
+
+	<select id="selectGoodsPurchaseList" parameterType="_int"
+		resultMap="goodsPurchaseResultSet">
+		SELECT *
+		FROM PAYMENT
+		JOIN PROD_ORDER USING(PAY_NO)
+		JOIN GOODS
+		USING(GOODS_NO)
+		JOIN DELIVERY USING(D_NO)
+		WHERE USER_NO = #{userNo}
+		ORDER BY PAY_NO DESC, ORDER_NO
+	</select>
+
+	<select id="selectGoodsPurchaseDetail"
+		parameterType="com.kh.kass.member.model.vo.GoodsPurchase"
+		resultMap="goodsPurchaseResultSet">
+		SELECT *
+		FROM PAYMENT
+		JOIN PROD_ORDER USING(PAY_NO)
+		JOIN GOODS
+		USING(GOODS_NO)
+		JOIN DELIVERY USING(D_NO)
+		WHERE USER_NO =
+		#{prodOrderList[0].userNo}
+		AND ORDER_NUM = #{orderNum}
+	</select>
+
+
+
+
+
+
 </mapper>

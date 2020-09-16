@@ -109,6 +109,7 @@ header>section {
 	width: 1500px;
 	margin: auto;
 }
+
 /* 영역 나누기 */
 </style>
 
@@ -133,81 +134,138 @@ header>section {
 							<tr class="topLine">
 								<td>
 									<div class="purchaseInfo">
-										<span class="purchaseNo">주문 번호 : 2020073011111 </span> <span
-											class="purchaseDate">주문 일시 : 2020-07-30</span>
+										<span class="purchaseNo">주문 번호 : ${ detailList[0].orderNum }
+										</span> <span class="purchaseDate">주문 일시 : ${
+											detailList[0].payDate }</span>
 									</div>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<table class="table">
-										<thead>
-											<tr>
-												<td scope="col" class="th no">상품 코드</td>
-												<td scope="col" class="th proName">상품명</td>
-												<td scope="col" class="th count">수량</td>
-												<td scope="col" class="th price">가격</td>
-												<td scope="col" class="th status">상태</td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td scope="row" class="code">800123456</td>
-												<td class="proName">토이스토리 텀블러</td>
-												<td class="count">2</td>
-												<td class="price">2,500 원</td>
-												<td class="status">사용가능</td>
-											</tr>
-											<tr>
-												<td scope="row" class="code">800123456</td>
-												<td class="proName">토이스토리 텀블러</td>
-												<td class="count">2</td>
-												<td class="price">2,500 원</td>
-												<td class="status">사용불가</td>
-											</tr>
-											<tr>
-												<td scope="row" class="code">800123456</td>
-												<td class="proName">토이스토리 텀블러</td>
-												<td class="count">2</td>
-												<td class="price">2,500 원</td>
-												<td class="status">사용불가</td>
-											</tr>
-											<tr>
-												<td scope="row" class="code">800123456</td>
-												<td class="proName">토이스토리 텀블러</td>
-												<td class="count">2</td>
-												<td class="price">2,500 원</td>
-												<td class="status">사용불가</td>
-											</tr>
-											<tr class="test">
-												<td scope="row" class="code">800123456</td>
-												<td class="proName">토이스토리 텀블러</td>
-												<td class="count">2</td>
-												<td class="price">2,500 원</td>
-												<td class="status">사용불가</td>
-											</tr>
+										<tr>
+											<th class="th no">상품 코드</th>
+											<th class="th proName">상품명</th>
+											<th class="th count">수량</th>
+											<th class="th price">가격</th>
+											<th class="th status">상태</th>
+										</tr>
 
-										</tbody>
+										<c:if test="${ detailList ne null }">
+											<c:forEach var="spd" items="${ detailList[0].prodOrderList }">
+												<tr class="oneBox">
+													<td class="code">${ spd.prodCode }</td>
+													<td class="proName">${ spd.snackName }</td>
+													<td class="count">${ spd.orderCount }</td>
+													<td class="price">${ spd.snackPrice }원</td>
+													<c:if test="${ spd.codeStatus eq 'Y' }">
+														<td class="userStatus status">사용 가능</td>
+													</c:if>
+													<c:if test="${ spd.codeStatus eq 'N' }">
+														<td class="userStatus status">사용 불가</td>
+													</c:if>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<tr>
+											<td colspan="2" class="test">
+												<input type="text" class="payDate" value="${ detailList[0].payDate }">
+											</td>
+
+											<td class="test"><span class="allPriceText">합계 :</span>
+											</td>
+
+											<td colspan="2" class="test"><span class="allPrice">${ detailList[0].payPrice }</span>
+												<span class="test1">원</span></td>
+
+										</tr>
 									</table>
 								</td>
-							<tr>
-								<td>
-									<div class="all">
-										<span class="allPriceText"> 합계 </span> <span class="allPrice">
-											10,500 원 </span>
-									</div>
-								</td>
 							</tr>
+
 						</table>
 					</section>
 				</section>
 			</section>
 		</div>
 	</div>
+
+	<script>
+		// 000,000처리 함수
+		function comma(num) {
+			var len, point, str;
+
+			num = num + "";
+			point = num.length % 3;
+			len = num.length;
+
+			str = num.substring(0, point);
+			while (point < len) {
+				if (str != "")
+					str += ",";
+				str += num.substring(point, point + 3);
+				point += 3;
+			}
+
+			return str;
+
+		}
+
+		$(document).ready(
+			function () {
+				// 가격 000,000처리
+				var price = $(".allPrice").text();
+
+				$(".allPrice").text(comma(price));
+				
+				var payDate = $(".payDate").val();
+
+				payDate = new Date(payDate);
+
+				payDate.setMonth(payDate.getMonth() + 6);
+
+				console.log("dd"+payDate)
+
+				var today = new Date();
+
+				if (today < payDate) {
+					$(".userStatus").text("사용 가능");
+				} else {
+					$(".userStatus").text("사용 불가");
+				}
+			}
+			
+			/* $(".oneBox").each(function () {
+				var startDate = $(this).find(".startDate").text();
+				var year = startDate.split("-")[0];
+				var month = startDate.split("-")[1];
+				var date = startDate.split("-")[2];
+
+				var startTime = $(this).find(".startTime").text();
+				var hour = startTime.split(":")[0];
+				var minute = startTime.split(":")[1];
+
+				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
+
+				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
+				var today = new Date();
+				console.log(resultDate);
+
+				if (today < resultDate) {
+					$(this).find(".cancel").show();
+				} else {
+					$(this).find(".cancel").hide();
+				}
+
+			}); */
+		);
+		
+	</script>
 	<div id="stay_footer">
 		<div id="stay_footer_inner">
 			<jsp:include page="../../views/common/footer.jsp" />
 		</div>
 	</div>
 </body>
+
 </html>

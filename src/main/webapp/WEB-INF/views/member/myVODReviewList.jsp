@@ -12,108 +12,103 @@
 	<link href="${ contextPath }/resources/css/member/myVODReviewList.css" rel="stylesheet" type="text/css">
 	<title>내가 쓴 VOD 리뷰</title>
 	<style>
-		header,
-		nav,
-		section,
-		article,
-		aside,
-		footer {
-			box-sizing: border-box;
-			display: block;
-		}
+		header, nav, section, article, aside, footer {
+	box-sizing: border-box;
+	display: block;
+}
 
-		body {
-			width: 100%;
-			margin: auto;
-		}
+body {
+	width: 100%;
+	margin: auto;
+}
 
-		header {
-			width: 100%;
-			height: 150px;
-		}
+header {
+	width: 100%;
+	height: 150px;
+}
 
-		nav {
-			width: 100%;
-			height: 50px;
-		}
+nav {
+	width: 100%;
+	height: 50px;
+}
 
-		.content {
-			width: 100%;
-			heigt: 100%;
-			margin: auto;
-			border: 1px solid red;
-			overflow: hidden;
-		}
+.content {
+	width: 100%;
+	heigt: 100%;
+	margin: auto;
+	border: 1px solid red;
+	overflow: hidden;
+}
 
-		footer {
-			width: 100%;
-			height: 150px;
-			float: left;
-			background: lightgray;
-		}
+footer {
+	width: 100%;
+	height: 150px;
+	float: left;
+	background: lightgray;
+}
 
-		header>section {
-			float: left;
-		}
+header>section {
+	float: left;
+}
 
-		#header-1 {
-			width: 25%;
-			height: 100%;
-			position: relative;
-		}
+#header-1 {
+	width: 25%;
+	height: 100%;
+	position: relative;
+}
 
-		#header-2 {
-			width: 50%;
-			height: 100%;
-			position: relative;
-		}
+#header-2 {
+	width: 50%;
+	height: 100%;
+	position: relative;
+}
 
-		#header-3 {
-			width: 25%;
-			height: 100%;
-		}
+#header-3 {
+	width: 25%;
+	height: 100%;
+}
 
-		#footer1 {
-			width: 80%;
-			height: 30%;
-			padding: 1px;
-			width: 80%;
-			float: left;
-		}
+#footer1 {
+	width: 80%;
+	height: 30%;
+	padding: 1px;
+	width: 80%;
+	float: left;
+}
 
-		#footer2 {
-			width: 80%;
-			height: 70%;
-			width: 80%;
-			float: left;
-		}
+#footer2 {
+	width: 80%;
+	height: 70%;
+	width: 80%;
+	float: left;
+}
 
-		#footer3 {
-			width: 20%;
-			height: 70%;
-			float: left;
-		}
+#footer3 {
+	width: 20%;
+	height: 70%;
+	float: left;
+}
 
-		#stay_footer {
-			width: 100%;
-			height: 150px;
-			background: lightgray;
-		}
+#stay_footer {
+	width: 100%;
+	height: 150px;
+	background: lightgray;
+}
 
-		#stay_footer_inner {
-			width: 1500px;
-			height: 150px;
-			display: block;
-			margin: auto;
-		}
+#stay_footer_inner {
+	width: 1500px;
+	height: 150px;
+	display: block;
+	margin: auto;
+}
 
-		#wrap_stay {
-			width: 1500px;
-			margin: auto;
-		}
+#wrap_stay {
+	width: 1500px;
+	margin: auto;
+}
 
-		/* 영역 나누기 */
-	</style>
+/* 영역 나누기 */
+</style>
 
 </head>
 
@@ -132,252 +127,281 @@
 					<section class="content-1-1">
 						<h2 class="title">내가 쓴 VOD 리뷰</h2>
 						<table class="contentTable">
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">이상의 곧 작고 것은 생생하며, 바이며, 사막이다.
-											있음으로써 시들어 풀이 목숨을 원질이 인류의 꾸며 장식하는 것이다. 청춘 기쁘며, 행복스럽고 있는 그림자는
-											교향악이다. 이것은 피는 이상의 꽃이 영원히 살았으며, 것이다. 역사를 쓸쓸한 이상은 희망의 위하여서.
-											황금시대의 그들을 이상, 위하여 그러므로 안고, 보이는 예수는 열락의 것이다. 하였으며, 과실</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
+							<c:if test="${ empty list }">
+								<tr>
+									<td colspan="2">
+										<div class="emptyList">등록된 리뷰가 존재하지 않습니다.</div>
+									</td>
+								</tr>
+							</c:if>
+							<c:if test="${ list ne null }">
+								<c:forEach var="vrv" items="${ list }">
+									<tr>
+									<tr>
+										<td class="left"><img src="${ contextPath }/resources/images/movie_image/${ vrv.attachment.renameFileName }"
+											 class="poster"></td>
+										<td class="right">
+											<div>
+												<div class="movieTitle">${ vrv.movieName }</div>
+												<p class="idDate">
+													<span class="writerDate">${ vrv.reEnrollDate }</span>
+												</p>
+												<div class="reviewContent">${ vrv.reContent }</div>
 											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/반도.jpg" class="poster">
-								</td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">반도</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
+											<div class="bottomTdDiv">
+												<div>
+													<div class="scoreDiv">
+														<c:if test="${ vrv.reScore eq 'G'}">
+															<img src="${ contextPath }/resources/images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
+														</c:if>
+														<c:if test="${ vrv.reScore eq 'B'}">
+															<img src="${ contextPath }/resources/images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
+														</c:if>
+													</div>
+												</div>
+												<div class="buttons">
+													<a href="javascript:openReviewUpdateForm(${ vrv.movieNo },'${ vrv.movieName }', '${ vrv.reContent }', '${ vrv.reScore }');"
+													 id="update" class="update">수정</a>
+													<a href="javascript:deleteReview(${ vrv.movieNo },'${ vrv.movieName }');" id="delete" class="delete">삭제</a>
+												</div>
 											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/토이스토리4.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">토이스토리4</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/반도.jpg" class="poster">
-								</td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">반도</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">보이는 맺어, 살았으며, 때에, 위하여서. 듣기만
-											인간이 있을 봄바람이다. 따뜻한 우리는 열락의 유소년에게서 보배를 몸이 황금시대의 인간이 온갖 때문이다.
-											이것은 따뜻한 곧 보내는 반짝이는 목숨이 칼이다.</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="left"><img src="../images/겨울왕국2.jpg" class="poster"></td>
-								<td class="right">
-									<div>
-										<div class="movieTitle">겨울왕국2</div>
-										<p class="idDate">
-											<span class="userId">us***1</span> | <span class="writerDate">2020.07.30</span>
-										</p>
-										<div class="reviewContent">너무 재밋습니당</div>
-									</div>
-									<div class="bottomTdDiv">
-										<div>
-											<div class="scoreDiv">
-												<img src="../images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
-											</div>
-										</div>
-										<div class="buttons">
-											<a href="#" id="update" class="update">수정</a> <a href="#" id="delete" class="delete">삭제</a>
-										</div>
-									</div>
-								</td>
-							</tr>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+
 						</table>
 						<!-- 페이징바 -->
 						<div class="pagination">
-							<a class="pageOne" href="#">&lt;</a>
-							<a class="pageOne" href="#">1</a>
-							<a class="pageOne" href="#">2</a>
-							<a class="pageOne" href="#">3</a>
-							<a class="pageOne" href="#">4</a>
-							<a class="pageOne" href="#">5</a>
-							<a class="pageOne" href="#">&gt;</a>
+							<div class="pageOuterDiv">
+								<div class="pageInnerDiv">
+									<!-- 이전 -->
+									<c:if test="${ pi.currentPage <= 1 }">
+										<a class="pageNone">&lt;</a>
+									</c:if>
+									<c:if test="${ pi.currentPage > 1 }">
+										<c:url var="before" value="vodReviewList.do">
+											<c:param name="page" value="${ pi.currentPage -1 }" />
+										</c:url>
+										<a class="pageOne" href="${ before }">&lt;</a>
+									</c:if>
 
-							<!-- 버튼 비활성화 일 때-->
-							<!-- <a class="pageNone">&lt;&lt;</a> -->
+									<!-- 페이지 숫자 -->
+									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+										<c:if test="${ p eq pi.currentPage }">
+											<a class="pageNone">${ p }</a>
+										</c:if>
+										<c:if test="${ p ne pi.currentPage }">
+											<c:url var="pagination" value="vodReviewList.do">
+												<c:param name="page" value="${ p }" />
+											</c:url>
+											<a class="pageOne" href="${ pagination }">${ p }</a>
+										</c:if>
+									</c:forEach>
+
+									<!-- 이후 -->
+									<c:if test="${ pi.currentPage >= pi.maxPage }">
+										<a class="pageNone">&gt;</a>
+									</c:if>
+									<c:if test="${ pi.currentPage < pi.maxPage }">
+										<c:url var="after" value="vodReviewList.do">
+											<c:param name="page" value="${ pi.currentPage + 1 }" />
+										</c:url>
+										<a class="pageOne" href="${ after }">&gt;</a>
+									</c:if>
+									<!-- 버튼 비활성화 일 때-->
+									<!-- <a class="pageNone">&lt;&lt;</a> -->
+								</div>
+							</div>
 						</div>
 					</section>
 				</section>
 			</section>
 		</div>
 	</div>
+	<div id="myModal" class="modal" data-backdrop="static" data-keyboard="false">
+		<div class="contentDiv">
+			<div class="contentModal">
+				<form id="rupdateForm" name="rupdateForm" method="post">
+					<input type="hidden" name="movieNo" value="" id="modalMovieNo">
+					<table class="reviewTable">
+						<tr>
+							<td colspan="3" class="topTd">
+								<p class="modalMovieTitle" id="modalMovieName"></p>
+							</td>
+						</tr>
+						<tr>
+
+							<td class="side tr2">
+								<div class="tabs cf">
+
+									<input type="radio" name="tabs" id="tab1" value="G" onclick="change(this.value);">
+
+									<label for="tab1">
+										<div class="scoreDiv2">
+											<img src="${ contextPath }/resources/images/up_black.png" class="scoreImg goodImg">
+										</div> <span class="scoreText2 goodText">좋았어요^^</span>
+									</label>
+								</div>
+							</td>
+							<td class="tr2">
+								<div class="imgAlign">
+									<c:if test="${ loginUser.attachment.renameFileName != null }">
+										<img src="${ contextPath }/resources/images/muploadFiles/${ loginUser.attachment.renameFileName }" class="profileImg">
+									</c:if>
+									<c:if test="${ loginUser.attachment.renameFileName == null }">
+										<img src="${ contextPath }/resources/images/defaultPropfieImg.png" class="profileImg" id="profileImg">
+									</c:if>
+								</div>
+							</td>
+							<td class="side tr2">
+								<div class="tabs cf">
+
+									<input type="radio" name="tabs" id="tab2" value="B" onclick="change(this.value);">
+
+									<label for="tab2">
+										<div class="scoreDiv2">
+											<img src="${ contextPath }/resources/images/down_white.png" class="scoreImg badImg">
+										</div> <span class="scoreText2 badText">별로에요;;</span>
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><textarea cols="80" rows="5" maxlength="190" placeholder="내용을 입력해주세요." name="reContent" class="rContent"
+								 id="rContent" required></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div id="textLimit" class="textLimit" id="textLimit">
+									(<span class="count" id="count">0</span> / 최대 280글자)
+								</div>
+							</td>
+						</tr>
+					</table>
+
+					<div class="buttons2">
+						<button id="cancel" class="cancel" onclick="close_pop();">취소</button>
+						<button id="next" class="next" onclick="updateVodReview();">등록</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+
+		// 리뷰작성 모달
+		function openReviewUpdateForm(movieNo, movieName, reContent, reScore, event) {
+
+			$("#modalMovieNo").val(movieNo);
+			$("#modalMovieName").text(movieName);
+			$("#rContent").val(reContent);
+			console.log(reScore)
+			if (reScore == "G") {
+				$("#tab1").prop('checked', true);
+				$(".goodImg").attr("src",
+					"${ contextPath }/resources/images/up_black.png");
+				$(".badImg").attr("src",
+					"${ contextPath }/resources/images/down_white.png");
+			} else {
+				$("#tab2").prop('checked', true);
+				$(".goodImg").attr("src",
+					"${ contextPath }/resources/images/up_white.png");
+				$(".badImg").attr("src",
+					"${ contextPath }/resources/images/down_black.png");
+
+			}
+			//document.getElementById("myModal").style.display = "block";
+			$("#myModal").show();
+		};
+
+		//팝업 Close 기능
+		function close_pop() {
+			//document.getElementById("myModal").style.display = "none";
+			$("#myModal").hide();
+		};
+
+		function change(value) {
+			console.log(value);
+
+			if (value == "G") {
+				$(".goodImg").attr("src",
+					"${ contextPath }/resources/images/up_black.png");
+				$(".badImg").attr("src",
+					"${ contextPath }/resources/images/down_white.png");
+			} else {
+				$(".goodImg").attr("src",
+					"${ contextPath }/resources/images/up_white.png");
+				$(".badImg").attr("src",
+					"${ contextPath }/resources/images/down_black.png");
+			}
+		}
+
+		// 글자수 실시간 카운팅
+		$("#rContent").keyup(function (e) {
+			var rContent = $(this).val();
+			$("#count").html(rContent.length);
+			console.log(rContent.length);
+			if (rContent.length > 190) {
+				alert("최대 190자까지 입력 가능합니다.");
+			}
+		});
+
+		// 리뷰 수정
+		function updateVodReview() {
+			var rContent = $("#rContent").val();
+
+			/* 공란 검사 변수*/
+			var rContent2 = $.trim($("#rContent").val());
+
+			/* 공란 검사 */
+			if (!rContent2) {
+				alert("내용을 10글자 이상 입력해주세요.");
+				$("#rContent").focus();
+
+				return false;
+			}
+
+			if (rContent.length < 10) {
+				alert("내용을 10글자 이상 입력해주세요.");
+				$("#rContent").focus();
+				return false;
+			}
+
+			var rupdateForm = $("form[name=rupdateForm]").serialize();
+
+			$.ajax({
+				url: "vrupdate.do",
+				data: rupdateForm,
+				type: "post",
+				success: function (data) {
+					$("#myModal").hide();
+					alert("리뷰가 수정되었습니다.");
+
+				},
+				error: function (e) {
+					console.log(e);
+					console.log("통신 실패!");
+				}
+			});
+
+			return true;
+		}
+
+		// 리뷰 수정
+		function deleteReview(movieNo, movieName) {
+			console.log("movieNo" + movieNo);
+			if (confirm("[" + movieName + "] 에 작성한 리뷰를 정말 삭제하시겠습니까?")) {
+				location.href = 'vrdelete.do?movieNo=' + movieNo;
+				alert("리뷰가 삭제되었습니다.");
+			}
+
+
+		}
+
+	</script>
 	<div id="stay_footer">
 		<div id="stay_footer_inner">
 			<jsp:include page="../../views/common/footer.jsp" />

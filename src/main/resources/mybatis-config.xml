@@ -10,7 +10,12 @@
 		<typeAlias type="com.kh.kass.common.Auth" alias="Auth"/>
 		<typeAlias type="com.kh.kass.member.model.vo.Withdrawal" alias="Withdrawal"/>
 		<typeAlias type="com.kh.kass.member.model.vo.MoviePurchase" alias="MoviePurchase"/>
-		<typeAlias type="com.kh.kass.review.model.vo.MyMovieReview" alias="MyMovieReview"/>
+		<typeAlias type="com.kh.kass.member.model.vo.MyMovieReview" alias="MyMovieReview"/>
+		<typeAlias type="com.kh.kass.member.model.vo.SnackPurchase" alias="SnackPurchase"/>
+		<typeAlias type="com.kh.kass.member.model.vo.VodPurchase" alias="VodPurchase"/>
+		<typeAlias type="com.kh.kass.member.model.vo.GoodsPurchase" alias="GoodsPurchase"/>
+		<typeAlias type="com.kh.kass.prodOrder.model.vo.ProdOrder" alias="ProdOrder"/>
+		
 		
 
 		<typeAlias type="com.kh.kass.goods.model.vo.Goods" alias="Goods"/>
@@ -25,6 +30,7 @@
 		<typeAlias type="com.kh.kass.reservation.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.kass.review.model.vo.Review" alias="Review"/>
+
 		<!-- <typeAlias type="com.kh.kass.snack.model.vo.Snack" alias="Snack"/>
 		 -->
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodOrder" alias="VodOrder"/>

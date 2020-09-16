@@ -10,10 +10,13 @@ import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
 import com.kh.kass.common.PageInfo;
 import com.kh.kass.member.model.dao.MemberDao;
+import com.kh.kass.member.model.vo.GoodsPurchase;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.MoviePurchase;
+import com.kh.kass.member.model.vo.MyMovieReview;
+import com.kh.kass.member.model.vo.SnackPurchase;
+import com.kh.kass.member.model.vo.VodPurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
-import com.kh.kass.review.model.vo.MyMovieReview;
 import com.kh.kass.review.model.vo.Review;
 
 @Service("mService")
@@ -140,10 +143,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectMovieList(userNo, pi);
 	}
 
-	@Override
-	public int insertMovieReview(Review r) {
-		return mDao.insertMovieReview(r);
-	}
 
 	@Override
 	public int selectMovieReviewListCount(int userNo) {
@@ -154,6 +153,11 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<MyMovieReview> selectMovieReviewList(int userNo, PageInfo pi) {
 		return mDao.selectMovieReviewList(userNo, pi);
 	}
+	
+	@Override
+	public int insertMovieReview(Review r) {
+		return mDao.insertMovieReview(r);
+	}
 
 	@Override
 	public int updateMovieReview(Review r) {
@@ -163,6 +167,76 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int deleteMovieReview(Review r) {
 		return mDao.deleteMovieReview(r);
+	}
+
+	@Override
+	public int selectSnackPurchaseListCount(int userNo) {
+		return mDao.selectSnackPurchaseListCount(userNo);
+	}
+
+	@Override
+	public int selectVodListCount(int userNo) {
+		return mDao.selectVodListCount(userNo);
+	}
+
+	@Override
+	public VodPurchase selectVodPurchaseDetail(VodPurchase vp) {
+		return mDao.selectVodPurchaseDetail(vp);
+	}
+
+	@Override
+	public int insertVodReview(Review r) {
+		return  mDao.insertVodReview(r);
+	}
+
+	@Override
+	public int updateVodReview(Review r) {
+		return mDao.updateVodReview(r);
+	}
+
+	@Override
+	public int deleteVodReview(Review r) {
+		return mDao.deleteVodReview(r);
+	}
+
+	@Override
+	public int selectVodReviewListCount(int userNo) {
+		return mDao.selectVodReviewListCount(userNo);
+	}
+
+	@Override
+	public ArrayList<MyMovieReview> selectVodReviewList(int userNo, PageInfo pi) {
+		return mDao.selectVodReviewList(userNo, pi);
+	}
+
+	@Override
+	public ArrayList<VodPurchase> selectVodList(int userNo, PageInfo pi) {
+		return mDao.selectVodList(userNo, pi);
+	}
+	
+	@Override
+	public ArrayList<SnackPurchase> selectSnackPurchaseList(int userNo, PageInfo pi) {
+		return mDao.selectSnackPurchaseList(userNo, pi);
+	}
+
+	@Override
+	public ArrayList<SnackPurchase> selectSnackPurchasDetail(SnackPurchase sp) {
+		return mDao.selectSnackPurchaseDetail(sp);
+	}
+
+	@Override
+	public int selectGoodsPurchaseListCount(int userNo) {
+		return mDao.selectGoodsPurchaseListCount(userNo);
+	}
+
+	@Override
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseList(int userNo, PageInfo pi) {
+		return mDao.selectGoodsPurchaseList(userNo, pi);
+	}
+	
+	@Override
+	public ArrayList<GoodsPurchase> selectGoodsPurchasDetail(GoodsPurchase gp) {
+		return mDao.selectGoodsPurchaseDetail(gp);
 	}
 
 

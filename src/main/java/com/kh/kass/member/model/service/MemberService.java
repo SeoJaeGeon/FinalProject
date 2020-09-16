@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
 import com.kh.kass.common.PageInfo;
+import com.kh.kass.member.model.vo.GoodsPurchase;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.MoviePurchase;
+import com.kh.kass.member.model.vo.MyMovieReview;
+import com.kh.kass.member.model.vo.SnackPurchase;
+import com.kh.kass.member.model.vo.VodPurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
-import com.kh.kass.review.model.vo.MyMovieReview;
 import com.kh.kass.review.model.vo.Review;
 
 public interface MemberService {
@@ -74,9 +77,10 @@ public interface MemberService {
 
 	// 내가 쓴 영화 리뷰 개수
 	public int selectMovieReviewListCount(int userNo);
-	
+
 	// 내가 쓴 영화 리뷰
 	public ArrayList<MyMovieReview> selectMovieReviewList(int userNo, PageInfo pi);
+
 	// 리뷰 등록
 	public int insertMovieReview(Review r);
 
@@ -86,17 +90,47 @@ public interface MemberService {
 	// 리뷰 삭제
 	public int deleteMovieReview(Review r);
 
+	// vod 구매 내역 개수
+	public int selectVodListCount(int userNo);
 
+	// vod 구매 내역
+	public ArrayList<VodPurchase> selectVodList(int userNo, PageInfo pi);
+
+	// vod 구매 상세
+	public VodPurchase selectVodPurchaseDetail(VodPurchase vp);
+
+	// vod 리뷰 등록
+	public int insertVodReview(Review r);
+
+	// vod 리뷰 수정
+	public int updateVodReview(Review r);
+
+	// vod 리뷰 삭제
+	public int deleteVodReview(Review r);
+
+	// 내가 쓴 vod 리뷰 개수
+	public int selectVodReviewListCount(int userNo);
+
+	// 내가 쓴 vod 리뷰
+	public ArrayList<MyMovieReview> selectVodReviewList(int userNo, PageInfo pi);
+
+	// 스낵 구매 내역 개수
+	public int selectSnackPurchaseListCount(int userNo);
+
+	// 스낵 구매내역
+	public ArrayList<SnackPurchase> selectSnackPurchaseList(int userNo, PageInfo pi);
+
+
+	// 스낵 상세
+	public ArrayList<SnackPurchase> selectSnackPurchasDetail(SnackPurchase sp);
+
+	// 굿즈 구매 내역 개수
+	public int selectGoodsPurchaseListCount(int userNo);
 	
+	// 굿즈 구매 내역
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseList(int userNo, PageInfo pi);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 굿즈 상세
+	public ArrayList<GoodsPurchase> selectGoodsPurchasDetail(GoodsPurchase gp);
+
 }

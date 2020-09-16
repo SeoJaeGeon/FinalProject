@@ -1,84 +1,119 @@
 @charset "UTF-8";
 
-
 /* My KASS */
 
 /* content */
 /* content-1 */
 .content-1 {
-    /* border:1px solid rebeccapurple; */
+	/* border:1px solid rebeccapurple; */
+	
 }
+
 .rightContent {
-    width: 900px;
-    /* border: 1px solid teal; */
-    margin-left: 100px;
-    float: left;
+	width: 900px;
+	/* border: 1px solid teal; */
+	margin-left: 100px;
+	float: left;
 }
 
 /* <h2> title */
 .title {
-    font-size: 25px;
-    color:rgb(70, 70, 70);
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+	font-size: 25px;
+	color: rgb(70, 70, 70);
+	display: block;
+	font-size: 1.5em;
+	margin-block-start: 0.83em;
+	margin-block-end: 0.83em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-weight: bold;
 }
 /* <h2> title */
 .table {
-    border-top: 1px solid black;
-    border-bottom: 1px solid #dee2e6;;
+	border-top: 1px solid black;
+	border-bottom: 1px solid #dee2e6;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 30px;
+	/* border-top: 1px solid black; */
+}
+
+.table th {
+	padding: 10px;
+	color: rgb(255, 255, 255);
+	background: rgb(31, 69, 97);
+	border-bottom: 3px solid rgb(31, 69, 97);
+	text-align: left;
+}
+
+.table td {
+	color: rgb(49, 49, 49);
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
 }
 
 .contentTable {
-    border-collapse: collapse;
-    border-top: 1px solid black;
-    width:100%;
+	border-collapse: collapse;
+	border-top: 1px solid black;
+	width: 100%;
 }
+
 .purchaseInfo {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    width: 100%;
-    /* border: 1px solid green; */
+	margin-top: 30px;
+	margin-bottom: 15px;
+	width: 100%;
+	/* border: 1px solid green; */
 }
+
 .purchaseNo {
-    font-size: 22px;
-    /* border: 1px lightcoral solid; */
+	font-size: 22px;
+	/* border: 1px lightcoral solid; */
 }
 
-.purchaseDate{
-    float: right;
-    font-size: 18px;
-    /* border: 1px solid rebeccapurple; */
-}
-.th {
-    background: rgb(31 , 69 ,97);
-    color: white;
+.purchaseDate {
+	float: right;
+	font-size: 18px;
+	/* border: 1px solid rebeccapurple; */
 }
 
-.table tr:last-child{
-   border-bottom: 1px solid black;
+.no {
+	width: 20%;
 }
-/* 리스트 */
-.all {
-    border-bottom: 1px solid black;
-    height: 40px;
-    position: relative;
+
+.proName {
+	width: 35%
 }
+
+.count {
+	width: 10%;
+}
+
+.price {
+	width: 17%;
+}
+
+.status {
+	width: 10%;
+}
+
+.table tr:last-child {
+	border-bottom: 1px solid black;
+}
+
+.test {
+	/* border: 1px solid firebrick; */
+	
+}
+
 .allPriceText {
-    position: absolute;
-    left: 485px;
-/* border: 1px saddlebrown solid; */
-
+	/* display: inline-block; */
+	float: left;
+	/* border: 1px saddlebrown solid; */
 }
 
-.allPrice{
-    position: absolute;
-    right: 248px;
-/* border: 1px solid tan; */
+.test1 {
+	/* border: 1px saddlebrown solid; */
+	float: right;
 }
 /* content-1 */
 /* content */

@@ -18,6 +18,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +43,14 @@ import com.kh.kass.common.PageInfo;
 import com.kh.kass.common.PaginationA;
 import com.kh.kass.member.model.exception.MemberException;
 import com.kh.kass.member.model.service.MemberService;
+import com.kh.kass.member.model.vo.GoodsPurchase;
 import com.kh.kass.member.model.vo.Member;
 import com.kh.kass.member.model.vo.MoviePurchase;
+import com.kh.kass.member.model.vo.MyMovieReview;
+import com.kh.kass.member.model.vo.ProductOrder;
+import com.kh.kass.member.model.vo.SnackPurchase;
+import com.kh.kass.member.model.vo.VodPurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
-import com.kh.kass.review.model.vo.MyMovieReview;
 import com.kh.kass.review.model.vo.Review;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
@@ -55,10 +60,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 
-//	@Autowired
-//	private JavaMailSenderImpl mailSender;
-
-	// 1. 회원가입
 	// 회원가입 뷰
 	@RequestMapping("minsertView.do")
 	public String mInsertView() {
@@ -189,7 +190,7 @@ public class MemberController {
 		return buffer.toString();
 	}
 
-	// 2. 로그인
+	// 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(@RequestParam("userId") String userId, @RequestParam("userPwd") String userPwd,
 			Model model, RedirectAttributes rd) {
@@ -206,7 +207,7 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 
-	// 3. 로그아웃
+	// 로그아웃
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {
 		status.setComplete();
@@ -214,7 +215,7 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 
-	// 4. 아이디 비밀번호 찾기 뷰 이동
+	// 아이디 비밀번호 찾기 뷰 이동
 	@RequestMapping("findUserInfoView.do")
 	public String findUserInfo() {
 		return "member/findUserInfo";
@@ -277,13 +278,32 @@ public class MemberController {
 		}
 	}
 
-	// 4. 마이페이지로 이동
+	// 마이페이지로 이동
 	@RequestMapping("myKass.do")
-	public String myPage() {
-		return "member/myPage";
+	public ModelAndView myPage(ModelAndView mv, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+		
+		System.out.println("마이페이지용 카운트 userNo" + userNo);
+
+		int moviePurchaseCount = mService.selectMovieListCount(userNo);
+		int vodPurchaseCount = mService.selectVodListCount(userNo);
+		int movieReviewCount = mService.selectMovieReviewListCount(userNo);
+		int vodReviewCount = mService.selectVodReviewListCount(userNo);
+		// int vodWishlistCount = mService.selectMovieListCount(userNo);
+
+		mv.addObject("moviePurchaseCount", moviePurchaseCount);
+		mv.addObject("vodPurchaseCount", vodPurchaseCount);
+		mv.addObject("movieReviewCount", movieReviewCount);
+		mv.addObject("vodReviewCount", vodReviewCount);
+		//mv.addObject("list", list);
+
+		mv.setViewName("member/myPage");
+
+		return mv;
 	}
 
-	// 5. 회원정보 수정
+	// 회원정보 수정
 	@RequestMapping("mupdateView.do")
 	public String updateMemberView() {
 		return "member/updateMember";
@@ -323,7 +343,7 @@ public class MemberController {
 		Attachment att = mService.selectAtt(m.getUserNo());
 
 		String renameFileName;
-		if (att == null) {
+		if (att == null) { // 한번도 사진이 업데이트 된 적 없을 
 			if (!file.getOriginalFilename().equals("")) {
 				renameFileName = saveFile(file, request);
 
@@ -345,9 +365,9 @@ public class MemberController {
 					}
 				}
 			}
-		} else {
+		} else { // 입력 된 사진이 있을 
 
-			if (file != null && !file.isEmpty()) {
+			if (file != null && !file.isEmpty()) { // INPU
 				renameFileName = saveFile(file, request);
 
 				if (att.getRenameFileName() != null) {
@@ -372,6 +392,9 @@ public class MemberController {
 						throw new MemberException("사진업로드 실패");
 					}
 				}
+			} else {
+				m.setAttachment(att);
+				model.addAttribute("loginUser", m);
 			}
 		}
 
@@ -507,7 +530,7 @@ public class MemberController {
 		System.out.println(listCount);
 
 		ArrayList<MoviePurchase> list = mService.selectMovieList(userNo, pi);
-		System.out.println("리스트!" + list);
+		System.out.println("영화 예매리스트!" + list);
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -520,14 +543,13 @@ public class MemberController {
 		return mv;
 	}
 
-
 	// 내가 쓴 영화 리뷰
 	@RequestMapping("movieReviewList.do")
 	public ModelAndView movieReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
 			HttpSession session) {
 		Member m = (Member) session.getAttribute("loginUser");
 		int userNo = m.getUserNo();
-		
+
 		int currentPage = page != null ? page : 1;
 
 		int listCount = mService.selectMovieReviewListCount(userNo);
@@ -537,10 +559,9 @@ public class MemberController {
 		System.out.println(userNo);
 
 		ArrayList<MyMovieReview> list = mService.selectMovieReviewList(userNo, pi);
-		System.out.println("리스트!" + list);
+		System.out.println("영화 리뷰리스트!" + list);
 		System.out.println(listCount + " 리스트카운트");
-		System.out.println("pi"+pi);
-
+		System.out.println("pi" + pi);
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -602,30 +623,165 @@ public class MemberController {
 		Review r = new Review();
 		r.setUserNo(m.getUserNo());
 		r.setMovieNo(movieNo);
-		
+
 		int result = mService.deleteMovieReview(r);
-		
+
 		if (result > 0) {
 			return "redirect:movieReviewList.do";
 		} else {
 			throw new MemberException("리뷰삭제실패");
 		}
 	}
-	
-	// 내가 쓴 vod 리뷰
-		@RequestMapping("vodReviewList.do")
-		public String vodReviewList() {
-			return "member/myVODReviewList";
-		}
-	// vod 구매 내역 리스트 뷰
+
+	// vod 구매 내역 리스트
 	@RequestMapping("vodPurchaseList.do")
-	public String vodPurchaseListView() {
-		return "member/vodPurchaseList";
+	public ModelAndView vodPurchaseList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		int listCount = mService.selectVodListCount(userNo);
+
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+
+		System.out.println(listCount);
+
+		ArrayList<VodPurchase> list = mService.selectVodList(userNo, pi);
+		System.out.println("vod 리스트!" + list);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("member/vodPurchaseList");
+		} else {
+			throw new MemberException("리스트 조회 실패");
+		}
+		return mv;
 	}
 
-	// 스낵 구매 내역 리스트 뷰
-	/*@RequestMapping("snackPurchaseList.do")
-	public String snackPurchaseListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+	// vod 보기
+	@RequestMapping("vodPurchaseDetail.do")
+	public ModelAndView vodPurchaseDetail(ModelAndView mv, int movieNo, @RequestParam("page") Integer page,
+			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		VodPurchase vp = new VodPurchase();
+		vp.setUserNo(userNo);
+		vp.setMovieNo(movieNo);
+
+		System.out.println(vp);
+
+		VodPurchase vodPurchase = mService.selectVodPurchaseDetail(vp);
+
+		if (vodPurchase != null) {
+			mv.addObject("vodPurchase", vodPurchase);
+			mv.addObject("currentPage", currentPage);
+			mv.setViewName("member/vodPurchaseDetail");
+		} else {
+			throw new MemberException("게시글 상세조회에 실패하였습니다");
+		}
+
+		return mv;
+	}
+
+	// 내가 쓴 vod 리뷰
+	@RequestMapping("vodReviewList.do")
+	public ModelAndView vodReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
+			HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		int listCount = mService.selectVodReviewListCount(userNo);
+
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+
+		System.out.println(userNo);
+
+		ArrayList<MyMovieReview> list = mService.selectVodReviewList(userNo, pi);
+		System.out.println("영화 리뷰리스트!" + list);
+		System.out.println(listCount + " 리스트카운트");
+		System.out.println("pi" + pi);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("member/myVODReviewList");
+		} else {
+			throw new MemberException("리스트 조회 실패");
+		}
+
+		return mv;
+	}
+
+	// vod 리뷰 등록
+	@RequestMapping("vrinsert.do")
+	public String insertVodReview(@RequestParam("tabs") String reScore, @RequestParam("reContent") String reContent,
+			@RequestParam("movieNo") int movieNo, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		Review r = new Review();
+		r.setUserNo(m.getUserNo());
+		r.setReScore(reScore);
+		r.setReContent(reContent);
+		r.setMovieNo(movieNo);
+
+		System.out.println(r);
+		int result = mService.insertVodReview(r);
+
+		if (result > 0) {
+			return "member/vodPurchaseList";
+		} else {
+			throw new MemberException("리뷰등록실패");
+		}
+	}
+
+	// vod 리뷰 수정
+	@RequestMapping("vrupdate.do")
+	public String updateVodReview(@RequestParam("tabs") String reScore, @RequestParam("reContent") String reContent,
+			@RequestParam("movieNo") int movieNo, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		Review r = new Review();
+		r.setUserNo(m.getUserNo());
+		r.setReScore(reScore);
+		r.setReContent(reContent);
+		r.setMovieNo(movieNo);
+
+		System.out.println(r);
+		int result = mService.updateVodReview(r);
+
+		if (result > 0) {
+			return "member/myVODReviewList";
+		} else {
+			throw new MemberException("리뷰수정실패");
+		}
+	}
+
+	// vod 리뷰 삭제
+	@RequestMapping("vrdelete.do")
+	public String deleteVodReview(int movieNo, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		Review r = new Review();
+		r.setUserNo(m.getUserNo());
+		r.setMovieNo(movieNo);
+
+		int result = mService.deleteVodReview(r);
+
+		if (result > 0) {
+			return "redirect:vodReviewList.do";
+		} else {
+			throw new MemberException("리뷰삭제실패");
+		}
+	}
+
+	// 스낵 구매 내역 리스트
+	@RequestMapping("snackPurchaseList.do")
+	public ModelAndView snackPurchaseList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
 			HttpSession session) {
 		Member m = (Member) session.getAttribute("loginUser");
 		int userNo = m.getUserNo();
@@ -638,8 +794,8 @@ public class MemberController {
 
 		System.out.println(listCount);
 
-		ArrayList<MyMovieReview> list = mService.selectSnackPurchaseList(userNo, pi);
-		System.out.println("리스트!" + list);
+		ArrayList<SnackPurchase> list = mService.selectSnackPurchaseList(userNo, pi);
+		System.out.println("스낵구매리스트!" + list);
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -650,11 +806,111 @@ public class MemberController {
 		}
 
 		return mv;
-	}*/
+	}
+
+	// 스낵 구매 상세
+	@RequestMapping("snackPurchaseDetail.do")
+	public ModelAndView snackPurchaseListDetail(ModelAndView mv, String orderNum,
+			@RequestParam(value = "page", required = false) Integer page, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		SnackPurchase sp = new SnackPurchase();
+
+		ArrayList<ProductOrder> spl = new ArrayList<ProductOrder>();
+
+		ProductOrder po = new ProductOrder();
+
+		po.setUserNo(userNo);
+		spl.add(po);
+		sp.setOrderNum(orderNum);
+		sp.setProdOrderList(spl);
+
+		System.out.println("sp????" + sp);
+
+		ArrayList<SnackPurchase> detailList = mService.selectSnackPurchasDetail(sp);
+		System.out.println("스낵구매상세리스트!" + detailList);
+
+		if (detailList != null) {
+			mv.addObject("detailList", detailList);
+			mv.addObject("currentPage", currentPage);
+			mv.setViewName("member/snackPurchaseDetail");
+		} else {
+			throw new MemberException("스낵 상세 조회 실패");
+		}
+
+		return mv;
+	}
 
 	// 굿즈 구매 내역 리스트 뷰
 	@RequestMapping("goodsPurchaseList.do")
-	public String goddsPurchaseListView() {
-		return "member/goodsPurchaseList";
+	public ModelAndView goodsPurchaseListView(ModelAndView mv,
+			@RequestParam(value = "page", required = false) Integer page, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		int listCount = mService.selectGoodsPurchaseListCount(userNo);
+
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+
+		System.out.println(listCount);
+
+		ArrayList<GoodsPurchase> list = mService.selectGoodsPurchaseList(userNo, pi);
+		System.out.println("굿즈구매리스트!" + list);
+
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("member/goodsPurchaseList");
+		} else {
+			throw new MemberException("리스트 조회 실패");
+		}
+		return mv;
+	}
+
+	// 굿즈 구매 상세
+	@RequestMapping("goodsPurchaseDetail.do")
+	public ModelAndView goodsPurchaseListDetail(ModelAndView mv, String orderNum,
+			@RequestParam(value = "page", required = false) Integer page, HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		int userNo = m.getUserNo();
+
+		int currentPage = page != null ? page : 1;
+
+		GoodsPurchase gp = new GoodsPurchase();
+
+		ArrayList<ProductOrder> gpl = new ArrayList<ProductOrder>();
+
+		ProductOrder po = new ProductOrder();
+
+		po.setUserNo(userNo);
+		gpl.add(po);
+		gp.setOrderNum(orderNum);
+		gp.setProdOrderList(gpl);
+
+		System.out.println("gp????" + gp);
+
+		ArrayList<GoodsPurchase> detailList = mService.selectGoodsPurchasDetail(gp);
+		System.out.println("굿즈구매상세리스트!" + detailList);
+
+		if (detailList != null) {
+			mv.addObject("detailList", detailList);
+			mv.addObject("currentPage", currentPage);
+			mv.setViewName("member/goodsPurchaseDetail");
+		} else {
+			throw new MemberException("굿즈 상세 조회 실패");
+		}
+
+		return mv;
+	}
+
+	// 장바구니
+	@RequestMapping("myCartView.do")
+	public String myCartView() {
+		return "member/myCart";
 	}
 }
