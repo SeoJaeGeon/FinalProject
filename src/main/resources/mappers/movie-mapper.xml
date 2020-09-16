@@ -71,6 +71,27 @@
 		<collection property="attachList" javaType="java.util.ArrayList" resultMap="attachmentResultSet"/>
 	</resultMap>
 	
+	<resultMap id="movieManagerGenre" type="Movie_Genre">
+		<id property="genreCode" column="GENRE_CODE"/>
+		<result property="genreName" column="GENRE_NAME"/>
+	</resultMap>
+	
+	<resultMap id="movieSales" type="Movie_Sales">
+		<id property="maNo" column="MA_NO"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="pryPrice" column="PAY_PRICE"/>
+	</resultMap>
+	
+	<resultMap id="movieSales2" type="Movie_Sales">
+		<id property="pryPrice" column="PAY_PRICE"/>
+	</resultMap>
+	
+	<resultMap id="movieRoomChk" type="Movie_Res_Room">
+		<id property="resInfo" column="RES_INFO"/>
+		<result property="roomChair" column="ROOM_CHAIR"/>
+	</resultMap>
+	
+	
 	<select id="movieList" resultMap="movieManagerResultSet">
 	SELECT *
 	FROM MOVIE
@@ -167,7 +188,8 @@
 	
 	<!-- 어태치의 파일 삭제 -->
 	<delete id="deleteMovieFile">
-	delete from ATTACHMENT where movie_No=#{movieNo}
+	delete from ATTACHMENT 
+	where RENAME_FILENAME=#{name}
 	</delete>
 	<!--  movie의 정보 삭제 -->
 	<delete id="deleteMovieInfo">
@@ -180,6 +202,7 @@
 		JOIN ATTACHMENT USING (MOVIE_NO)
 		WHERE FILE_STATUS = 'Y'
 		and SORT_CODE = 20
+		
 	</select>
 	
 	<select id="deleteSelectMovie" resultMap="movieManagerResultSet">
@@ -199,7 +222,7 @@
 	join movie_room USING(room_no)
     join movie_area using(ma_no)
     where movie_No=#{movieNo}
-    and RES_DATE > sysdate
+    and RES_DATE >= sysdate-1
     ORDER by res_date ASC
 	</select>
 	<select id="selectMovieResList2" resultMap="movieResList">
@@ -208,10 +231,19 @@
 	join movie_room USING(room_no)
     join movie_area using(ma_no)
     where movie_No=#{movieNo}
-    and RES_DATE > sysdate
+    and RES_DATE >= sysdate-1
     and MA_NAME =#{maName}
     ORDER by res_date ASC
-	    
+	</select>
+	<select id="selectmovResList3" resultMap="movieResList">
+	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
+	from MOVIE_RES
+	join movie_room USING(room_no)
+    join movie_area using(ma_no)
+    where movie_No=#{movieNo}
+    and RES_DATE = #{resDate}
+    and MA_NAME =#{maName}
+    ORDER by res_date ASC
 	</select>
 	
 	<!-- movie_res 리스트 추가하는 sql문 재건이랑 sql 시퀸스 이름을 맞춰야함 -->
@@ -231,6 +263,65 @@
 	,#{startTime}
 	,#{endTime})
 	</insert> 
+	
+	<!-- 무비 장르 List 불러오기 -->
+	<select id="selectMovieGenreList" resultMap="movieManagerGenre">
+	select *
+	from genre
+	</select>
+	
+	<!-- 선택된 무비 넘버 장르 불러오기 -->
+	<select id="selectMovieGenreName" resultMap="movieManagerGenre">
+	select *
+	from genre
+	where GENRE_CODE = #{getGenreCode}
+	</select>
+	
+	<update id="YNupdate">
+	update movie SET MOVIE_RSTATUS='N'
+	where movie_no = #{movieNo}
+	</update>
+	<update id="YNupdate2">
+	update movie SET MOVIE_RSTATUS='Y'
+	where movie_no = #{movieNo}
+	</update>
+	
+	<!--  sales 전체 구하기 -->
+	<select id="selesList1" resultMap="movieSales">
+	select pay_price, ma_no, pay_date
+	from payment
+	join user_resmovie using(ur_no)
+	join movie_res using(res_no)
+	join movie_room using (room_no)
+	join movie_area using (ma_no)
+	where ma_no = #{maNo}
+	</select>
+	
+	
+	
+	<!--  sales 기간 구하기 -->
+	<select id="selesList2" resultMap="movieSales">
+	select pay_price, ma_no, pay_date
+	from payment
+	join user_resmovie using(ur_no)
+	join movie_res using(res_no)
+	join movie_room using (room_no)
+	join movie_area using (ma_no)
+	where ma_no = #{maNo}
+	and PAY_DATE = #{payDate}
+	</select>
+	
+	<select id="selectRoomChk" resultMap="movieRoomChk">
+	select res_info, room_chair
+	from movie_room
+	join movie_res using(room_no)
+	where res_no = #{i}
+	</select>
+	
+	<!-- 영화상영정보인 movie_res를 삭제함 -->
+	<delete id="deleteMovieRoom">
+	delete from MOVIE_RES where RES_NO = #{i}
+	</delete>
 </mapper>
 
 

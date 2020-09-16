@@ -67,8 +67,8 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">상품 등록</a></li>
-							<li><a href="#">상품 수정 및 삭제</a></li>
+							<li><a href="sInsertSnack.do">상품 등록</a></li>
+							<li><a href="sUpdateSnack.do">상품 수정 및 삭제</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -80,7 +80,7 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">판매 종료 상품</a></li>
+							<li><a href="deleteSelectSnack.do">판매 종료 상품</a></li>
 						</ul>
 					</td>
 				</tr>

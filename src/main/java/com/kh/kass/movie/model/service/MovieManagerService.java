@@ -7,7 +7,10 @@ import com.kh.kass.common.Attachment;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.movie.model.vo.MovieResListAjax;
 import com.kh.kass.movie.model.vo.Movie_Area;
+import com.kh.kass.movie.model.vo.Movie_Genre;
 import com.kh.kass.movie.model.vo.Movie_Res;
+import com.kh.kass.movie.model.vo.Movie_Res_Room;
+import com.kh.kass.movie.model.vo.Movie_Sales;
 
 public interface MovieManagerService {
 	
@@ -18,7 +21,7 @@ public interface MovieManagerService {
 	public int updateMovieManager(Movie movieNo);
 		
 	// 3. 무비 정보 삭제
-	public int deleteMovieManager(Movie m);
+	public int deleteMovieManager(String m);
 	
 	// 4. 무비 리스트 출력
 	public ArrayList<Movie> movList();
@@ -62,5 +65,27 @@ public interface MovieManagerService {
 
 	public int insertMovieRes(MovieResListAjax movieResListAjax);
 	//
+
+	public ArrayList<Movie_Genre> selectMovieGenre();
+
+	public ArrayList<Movie_Genre> selectMovieGenreName(int getGenreCode);
+	
+	// 파일 삭제 창에서 삭제를 눌렀을 시
+	public int deleteMovieInfo(Movie movie1);
+
+	public int YNupdateMovie(Movie movie1);
+
+	public int YNupdateMovie2(Movie movie1);
+
+	public ArrayList<Movie_Sales> salesList2(Movie_Sales movie_Sales);
+
+	public ArrayList<Movie_Sales> salesList1(Movie_Sales movie_Sales);
+
+	public Movie_Res_Room resInfoChk(int i);
+
+	public int resInfoDelete(int i);
+
+	// 영화 상영 취소 날짜를 돌렸을 때 들어가는 페이지
+	public ArrayList<Movie_Res> selectmovResList3(Movie_Res movie_ResList2);
 	
 }
