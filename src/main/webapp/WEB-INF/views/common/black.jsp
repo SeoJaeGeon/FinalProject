@@ -238,14 +238,12 @@ a:hover {
 
 	<header>
 		<section id="header-1">
-			<form id="search-form">
-				<input type="text" id="search_Text" name="search_Text"
-					placeholder="영화 입력">
-				<button type="submit" id="search_Btn" name="search_Btn">
-					<img src="${ contextPath }/resources/images/search.png"
-						id="search_img">
+			<div id="search-form">
+				<input type="text" id="search_Text" name="search_Text" placeholder="영화 입력">
+				<button type="submit" id="search_Btn" name="search_Btn"type="button" onclick="enter();">
+					<img src="${ contextPath }/resources/images/search.png" id="search_img">
 				</button>
-			</form>
+			</div>
 		</section>
 		<section id="header-2">
 			<a href="${ contextPath }"> <img
@@ -276,9 +274,9 @@ a:hover {
 		<ul id="navi">
 			<li><a href="movieList.do">영화</a></li>
 			<li><a href="resList.do">예매</a></li>
-			<li><a href="#">극장</a></li>
-			<li><a href="#">VOD</a></li>
-			<li><a href="#">스토어</a></li>
+			<li><a href="placeList.do">극장</a></li>
+			<li><a href="vlist.do">VOD</a></li>
+			<li><a href="productList.do">스토어</a></li>
 		</ul>
 	</nav>
 
@@ -354,6 +352,16 @@ a:hover {
 			}
 
 			return true;
+		}
+		
+		function enter(){
+			var searchText = $("#search_Text").val();
+			if(searchText != '' && searchText != ' '){
+				location.href="movieList.do?searchText="+searchText;
+				$("#search_Text").val("");
+			}else{
+				alert("검색어를 입력해주세요.");
+			}
 		}
 	</script>
 </body>

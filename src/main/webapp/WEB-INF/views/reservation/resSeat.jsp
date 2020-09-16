@@ -385,6 +385,11 @@ header>section {
 	display : block;
 	margin: auto;
 }
+
+.selectMovieInfo > b {
+	margin : 0px !important;
+	padding : 0px !important;
+}
 /* 내가 쓴 코드 */
 </style>
 </head>
@@ -433,8 +438,8 @@ header>section {
 										<button value="8">8</button>
 									</li>
 								</ul>
-								<br> <br> <br> <span
-									style="display: block; width: 80px;">청소년</span>
+								<br> <br> <br>
+								<span style="display: block; width: 80px;">청소년</span>
 								<ul class="peopleList2">
 									<li class="changeSelect">
 										<button value="0">0</button>
@@ -466,17 +471,18 @@ header>section {
 								</ul>
 							</div>
 							<div class="selectMovieInfo">
-								<span
-									style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver;">${ seatList.maName }</span>
-								<span
-									style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver">${ seatList.roomNumber }관</span>
-								<span
-									style="display: block; float: left; width: 100px; font-size: 20px; text-align: center; border-right: 1px solid silver">
-									<strong style="color: red">${ num1 }</strong> / <em
-									style="font-style: inherit">${ num2 }</em>
-								</span> <span
-									style="display: block; width: 400px; font-size: 30px; text-align: center; margin-top: 60px;">
-									<strong>${ resDate }</strong><strong>${ seatList.startTime }~${ seatList.endTime }</strong>
+								<span style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver;">${ seatList.maName }</span>
+								<span style="display: block; float: left; width: 80px; font-size: 20px; text-align: center; border-right: 1px solid silver">${ seatList.roomNumber }관</span>
+								<span style="display: block; float: left; width: 100px; font-size: 20px; text-align: center; border-right: 1px solid silver">
+									<strong style="color: red">${ num1 }</strong> / <em style="font-style: inherit">${ num2 }</em>
+								</span>
+								<c:if test="${ seatList.movie.movieAge >= 19 }">
+									<span style="float: left; font-size: 20px; color:red; margin-left: 15px">보호자 없이 관람 불가</span>
+								</c:if>
+								<br clear="strong">
+								<span style="display: block; width: 400px; font-size: 35px; margin-top: 15px;">
+									<strong>${ resDate }</strong><br clear="strong">
+									<strong>${ seatList.startTime }~${ seatList.endTime }</strong>
 								</span>
 							</div>
 						</div>
@@ -627,14 +633,27 @@ header>section {
 		var totalPrice = $('.movie_sale4').children('div').eq(2).children(
 				'span').eq(1);
 
+		var movieAge = ${ seatList.movie.movieAge };
+		if(movieAge >= 19 && val1 < 1){
+			$('.peopleList2 li button').prop('disabled', true);
+		}
+		
 		$(".peopleList1 li").click(function() {
 			var list = $(this);
 			var child = list.children('button');
-
+			
 			if (Number(child.val()) + val2 > 8) {
 				alert("총 인원이 8명을 넘어갈수 없습니다.");
 			} else {
 				val1 = Number(child.val());
+				if(movieAge >= 19 && val1 >= 1){
+					$('.peopleList2 li button').prop('disabled', false);
+				}else if(movieAge >= 19 && val1 < 1){
+					$('.peopleList2 li button').prop('disabled', true);
+					$(".peopleList2 li").removeClass('changeSelect');
+					$(".peopleList2 li").eq(0).addClass('changeSelect');
+					val2 =0;
+				}
 				$(".peopleList1 li").removeClass('changeSelect');
 				list.addClass('changeSelect');
 				peopleDiv(val1, val2);
@@ -648,18 +667,35 @@ header>section {
 		$(".peopleList2 li").click(function() {
 			var list = $(this);
 			var child = list.children('button');
-
-			if (Number(child.val()) + val1 > 8) {
-				alert("총 인원이 8명을 넘어갈수 없습니다.");
-			} else {
-				val2 = Number(child.val());
-				$(".peopleList2 li").removeClass('changeSelect');
-				list.addClass('changeSelect');
-				peopleDiv(val1, val2);
-				sum = val1 + val2;
-				console.log("청소년 : " + val2 + "명");
-				console.log("총 : " + sum + "명");
+			if( movieAge >= 19 && val1 >= 1){
+				if (Number(child.val()) + val1 > 8) {
+					alert("총 인원이 8명을 넘어갈수 없습니다.");
+				} else {
+					val2 = Number(child.val());
+					$(".peopleList2 li").removeClass('changeSelect');
+					list.addClass('changeSelect');
+					peopleDiv(val1, val2);
+					sum = val1 + val2;
+					console.log("청소년 : " + val2 + "명");
+					console.log("총 : " + sum + "명");
+				}
+			}else if( movieAge < 19){
+				if (Number(child.val()) + val1 > 8) {
+					alert("총 인원이 8명을 넘어갈수 없습니다.");
+				} else {
+					val2 = Number(child.val());
+					$(".peopleList2 li").removeClass('changeSelect');
+					list.addClass('changeSelect');
+					peopleDiv(val1, val2);
+					sum = val1 + val2;
+					console.log("청소년 : " + val2 + "명");
+					console.log("총 : " + sum + "명");
+				}
+			}else{
+				alert("보호자 없이 관람할 수 없습니다.");
 			}
+			
+			
 		})
 
 		function peopleDiv(val1, val2) {

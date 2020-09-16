@@ -100,5 +100,45 @@ public class ResServiceImpl implements ResService {
 		return resDao.movListFavor();
 	}
 
+	@Override
+	public ArrayList<Movie> searchList(String searchText) {
+		return resDao.searchList(searchText);
+	}
+
+	@Override
+	public ArrayList<Movie> movieDateList() {
+		return resDao.movieDateList();
+	}
+
+	@Override
+	public ArrayList<Movie> movieFavorList() {
+		return resDao.movieFavorList();
+	}
+
+	@Override
+	public ArrayList<Reservation> placeList() {
+		return resDao.placeList();
+	}
+
+	@Override
+	public ArrayList<Movie> scoreList() {
+		return resDao.scoreList();
+	}
+
+	@Override
+	public ArrayList<Movie> totalScoreList() {
+		return resDao.totalScoreList();
+	}
+
+	@Override
+	public ArrayList<Movie> mScoreList() {
+		return resDao.mScoreList();
+	}
+
+	@Override
+	public ArrayList<Movie> mTotalScoreList() {
+		return resDao.mTotalScoreList();
+	}
+
 
 }

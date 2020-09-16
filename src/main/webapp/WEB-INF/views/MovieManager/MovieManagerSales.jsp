@@ -18,8 +18,8 @@
     <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
     
-    
-    
+    <!-- 지도 api 키 설정 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d5c72c09d29339bc5e4a1d658776bc39&libraries=services"></script>
     
 
      <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -216,7 +216,7 @@
         #stay2 {
             width: 100%;
             border: 1px white solid;
-            background: rgb(197, 197, 197);
+            background: white;
         }
 
         #stay_footer {
@@ -237,7 +237,7 @@
             border: 3px solid black;
             margin: auto;
             margin-top: 40px;
-            background: white;
+            background-color: #e9f5ff;
         }
 
         #content1-1 {
@@ -299,6 +299,7 @@
             height: 50%;
             float: left;
             border: 1px solid black;
+            background-color: #f2fbff;
             
         }
 
@@ -312,7 +313,6 @@
         #manager04-5{
             width:30%;
             height: 20%;
-            border: 1px solid black;
             float: left;
             margin-left: 50px;
             margin-top: 100px;
@@ -334,9 +334,14 @@
         /* 드롭 바 */
         #dropdownMenu1{
             width: 100%;
+            height:30px;
+            font-size:20px;
+            background-color: #f2fbff;
         }
         #dropdown-a{
             width: 330px;
+            height:30px;
+            font-size:20px;
         }
 
 
@@ -372,8 +377,13 @@
             padding: 5px;
             padding-top: 25px;
         }
-
-        
+		
+		.dropdown-menu {
+    	position: absolute !important;
+        }
+        #Calendar_Text{
+        background-color: #f2fbff;
+        }
     </style>
 </head>
 
@@ -399,12 +409,120 @@
 
                                             <div class="input-group date">
                                     
-                                                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                <input type="text" id="Calendar_Text"class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     
                                             </div>
                                     
                                         </div>
                             </div>
+                        <!-- 지도 api 시작 -->    
+                         <div id="map" style="width:100%;height:100%;border: 1px solid black;margin-top: 10px">
+                          <script>
+                       // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+                          var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+                          var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                              mapOption = {
+                                  center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+                                  level: 3 // 지도의 확대 레벨
+                              };  
+
+                          // 지도를 생성합니다    
+                          var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                          // 장소 검색 객체를 생성합니다
+                          var ps = new kakao.maps.services.Places();
+                          
+                          // 키워드로 장소를 검색합니다
+                           ps.keywordSearch("건대 메가박스", placesSearchCB); 
+
+                          // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+                          function placesSearchCB (data, status, pagination) {
+                              if (status === kakao.maps.services.Status.OK) {
+
+                                  // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                                  // LatLngBounds 객체에 좌표를 추가합니다
+                                  var bounds = new kakao.maps.LatLngBounds();
+                               /* 
+                                  for (var i=0; i<data.length; i++) {
+                                      displayMarker(data[i]);    
+                                      bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                                  }  
+                                   */
+                                  displayMarker(data[0]);    
+                                  bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
+
+                                  // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                                  map.setBounds(bounds);
+                              } 
+                          }
+
+                          // 지도에 마커를 표시하는 함수입니다
+                          function displayMarker(place) {
+                              
+                              // 마커를 생성하고 지도에 표시합니다
+                              var marker = new kakao.maps.Marker({
+                                  map: map,
+                                  position: new kakao.maps.LatLng(place.y, place.x) 
+                              });
+
+                              // 마커에 클릭이벤트를 등록합니다
+                              kakao.maps.event.addListener(marker, 'click', function() {
+                                  // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                                  infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                                  infowindow.open(map, marker);
+                              });
+                          }
+                          
+                          
+                          // 수익조회 버튼을 누르면 오는 function 
+                          function listTest(obj){
+  							var num5 = document.getElementById("Calendar_Text").value; // 날짜 2020/09/10 기준 (date 포멧으로 변경)
+  							var num6 = $("#dropdownMenu1 option:checked").text()
+  							console.log(num6);
+  							
+  							// 지도의 위치를 바꿈
+  							ps.keywordSearch(num6 + "메가박스", placesSearchCB); 
+  							
+  							
+  							function parse(str) {
+                          	    var y = str.substr(0, 4);
+                          	    var m = str.substr(5, 2);
+                          	    var d = str.substr(8, 2);
+                          	    return new Date(y,m-1,d);
+                          	}
+                          	var dateA = parse(num5);
+                          	var numL = [];
+                          	numL.push({maNo:obj, payDate:dateA});
+                             	$.ajax({ 
+                             		url: "MovieManagerSalesAjax.do",
+  								type: "post",
+  								data: JSON.stringify(numL),
+  								contentType: "application/json; charset=utf-8",
+  								success: function(data) {
+  									
+  									var data1 = numbeComma(data[0]);
+  									var data2 = numbeComma(data[1]);
+  									
+  								
+  									document.getElementById("textp_1").innerHTML=data1 + "원"; // 전체 금액
+  									document.getElementById("textp_2").innerHTML=data2 + "원"; // 선택된 날자 금액
+  									},
+  									error: function(errorThrown) {
+  									},
+  								}); 
+  						}
+                          // number에 int값을 넣으면 1000단위 콤마가 찍힌다.
+                          function numbeComma(number) {
+  						    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  						  }
+                          
+                          </script>
+                          
+
+
+                         </div>     
+                        <!-- 지도 api 끝 -->
                         </div>
                         <!-- 위 까지가 캘린더 코드 -->
             
@@ -414,32 +532,26 @@
                                <p>총 매출</p>
                             </div>
                             <div class="manager04-class" id="manager04-2">
-                                <p>123,123,322원</p>
+                                <p id="textp_1"></p>
                             </div>
                             <div class="manager04-class" id="manager04-3"> <!-- 기간 매출 -->
                                 <p>기간 매출</p>
                             </div>
                             <div class="manager04-class" id="manager04-4">
-                                <p>123,123,322원</p>
+                                <p id="textp_2"></p>
                             </div>
 
                            
                         </div>
 
                         <div id="manager04-5">
-                              <select id ="dropdownMenu1" name="dd2" onmousedown="this.value='';" onchange="jsFunction(this.value);">
-                                <option value='강남' id="dropdown-a">강남</option>
-                                <option value='건대' id="dropdown-a">건대</option>
-                                <option value='서울대입구' id="dropdown-a">서울대입구</option>
-                                <option value='홍대입구' id="dropdown-a">홍대입구</option>
+                              <select id ="dropdownMenu1" name="dd2" onclick="listTest(this.value);" onchange="listTest(this.value);">
+                              <c:forEach var="MOVIE_AREA" items="${ MOVIE_AREA }">
+                                <option value='${ MOVIE_AREA.maNo }' id="dropdown-a">${ MOVIE_AREA.maName }</option>
+							 </c:forEach>
                              </select>
 
                         </div>
-                        <!-- 위 까지가 지점 선택 영역-->
-
-                        <button type="button" class="btn btn-primary" id="button-1">상영 취소</button>
-
-                        
                     </div>
                 </div>
             </div>

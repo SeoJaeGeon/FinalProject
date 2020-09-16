@@ -160,9 +160,9 @@ li a:hover {
 	           	<ul>
 	           		<li><a href="MovieManagerInsertPage.do">영화 정보 등록</a></li>
 	           		<li><a href="MovieManagerUpdatePage.do">영화 정보 수정</a></li>
-	           		<li><a href="MovieManagerDeletePage.do">영화 정보 삭제</a></li>
 	           		<li><a href="MovieManagerScreenInsert.do">영화 상영 등록</a></li>
 	           		<li><a href="MovieManagerCancel.do">영화 상영 취소</a></li>
+	           		<li><a href="MovieManagerDeletePage.do">영화 개봉 수정</a></li>
 	           	</ul>
       	   </li>
            <li><a href="#">VOD 설정</a>
@@ -173,14 +173,14 @@ li a:hover {
            </li>
            <li><a href="#">스낵 설정</a>
            		<ul>
-	           		<li><a href="#">스낵 상품 등록</a></li>
-	           		<li><a href="#">스낵 상품 수정</a></li>
+	           		<li><a href="sInsertSnack.do">스낵 상품 등록</a></li>
+	           		<li><a href="sUpdateSnack.do">스낵 상품 수정</a></li>
 	           	</ul>
            </li>
            <li><a href="#">굿즈 설정</a>
 	           <ul>
-		         	<li><a href="#">굿즈 상품 등록</a></li>
-	           		<li><a href="#">굿즈 상품 등록</a></li>
+		         	<li><a href="gInsertGoods.do">굿즈 상품 등록</a></li>
+	           		<li><a href="gUpdateGoods.do">굿즈 상품 수정</a></li>
 		       </ul>
            </li>
            <li><a href="#">관리</a>

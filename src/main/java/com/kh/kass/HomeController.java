@@ -1,15 +1,23 @@
 package com.kh.kass;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.kass.movie.model.vo.Movie;
+import com.kh.kass.reservation.model.exception.ResException;
+import com.kh.kass.reservation.model.service.ResService;
 
 /**
  * Handles requests for the application home page.
@@ -19,21 +27,46 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		/*logger.info("Welcome home! The client locale is {}.", locale);
+	@Autowired
+	private ResService resService;
+
+	@RequestMapping("home.do")
+	public ModelAndView movieSelectAll(ModelAndView mv, String searchText) {
+		ArrayList<Movie> movieDateList = resService.movieDateList();
+		ArrayList<Movie> movieFavorList = resService.movieFavorList();
+		ArrayList<Movie> scoreList = resService.mScoreList();
+		ArrayList<Movie> totalScoreList = resService.mTotalScoreList();
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		ArrayList<Movie> avgScore = new ArrayList<>();
+		double avg = 0;
+		for(int i=0; i<scoreList.size(); i++) {
+			if(scoreList.get(i).getMovieNo() == totalScoreList.get(i).getMovieNo()) {
+				Movie m = new Movie();
+				avg = Math.round((scoreList.get(i).getScore() / totalScoreList.get(i).getScore() * 100)*10)/10.0;
+				m = new Movie(scoreList.get(i).getMovieNo(), avg);
+				avgScore.add(m);
+			}
+		}
 		
-		String formattedDate = dateFormat.format(date);
+		for(int i=0; i<movieFavorList.size(); i++) {
+			for(int j=0; j<avgScore.size(); j++) {
+				if((movieFavorList.get(i).getMovieNo()) == (avgScore.get(j).getMovieNo())) {
+					movieFavorList.get(i).setScore(avgScore.get(j).getScore());
+				}
+			}
+		}
 		
-		model.addAttribute("serverTime", formattedDate );*/
+		Collections.sort(movieFavorList);
 		
-		return "home";
+		if (movieDateList != null || movieFavorList != null) {
+			mv.addObject("movieDateList", movieDateList);
+			mv.addObject("movieFavorList", movieFavorList);
+			mv.setViewName("home");
+		} else {
+			throw new ResException("영화 리스트 불러오기를 실패했습니다.");
+		}
+		
+		return mv;
 	}
 	
 }

@@ -26,7 +26,26 @@
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 
 
-
+	
+	
+	
+	
+	<script>
+	window.onload = function() {
+		
+		var result = ${resultOX};
+		
+		if(result == 0){
+			alert("영화정보 등록에 실패했습니다.")
+			console.log("resultOX == 0");
+		} else if(result == 2){
+			console.log("resultOX == 2");
+		} else if(result == 1){
+			alert("영화 정보 등록에 성공하였습니다!!");
+			console.log("resultOX == 1");
+		}
+	}
+	</script>
 
 
 	
@@ -299,7 +318,7 @@
         #stay2 {
             width: 100%;
             border: 1px white solid;
-            background: rgb(197, 197, 197);
+            background: white;
         }
 
         #stay_footer {
@@ -318,7 +337,8 @@
         #manager01 {
             width: 50%;
             height: 1189px;
-            border: 3px solid black;
+            border-bottom: 3px solid black;
+    		border-left: 3px solid black;
             margin: auto;
             margin-top: 40px;
             background: white;
@@ -330,7 +350,7 @@
             border: 3px solid black;
             margin: auto;
             margin-top: 40px;
-            background: white;
+            background: #f2fbff;
         }
 
         #manager03 {
@@ -340,16 +360,17 @@
             margin: auto;
             margin-top: 40px;
             background: white;
+            background-color: #f2fbff;
         }
 
         #manager04{
             width: 20%;
             height:249px;
-            border: 3px solid black;
             margin: auto;
             margin-top: 40px;
             margin-left:5%;
             background: white;
+            border: none;
         }
 
         #content1-1 {
@@ -381,7 +402,8 @@
             border: 1px solid black;
             float:left;
             font-size: 25px;
-            text-align: center
+            text-align: center;
+            background-color: #e9f5ff;
         }
 
         
@@ -425,7 +447,7 @@
             color:black;
             background-image: none;
             border: none;
-            background-color: white;
+            background-color: #f2fbff;
             outline: none;
             text-shadow:none;
             -webkit-box-shadow: none;
@@ -438,7 +460,7 @@
             color:black;
             background-image: none;
             border: none;
-            background-color: white;
+            background-color: #e9f5ff;
             outline: none;
             text-shadow:none;
             -webkit-box-shadow: none;
@@ -548,8 +570,8 @@
                         <div class="movie-div" id="movie-div-id7"><br>개봉 날짜<br><input type="date" name="movieRdate" required></div>
                         <div class="movie-div" id="movie-div-id8"><br>상영 시간<br><input type="text" name="movieStime" required></div>
                         <div class="movie-div" id="movie-div-id9"><br>개봉 상태<br><select name="movieRstatus" required>
-                        	<option value="Y">개봉</option>
-                        	<option value="N">미개봉</option>
+                        	<option value="Y">상영등록 가능</option>
+                        	<option value="N">상영등록 불가</option>
                         </select></div>
                         <div class="movie-div" id="movie-div-id10"><br>제작 국가<br><input type="text" name="movieCountry" required></div>
                         <div class="movie-div" id="movie-div-id11"><br>영화 가격<br><input type="text" name="moviePrice" required></div>

@@ -175,7 +175,7 @@
         #stay2 {
             width: 100%;
             border: 1px white solid;
-            background: rgb(197, 197, 197);
+            background: white;
         }
 
         #stay_footer {
@@ -223,7 +223,7 @@
             width: 100%;
             height: 100%;
             display: block;
-
+			background-color: #f2fbff;
 
         }
 
@@ -296,6 +296,20 @@
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
 }
+/* 재 상영 버튼*/
+.movie_statusY {
+	float: left;
+	margin-top: 2px;
+	margin-left:75px;
+	padding-top: 7px;
+	background: rgb(114, 168, 98);
+	color: white;
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	font-size: 19px;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
 
 /* 모달창 세팅 */
 #Xspan{
@@ -326,7 +340,7 @@ margin-top:-20px;
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
                     <div id="content1-1">
-                        <h1 id="content1-h1-1" style="align-content: center">영화정보 삭제</h1>
+                        <h1 id="content1-h1-1" style="align-content: center">영화 개봉 변경</h1>
                     </div>
                 <div id="manager01">
                     <div class="manager-formQ1" id="manager02" style="overflow: auto">
@@ -339,7 +353,12 @@ margin-top:-20px;
 									<p class="age">${ movListFile.movieAge }세 이용가</p>
 								</div>
 								<div class="btn-util">
-									<span class="movie_statusN" data-toggle="modal" data-target="#staticBackdrop2${movListFile.movieNo }">영화 삭제</span>
+								<c:if test="${ movListFile.movieRstatus eq 'Y' }">
+									<span class="movie_statusN" data-toggle="modal" data-target="#staticBackdrop2${movListFile.movieNo }">개봉 종료</span>
+								</c:if>
+								<c:if test="${ movListFile.movieRstatus eq 'N' }">
+									<span class="movie_statusY" data-toggle="modal" data-target="#staticBackdrop3${movListFile.movieNo }">영화 개봉</span>
+								</c:if>
 								</div>
 								
 								
@@ -349,25 +368,58 @@ margin-top:-20px;
 							  <div class="modal-dialog">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <h5 class="modal-title" id="staticBackdropLabel">영화 정보 삭제하기</h5>
+							        <h5 class="modal-title" id="staticBackdropLabel">영화 개봉 변경하기</h5>
 							        <button type="button" id="Xspan" class="close" data-dismiss="modal" aria-label="Close">
 							          <span aria-hidden="true">&times;</span>
 							        </button>
 							      </div>
 							      <div class="modal-body">
 							       	<div id="modalbodysns1">
-							       		<h1 id="snsh1_1">${ movListFile.movieName }&nbsp의<br>정보를 정말 삭제하시겠습니까?</h1><br><br>
+							       		<h1 id="snsh1_1">${ movListFile.movieName }&nbsp의<br>영화 상영을 정말로 중단하시겠습니까?</h1><br><br>
 							       		<img class="deleteImgModal" src="<%=request.getContextPath()%>${ movListFile.attachList[0].filePath }${ movListFile.attachList[0].renameFileName }">
 										<br>
 							       	</div>
 							      </div>
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-							        <button type="button" class="btn btn-danger" id="${movListFile.movieNo }" onclick="movieDelete(this.id)">삭제하기</button>
+							        <button type="button" class="btn btn-danger" id="${movListFile.movieNo }" onclick="movieDelete1(this.id)">상영종료</button>
 							        <!-- 삭제버튼을 누르면 실행되는 function -->
 										<script>
-										function movieDelete(id){
+										function movieDelete1(id){
+											alert("영화가 성공적으로 상영종료 했습니다!");
 											return location.href="MoviemanagerDeletePageFile.do?MovieNo="+id;
+										}
+										</script>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							<!-- 삭제하기 버튼을 누르면 생기는 모달창 여기까지 -->
+							<!-- 재 상영 버튼을 누르면 생기는 모달창 -->
+							<div class="modal fade" id="staticBackdrop3${movListFile.movieNo }" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="staticBackdropLabel">영화 개봉 변경하기</h5>
+							        <button type="button" id="Xspan" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							       	<div id="modalbodysns1">
+							       		<h1 id="snsh1_1">${ movListFile.movieName }&nbsp의<br>영화를 정말로 개봉하시겠습니까?</h1><br><br>
+							       		<img class="deleteImgModal" src="<%=request.getContextPath()%>${ movListFile.attachList[0].filePath }${ movListFile.attachList[0].renameFileName }">
+										<br>
+							       	</div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+							        <button type="button" class="btn btn-success" id="${movListFile.movieNo }" onclick="movieDelete2(this.id)">영화개봉</button>
+							        <!-- 삭제버튼을 누르면 실행되는 function -->
+										<script>
+										function movieDelete2(id){
+											alert("영화가 성공적으로 개봉되었습니다!");
+											return location.href="MoviemanagerDeletePageFile2.do?MovieNo="+id;
 										}
 										</script>
 							      </div>

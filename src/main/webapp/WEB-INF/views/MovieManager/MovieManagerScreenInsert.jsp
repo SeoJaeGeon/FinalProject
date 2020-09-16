@@ -107,7 +107,7 @@
             width: 100%;
             height: 70px;
         }
-
+        
         #content {
             width: 100%;
             /* border: 1px rgb(236, 159, 159) solid; */
@@ -219,7 +219,7 @@
             width: 100%;
             height: 2000px;
             border: 1px white solid;
-            background: rgb(197, 197, 197);
+            background: white;
         }
 
         #stay_footer {
@@ -251,7 +251,6 @@
 
         #content1-h1-1 {
             width: 290px;
-            align-content: center;
             margin: auto;
         }
         
@@ -259,9 +258,9 @@
 
         #manager02{
             width: 100%;
-            height: 50px;
+            height: 70px;
             display: block;
-            
+            background-color: #d9edf7;
             
         }
 
@@ -269,19 +268,20 @@
             width:25%;
             height:50px;
             float: left;
-            
+            margin: 10px;
         }
-
+		
+		
 
         #dropdownMenu1{
             width: 100%;
             height: 50px;
-            
         }
         
         #dropdownMenu1_A{
         	 width: 100%;
             height: 50px;
+            margin-top: 10px;
         }
         
         #dropdownMenu2{
@@ -319,19 +319,21 @@
             height:50px;
             display: block;
             float: left;
+            margin-top: 10px;
         }
 
         #manager05{
-            width:15%;
+            width:12%;
             height:50px;
             display: block;
             float: left;
+            margin-top: 10px;
         }
 
         #manager06{
             margin: auto;
             margin-top: 10px;
-            margin-left:57%;
+            margin-left:47%;
             float: left;
         }
 
@@ -364,17 +366,18 @@
         
         #manager2-01{
             width: 50%;
-            height: 1047px;
+            height: 1025px;
             border: 1px solid black;
             float: left;
+            background-color: #d9edf7;
         }
 
         #manager2-02{
             width: 50%;
-            height: 1047px;
-            border: 1px solid red;
+            height: 1025px;
+            border: 1px solid black;
             float: left;
-            
+            background-color: #d9edf7;
             
         }
 
@@ -397,6 +400,7 @@
        #manager2-id-div1{
            margin-top: 30px;
            height: 450px;
+           background-color: white;
        }
         
        
@@ -409,6 +413,7 @@
         #container-1{
             width: 100%;
             height: 100%;
+            background-color: white;
         }
 
         .datepicker{
@@ -445,6 +450,7 @@
 	height:550px;
 	margin-left:60px;
 	border: 1px solid black;
+	background-color: white;
 }
 
 #thumbnailImg1{
@@ -464,6 +470,16 @@ font-size:20px;
 }
 
 
+#manager2-01-01{
+	margin-top: 35px;
+}
+#backimg{
+width: 100%;
+height: 2000px;
+opacity : 5%;
+position: absolute;
+pointer-events: none;
+}
 
     </style>
     
@@ -474,12 +490,15 @@ font-size:20px;
 
 <body>
         <!-- 드롭박스 선택 시 알러트 뜨는 script -->
-        
+         		<%
+                            	ArrayList<Attachment> ATClist1 = (ArrayList<Attachment>)request.getAttribute("movieAttachment1");
+            	%>
 
 
      <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
+        <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
@@ -490,18 +509,21 @@ font-size:20px;
                			<div id="manager02">
                             <!-- 위에 상단바 -->
                             <div class="dropdown" id="manager02-1">
-                               <!-- 맨위 날짜 선택 부분 -->
                             <c:forEach var="movieListName" items="${movieListName}">
                                     <select id ="dropdownMenu1" name="dd6" onchange="movieNameChange(this.value);">
                                             <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
-                         	<%
+                         	<%-- <%
 		                    ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movListFile");
 		                    for(int i = 0; i<list.size();i++){
-		                    %>	
-		                    				<option value="<%=list.get(i).getMovieName()%>"><%=list.get(i).getMovieName()%></option>
-                    		<%
+		                    %>	 --%>
+		                    		<c:forEach var="list" items="${ movListFile }">
+		                    		<c:if test="${ movieListName.movieNo ne list.movieNo }">
+		                    				<option value="${ list.movieName }">${ list.movieName }</option>
+                    				</c:if>
+		                    		</c:forEach>
+                    		<%-- <%
 		                    }
-                    		%>
+                    		%> --%>
                                     </select>
                             <script>
 		                    	function movieNameChange(obj){   		
@@ -610,22 +632,39 @@ font-size:20px;
                                 <!-- 영화 선택 -->
                                
                             <c:forEach var="movieListName" items="${movieListName}">
-                                    <select id ="dropdownMenu1" onchange="movieNameChange(this.value);" name="dd6">
+                                    <select id ="dropdownMenu1" onchange="movieNameChangebottom(this.value);" name="dd6">
                                             <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
                                             
-                         	<%
-		                    ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movListFile");
-		                    for(int i = 0; i<list.size();i++){
-		                    %>	
-		                    				<option value="<%=list.get(i).getMovieName()%>"><%=list.get(i).getMovieName()%></option>
-                    		<%
-		                    }
-                    		%>
+		                    <c:forEach var="list" items="${ movListFile }">
+	                    		<c:if test="${ movieListName.movieNo ne list.movieNo }">
+	                    				<option value="${ list.movieName }">${ list.movieName }</option>
+                   				</c:if>
+                    		</c:forEach>
                                     </select>
                             </c:forEach>
-                            <%
-                            	ArrayList<Attachment> ATClist1 = (ArrayList<Attachment>)request.getAttribute("movieAttachment1");
-		                    %>
+                            
+                            <!-- 아래쪽 이름 바꿀 시 실행되는 function과 Ajax -->
+                            <script>
+                            function movieNameChangebottom(obj){
+                            	$.ajax({ 
+									url: "MovieManagerResAjax.do",
+									type: "post",
+									data: obj,
+									contentType: "application/json; charset=utf-8",
+									success: function(data) {
+										var image = document.getElementById("thumbnailImg1");
+										image.src = "${ contextPath }"+data;
+										},
+										error: function(errorThrown) {
+										alert("상영등록에 실패했습니다.")
+										},
+									}); 
+								}
+                            </script>
+                            
+                            
+                            
+                           
                                     
                             </div>
                             <div class="manager2-div" id="manager2-01-02">
@@ -775,7 +814,7 @@ font-size:20px;
                                     </tbody>
                                     </table>
                                     <script>
-                                    var tableDatas = []
+                                    var tableDatas = [];
                                     function table_make(){
                                     // 특정 버튼을 누르면 테이블의 td 가 1줄씩 추가되는데 이 모든것을 다 controller로 가져가야함
                                      
@@ -803,6 +842,9 @@ font-size:20px;
                                     		alert("지역을 선택해 주시기 바랍니다.");
                                     	} else {
                                     	tableDatas.push({movieName : num1, maName : num2, roomNo: num3 ,startTime: Stime, endTime: Etime, resDate: dateA});
+                                    	
+                                    	
+                                    	
                                     	console.log(tableDatas);
                                     	$("#movie-table").append("<tr><td name='movieName'>" + num1 + "</td>" + 
                                    								 "<td name='maName'>" + num2 + "</td>" +
@@ -819,14 +861,12 @@ font-size:20px;
         									url: "MovieManagerResinsert.do",
         									type: "post",
         									data: JSON.stringify(tableDatas),
-        									dataType: "json",
         									contentType: "application/json; charset=utf-8",
         									success: function(data) {
-        										alert("성공"); 
+        										alert("상영등록이 성공하였습니다!");
         										},
         										error: function(errorThrown) {
-        											alert("실패함");
-        											alert(errorThrown.statusText); 
+        										alert("상영등록에 실패했습니다.")
         										},
         									}); 
         								}

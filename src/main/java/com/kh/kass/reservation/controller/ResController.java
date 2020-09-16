@@ -7,8 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,17 +35,68 @@ public class ResController {
 	private ResService resService;
 
 	@RequestMapping("movieList.do")
-	public ModelAndView movieSelectAll(ModelAndView mv) {
+	public ModelAndView movieSelectAll(ModelAndView mv, String searchText) {
 		ArrayList<Movie> movListON = resService.movListON();
 		ArrayList<Movie> movListWait = resService.movListWait();
 		ArrayList<Movie> movListOff = resService.movListOff();
 		ArrayList<Movie> movListFavor = resService.movListFavor();
+		ArrayList<Movie> scoreList = resService.scoreList();
+		ArrayList<Movie> totalScoreList = resService.totalScoreList();
 		
-		if (movListON != null || movListWait != null || movListOff != null) {
+		ArrayList<Movie> avgScore = new ArrayList<>();
+		double avg = 0;
+		for(int i=0; i<scoreList.size(); i++) {
+			if(scoreList.get(i).getMovieNo() == totalScoreList.get(i).getMovieNo()) {
+				Movie m = new Movie();
+				avg = Math.round((scoreList.get(i).getScore() / totalScoreList.get(i).getScore() * 100)*10)/10.0;
+				m = new Movie(scoreList.get(i).getMovieNo(), avg);
+				avgScore.add(m);
+			}
+		}
+		
+		for(int i=0; i<movListFavor.size(); i++) {
+			for(int j=0; j<avgScore.size(); j++) {
+				if((movListFavor.get(i).getMovieNo()) == (avgScore.get(j).getMovieNo())) {
+					movListFavor.get(i).setScore(avgScore.get(j).getScore());
+				}
+				if((movListON.get(i).getMovieNo()) == (avgScore.get(j).getMovieNo())) {
+					movListON.get(i).setScore(avgScore.get(j).getScore());
+				}
+			}
+		}
+		
+		Collections.sort(movListFavor);
+		
+		double totalRes = 0;
+		for(int i=0; i<movListON.size(); i++) {
+			totalRes += movListON.get(i).getResPeople();
+		}
+		
+		for(int i=0; i<movListON.size(); i++) {
+			movListON.get(i).setResPeople(Math.round((movListON.get(i).getResPeople()/totalRes*100)*10)/10.0);
+		}
+		
+		for(int i=0; i<movListFavor.size(); i++) {
+			for(int j=0; j<movListON.size(); j++) {
+				if(movListON.get(j).getMovieNo() == movListFavor.get(i).getMovieNo()) {
+					movListFavor.get(i).setResPeople(movListON.get(j).getResPeople());
+				}
+			}
+		}
+		
+		ArrayList<Movie> searchList = new ArrayList<>();
+		if(searchText != null) {
+			searchList = resService.searchList(searchText);
+		}
+		
+		if (movListON != null || movListWait != null || movListOff != null || searchList != null) {
 			mv.addObject("movListON", movListON);
 			mv.addObject("movListWait", movListWait);
 			mv.addObject("movListOff", movListOff);
 			mv.addObject("movListFavor", movListFavor);
+			mv.addObject("searchList", searchList);
+			mv.addObject("searchText", searchText);
+			mv.addObject("searchList", searchList);
 			
 			mv.setViewName("reservation/movieList");
 		} else {
@@ -118,14 +169,10 @@ public class ResController {
 			@RequestParam(value="page", required=false) Integer page) {
 		int currentPage = page != null ? page : 1;
 		ArrayList<Movie> movInfo = resService.movieInfo(movieNum);
-
 		ArrayList<Review> reList = resService.reviewList(movieNum);
-		
 		int reviewUp = 0;
 		int reviewDown = 0;
 		int listCount = reList.size();
-		System.out.println("movieNo : " + movieNum);
-		System.out.println("리뷰 리스트 갯수 : " + listCount);
 		PageInfo pi = PaginationS.getPageInfo(currentPage, listCount);
 		
 		if(reList.size() >= 1) {
@@ -139,7 +186,6 @@ public class ResController {
 		}
 		
 		ArrayList<Review> rList = resService.rSelectList(pi, movieNum);
-		System.out.println("rList : " + rList);
 		Calendar time = Calendar.getInstance();
 		Date movieDate = movInfo.get(0).getMovieRdate();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -157,13 +203,10 @@ public class ResController {
 		int compare = today.compareTo(mDate);
 		boolean movieStatus = false;
 		if(compare > 0) {
-			System.out.println(" today > mDate");
 			movieStatus= false;
 		}else if(compare <0) {
-			System.out.println(" today < mDate");
 			movieStatus = true;
 		}else {
-			System.out.println(" today = mDate");
 			movieStatus = true;
 		}
 		
@@ -186,8 +229,6 @@ public class ResController {
 	
 	@RequestMapping("resSeat.do")
 	public ModelAndView goResSeat(ModelAndView mv, @RequestParam("placeValue") int placeValue) {
-		
-		
 		
 		Reservation seatList = resService.resSeatSelect(placeValue);
 		
@@ -356,6 +397,21 @@ public class ResController {
 		Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd").create();
 		
 		return "success";
+	}
+	
+	@RequestMapping("placeList.do")
+	public ModelAndView placeAllView(ModelAndView mv) {
+		
+		ArrayList<Reservation> placeList = resService.placeList();
+		System.out.println("pladeList : " + placeList);
+		
+		if (placeList != null) {
+			mv.addObject("placeList", placeList);
+			mv.setViewName("reservation/moviePlaceInfo");
+		} else {
+			throw new ResException("극장 불러오기를 실패했습니다.");
+		}
+		return mv;
 	}
 }
 	

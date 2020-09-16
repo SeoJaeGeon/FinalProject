@@ -99,7 +99,7 @@ header>section {
 	width: 100%;
 	height: 1000px;
 	padding: 10px;
-	background: rgb(234, 227, 227);
+	background: black;
 }
 
 .movie_content {
@@ -111,7 +111,7 @@ header>section {
 
 .movie_station {
 	margin: auto;
-	margin-top: 150px;
+	margin-top: 145px;
 	width: 1200px;
 	height: 500px;
 	background: white;
@@ -119,14 +119,13 @@ header>section {
 
 .movie_text {
 	font-size: 22px;
-	font-weight: bold;
-	padding-top: 5px;
+	padding-top: 10px;
 	padding-left: 10px;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
-	border-top: 3px solid black;
-	border-bottom: 3px solid black;
-	background: none;
+	background: black;
+	color : white;
+	border-radius : 10px;
+	text-shadow: -1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;
+	font-family: 'NanumBarunGothic', sans-serif;
 }
 
 .movie_select {
@@ -431,8 +430,7 @@ header>section {
 								<ul class="movie_ul moc_list_ul">
 								<c:forEach var="oc" items="${ ocList }">
 									<li class="movie_area_list">
-										<button
-											style="border: none; background: none; width: 100%; text-align: left;">
+										<button style="border: none; background: none; width: 100%; text-align: left;">
 											<span class="movie_area">${ oc.mocName }</span>
 											<input value="${ oc.mocNo }" type="hidden" id="mocNo">
 										</button>
@@ -617,7 +615,7 @@ header>section {
 		var timeValue = "";
 		var placeText = "";
 		var placeValue = 0;
-		
+		var movieAge = 0;
 
 		$(".movie_list").click(function() {
 			$('.movie_list').removeClass('changeSelect');
@@ -636,11 +634,7 @@ header>section {
 			$('#movie_poster').html("");
 			$('#movie_poster').append($img);
 			
-			
-			console.log("path 경로 : " + path);
-			console.log("src 경로 : " + imgSrc);
-            
-			console.log(child2.text() + child3.text());
+			movieAge = child2.text();
 			
 			titleText = child3.text();
 			
@@ -799,7 +793,6 @@ header>section {
 							var $thirdStrong = $("<strong style='color: red'>").text(leftCount);
 							var $thirdEm = $("<em style='font-style: inherit'>").text("/"+initialCount);
 							
-							
 							$firstDiv.append($firstStrong);
 							$firstDiv.append($br);
 							$firstDiv.append($firstEm);
@@ -850,9 +843,27 @@ header>section {
 		}
 		
 		function nextBtn(){
-	         if($("loginUser") != null){
+	         if(${ empty loginUser } == false){
+	        	var userBirth = ${ (loginUser.userBirth > 0) ? loginUser.userBirth : 0 };
+				var strBirth = String( userBirth )
+				var age = calcAge(strBirth);
+				var numAge = Number(age);
+				var ageTest = 0;
+				if(movieAge == 'All'){
+					ageTest = numAge - 0;					
+				}else{
+					ageTest = numAge - movieAge;
+				}
+				console.log("userBirth : " +userBirth);
+				console.log("strBirth : " +strBirth);
+				console.log("movieAge : " +movieAge);
+				console.log("ageTest : " + ageTest);
 	            if(placeValue != 0){
-	               location.href="resSeat.do?placeValue="+placeValue;            
+	            	if(ageTest >= 0){
+	               		location.href="resSeat.do?placeValue="+placeValue;
+	            	}else{
+	            		alert("연령 제한 영화입니다.");
+	            	}
 	            }else{
 	               alert("영화를 선택하지 않으셨습니다.");
 	            }
@@ -860,6 +871,21 @@ header>section {
 	            alert("로그인 해주세요.");
 	         }
 	      }
+		
+		function calcAge(birth) {
+		    var date = new Date();
+		    var year = date.getFullYear();
+		    var month = (date.getMonth() + 1);
+		    var day = date.getDate();
+		    if (month < 10) month = '0' + month;
+		    if (day < 10) day = '0' + day;
+		    var monthDay = month + day;
+		    var birthdayy = birth.substr(0, 4);
+		    var birthdaymd = birth.substr(4, 4);
+		    var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
+		    return age;
+		}
+		
 	</script>
 
 </body>

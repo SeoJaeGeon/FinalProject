@@ -94,6 +94,38 @@ public class ResDao {
 	public ArrayList<Movie> movListFavor() {
 		return (ArrayList)sqlSession.selectList("resMapper.movListFavor");
 	}
+
+	public ArrayList<Movie> searchList(String searchText) {
+		return (ArrayList)sqlSession.selectList("resMapper.searchList", searchText);
+	}
+
+	public ArrayList<Movie> movieDateList() {
+		return (ArrayList)sqlSession.selectList("resMapper.movieDateList");
+	}
+
+	public ArrayList<Movie> movieFavorList() {
+		return (ArrayList)sqlSession.selectList("resMapper.movieFavorList");
+	}
+
+	public ArrayList<Reservation> placeList() {
+		return (ArrayList)sqlSession.selectList("resMapper.placeList");
+	}
+
+	public ArrayList<Movie> scoreList() {
+		return (ArrayList)sqlSession.selectList("resMapper.scoreList");
+	}
+
+	public ArrayList<Movie> totalScoreList() {
+		return (ArrayList)sqlSession.selectList("resMapper.totalScoreList");
+	}
+
+	public ArrayList<Movie> mScoreList() {
+		return (ArrayList)sqlSession.selectList("resMapper.mScoreList");
+	}
+
+	public ArrayList<Movie> mTotalScoreList() {
+		return (ArrayList)sqlSession.selectList("resMapper.mTotalScoreList");
+	}
 	
 
 }
