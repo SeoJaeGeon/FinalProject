@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Movie {
+public class Movie implements Comparable<Movie> {
    private int movieNo; // 영화번호
    private String movieName; // 영화이름
    private int movieAge; // 영화연령
@@ -34,6 +34,8 @@ public class Movie {
    private String movieContent; // 영화내용
    private String movieVodStatus; // vod 구분
    private String genreName; // 장르명
+   private double score; // 평점
+   private double resPeople; // 예약 퍼센트
    private ArrayList<Attachment> attachList;
    
    public Movie(int movieNo) {
@@ -63,6 +65,21 @@ public class Movie {
          this.movieVodStatus = movieVodStatus;
          this.genreName = genreName;
       }
+
+
+		public Movie(int movieNo, double score) {
+			super();
+			this.movieNo = movieNo;
+			this.score = score;
+		}
+
+
+		@Override
+		public int compareTo(Movie o) {
+			return (int)(o.score - this.score);
+		}
+   
+   
 
 
 }

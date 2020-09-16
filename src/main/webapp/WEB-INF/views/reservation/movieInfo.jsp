@@ -145,6 +145,17 @@ header>section {
 	padding: 10px;
 	width: 75%;
 	height: 40%;
+	position : relative;
+}
+
+.resValue{
+	top : 0;
+	right : 0;
+	font-size : 30px;
+	font-family: 'NanumBarunGothic', sans-serif;
+	text-shadow: -1px 0 silver, 0 1px silver, 1px 0 silver, 0 -1px silver;
+	color : purple;
+	position : absolute;
 }
 
 .movie-in3 {
@@ -152,12 +163,13 @@ header>section {
 	padding: 20px;
 	width: 75%;
 	height: 60%;
+	font-family: 'NanumBarunGothic', sans-serif;
 }
 
 /* 상영중 */
 .movie_statusY {
 	float: left;
-	margin-top: 10px;
+	margin-top: 2px;
 	padding-top: 7px;
 	background: rgb(46, 204, 113);
 	color: white;
@@ -166,13 +178,14 @@ header>section {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
+	border-radius : 10px;
+	cursor: default;
 }
-
 /* 상영중 */
 /* 개봉예정 */
 .movie_statusW {
 	float: left;
-	margin-top: 10px;
+	margin-top: 2px;
 	padding-top: 7px;
 	background: rgb(52, 152, 219);
 	color: white;
@@ -181,13 +194,14 @@ header>section {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
+	border-radius : 10px;
+	cursor: default;
 }
-
 /* 개봉예정 */
 /* 상영종료 */
 .movie_statusN {
 	float: left;
-	margin-top: 10px;
+	margin-top: 2px;
 	padding-top: 7px;
 	background: rgb(231, 76, 60);
 	color: white;
@@ -196,6 +210,8 @@ header>section {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
+	border-radius : 10px;
+	cursor: default;
 }
 /* 상영종료 */
 .like-view {
@@ -363,12 +379,14 @@ padding-top : 50px;
     padding-right: 3px;
     border-radius: 5px;
     color: rgb(51, 51, 51);
+    background : white;
 }
 
 .pageOne:hover {
     border: 1px solid rgb(151, 151, 151);
-    color: rgb(51, 51, 51);
+    color: white;
     text-decoration: none;
+    background : red;
 }
 
 .pageNone {
@@ -382,7 +400,8 @@ padding-top : 50px;
     padding-left: 3px;
     padding-right: 3px;
     border-radius: 5px;
-    color: rgb(51, 51, 51);
+    color: white;
+    background : black;
 }
 /* 페이징 바 */
 /* 내가 작성한 코드*/
@@ -402,7 +421,7 @@ padding-top : 50px;
 				</div>
 				<div class="movie-in2">
 					<p class="movie-grade">${ movInfo[0].movieAge }</p>
-					<h3>${ movInfo[0].movieName }</h3>
+					<h3 style="font-family: 'NanumBarunGothic', sans-serif;">${ movInfo[0].movieName }</h3>
 					<br clear="left">
 					<c:choose>
 						<c:when test="${ movInfo[0].movieRstatus == 'Y' && movieStatus == false }">
@@ -417,10 +436,10 @@ padding-top : 50px;
 					</c:choose>
 					<br><br><br>
 					<span class="like-view" style="color: black; margin-right: 100px;">
-						<img src="<%=request.getContextPath()%>/resources/images/good.png" style="width:30px; height:30px;"><b> : ${ reviewUp }</b>
+						<img src="<%=request.getContextPath()%>/resources/images/up_white.png" style="width:30px; height:30px;"><b> : ${ reviewUp }</b>
 					</span> 
 					<span class="like-view" style="color: black">
-						<img src="<%=request.getContextPath()%>/resources/images/bad.png" style="width:30px; height:30px;"><b> : ${ reviewDown }</b>
+						<img src="<%=request.getContextPath()%>/resources/images/down_white.png" style="width:30px; height:30px;"><b> : ${ reviewDown }</b>
 					</span>
 				</div>
 				<div class="movie-in3">
@@ -513,10 +532,10 @@ padding-top : 50px;
 						</div>
 						<div class="rView3">
 						<c:if test="${ r.reScore == 'B' }">
-							<img src="<%=request.getContextPath()%>/resources/images/bad.png" style="width:50px; height:50px;">
+							<img src="<%=request.getContextPath()%>/resources/images/up_white.png" style="width:50px; height:50px;">
 						</c:if>
 						<c:if test="${ r.reScore == 'G' }">
-							<img src="<%=request.getContextPath()%>/resources/images/good.png" style="width:50px; height:50px;">
+							<img src="<%=request.getContextPath()%>/resources/images/down_white.png" style="width:50px; height:50px;">
 						</c:if>
 						</div>
 					</li>
@@ -524,7 +543,7 @@ padding-top : 50px;
 				</ul>
 				
 				<c:choose>
-				<c:when test="${ reviewList.size() >= 6}">
+				<c:when test="${ reviewList.size() >= 1}">
 				<div class="pagination">
 					<c:if test="${ pi.currentPage <= 1 }">
 						
@@ -539,14 +558,14 @@ padding-top : 50px;
 					<!-- 페이지 숫자 -->
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:if test="${ p eq pi.currentPage }">
-							<button class="pageNone">${ p }</button>
+							<button class="pageNone" type="button" disabled="disabled">${ p }</button>
 						</c:if>
 						<c:if test="${ p ne pi.currentPage }">
 							<c:url var="pagination" value="movieInfo.do">
 								<c:param name="page" value="${ p }" />
 								<c:param name="movieNo" value="${ movInfo[0].movieNo }"/>
 							</c:url>
-							<button onclick="location.href='${ pagination }'" class="pageOne">${ p }</button>
+							<button onclick="location.href='${ pagination }'" class="pageOne" type="button">${ p }</button>
 						</c:if>
 					</c:forEach>
 					<c:if test="${ pi.currentPage >= pi.maxPage }">
@@ -557,7 +576,7 @@ padding-top : 50px;
 							<c:param name="page" value="${ pi.currentPage + 1 }"/>
 							<c:param name="movieNo" value="${ movInfo[0].movieNo }"/>
 						</c:url>
-						<button onclick="location.href='${ after }'" class="pageOne">&gt;</button>
+						<button onclick="location.href='${ after }'" class="pageOne" type="button">&gt;</button>
 					</c:if>
                  </div>
                  </c:when>
