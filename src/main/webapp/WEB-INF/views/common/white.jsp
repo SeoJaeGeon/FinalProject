@@ -279,7 +279,7 @@ a {
 			</c:if>
 		</section>
 	</header>
-
+	
 	<nav>
 		<ul id="navi">
 			<li><a href="movieList.do">영화</a></li>

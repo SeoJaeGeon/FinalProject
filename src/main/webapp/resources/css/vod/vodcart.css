@@ -1,0 +1,134 @@
+@charset "UTF-8";
+ #vod{/* 상단 바 */
+            margin: auto;
+            margin-top : 25px;
+            width: 1500px;
+            height: 70px;
+            background-color: white;
+            font-size: 40px;
+           font-weight : bold;
+            color: rgb(31, 69, 97);
+        }
+
+
+        #cart{
+            margin: auto;
+          
+            width: 1000px;
+            height: 400px;
+      
+
+        }
+        #cate{
+            margin: auto;
+            border: rgb(0,0,0,0.7) 1px solid;
+            width: 1000px;
+            height: 30px;
+            border-radius: 5px;
+
+        }
+        #cartvod{
+            
+            margin: auto;
+            margin-top: 10px;
+            border: rgb(0,0,0,0.2) 1px solid;
+            width: 970px;
+            height: 130px;
+            border-radius: 5px;
+        }
+        #vodimg{
+           
+            width: 95px;
+            height: 110px;
+            float: left; 
+            margin-left: 50px;
+             margin-top: 10px;
+        }
+        #movieImg{
+            width: 95px;
+            height: 110px;
+        }
+
+        #delete{
+            margin: auto;
+           margin-top: 10px;
+            border: rgb(0,0,0,0.7) 1px solid;
+            width: 1000px;
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        #back-btn{
+            margin: 10px 10px;
+            width: 100px;
+            height: 25px;
+            font-size: 10px;
+            background-color: rgb(169,169,169,0.7);
+            border-color: rgb(169,169,169,0.7);
+        }
+
+        #price{
+            margin: auto;
+           margin-top: 4px;
+            border: rgb(0,0,0,0.7) 1px solid;
+            width: 1000px;
+            height: 100px;
+            border-radius: 5px;
+        }
+
+        #buy-btn{
+            margin-left: 960px;
+            color: rgb(31, 69, 97);
+            width: 120px;
+            height: 35px;
+            font-weight : bold;
+            border-color: rgb(31, 69, 97);
+        }
+        #buy-btn:hover{
+           color: white;
+            background-color:rgb(31, 69, 97) ;
+            border-color: rgb(31, 69, 97);
+        }
+        #buy-btn1{
+            margin-left: 5px;
+            color: rgb(31, 69, 97);
+            width: 168px;
+            height: 35px;
+            font-weight : bold;
+            border-color: rgb(31, 69, 97);
+        }
+        #buy-btn1:hover{
+           color: white;
+            background-color:rgb(31, 69, 97) ;
+            border-color: rgb(31, 69, 97);
+        }
+
+        #buy{
+            margin: auto;
+           margin-top: 30px;
+        
+            width: 1000px;
+            height: 200px;
+          
+        }
+
+        #buy-btn2{
+            margin-left: 320px;
+            color: white;
+            width: 168px;
+            height: 35px;
+            font-weight : bold;
+            border-color: rgb(169,169,169,0.7);
+            background-color: rgb(169,169,169,0.7);
+        }
+      
+        #buy-btn3{
+            margin-left: 20px;
+            color: white;
+            width: 168px;
+            height: 35px;
+            font-weight : bold;
+            border-color: rgb(31, 69, 97);
+            background-color: rgb(31, 69, 97);
+        }
+      

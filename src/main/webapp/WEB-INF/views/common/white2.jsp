@@ -3,111 +3,211 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>KASS CINEMA</title>
 
-<title>Insert title here</title>
 <style>
+  header,
+        nav,
+        section,
+        article,
+        aside,
+        footer {
+            box-sizing: border-box;
+            display: block;
+        }
+
+        body{
+            width: 100%;
+            background: white;
+            margin: auto;
+        }
+
+        header {
+            width: 100%;
+            height: 150px;
+        }
+
+        nav {
+            width: 100%;
+            height: 50px;
+        }
+
+        #content {
+            width: 100%;
+        }
+
+        footer {
+            width: 100%;
+            height: 150px;
+            float: left;
+            background: lightgray;
+        }
+
+        header>section {
+            float: left;
+        }
+
+        #header-1 {
+            width: 25%;
+            height: 100%;
+            position: relative;
+        }
+
+        #header-2 {
+            width: 50%;
+            height: 100%;
+            position: relative;
+        }
+
+        #header-3 {
+            width: 25%;
+            height: 100%;
+        }
+
+        #footer1 {
+            width: 80%;
+            height: 30%;
+            padding: 1px;
+            width: 80%;
+            float: left;
+        }
+
+        #footer2 {
+            width: 80%;
+            height: 70%;
+            width: 80%;
+            float: left;
+        }
+
+        #footer3{
+            width: 20%;
+            height: 70%;
+            float: left;
+        }
+
+        .content1 {
+            width: 100%;
+            height: 500px;
+            padding-top: 20px;
+        }
+
+      
+        
+        #img1,#img2,#img3{
+            width: 500px !important;
+            height: 400px !important;   
+            margin:auto;
+        }
+
+        .carousel{
+            width: 100%;  
+        }
+
+
 /* 검색 창 */
-#search-form {
-	height: 50px;
-	width: 300px;
-	background: #ffffff;
-	border: 1px solid black;
-	margin: auto;
-	margin-top: 40px;
-}
+        #search-form{
+            height: 50px;
+            width: 300px;
+            background: #ffffff;
+            border: 1px solid;
+            margin: auto;
+            margin-top: 40px;
+        }
 
-#search_Text {
-	font-size: 16px;
-	width: 80%;
-	padding: 10px;
-	border: 0px;
-	outline: none;
-	float: left;
-	font-family: 'NanumBarunGothic', sans-serif;
-}
+        #search_Text{
+            font-size: 16px;
+            width: 80%;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+            float: left;
+            font-family: 'NanumBarunGothic', sans-serif;
+        }
 
-#search_img {
-	width: 30px;
-	height: 30px;
-}
-
-#search_Btn {
-	width: 20%;
-	height: 100%;
-	border: 0px;
-	background: white;
-	outline: none;
-	float: right;
-	color: #ffffff;
-	font-family: 'NanumBarunGothic', sans-serif;
-}
+        #search_Btn{
+            width: 20%;
+            height: 100%;
+            border: 0px;
+            background: white;
+            outline: none;
+            float: right;
+            color: #ffffff;
+            font-family: 'NanumBarunGothic', sans-serif;
+        }
 /* 검색 창 */
+        #search_img {
+            width: 30px;
+            height: 30px;
+        }
 
 /* 로고 */
-#logo_img {
-	display: block;
-	margin: auto;
-	margin-top: 20px;
-}
+        #logo_img{
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+        }
 /* 로고 */
 /* 로그인, 회원가입 */
-.login_bar {
-	float: right;
-	text-decoration: none;
-	color: silver;
-	font-weight: bold;
-	font-size: 21px;
-	margin-right: 50px;
-	margin-top: 20px;
-	font-family: 'NanumBarunGothic', sans-serif;
-}
+        .login_bar{
+            float: right;
+            text-decoration: none;
+            color: silver;
+            font-weight: bold;
+            font-size: 21px;
+            margin-right: 50px;
+            margin-top: 20px;
+            font-family: 'NanumBarunGothic', sans-serif;
+        }
 
-.login_bar:hover {
-	text-decoration: none;
-	color: gray;
-}
+        .login_bar:hover{
+            text-decoration: none;
+            color: gray;
+        }
 /* 로그인, 회원가입 */
 
 /* 네비게이션 바*/
-#navi {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	height: 100%
-}
+        #navi{
+            
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
 
-#navi>li {
-	float: left;
-	width: 20%;
-	height: 100%
-}
+        #navi>li{
+            display: inline-block;
+            width: 19%;
+            height: 100%;
+       
+        }
 
-#navi li a {
-	display: block;
-	text-decoration: none;
-	text-align: center;
-	color: white;
-	font-weight: bold;
-	padding-top: 5px;
-	font-size: 21px;
-	line-height: 40px;
-	height: 100%
-}
+        #navi li a{
+            height: 100%;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+           padding-top: 5px;
+            color: black;
+            font-weight: bold;
+            font-size: 21px;
+            line-height: 40px;
+        }
 
-#navi li a:hover {
-	color: white;
-	border-bottom: 1px solid red;
-}
+        #navi li a:hover{
+         
+           border-bottom: 2px solid rgb(31 , 69 ,97);
+           
+        }
 /* 네비게이션 바*/
 
+/* 네비게이션 바*/
 /* 모달 */
 /* The Modal (background) */
-.myloginModal{
+.myloginModal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
@@ -214,9 +314,7 @@ a {
 }
 </style>
 </head>
-
 <body>
-
 	<c:if test="${ !empty msg }">
 		<script>
 			alert('${msg}');
@@ -224,23 +322,25 @@ a {
 		<c:remove var="msg" />
 
 	</c:if>
-
 	<header>
 		<section id="header-1">
 			<form id="search-form">
 				<input type="text" id="search_Text" name="search_Text"
 					placeholder="영화 입력">
 				<button type="submit" id="search_Btn" name="search_Btn">
-					<img src="${ contextPath }/resources/images/search.png"
+					<img
+						src="<%=request.getContextPath()%>/resources/images/search.png"
 						id="search_img">
 				</button>
 			</form>
 		</section>
 		<section id="header-2">
 			<a href="${ contextPath }"> <img
-				src="${ contextPath }/resources/images/logo_white.png" id="logo_img">
+				src="<%=request.getContextPath()%>/resources/images/logo_navy.png"
+				id="logo_img">
 			</a>
 		</section>
+		
 
 		<section id="header-3">
 			<c:if test="${ empty sessionScope.loginUser }">
@@ -259,20 +359,19 @@ a {
 				</c:if>
 			</c:if>
 		</section>
-
 	</header>
+	
 	<nav>
 		<ul id="navi">
 			<li><a href="movieList.do">영화</a></li>
 			<li><a href="resList.do">예매</a></li>
 			<li><a href="#">극장</a></li>
-			<li><a href="vlist.do">VOD</a></li>
-			<li><a href="productList.do">스토어</a></li>
+			<li><a href="#">VOD</a></li>
+			<li><a href="#">스토어</a></li>
 		</ul>
 	</nav>
 
-
-		<div id="myloginModal" class="myloginModal">
+	<div id="myloginModal" class="myloginModal">
 		<!-- Modal content -->
 		<div class="loginmodal-content">
 			<div class="header">
@@ -312,7 +411,6 @@ a {
 			</div>
 		</div>
 	</div>
-
 	<script>
 		function login_bar() {
 			document.getElementById("myloginModal").style.display = "block";
@@ -346,5 +444,4 @@ a {
 		}
 	</script>
 </body>
-
 </html>
