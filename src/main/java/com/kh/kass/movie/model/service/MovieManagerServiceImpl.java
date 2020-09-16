@@ -11,7 +11,10 @@ import com.kh.kass.movie.model.dao.MovieManagerDao;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.movie.model.vo.MovieResListAjax;
 import com.kh.kass.movie.model.vo.Movie_Area;
+import com.kh.kass.movie.model.vo.Movie_Genre;
 import com.kh.kass.movie.model.vo.Movie_Res;
+import com.kh.kass.movie.model.vo.Movie_Res_Room;
+import com.kh.kass.movie.model.vo.Movie_Sales;
 
 @Service("MovieManagerService")
 public class MovieManagerServiceImpl implements MovieManagerService{
@@ -26,7 +29,7 @@ public class MovieManagerServiceImpl implements MovieManagerService{
 	}
 
 	@Override
-	public int deleteMovieManager(Movie m) {
+	public int deleteMovieManager(String m) {
 		return mDao.deleteMovieFile(m);
 	}
 
@@ -119,6 +122,61 @@ public class MovieManagerServiceImpl implements MovieManagerService{
 	public int insertMovieRes(MovieResListAjax movieResListAjax) {
 		return mDao.insertMovieRes(movieResListAjax);
 	}
+
+	@Override
+	public ArrayList<Movie_Genre> selectMovieGenre() {
+		return mDao.selectMovie_Genre();
+	}
+
+	@Override
+	public ArrayList<Movie_Genre> selectMovieGenreName(int getGenreCode) {
+		return mDao.selectMovie_GenreName(getGenreCode);
+	}
+
+	@Override
+	public int deleteMovieInfo(Movie movie1) {
+		return mDao.deleteMovieInfo(movie1);
+	}
+	
+	// 개봉상태를 N으로 만듬
+	@Override
+	public int YNupdateMovie(Movie movie1) {
+		return mDao.YNupdate(movie1);
+	}
+	
+	// 개봉상태를 Y으로 만듬
+	@Override
+	public int YNupdateMovie2(Movie movie1) {
+		return mDao.YNupdate2(movie1);
+	}
+	
+	// 전체 금액 구하기
+	@Override
+	public ArrayList<Movie_Sales> salesList1(Movie_Sales movie_Sales) {
+		return mDao.salesList1(movie_Sales);
+	}
+	
+	// 특정 날짜만 구하기
+	@Override
+	public ArrayList<Movie_Sales> salesList2(Movie_Sales movie_Sales) {
+		return mDao.salesList2(movie_Sales);
+	}
+
+	@Override
+	public Movie_Res_Room resInfoChk(int i) {
+		return mDao.selectRoomChk(i);
+	}
+
+	@Override
+	public int resInfoDelete(int i) {
+		return mDao.deleteMovieRoomInfo(i);
+	}
+
+	@Override
+	public ArrayList<Movie_Res> selectmovResList3(Movie_Res movie_ResList2) {
+		return mDao.selectmovResList3(movie_ResList2);
+	}
+
 	
 
 }

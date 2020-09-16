@@ -117,7 +117,7 @@
             	document.getElementById("thumbnailvod5").innerHTML="/resources/images/movie_vod/" + fileName;
             	console.log(document.getElementById(num_id).value);
             }
-
+        	console.log("벨류값 : " + document.getElementById("upImgFile1").value);
         };
 
 
@@ -307,7 +307,7 @@
         #stay2 {
             width: 100%;
             border: 1px white solid;
-            background: rgb(197, 197, 197);
+            background: white;
         }
 
         #stay_footer {
@@ -326,7 +326,8 @@
         #manager01 {
             width: 50%;
             height: 1189px;
-            border: 3px solid black;
+            border-bottom:3px solid black;
+            border-left:3px solid black;
             margin: auto;
             margin-top: 40px;
             background: white;
@@ -338,7 +339,7 @@
             border: 3px solid black;
             margin: auto;
             margin-top: 40px;
-            background: white;
+            background: #f2fbff;
         }
 
         #manager03 {
@@ -347,17 +348,18 @@
             border: 3px solid black;
             margin: auto;
             margin-top: 40px;
-            background: white;
+            background: #f2fbff;
+            
         }
 
         #manager04{
             width: 20%;
             height:249px;
-            border: 3px solid black;
             margin: auto;
             margin-top: 40px;
             margin-left:5%;
             background: white;
+            border: none;
         }
 
         #content1-1 {
@@ -389,7 +391,8 @@
             border: 1px solid black;
             float:left;
             font-size: 25px;
-            text-align: center
+            text-align: center;
+            background-color: #e9f5ff;
         }
 
         
@@ -407,7 +410,6 @@
         #movie-div2-id1{
             width: 500px;
             height: 500px;
-            border: 3px solid black;
             margin: auto;
             margin-top: 10px;
             font-size: 25px;
@@ -471,6 +473,7 @@
             margin-left: 95px;
             float: left;
         }
+        
 
         #movie-div3-input1{
             width: 100%;
@@ -479,8 +482,8 @@
         #movie-manager04-button1, #movie-manager04-button2{
             width: 70%;
             height: 20%;
-            margin-left:50px;
-            margin-top:20px; 
+            margin-left:90px;
+            margin-top:40px; 
         }
 
         #movie-manager04-button1{
@@ -521,7 +524,14 @@
        height: 496px;
        }
        
-     
+     /* 배경 이미지 */
+     #backimg{
+	width: 100%;
+	height: 1830px;
+	opacity : 5%;
+	position: absolute;
+	pointer-events: none;
+	}
 
     </style>
 </head>
@@ -530,12 +540,17 @@
 
 
 <body>
-
+					<%
+                    	ArrayList<Attachment> ATClist1 = (ArrayList<Attachment>)request.getAttribute("movieAttachment1");  
+	                    ArrayList<Attachment> ATClist2 = (ArrayList<Attachment>)request.getAttribute("movieAttachment2");
+	                    ArrayList<Attachment> ATClist3 = (ArrayList<Attachment>)request.getAttribute("movieAttachment3");
+                    %>
 
     <jsp:include page="../../views/common/manager.jsp" />
         
     <section id="content">
         <div id="stay2">
+        <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
@@ -547,18 +562,22 @@
                     <div class="manager-formQ1" id="manager01">
                     
                     
-                    <c:forEach var="movieList" items="${movieList1}">
+                    <c:forEach var="movieList1" items="${movieList1}">
                     
                     	<div class="movie-div" id="movie-div-id1"><br> 영화제목<br><select name="movieName" required onchange="movieNameChange(this.value)">
-                    		<option value="${movieList.movieName}">${movieList.movieName}</option>
-                    <% 
+                    		<option value="${movieList1.movieName}">${movieList1.movieName}</option>
+                    		<c:forEach var="movieList" items="${ movieList }">
+                    <%-- <% 
                     ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
                     for(int i = 0; i<list.size();i++){
-                    %>		
-                    		<option value="<%=list.get(i).getMovieName()%>"><%=list.get(i).getMovieName()%></option>
-                    <% 
+                    %>	 --%>	
+                    	 <c:if test="${ movieList1.movieNo ne movieList.movieNo }">
+                    		<option value="${ movieList.movieName }">${ movieList.movieName }</option>
+                    	</c:if>
+                    <%-- <% 
                     }
-                    %>		
+                    %>	 --%>
+                    </c:forEach>	
                     	</select></div>
                     	<!-- movieName 바뀌면 전체가 바뀌는 function -->
                     	<script>
@@ -569,41 +588,61 @@
                     	
                     	</script>
                     
-                        <div class="movie-div" id="movie-div-id2"><br>감독<br><input type="text" name="movieForeman" value="${ movieList.movieForeman }" required></div>
+                        <div class="movie-div" id="movie-div-id2"><br>감독<br><input type="text" name="movieForeman" value="${ movieList1.movieForeman }" required></div>
                         <div class="movie-div" id="movie-div-id3"><br>영화 연령<br><select name="movieAge" required>
-                        	<option value="0">전체이용가</option>
+                        <c:choose>
+                        	<c:when test="${ movieList1.movieAge eq 0 }">
+                        	<option value="0">전체이용가(기존값)</option>
                         	<option value="12">12세 이용가</option>
                         	<option value="15">15세 이용가</option>
                         	<option value="19">청소년 관람불가</option>
+                        	</c:when>
+                        	<c:when test="${ movieList1.movieAge eq 12 }">
+                        	<option value="12">12세 이용가(기존값)</option>
+                        	<option value="0">전체이용가</option>
+                        	<option value="15">15세 이용가</option>
+                        	<option value="19">청소년 관람불가</option>
+                        	</c:when>
+                        	<c:when test="${ movieList1.movieAge eq 15 }">
+                        	<option value="15">15세 이용가(기존값)</option>
+                        	<option value="0">전체이용가</option>
+                        	<option value="12">12세 이용가</option>
+                        	<option value="19">청소년 관람불가</option>
+                        	</c:when>
+                        	<c:when test="${ movieList1.movieAge eq 19 }">
+                        	<option value="19">청소년 관람불가(기존값)</option>
+                        	<option value="0">전체이용가</option>
+                        	<option value="12">12세 이용가</option>
+                        	<option value="15">15세 이용가</option>
+                        	</c:when>
+                        </c:choose>
                         </select></div>
-                        <div class="movie-div" id="movie-div-id4"><br>프로듀서<br><input type="text" name="movieProducer" value="${ movieList.movieProducer }" required></div>
+                        <div class="movie-div" id="movie-div-id4"><br>프로듀서<br><input type="text" name="movieProducer" value="${ movieList1.movieProducer }" required></div>
                         <div class="movie-div" id="movie-div-id5"><br>영화 장르<br><select name="genreCode"  required>
-                        	<option value="1">액션, SF</option>
-                        	<option value="2">공포, 스릴러</option>
-                        	<option value="3">미스터리</option>
-                        	<option value="4">판타지</option>
+                        <option value="${ movieGenreListName.get(0).genreCode }">${ movieGenreListName.get(0).genreName }&nbsp(기존값)</option>
+                        <c:forEach var="movieGenreList" items="${ movieGenreList }">
+                        <c:if test="${ movieGenreList.genreCode ne movieGenreListName.get(0).genreCode  }">
+                        	<option value="${ movieGenreList.genreCode }">${ movieGenreList.genreName }</option>
+                        </c:if>
+                        </c:forEach>
                         </select></div>
-                        <div class="movie-div" id="movie-div-id6"><br>배우<br><input type="text" name="movieActor" value="${ movieList.movieActor }" required></div>
-                        <div class="movie-div" id="movie-div-id7"><br>개봉 날짜<br><input type="date" name="movieRdate" value="${ movieList.movieRdate }" required></div>
-                        <div class="movie-div" id="movie-div-id8"><br>상영 시간<br><input type="text" name="movieStime" value="${ movieList.movieStime }" required></div>
+                        <div class="movie-div" id="movie-div-id6"><br>배우<br><input type="text" name="movieActor" value="${ movieList1.movieActor }" required></div>
+                        <div class="movie-div" id="movie-div-id7"><br>개봉 날짜<br><input type="date" name="movieRdate" value="${ movieList1.movieRdate }" required></div>
+                        <div class="movie-div" id="movie-div-id8"><br>상영 시간<br><input type="text" name="movieStime" value="${ movieList1.movieStime }" required></div>
                         <div class="movie-div" id="movie-div-id9"><br>개봉 상태<br><select name="movieRstatus" required>
-                        	<option value="Y">개봉</option>
-                        	<option value="N">미개봉</option>
+                        	<option value="Y">상영등록 가능</option>
+                        	<option value="N">상영등록 불가</option>
                         </select></div>
-                        <div class="movie-div" id="movie-div-id10"><br>제작 국가<br><input type="text" name="movieCountry" value="${ movieList.movieCountry }" required></div>
-                        <div class="movie-div" id="movie-div-id11"><br>영화 가격<br><input type="text" name="moviePrice" value="${ movieList.moviePrice }" required></div>
-                        <div class="movie-div" id="movie-div-id12"><br>예고편 링크<br><textarea style="resize: none;" name="movieLink" required>${ movieList.movieLink }</textarea></div>
-                        <div class="movie-div" id="movie-div-id13">영화 내용<br><textarea id="movie-textarea" style="resize: none;" name="movieContent" required>${ movieList.movieContent }</textarea></div>
+                        <div class="movie-div" id="movie-div-id10"><br>제작 국가<br><input type="text" name="movieCountry" value="${ movieList1.movieCountry }" required></div>
+                        <div class="movie-div" id="movie-div-id11"><br>영화 가격<br><input type="text" name="moviePrice" value="${ movieList1.moviePrice }" required></div>
+                        <div class="movie-div" id="movie-div-id12"><br>예고편 링크<br><textarea style="resize: none;" name="movieLink" required>${ movieList1.movieLink }</textarea></div>
+                        <div class="movie-div" id="movie-div-id13">영화 내용<br><textarea id="movie-textarea" style="resize: none;" name="movieContent" required>${ movieList1.movieContent }</textarea></div>
 					</c:forEach>
 					
 					
                     </div>
                     <div class="manager-formQ1" id="manager02">
-                    <%
-                    	ArrayList<Attachment> ATClist1 = (ArrayList<Attachment>)request.getAttribute("movieAttachment1");  
-	                    ArrayList<Attachment> ATClist2 = (ArrayList<Attachment>)request.getAttribute("movieAttachment2");
-	                    ArrayList<Attachment> ATClist3 = (ArrayList<Attachment>)request.getAttribute("movieAttachment3");
-                    %>
+                    
                     <p id="manager02_p1">사진 포스터</p>
                         <div class="movie-div2" id="movie-div2-id1"><img id="thumbnailImg1" onclick="funimg1()" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>"><br>
                             <label class="btn btn-primary btn-file" id="file-button1" style="visibility: hidden;">
@@ -631,16 +670,32 @@
                     </div>
                     <div class="manager-formQ1" id="manager04">
                            
-                            <button type="submit" class="btn btn-primary" id="movie-manager04-button1" value="upload">등록</button>
+                            <button type="button" class="btn btn-primary" id="movie-manager04-button1" onclick="test1()">등록</button>
                             <button type="button" class="btn btn-primary" id="movie-manager04-button2">취소</button>
-
+							<button type="submit"  id="movie-manager04-button3" style="overflow: hidden;width: 0px; height: 0px;border: none;
+    						padding: 0px !important;"></button>
                     </div>
                     
                     <!-- 이미지 클릭 시 파일 추가 function -->
                      <script>
-                     
+                     function test1(){
+                    	 /* if(document.getElementById("upImgFile1").value == ""){
+                    		 alert("포스터 파일을 새로 수정시켜야 합니다.");
+                    	 } else if( document.getElementById("upImgFile2").value == ""){
+                    		 alert("스틸컷 1번 파일을 새로 수정시켜야 합니다.");
+                    	 } else if( document.getElementById("upImgFile3").value == "") {
+                    		 alert("스틸컷 2번 파일을 새로 수정시켜야 합니다.");
+                    	 } else if(document.getElementById("upImgFile4").value == ""){
+                    		 alert("스틸컷 3번 파일을 새로 수정시켜야 합니다.");
+                    	 } else if(document.getElementById("upvodFile5").value == ""){
+                    		 alert("VOD 파일을 새로 수정시켜야 합니다.");
+                    	 } else { */
+                    		 $("#movie-manager04-button3").click();
+                    	/*  } */
+                     }
                      window.onload = function () {
-                    	 console.log("이것 : " + document.getElementById("upImgFile1").name);
+                    	 console.log("시작 test1값 : " + document.getElementById("upImgFile1").value);
+                    	 
                     	}
                      
                         
@@ -663,6 +718,8 @@
                         function funimg5(){
                          	$("label[id='file-button5']").click();
                     	}
+                        
+                       	
                        
                         </script>
                     
