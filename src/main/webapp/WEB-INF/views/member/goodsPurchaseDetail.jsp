@@ -37,10 +37,10 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -154,16 +154,17 @@ header>section {
 												<tr class="oneBox">
 													<td class="proName">${ gpd.goodsName }</td>
 													<td class="count">${ gpd.orderCount }</td>
-													<td class="price">${ gpd.goodsPrice }</td>
+													<td class="price"><span class="goodsPrice">${ gpd.goodsPrice }</span>원</td>
 												</tr>
 											</c:forEach>
 										</c:if>
 										<tr>
-											<td colspan="2" class="test"><span class="allPriceText">합계
-													:</span></td>
-
-											<td class="test"><span class="allPrice">${ detailList[0].payPrice }</span>
-												<span class="test1">원</span></td>
+											<td colspan="2" class="test"></td>
+											<!-- <td class="test"></td>
+ -->
+											<td class="test"><span class="allPriceText">합계 :</span>
+												<span class="allPrice">${ detailList[0].payPrice }</span> <span
+												class="test1">원</span></td>
 
 										</tr>
 									</table>
@@ -248,6 +249,13 @@ header>section {
 			var price = $(".allPrice").text();
 
 			$(".allPrice").text(comma(price));
+			
+			 $(".oneBox").each(function () {
+					var price = $(this).find(".goodsPrice").text();
+
+					$(this).find(".goodsPrice").text(comma(price));
+					
+					});
 		});
 	</script>
 	<div id="stay_footer">

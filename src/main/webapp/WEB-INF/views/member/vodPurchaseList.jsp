@@ -38,8 +38,8 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -177,7 +177,8 @@ header>section {
 															<c:param name="movieNo" value="${ vpl.movieNo }" />
 															<c:param name="page" value="${ pi.currentPage }" />
 														</c:url>
-														<button class="vodBtn" onclick="location.href='${vodDetail}'">VOD 바로보기</button>
+														<button class="vodBtn"
+															onclick="location.href='${vodDetail}'">VOD 바로보기</button>
 													</div>
 												</div>
 											</div>
@@ -295,7 +296,7 @@ header>section {
 						<tr>
 							<td colspan="3">
 								<div id="textLimit" class="textLimit" id="textLimit">
-									(<span class="count" id="count">0</span> / 최대 280글자)
+									(<span class="count" id="count">0</span> / 최대 190글자)
 								</div>
 							</td>
 						</tr>

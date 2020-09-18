@@ -1,6 +1,7 @@
 package com.kh.kass.member.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -170,11 +171,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int selectSnackPurchaseListCount(int userNo) {
-		return mDao.selectSnackPurchaseListCount(userNo);
-	}
-
-	@Override
 	public int selectVodListCount(int userNo) {
 		return mDao.selectVodListCount(userNo);
 	}
@@ -213,6 +209,11 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<VodPurchase> selectVodList(int userNo, PageInfo pi) {
 		return mDao.selectVodList(userNo, pi);
 	}
+
+	@Override
+	public int selectSnackPurchaseListCount(int userNo) {
+		return mDao.selectSnackPurchaseListCount(userNo);
+	}
 	
 	@Override
 	public ArrayList<SnackPurchase> selectSnackPurchaseList(int userNo, PageInfo pi) {
@@ -223,7 +224,12 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<SnackPurchase> selectSnackPurchasDetail(SnackPurchase sp) {
 		return mDao.selectSnackPurchaseDetail(sp);
 	}
-
+	
+	@Override
+	public ArrayList<SnackPurchase> selectSnackPurchaseDetailCount() {
+		return mDao.selectSnackPurchaseDetailCount();
+	}
+	
 	@Override
 	public int selectGoodsPurchaseListCount(int userNo) {
 		return mDao.selectGoodsPurchaseListCount(userNo);
@@ -237,6 +243,21 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<GoodsPurchase> selectGoodsPurchasDetail(GoodsPurchase gp) {
 		return mDao.selectGoodsPurchaseDetail(gp);
+	}
+
+	@Override
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseDetailCount() {
+		return mDao.selectGoodsPurchaseDetailCount();
+	}
+	
+	@Override
+	public ArrayList<VodPurchase> selectRecommendVod(int userNo) {
+		return mDao.selectRecommendVod(userNo);
+	}
+
+	@Override
+	public int updateSnackCodeStatus(int codeNo) {
+		return mDao.updateSnackCodeStatus(codeNo);
 	}
 
 

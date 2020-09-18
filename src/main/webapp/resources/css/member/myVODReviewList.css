@@ -12,6 +12,11 @@
     float: left;
 }
 
+a:visited {
+    text-decoration: none;
+    color: rgb(114, 114, 114);
+}
+
 /* <h2> title */
 .title {
     font-size: 25px;
@@ -51,11 +56,13 @@
 
 .right {
     width: 700px !important;
+        padding: 20px 23px !important;
+    
 }
 
 .poster{
-    width:110px;
-    height: 154.59px;
+    width:130px;
+    height: 174.59px;
     /* border: 1px solid hotpink; */
 }
 
@@ -67,26 +74,20 @@
 
 }
 
-.idDate{
-    /* border: 1px solid paleturquoise; */
-    width:100%;
-}
-
-.userId{
-    /* border: 1px solid saddlebrown; */
-}
-
 .writerDate{
     /* border: 1px solid tan; */
-    font-size: 12px;
-
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    
 }
 
 .reviewContent {
-    /* border: 1px solid cornflowerblue; */
+	/* border: 1px solid tan;  */
+	line-height: 25px;
     width:100%;
-    height: 70px;
-    font-size: 13px;
+    height: 110px;
+    font-size: 14px;
 }
 
 .buttons {
@@ -120,7 +121,9 @@
     /* border: 1px solid chartreuse; */
 }
 .update, .delete{
-    margin-left: 10px;
+     margin-left: 10px;
+    color: rgb(114, 114, 114);
+    text-decoration: none;
 }
 
 
