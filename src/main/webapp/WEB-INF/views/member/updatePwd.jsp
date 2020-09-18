@@ -36,7 +36,6 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	padding-bottom: 100px;
 	overflow: hidden;
 }
@@ -156,20 +155,20 @@ header>section {
 						<table class="contentTable">
 							<tr class="topLine">
 								<td class="left">현재 비밀번호</td>
-								<td><input type="password" name="userPwd" id="userPwd" class="userPwd"></td>
+								<td><input type="password" name="userPwd" id="userPwd1" class="userPwd"></td>
 								<td><input type="hidden" name="userId" value="${ loginUser.userId }"></td>
 							</tr>
 							<tr>
 								<td class="left">새 비밀번호</td>
 								<td>
-									<input type="password" name="newPwd" id="newPwd" class="newPwd">
+									<input type="password" name="newPwd" id="newPwd2" class="newPwd">
 									<div class="pwdGuide">&nbsp;&nbsp;※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 8자리 이상으로 입력해 주세요.</div>
 								</td>
 							</tr>
 							<tr>
 								<td class="left">새 비밀번호 확인</td>
 								<td>
-									<input type="password" name="newPwd2" id="newPwd2" class="newPwd2">
+									<input type="password" name="newPwd2" id="newPwd3" class="newPwd2">
 									<div class="pwdGuide">&nbsp;&nbsp;※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</div>
 								</td>
 							</tr>
@@ -197,25 +196,25 @@ header>section {
 		
 		<script>
 			function updatePwd() {
-				var pwd = $.trim($("#userPwd").val());
-				var pwd1 = $.trim($("#newPwd").val());
-	            var pwd2 = $.trim($("#newPwd2").val());
+				var pwd = $.trim($("#userPwd1").val());
+				var pwd1 = $.trim($("#newPwd2").val());
+	            var pwd2 = $.trim($("#newPwd3").val());
 	            if (!pwd) {
 	                alert("현재 비밀번호를 입력해 주세요.");
-	                $("#userPwd").focus();
+	                $("#userPwd1").focus();
 	                return false;
 	            } else if (!pwd1) {
 	                alert("새 비밀번호를 입력해 주세요.");
-	                $("#newPwd").focus();
+	                $("#newPwd2").focus();
 	                return false;
 	            }else if (!pwd2) {
 	                alert("새 비밀번호 확인을 입력해 주세요.");
-	                $("#newPwd2").focus();
+	                $("#newPwd3").focus();
 	                return false;
 	            }
 
-	            var newPwd = document.getElementById("newPwd");
-				var newPwd2 = document.getElementById("newPwd2");
+	            var newPwd = document.getElementById("newPwd2");
+				var newPwd2 = document.getElementById("newPwd3");
 				// 비밀번호
 				if (!chk(/(?=.*[a-z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,}/,
 						newPwd, "비밀번호는 영문, 숫자, 특수문자 포함하여 8자 이상 입력해주세요."))

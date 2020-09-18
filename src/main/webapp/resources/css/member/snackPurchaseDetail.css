@@ -81,7 +81,7 @@
 }
 
 .proName {
-	width: 35%
+	width: 30%
 }
 
 .count {
@@ -89,11 +89,11 @@
 }
 
 .price {
-	width: 17%;
+	width: 15%;
 }
 
 .status {
-	width: 10%;
+	width: 15%;
 }
 
 .table tr:last-child {
@@ -111,9 +111,13 @@
 	/* border: 1px saddlebrown solid; */
 }
 
+.allPrice {
+	display:inline-block;
+	width: 100px;
+	text-align:right;
+}
 .test1 {
 	/* border: 1px saddlebrown solid; */
-	float: right;
 }
 /* content-1 */
 /* content */

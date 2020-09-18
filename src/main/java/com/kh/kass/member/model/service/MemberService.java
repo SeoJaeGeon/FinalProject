@@ -1,6 +1,7 @@
 package com.kh.kass.member.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
@@ -120,17 +121,28 @@ public interface MemberService {
 	// 스낵 구매내역
 	public ArrayList<SnackPurchase> selectSnackPurchaseList(int userNo, PageInfo pi);
 
-
 	// 스낵 상세
 	public ArrayList<SnackPurchase> selectSnackPurchasDetail(SnackPurchase sp);
 
+	// 스낵 상세 count
+	public ArrayList<SnackPurchase> selectSnackPurchaseDetailCount();
+
 	// 굿즈 구매 내역 개수
 	public int selectGoodsPurchaseListCount(int userNo);
-	
+
 	// 굿즈 구매 내역
 	public ArrayList<GoodsPurchase> selectGoodsPurchaseList(int userNo, PageInfo pi);
-	
+
 	// 굿즈 상세
 	public ArrayList<GoodsPurchase> selectGoodsPurchasDetail(GoodsPurchase gp);
+
+	// 굿즈 상세 count
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseDetailCount();
+
+	// 추천 vod
+	public ArrayList<VodPurchase> selectRecommendVod(int userNo);
+
+	// 스낵 status 수정
+	public int updateSnackCodeStatus(int codeNo);
 
 }

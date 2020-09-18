@@ -1,6 +1,7 @@
 package com.kh.kass.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -191,6 +192,10 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectSnackPurchaseDetail", sp);
 	}
 	
+	public ArrayList<SnackPurchase> selectSnackPurchaseDetailCount(){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSnackPurchaseDetailCount");
+	}
+	
 	public int selectGoodsPurchaseListCount(int userNo) {
 		return sqlSession.selectOne("memberMapper.selectGoodsPurchaseListCount", userNo);
 	}
@@ -205,6 +210,17 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectGoodsPurchaseDetail", gp);
 	}
 
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseDetailCount() {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectGoodsPurchaseDetailCount");
+	}
+	
+	public ArrayList<VodPurchase> selectRecommendVod(int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectRecommendVod", userNo);
+	}
+
+	public int updateSnackCodeStatus(int codeNo) {
+		return sqlSession.update("memberMapper.updateSnackCodeStatus", codeNo);
+	}
 
 
 	

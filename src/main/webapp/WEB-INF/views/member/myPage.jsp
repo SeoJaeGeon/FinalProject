@@ -35,8 +35,8 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -105,7 +105,10 @@ header>section {
 	width: 1500px;
 	margin: auto;
 }
-/* 영역 나누기 */
+
+a:visited {
+	
+}
 </style>
 
 </head>
@@ -152,29 +155,20 @@ header>section {
 						<div class="my-2">
 							<div class="my-2-1">
 								<div class="movieRecommendDiv">
-									<h2 class="myTitle">▶ 회원님이 최근에 본 영화와 장르가 비슷해요!</h2>
+									<h2 class="myTitle">▶ 회원님이 최근에 본 VOD와 장르가 비슷해요!</h2>
 									<div class="movies">
-										<article class="movie">
-											<a href="#"> <img
-												src="${ contextPath }/resources/images/겨울왕국2.jpg"
-												class="poster">
-												<p>겨울왕국2</p>
-											</a>
-										</article>
-										<article class="movie">
-											<a href="#"> <img
-												src="${ contextPath }/resources/images/토이스토리4.jpg"
-												class="poster">
-												<p>토이스토리4</p>
-											</a>
-										</article>
-										<article class="movie">
-											<a href="#"> <img
-												src="${ contextPath }/resources/images/반도.jpg"
-												class="poster">
-												<p>반도</p>
-											</a>
-										</article>
+										<c:forEach var="rclist" items="${ list }">
+											<article class="movie">
+												<c:url var="movieDetail" value="movieInfo.do">
+													<c:param name="movieNo" value="${ rclist.movieNo }" />
+												</c:url>
+												<a href="${ movieDetail }"> <img
+													src="${ contextPath }/resources/images/movie_image/${ rclist.attachment.renameFileName }"
+													class="poster">
+													<p>${ rclist.movieName }</p>
+												</a>
+											</article>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -206,7 +200,7 @@ header>section {
 										</a>
 									</article>
 									<article class="myCount">
-										<a href="#">
+										<a href="vodReviewList.do">
 											<p class="count">${ moviePurchaseCount }</p>
 											<p class="text">찜한 VOD</p>
 										</a>

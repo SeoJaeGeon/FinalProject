@@ -35,8 +35,8 @@ nav {
 	width: 100%;
 	height: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -165,7 +165,8 @@ header>section {
 												<div>
 													<div class="scoreDiv1">
 														<c:if test="${ mpl.reScore eq null}">
-															<a href="javascript:openReviewInsertForm(${ mpl.movieNo }, '${ mpl.movieName }');" class="goReview">평가해
+															<a href="javascript:openReviewInsertForm('${ mpl.resDate }', '${
+														mpl.startTime }', ${ mpl.movieNo }, '${ mpl.movieName }');" class="goReview">평가해
 																주세요!</a>
 														</c:if>
 														<c:if test="${ mpl.reScore eq 'G'}">
@@ -241,6 +242,7 @@ header>section {
 			<div class="contentModal">
 				<form id="rinsertForm" name="rinsertForm" method="post">
 					<input type="hidden" name="movieNo" id="modalMovieNo">
+					
 					<table class="reviewTable">
 						<tr>
 							<td colspan="3" class="topTd">
@@ -284,7 +286,7 @@ header>section {
 						<tr>
 							<td colspan="3">
 								<div id="textLimit" class="textLimit" id="textLimit">
-									(<span class="count" id="count">0</span> / 최대 280글자)
+									(<span class="count" id="count">0</span> / 최대 190글자)
 								</div>
 							</td>
 						</tr>
@@ -311,11 +313,11 @@ header>section {
 				var hour = startTime.split(":")[0];
 				var minute = startTime.split(":")[1];
 
-				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
+				//console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
 
 				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
 				var today = new Date();
-				console.log(resultDate);
+				//console.log(resultDate);
 
 				if (today < resultDate) {
 					$(this).find(".cancel").show();
@@ -328,32 +330,25 @@ header>section {
 
 
 		// 리뷰작성 view
-		function openReviewInsertForm(movieNo, movieName) {
+		function openReviewInsertForm(startDate, startTime, movieNo, movieName) {
 
-			$(".goReview").each(function () {
-				var startDate = $(this).find(".endDate").text();
 				var year = startDate.split("-")[0];
 				var month = startDate.split("-")[1];
 				var date = startDate.split("-")[2];
-
-				var endTime = $(this).find(".endTime").text();
+				
 				var hour = startTime.split(":")[0];
 				var minute = startTime.split(":")[1];
 
-				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
+				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분 입니다");
 
 				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
 				var today = new Date();
-				console.log(resultDate);
-
+				
 				if (today.getTime() < resultDate.getTime()) {
 					alert("상영이 시작되지 않은 영화입니다. 영화 관람 후 리뷰 작성이 가능합니다.");
 					return false;
-				} else {
-					return true;
 				}
 
-			});
 			$("#modalMovieNo").val(movieNo);
 			$("#modalMovieName").text(movieName);
 			document.getElementById("myModal").style.display = "block";
