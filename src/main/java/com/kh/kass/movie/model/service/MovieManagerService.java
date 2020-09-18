@@ -90,5 +90,7 @@ public interface MovieManagerService {
 	public ArrayList<Movie_Res> selectmovResList3(Movie_Res movie_ResList2);
 
 	public ArrayList<Movie_Room> movRoomList(String ma_name);
+
+	public ArrayList<Movie_Sales> selectMovieTebalAjax(int maNo);
 	
 }

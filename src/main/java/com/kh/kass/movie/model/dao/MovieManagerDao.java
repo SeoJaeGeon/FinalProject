@@ -149,6 +149,11 @@ public class MovieManagerDao {
 	public ArrayList<Movie_Room> selectRoomNo(String ma_name) {
 		return (ArrayList)sqlSession.selectList("movieManagerMapper.selectRoomList",ma_name);
 	}
+
+	public ArrayList<Movie_Sales> selectTableList(int maNo) {
+		System.out.println("maNo 값 : " + maNo);
+		return (ArrayList)sqlSession.selectList("movieManagerMapper.selectTableAjaxList",maNo);
+	}
 	
 	
 }
