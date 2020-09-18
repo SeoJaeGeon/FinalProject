@@ -1013,7 +1013,7 @@ margin: auto;
                                     	<%
                                     	for (int i = 0; i < list_movieRes.size(); i++) { 
                                     	%>
-                                    	
+                                    	console.log("서재건의 테스트 공간");
 										numX1 = <%="'" + list_movieRes.get(i).getStartTime() + "'"%>;
 										numX2 = <%="'" + list_movieRes.get(i).getEndTime() + "'"%>;   
 										
