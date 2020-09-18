@@ -43,12 +43,18 @@ public class ResController {
 		ArrayList<Movie> scoreList = resService.scoreList();
 		ArrayList<Movie> totalScoreList = resService.totalScoreList();
 		
+		System.out.println("movListFavor : " + movListFavor);
+		System.out.println("scoreList : " + scoreList);
+		System.out.println("totalScoreList : " + totalScoreList);
+		
+		
 		ArrayList<Movie> avgScore = new ArrayList<>();
 		double avg = 0;
 		for(int i=0; i<scoreList.size(); i++) {
 			if(scoreList.get(i).getMovieNo() == totalScoreList.get(i).getMovieNo()) {
 				Movie m = new Movie();
 				avg = Math.round((scoreList.get(i).getScore() / totalScoreList.get(i).getScore() * 100)*10)/10.0;
+				System.out.println("scoreList : " + scoreList);
 				m = new Movie(scoreList.get(i).getMovieNo(), avg);
 				avgScore.add(m);
 			}
@@ -140,8 +146,6 @@ public class ResController {
 	@ResponseBody
 	public String playMovieSelect(int title,int area,int cinema,String time) throws ParseException {
 		
-		/*System.out.println("들어온 값 : " + title+ ", " + area+ ", " + cinema + ", " + time);*/
-		
 		Date date = null;
 		
 		if(!time.equals("")) {
@@ -202,7 +206,7 @@ public class ResController {
 		}
 		int compare = today.compareTo(mDate);
 		boolean movieStatus = false;
-		if(compare > 0) {
+		if(compare >= 0) {
 			movieStatus= false;
 		}else if(compare <0) {
 			movieStatus = true;
@@ -221,7 +225,7 @@ public class ResController {
 			mv.addObject("movieStatus", movieStatus);
 			mv.setViewName("reservation/movieInfo");
 		} else {
-			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");// 다른거눌러서 그래요 리뷰가없어요
+			throw new ResException("영화 정보 불러오기를 실패했습니다.");
 		}
 		
 		return mv;
@@ -267,7 +271,7 @@ public class ResController {
 			
 			mv.setViewName("reservation/resSeat");
 		} else {
-			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");
+			throw new ResException("영화 예약를 실패했습니다.");
 		}
 		
 		return mv;
