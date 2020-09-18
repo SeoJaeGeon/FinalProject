@@ -100,20 +100,22 @@
 	border-bottom: 1px solid black;
 }
 
-.test {
+.test1 {
 	/* border: 1px solid firebrick; */
+	float:right;
 	
 }
 
 .allPriceText {
 	/* display: inline-block; */
-	float: right;
+	float: left;
 	/* border: 1px saddlebrown solid; */
 }
 
-.test1 {
-	/* border: 1px saddlebrown solid; */
-	float: right;
+.allPrice {
+	display:inline-block;
+	width: 140px;
+	text-align:right;
 }
 /* content-1 */
 /* content */

@@ -328,10 +328,14 @@ a:hover {
 		}
 
 		function back() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 
 		function close_pop() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 

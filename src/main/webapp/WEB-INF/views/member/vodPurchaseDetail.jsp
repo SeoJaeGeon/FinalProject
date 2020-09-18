@@ -5,114 +5,112 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link href="${ contextPath }/resources/css/member/vodPurchaseDetail.css" rel="stylesheet" type="text/css">
-	<title>VOD 바로 보기</title>
-	<style>
-		header,
-		nav,
-		section,
-		article,
-		aside,
-		footer {
-			box-sizing: border-box;
-			display: block;
-		}
+<meta charset="UTF-8">
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="${ contextPath }/resources/css/member/vodPurchaseDetail.css"
+	rel="stylesheet" type="text/css">
+<title>VOD 바로 보기</title>
+<style>
+header, nav, section, article, aside, footer {
+	box-sizing: border-box;
+	display: block;
+}
 
-		body {
-			width: 100%;
-			margin: auto;
-		}
+body {
+	width: 100%;
+	margin: auto;
+}
 
-		header {
-			width: 100%;
-			height: 150px;
-		}
+header {
+	width: 100%;
+	height: 150px;
+}
 
-		nav {
-			width: 100%;
-			height: 50px;
-		}
+nav {
+	width: 100%;
+	height: 50px;
+}
 
-		.content {
-			width: 100%;
-			heigt: 100%;
-			margin: auto;
-			border: 1px solid red;
-			overflow: hidden;
-		}
+.content {
+	width: 100%;
+	heigt: 100%;
+	margin: auto;
+	overflow: hidden;
+	margin-bottom: 100px;
+}
 
-		footer {
-			width: 100%;
-			height: 150px;
-			float: left;
-			background: lightgray;
-		}
+footer {
+	width: 100%;
+	height: 150px;
+	float: left;
+	background: lightgray;
+}
 
-		header>section {
-			float: left;
-		}
+header>section {
+	float: left;
+}
 
-		#header-1 {
-			width: 25%;
-			height: 100%;
-			position: relative;
-		}
+#header-1 {
+	width: 25%;
+	height: 100%;
+	position: relative;
+}
 
-		#header-2 {
-			width: 50%;
-			height: 100%;
-			position: relative;
-		}
+#header-2 {
+	width: 50%;
+	height: 100%;
+	position: relative;
+}
 
-		#header-3 {
-			width: 25%;
-			height: 100%;
-		}
+#header-3 {
+	width: 25%;
+	height: 100%;
+}
 
-		#footer1 {
-			width: 80%;
-			height: 30%;
-			padding: 1px;
-			width: 80%;
-			float: left;
-		}
+#footer1 {
+	width: 80%;
+	height: 30%;
+	padding: 1px;
+	width: 80%;
+	float: left;
+}
 
-		#footer2 {
-			width: 80%;
-			height: 70%;
-			width: 80%;
-			float: left;
-		}
+#footer2 {
+	width: 80%;
+	height: 70%;
+	width: 80%;
+	float: left;
+}
 
-		#footer3 {
-			width: 20%;
-			height: 70%;
-			float: left;
-		}
+#footer3 {
+	width: 20%;
+	height: 70%;
+	float: left;
+}
 
-		#stay_footer {
-			width: 100%;
-			height: 150px;
-			background: lightgray;
-		}
+#stay_footer {
+	width: 100%;
+	height: 150px;
+	background: lightgray;
+}
 
-		#stay_footer_inner {
-			width: 1500px;
-			height: 150px;
-			display: block;
-			margin: auto;
-		}
+#stay_footer_inner {
+	width: 1500px;
+	height: 150px;
+	display: block;
+	margin: auto;
+}
 
-		#wrap_stay {
-			width: 1500px;
-			margin: auto;
-		}
+#wrap_stay {
+	width: 1500px;
+	margin: auto;
+}
 
-		/* 영역 나누기 */
-	</style>
+/* 영역 나누기 */
+</style>
 
 </head>
 
@@ -139,8 +137,9 @@
 							<tr>
 								<td>
 									<div class="vodDiv">
-										<video src="${ contextPath }/resources/images/movie_vod/${ vodPurchase.attachment.renameFileName }" controls="controls"
-										 class="vod" poster="../images/겨울왕국2.jpg"></video>
+										<video
+											src="${ contextPath }/resources/images/movie_vod/${ vodPurchase.attachment.renameFileName }"
+											controls="controls" class="vod" poster="../images/겨울왕국2.jpg"></video>
 									</div>
 								</td>
 							</tr>
@@ -149,7 +148,8 @@
 							<c:param name="page" value="${ currentPage }" />
 						</c:url>
 						<div class="buttons1">
-							<button id="goList" class="goList" onclick="location.href='${ vpList }'">목록으로</button>
+							<button id="goList" class="goList"
+								onclick="location.href='${ vpList }'">목록으로</button>
 						</div>
 
 					</section>

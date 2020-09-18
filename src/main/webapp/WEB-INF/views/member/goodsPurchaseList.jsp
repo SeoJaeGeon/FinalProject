@@ -38,8 +38,8 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -151,7 +151,14 @@ header>section {
 												<tr onclick="location.href='${gpDetail}'">
 													<td class="no">${ gpl.orderNum }</td>
 													<td class="proName">${ gpl.prodOrderList[0].goodsName }
-														외 몇개</td>
+														<c:forEach var="count" items="${ counting }">
+															<c:if test="${ gpl.orderNum eq count.orderNum }">
+																<c:if test="${ count.detailCount-1 ne 0 }">
+																	외 ${ count.detailCount-1 }개
+																</c:if>
+															</c:if>
+														</c:forEach>
+														</td>
 													<td class="purchaseDate">${ gpl.payDate }</td>
 												</tr>
 											</c:forEach>
