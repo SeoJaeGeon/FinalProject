@@ -43,6 +43,7 @@
 		} else if(result == 1){
 			alert("영화 정보 등록에 성공하였습니다!!");
 			console.log("resultOX == 1");
+			location.href="MovieManagerInsertPage.do";
 		} else if(result == 3){
 			alert("영화 정보 수정에 성공하였습니다!!");
 			location.href="MovieManagerUpdatePage.do";

@@ -1225,11 +1225,6 @@ public class MovieManagerMain {
             	mf4.transferTo(new File(safeFile4));
             	mf5.transferTo(new File(safeFile5));
             	
-            	mf.transferTo(new File(safeOFile1));
-            	mf2.transferTo(new File(safeOFile2));
-            	mf3.transferTo(new File(safeOFile3));
-            	mf4.transferTo(new File(safeOFile4));
-            	mf5.transferTo(new File(safeOFile5));
                } catch (IllegalStateException e) {
             	   throw new MovieManagerException("영화 파일 추가에 실패했습니다.");
                 } catch (IOException e) {
@@ -1329,7 +1324,6 @@ public class MovieManagerMain {
 			 String safeOFile1 = SAVE_PATH + "" + originFileName1;
 			 
 			 deleteFile1(movieAttachment1.get(0).getRenameFileName(), request); // 리네임 파일 삭제
-			 deleteFile1(movieAttachment1.get(0).getOriginFileName(), request); // 오리지널 파일 삭제
 			 
 			 int resultdelete = movService.deleteMovieManager(movieAttachment1.get(0).getRenameFileName()); // 삭제함
 			 
@@ -1345,7 +1339,6 @@ public class MovieManagerMain {
 		   	 
 		   	try { 
 		   	mf.transferTo(new File(safeFile1));
-		   	mf.transferTo(new File(safeOFile1));
 		   	}  catch (IllegalStateException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -1368,7 +1361,6 @@ public class MovieManagerMain {
      		String safeOFile2 = SAVE_PATH + "" + originFileName2;
      		
      		deleteFile1(movieAttachment2.get(0).getRenameFileName(), request);
-     		deleteFile1(movieAttachment2.get(0).getOriginFileName(), request);
      		int resultdelete = movService.deleteMovieManager(movieAttachment2.get(0).getRenameFileName()); // 삭제함
      		
      		HashMap<Object, Object> fullFileName2 = new HashMap<>();
@@ -1382,7 +1374,6 @@ public class MovieManagerMain {
 	   		
 	   		try { 
 			   	mf2.transferTo(new File(safeFile2));
-			   	mf2.transferTo(new File(safeOFile2));
 			   	}  catch (IllegalStateException e) {
 	                e.printStackTrace();
 	            } catch (IOException e) {
@@ -1419,7 +1410,6 @@ public class MovieManagerMain {
 	   		
 	   		try { 
 			   	mf3.transferTo(new File(safeFile3));
-			   	mf3.transferTo(new File(safeOFile3));
 			   	}  catch (IllegalStateException e) {
 	                e.printStackTrace();
 	            } catch (IOException e) {
@@ -1442,7 +1432,6 @@ public class MovieManagerMain {
      		String safeOFile4 = SAVE_PATH + "" + originFileName4;
      		
      		deleteFile1(movieAttachment2.get(2).getRenameFileName(), request);
-     		deleteFile1(movieAttachment2.get(2).getOriginFileName(), request);
      		int resultdelete = movService.deleteMovieManager(movieAttachment2.get(2).getRenameFileName()); // 삭제함
      		
      		HashMap<Object, Object> fullFileName4 = new HashMap<>();
@@ -1456,7 +1445,6 @@ public class MovieManagerMain {
 	   		
 	   		try { 
 			   	mf4.transferTo(new File(safeFile4));
-			   	mf4.transferTo(new File(safeOFile4));
 			   	}  catch (IllegalStateException e) {
 	                e.printStackTrace();
 	            } catch (IOException e) {
@@ -1479,7 +1467,6 @@ public class MovieManagerMain {
      		String safeOFile5 = SAVE_PATH + "" + originFileName5;
      		
      		deleteFile1(movieAttachment3.get(0).getRenameFileName(), request);
-     		deleteFile1(movieAttachment3.get(0).getOriginFileName(), request);
      		int resultdelete = movService.deleteMovieManager(movieAttachment3.get(0).getRenameFileName()); // 삭제함
      		
      		HashMap<Object, Object> fullFileName5 = new HashMap<>();
@@ -1493,7 +1480,6 @@ public class MovieManagerMain {
 	   		
 	   		try { 
 			   	mf5.transferTo(new File(safeFile5));
-			   	mf5.transferTo(new File(safeOFile5));
 			   	}  catch (IllegalStateException e) {
 	                e.printStackTrace();
 	            } catch (IOException e) {
