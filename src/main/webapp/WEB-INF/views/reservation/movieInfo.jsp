@@ -286,8 +286,8 @@ header>section {
 	float: left;
 	margin: 0px;
 	padding: 0px;
-	width: 50%;
-	height: 33.33%;
+	width: 750px;
+	height: 200px;
 }
 
 #stay_footer {
@@ -317,10 +317,10 @@ float : left;
 .rView2 {
 width : 50%;
 height : 100%;
-padding-top : 50px;
+padding-top : 20px;
 padding-left : 5px;
 float : left;
-overflow: hidden;
+overflow: auto;
 }
 
 .rView3 {
@@ -337,9 +337,10 @@ padding-top : 50px;
 }
 
 .rView1-top > img {
-	width: 150px;
-	height: 150px;
-	margin-left : 35px;
+	width: 120px;
+	height: 120px;
+	margin-top : 10px;
+	margin-left : 55px;
 	border-radius: 150px;
 }
 
@@ -443,8 +444,12 @@ padding-top : 50px;
 					</span>
 				</div>
 				<div class="movie-in3">
-					<span class="intro-text"> <strong>감독 : </strong><b>${ movInfo[0].movieForeman }</b> /
-						<strong>프로듀서 : </strong><b>${ movInfo[0].movieProducer }</b> / <strong>배우 : </strong><b>${ movInfo[0].movieActor }</b>
+					<span class="intro-text">
+					<strong>감독 : </strong><b>${ movInfo[0].movieForeman }</b> 
+					<c:if test="${  movInfo[0].movieProducer != '모름' }">
+						/<strong>프로듀서 : </strong><b>${ movInfo[0].movieProducer }</b>
+					</c:if>
+					/<strong>배우 : </strong><b>${ movInfo[0].movieActor }</b>
 					</span><br> <br> <span class="intro-text"> <strong>장르
 							: </strong><b>${ movInfo[0].genreName }</b>
 					</span><br> <br> <span class="intro-text"> <strong>상영시간
@@ -537,6 +542,8 @@ padding-top : 50px;
 						<c:if test="${ r.reScore == 'G' }">
 							<img src="<%=request.getContextPath()%>/resources/images/down_white.png" style="width:50px; height:50px;">
 						</c:if>
+						<br clear="img"><br><br>
+							<span>${ r.reModifyDate }</span>
 						</div>
 					</li>
 				</c:forEach> 

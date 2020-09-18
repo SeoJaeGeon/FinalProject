@@ -104,7 +104,7 @@ header>section {
 .content2, .content1-1 {
 	width: 100%;
 	height: 700px;
-	margin-left: 220px;
+	padding-left: 220px;
 }
 
 #causalImg {
