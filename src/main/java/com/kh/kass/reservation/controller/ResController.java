@@ -202,7 +202,7 @@ public class ResController {
 		}
 		int compare = today.compareTo(mDate);
 		boolean movieStatus = false;
-		if(compare > 0) {
+		if(compare >= 0) {
 			movieStatus= false;
 		}else if(compare <0) {
 			movieStatus = true;
