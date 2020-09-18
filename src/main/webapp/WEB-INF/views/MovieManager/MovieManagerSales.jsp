@@ -39,8 +39,9 @@
 
 
         <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.3.js'></script>
-        
-    
+     
+    <!-- 구글 api 전용 -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
@@ -395,6 +396,10 @@
 	    margin-left: 50px;
         }
         
+        #stay3{
+		 width:1500px;
+		 margin: auto;
+		}
         
         
     </style>
@@ -406,6 +411,7 @@
 	
     <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
+    
         <div id="stay2">
             <div id="wrap_stay">
                 <div class="content1">
@@ -430,15 +436,6 @@
                             </div>
                        	<!-- 구글 차트 div -->
                          <div id="columnchart_material" style="width: 100%; height: 100%;float:left;margin-top: 20px"></div>
-                         
-                          
-                          
-                          
-                          
-                          
-                          
-                         
-                         
                         <!-- 지도 api 끝 -->
                         </div>
                          
@@ -530,6 +527,9 @@
                              });
                          }
                          
+                         
+                         var data1;
+                         var data2
                       // 수익조회 버튼을 누르면 오는 function 
                          function listTest(obj){
  							var num5 = document.getElementById("Calendar_Text").value; // 날짜 2020/09/10 기준 (date 포멧으로 변경)
@@ -552,12 +552,13 @@
                             	$.ajax({ 
                             		url: "MovieManagerSalesAjax.do",
  								type: "post",
+ 								async:false,
  								data: JSON.stringify(numL),
  								contentType: "application/json; charset=utf-8",
  								success: function(data) {
  									
- 									var data1 = numbeComma(data[0]);
- 									var data2 = numbeComma(data[1]);
+ 									data1 = numbeComma(data[0]);
+ 									data2 = numbeComma(data[1]);
  									
  								
  									document.getElementById("textp_1").innerHTML=data1 + "원"; // 전체 금액
@@ -566,6 +567,75 @@
  									error: function(errorThrown) {
  									},
  								}); 
+                            	
+                            	google.charts.load('current', {'packages':['bar']});
+  						      google.charts.setOnLoadCallback(drawChart);
+  						
+  						      function drawChart() {
+  						    	  
+  						    	var obj_01 = $("#dropdownMenu1 option:checked").val();
+  						    	  
+  						    	var dateSysdate = new Date(); 
+  						    	var date1 = dateSysdate.getMonth()+1+"월 "+dateSysdate.getDate()+"일"; // 오늘 날짜
+  						    	var date2 = dateSysdate.getMonth()+1+"월 "+(dateSysdate.getDate()-1)+"일";
+  						    	var date3 = dateSysdate.getMonth()+1+"월 "+(dateSysdate.getDate()-2)+"일";
+  						    	var date4 = dateSysdate.getMonth()+1+"월 "+(dateSysdate.getDate()-3)+"일";
+  						    	var date5 = dateSysdate.getMonth()+1+"월 "+(dateSysdate.getDate()-4)+"일";
+  						    	
+  						    	var num1 = 0;
+  						    	var num2 = 0;
+  						    	var num3 = 0;
+  						    	var num4 = 0;
+  						    	var num5 = 0;
+  						    	
+  						  
+  						    	console.log(date1);
+  						    	console.log(date2);
+  						    	console.log(date3);
+  						    	console.log(date4);
+  						    	console.log(date5);
+  						    	
+  						    	$.ajax({ 
+                            	url: "MovieManagerSalesDateAjax.do",
+ 								type: "post",
+ 								async:false,
+ 								data: obj_01,
+ 								contentType: "application/json; charset=utf-8",
+ 								success: function(data) {
+ 									num1 = data[0];
+ 									num2 = data[1];
+ 									num3 = data[2];
+ 									num4 = data[3];
+ 									num5 = data[4];
+ 									console.log(num1 + " " + num2 + " " + num3 + " " + num4 + " " + num5);
+ 									},
+ 									error: function(errorThrown) {
+ 									},
+ 								}); 
+  						    	
+  						    	
+  						    	
+  						    	  
+  						        var data = google.visualization.arrayToDataTable([
+  						          ['날짜', '판매금액'],
+  						          [date5, num5],
+  						          [date4, num4],
+  						          [date3, num3],
+  						          [date2, num2],
+  						          [date1, num1]
+  						        ]);
+  						
+  						        var options = {
+  						          chart: {
+  						            title: '영화 최근 매출 순위',
+  						            subtitle: '',
+  						          }
+  						        };
+  						
+  						        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+  						        chart.draw(data, google.charts.Bar.convertOptions(options));
+  						      }
+  						      
  						}
                          // number에 int값을 넣으면 1000단위 콤마가 찍힌다.
                          function numbeComma(number) {
@@ -577,50 +647,9 @@
                          </script>
                         </div>
                         <!-- 위 까지가 캘린더 코드 -->
-            
-                       
-
-                      
                         
                         <!-- 구글 차트 넣을꺼 -->
                          <!--  구글 차트 전용 script -->
-					       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-						    <script type="text/javascript">
-						      google.charts.load('current', {'packages':['bar']});
-						      google.charts.setOnLoadCallback(drawChart);
-						
-						      function drawChart() {
-						    	  
-						    	  
-						    	  
-						    	  
-						    	  
-						    	  
-						    	  
-						    	  
-						        var data = google.visualization.arrayToDataTable([
-						          ['Year', 'Expenses'],
-						          ['2014', 1000],
-						          ['2015', 1170],
-						          ['2016', 660],
-						          ['2017', 1030],
-						          ['2018', 500]
-						        ]);
-						
-						        var options = {
-						          chart: {
-						            title: '영화 최근 매출 순위',
-						            subtitle: '',
-						          }
-						        };
-						
-						        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-						
-						        chart.draw(data, google.charts.Bar.convertOptions(options));
-						      }
-						    </script>
-                        
-                        
                     </div>
                 </div>
             </div>

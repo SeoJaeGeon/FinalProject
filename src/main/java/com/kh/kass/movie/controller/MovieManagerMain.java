@@ -73,6 +73,11 @@ public class MovieManagerMain {
 		ArrayList<Movie_Sales> result1 = movService.salesList1(MSlist.get(0));
 		ArrayList<Movie_Sales> result2 = movService.salesList2(MSlist.get(0));
 		
+		System.out.println("result1 : " + result1);
+		System.out.println("result2 : " + result2);
+		
+		
+		
 		int resultSalesToTal1 = 0;
 		int resultSalesToTal2 = 0;
 		int tatal[] = {0,0};
@@ -91,6 +96,30 @@ public class MovieManagerMain {
 		System.out.println("최종토탈1 : " + tatal[0]);
 		System.out.println("최종토탈2 : " + tatal[1]);
 		return tatal;
+	}
+	
+	@ResponseBody	
+	@RequestMapping("MovieManagerSalesDateAjax.do")
+	public int[] MovieManagerSalesDateAjax(ModelAndView mv,
+			HttpServletRequest request,
+			@RequestBody int obj_01) {
+		System.out.println("테이블 아자스 들어왔어요");
+		System.out.println("이거 num6 : " + obj_01);
+		
+		
+		
+		
+		
+		ArrayList<Movie_Sales> result = movService.selectMovieTebalAjax(obj_01);
+		System.out.println(result);
+		int[] tableArr = new int[result.size()];
+		for(int i = 0; i < tableArr.length; i++) {
+			tableArr[i] = result.get(i).getPryPrice();
+			System.out.println("tableArr의 값 : " + tableArr[i]);
+		}
+		
+		
+		return tableArr;
 	}
 			
 	

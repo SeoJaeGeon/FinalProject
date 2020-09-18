@@ -405,6 +405,12 @@
 		pointer-events: none;
 		margin: auto;
 		}
+		
+		#stay3{
+		 width:1500px;
+		 margin: auto;
+		}
+		
     </style>
 </head>
 
@@ -418,7 +424,9 @@
     <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
+        <div id="stay3">
         <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+        </div>
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->

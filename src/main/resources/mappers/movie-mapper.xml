@@ -82,6 +82,12 @@
 		<result property="pryPrice" column="PAY_PRICE"/>
 	</resultMap>
 	
+	<resultMap id="movieTableSales" type="Movie_Sales">
+		<id property="payDate" column="PAY_DATE"/>
+		<result property="pryPrice" column="ABC"/>
+		<result property="maName" column="MA_NAME"/>
+	</resultMap>
+	
 	<resultMap id="movieSales2" type="Movie_Sales">
 		<id property="pryPrice" column="PAY_PRICE"/>
 	</resultMap>
@@ -97,6 +103,8 @@
 		<result property="roomChair" column="ROOM_CHAIR"/>
 		<result property="maNo" column="MA_NO"/>
 	</resultMap>
+	
+	
 	
 	
 	<select id="movieList" resultMap="movieManagerResultSet">
@@ -315,7 +323,8 @@
 	join movie_room using (room_no)
 	join movie_area using (ma_no)
 	where ma_no = #{maNo}
-	and PAY_DATE = #{payDate}
+	and PAY_DATE >= #{payDate}
+	
 	</select>
 	
 	<select id="selectRoomChk" resultMap="movieRoomChk">
@@ -338,6 +347,22 @@
 	join movie_area USING(ma_no)
 	where ma_name = #{ma_name}
 	</select>
+	
+	<select id="selectTableAjaxList" resultMap="movieTableSales">
+	select a.*
+	from (
+	select TO_CHAR(PAY_DATE,'YYYY-MM--DD'), sum(PAY_PRICE) as ABC
+		from payment
+		join user_resmovie using(ur_no)
+		join movie_res using(res_no)
+		join movie_room using (room_no)
+		join movie_area using (ma_no)
+		where MA_NO = #{maNo}
+	    GROUP BY TO_CHAR(PAY_DATE,'YYYY-MM--DD')
+	    ORDER by 1 DESC) a
+	    where 5 >= rownum
+	</select>
+	
 </mapper>
 
 

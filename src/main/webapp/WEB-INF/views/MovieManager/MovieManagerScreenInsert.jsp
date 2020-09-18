@@ -509,6 +509,12 @@ margin: auto;
 	margin-top:40px;
 }
 
+#stay3{
+ width:1500px;
+ margin: auto;
+}
+
+
     </style>
     
 </head>
@@ -526,7 +532,9 @@ margin: auto;
      <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
+        <div id="stay3">
         <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+        </div>
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
@@ -875,20 +883,6 @@ margin: auto;
                                       <option value="50">50분</option>
                                     </select>
                                     
-                                    
-                                  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
                             </div>
                             <div id="imgdiv1">
                             <img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
@@ -1133,12 +1127,10 @@ margin: auto;
                                         		if(resDate.getTime() == tableStartTime[key].resDate.getTime()){
                                         			if(maName == tableStartTime[key].maName){
                                         				if(roomNo == tableStartTime[key].roomNo){
-                                        					alert("startTime : " + startTime + " 뒤에 : " + tableStartTime[key].startTime);
                                         					if(startTime >= tableStartTime[key].startTime && endTime <= tableStartTime[key].endTime){
                                         						alert("해당 시간대는 이미 영화 상영 예정입니다.");
                                         						return;
                                         					}
-                                        					alert("endTime : " + endTime + " 뒤에 : " + tableStartTime[key].endTime);
                                         					if(endTime >= tableStartTime[key].startTime && startTime <= tableStartTime[key].endTime){
                                         						alert("해당 시간대는 이미 영화 상영 예정입니다.");
                                         						return;
