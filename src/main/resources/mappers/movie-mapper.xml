@@ -91,6 +91,13 @@
 		<result property="roomChair" column="ROOM_CHAIR"/>
 	</resultMap>
 	
+	<resultMap id="movieRoomselect" type="Movie_Room">
+		<id property="roomNo" column="ROOM_NO"/>
+		<result property="roomNumber" column="ROOM_NUMBER"/>
+		<result property="roomChair" column="ROOM_CHAIR"/>
+		<result property="maNo" column="MA_NO"/>
+	</resultMap>
+	
 	
 	<select id="movieList" resultMap="movieManagerResultSet">
 	SELECT *
@@ -322,6 +329,15 @@
 	<delete id="deleteMovieRoom">
 	delete from MOVIE_RES where RES_NO = #{i}
 	</delete>
+	
+	
+	<!-- movie Room의 roomNo을 알기위한 sql -->
+	<select id="selectRoomList" resultMap="movieRoomselect">
+	select room_no, room_number, room_chair, ma_no
+	from movie_room
+	join movie_area USING(ma_no)
+	where ma_name = #{ma_name}
+	</select>
 </mapper>
 
 

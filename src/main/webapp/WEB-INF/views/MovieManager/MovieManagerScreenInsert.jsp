@@ -3,7 +3,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.kh.kass.common.*" %>
 <%@ page import="com.kh.kass.movie.model.vo.*" %>
+<%@ page import="com.kh.kass.movie.controller.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.text.SimpleDateFormat"%> 
+
 <!doctype html>
 <html lang="ko">
 
@@ -93,21 +96,23 @@
         }
 
         body {
-            width: 100%;
+            width: 100;
             background: white;
             margin: auto;
         }
 
         header {
-            width: 100%;
+            width: 1500px;
             height: 150px;
+            margin: auto;
         }
 
         nav {
-            width: 100%;
+            width: 1500px;
             height: 70px;
+            margin: auto;
         }
-        
+
         #content {
             width: 100%;
             /* border: 1px rgb(236, 159, 159) solid; */
@@ -118,6 +123,7 @@
             height: 150px;
             float: left;
             background: rgb(145, 145, 145);
+            margin: auto;
         }
 
         header>section {
@@ -301,6 +307,17 @@
             height: 50px;
         }
         
+        #dropdownMenu_selete01, #dropdownMenu_selete02{
+        	text-align:center;
+    	  	width: 40%;
+            height: 50px;
+            font-size:20px;
+        }
+        
+        #dropdownMenu_selete02{
+        	margin-left: 90px;
+        }
+        
         #dropdownMenu5{
     	  	  width: 100%;
             height: 50px;
@@ -391,15 +408,15 @@
        .manager2-2-div{
             width:80%;
             margin-left: 60px;
-            margin-top: 100px;
+            margin-top: 40px;
             height: 30%;
             border: 1px solid black;
             float:left;
        }
 
        #manager2-id-div1{
-           margin-top: 30px;
-           height: 450px;
+           margin-top: 95px;
+           height: 400px;
            background-color: white;
        }
         
@@ -417,9 +434,12 @@
         }
 
         .datepicker{
-            top:1130px !important;
-            width: 430px;
-            height: 260px;
+         	left: 833px !important;
+		    top: -1284px !important;
+		    
+		    width: 430px;
+		    height: 260px;
+		    position: relative;
         }
 
         .datepicker table tr td, .datepicker table tr th {
@@ -474,11 +494,19 @@ font-size:20px;
 	margin-top: 35px;
 }
 #backimg{
-width: 100%;
+width: 1500px;
 height: 2000px;
 opacity : 5%;
 position: absolute;
 pointer-events: none;
+margin: auto;
+}
+
+#dateText01{
+	width:80%;
+	height:45px;
+	margin-left: 60px;
+	margin-top:40px;
 }
 
     </style>
@@ -493,8 +521,8 @@ pointer-events: none;
          		<%
                             	ArrayList<Attachment> ATClist1 = (ArrayList<Attachment>)request.getAttribute("movieAttachment1");
             	%>
-
-
+            	
+            	
      <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
@@ -512,18 +540,11 @@ pointer-events: none;
                             <c:forEach var="movieListName" items="${movieListName}">
                                     <select id ="dropdownMenu1" name="dd6" onchange="movieNameChange(this.value);">
                                             <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
-                         	<%-- <%
-		                    ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movListFile");
-		                    for(int i = 0; i<list.size();i++){
-		                    %>	 --%>
 		                    		<c:forEach var="list" items="${ movListFile }">
 		                    		<c:if test="${ movieListName.movieNo ne list.movieNo }">
 		                    				<option value="${ list.movieName }">${ list.movieName }</option>
                     				</c:if>
 		                    		</c:forEach>
-                    		<%-- <%
-		                    }
-                    		%> --%>
                                     </select>
                             <script>
 		                    	function movieNameChange(obj){   		
@@ -588,7 +609,7 @@ pointer-events: none;
                             
                             </script>
                         </div>
-                        <div id="table-div-01" style="overflow:scroll" >
+                        <div id="table-div-01" style="overflow:auto;" >
                             <table class="table table-striped" id="table-02">
                                 <thead>
                                     <tr>
@@ -632,7 +653,7 @@ pointer-events: none;
                                 <!-- 영화 선택 -->
                                
                             <c:forEach var="movieListName" items="${movieListName}">
-                                    <select id ="dropdownMenu1" onchange="movieNameChangebottom(this.value);" name="dd6">
+                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this.value);" name="dd6">
                                             <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
                                             
 		                    <c:forEach var="list" items="${ movListFile }">
@@ -642,9 +663,23 @@ pointer-events: none;
                     		</c:forEach>
                                     </select>
                             </c:forEach>
+                            <div style="margin-top:3px;">
+                            <input type="text" id="search01" style="width: 80%;height: 45px;font-size:20px;font-weight:bold;"><button type="button" style="width:15%;height:45px;margin-left:23px;" onclick="Search();">검색</button>
+                            </div>
+                            
+                            
                             
                             <!-- 아래쪽 이름 바꿀 시 실행되는 function과 Ajax -->
                             <script>
+                            // 검색했을떄 들어옴
+                            function Search(){
+                            	var search = $("#search01").val();
+                            	location.href = "MovieManagerResAjaxSearch.do?search="+search;
+                            }
+                            
+                            
+                            
+                            
                             function movieNameChangebottom(obj){
                             	$.ajax({ 
 									url: "MovieManagerResAjax.do",
@@ -654,11 +689,29 @@ pointer-events: none;
 									success: function(data) {
 										var image = document.getElementById("thumbnailImg1");
 										image.src = "${ contextPath }"+data;
+										var image2 = document.getElementById("backimg");
+										image2.src = "${ contextPath }"+data;
 										},
 										error: function(errorThrown) {
 										alert("상영등록에 실패했습니다.")
 										},
-									}); 
+									});
+                            	
+                            	$.ajax({ 
+									url: "MovieManagerResAjax2.do",
+									type: "post",
+									data: obj,
+									contentType: "application/json; charset=utf-8",
+									success: function(data) {
+										var date1 = document.getElementById("dateText01");
+										date1.value = + data;
+										},
+										error: function(errorThrown) {
+										alert("상영등록에 실패했습니다.")
+										},
+									});
+                            	
+                            	
 								}
                             </script>
                             
@@ -709,28 +762,46 @@ pointer-events: none;
                                     	} else {
                                     	// null 값이 아니라면
                                     	var you_value = document.getElementById("dropdownMenu3");
-                                    	if(you_value.value =='건대'){
-                                    		document.getElementById("1").value="1";
-                                    		document.getElementById("2").value="2";
-                                    		document.getElementById("3").value="3";
-                                    	} else if(you_value.value =='강변'){
-                                    		document.getElementById("1").value="4";
-                                    		document.getElementById("2").value="5";
-                                    		document.getElementById("3").value="6";
-                                    	} else if(you_value.value =='명동'){
-                                    		document.getElementById("1").value="7";
-                                    		document.getElementById("2").value="8";
-                                    		document.getElementById("3").value="9";
-                                    	} else if(you_value.value =='상봉'){
-                                    		document.getElementById("1").value="10";
-                                    		document.getElementById("2").value="11";
-                                    		document.getElementById("3").value="12";
-                                    	} else if(you_value.value =='구로'){
-                                    		document.getElementById("1").value="13";
-                                    		document.getElementById("2").value="14";
-                                    		document.getElementById("3").value="15";
+                                    	var you_value = document.getElementById("dropdownMenu3");
+                                    	var roomNo;
+                                    	var idnum = 1;
+                                    	$.ajax({ 
+        									url: "MovieManagerResRoomNoAjax.do",
+        									type: "post",
+        									data: you_value.value,
+        									contentType: "application/json; charset=utf-8",
+        									success: function(data) {
+        										for(i in data){
+        										  console.log("아자스 for문 : " + i + " " + data[i].roomNo);
+        										  roomNo = data[i].roomNo;
+        										  
+        										  console.log("roomNo : " + roomNo);
+        										  document.getElementById(idnum).value=roomNo;
+        										  console.log("들어가는 값 : " + document.getElementById(idnum).value);
+        										  idnum++;
+        										}
+        										},
+        										error: function(errorThrown) {
+        										alert("상영등록에 실패했습니다.")
+        										},
+        									}); 
                                     	}
-                                    	}
+                                    	
+                                    	
+                                    	var num1 = $(".dropdownMenu1_01").val(); 
+                                        	   $.ajax({ 
+                                    				url: "MovieManagerResAjax2.do",
+                                    				type: "post",
+                                    				data: num1,
+                                    				contentType: "application/json; charset=utf-8",
+                                    				success: function(data) {
+                                    					var date1 = document.getElementById("dateText01");
+                                    					date1.value = + data;
+                                    					},
+                                    					error: function(errorThrown) {
+                                    					alert("상영등록에 실패했습니다.")
+                                    					},
+                                    				});
                                     }
                                     
                                     function change_A(){
@@ -742,28 +813,31 @@ pointer-events: none;
                                     	} else {
                                     	// null 값이 아니라면
                                     	var you_value = document.getElementById("dropdownMenu3");
-                                    	if(you_value.value =='건대'){
-                                    		document.getElementById("1").value="1";
-                                    		document.getElementById("2").value="2";
-                                    		document.getElementById("3").value="3";
-                                    	} else if(you_value.value =='강변'){
-                                    		document.getElementById("1").value="4";
-                                    		document.getElementById("2").value="5";
-                                    		document.getElementById("3").value="6";
-                                    	} else if(you_value.value =='명동'){
-                                    		document.getElementById("1").value="7";
-                                    		document.getElementById("2").value="8";
-                                    		document.getElementById("3").value="9";
-                                    	} else if(you_value.value =='상봉'){
-                                    		document.getElementById("1").value="10";
-                                    		document.getElementById("2").value="11";
-                                    		document.getElementById("3").value="12";
-                                    	} else if(you_value.value =='구로'){
-                                    		document.getElementById("1").value="13";
-                                    		document.getElementById("2").value="14";
-                                    		document.getElementById("3").value="15";
-                                    	}
-                                    	}
+                                    	var roomNo;
+                                    	var idnum = 1;
+                                    	$.ajax({ 
+        									url: "MovieManagerResRoomNoAjax.do",
+        									type: "post",
+        									data: you_value.value,
+        									contentType: "application/json; charset=utf-8",
+        									success: function(data) {
+        										for(i in data){
+        										  console.log("아자스 for문 : " + i + " " + data[i].roomNo);
+        										  roomNo = data[i].roomNo;
+        										  
+        										  console.log("roomNo : " + roomNo);
+        										  document.getElementById(idnum).value=roomNo;
+        										  console.log("들어가는 값 : " + document.getElementById(idnum).value );
+        										  idnum++;
+        										}
+        										
+        										
+        										},
+        										error: function(errorThrown) {
+        										alert("상영등록에 실패했습니다.")
+        										},
+        									}); 
+        								}
                                     }
                                     
                                     
@@ -771,7 +845,50 @@ pointer-events: none;
                             </div>
                             <div class="manager2-div" id="manager2-01-04">
                            <!-- 상영 시간대 선택 -->
-                                    <input type="text" id="dropdownMenu5" placeholder="상영시간대 예) 09:00~10:00" maxlength="11"name="dd4">
+                                    <select id="dropdownMenu_selete01">
+                                      <option value="07">07시</option>
+                                      <option value="08">08시</option>
+                                      <option value="09">09시</option>
+                                      <option value="10">10시</option>
+                                      <option value="11">11시</option>
+                                      <option value="12">12시</option>
+                                      <option value="13">13시</option>
+                                      <option value="14">14시</option>
+                                      <option value="15">15시</option>
+                                      <option value="16">16시</option>
+                                      <option value="17">17시</option>
+                                      <option value="18">18시</option>
+                                      <option value="19">19시</option>
+                                      <option value="20">20시</option>
+                                      <option value="21">21시</option>
+                                      <option value="22">22시</option>
+                                      <option value="23">23시</option>
+                                      <option value="24">24시</option>
+                                      <option value="01">25시</option>
+                                    </select>
+                                    <select id="dropdownMenu_selete02">
+                                      <option value="00">00분</option>
+                                      <option value="10">10분</option>
+                                      <option value="20">20분</option>
+                                      <option value="30">30분</option>
+                                      <option value="40">40분</option>
+                                      <option value="50">50분</option>
+                                    </select>
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                             </div>
                             <div id="imgdiv1">
                             <img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
@@ -781,6 +898,7 @@ pointer-events: none;
                         </div>
 
                         <div id="manager2-02">
+                        	<input type="hidden" id="dateText01" readonly="readonly">
                             <!-- 달력 쪽-->
                             <div class="manager2-2-div">
                                     <div class="container" id="container-1">
@@ -800,7 +918,7 @@ pointer-events: none;
                             
                             
                             
-                            <div class="manager2-2-div" id="manager2-id-div1">
+                            <div class="manager2-2-div" id="manager2-id-div1" style="overflow:auto;">
                                 <table class="table" id="movie-table">
                                     <thead class="thead-light" id="movie-table1">
                                         <th scope="col">이름</th>
@@ -809,21 +927,53 @@ pointer-events: none;
                                         <th scope="col">시간</th>
                                         <th scope="col">날짜</th>
                                     </thead>
-                                    <tbody id="my-tbody">
-                                    
-                                    </tbody>
+	                                    <tbody id="my-tbody">
+	                                    
+	                                    </tbody>
                                     </table>
                                     <script>
                                     var tableDatas = [];
+                                    var tableStartTime = [];
+                                    var tableMovie
                                     function table_make(){
                                     // 특정 버튼을 누르면 테이블의 td 가 1줄씩 추가되는데 이 모든것을 다 controller로 가져가야함
-                                     
-                                    	var num1 = document.getElementById("dropdownMenu1").value; // 영화 이름
+                                    	var num1 = $(".dropdownMenu1_01").val(); // 영화 이름
                                     	var num2 = document.getElementById("dropdownMenu3").value; // 영화관 지역
                                     	var num3 = document.getElementById("dropdownMenu4").value; // 영화관 번호
-                                    	var num4 = document.getElementById("dropdownMenu5").value; // 시간 09:00~11:00 기준 (~로 split해서 값 출력)
                                     	var num5 = document.getElementById("dropdownMenu6").value; // 날짜 2020/09/10 기준 (date 포멧으로 변경)
                                     	
+                                    	var str1 = num5.substr(0,4);
+                                    	var str2 = num5.substr(5,2);
+                                    	var str3 = num5.substr(8,2);
+                                    	var str4 = str1 + str2 + str3 + "000000";
+                                    	var str5 = $("#dateText01").val();
+                                    	console.log("str4 : " + str4);
+                                    	console.log("str5 : " + str5);
+                                    	if(str5 > str4){
+                                    		alert("해당 영화는 개봉전에 상영을 하실 수 없습니다.");
+                                    	} else {	
+                                    		
+                                   		var num6 = document.getElementById("dropdownMenu_selete01").value; // 이제 추가하려는 시간의 H
+                                       	var num7 = document.getElementById("dropdownMenu_selete02").value; // 이제 추가하려는 시간의 M
+                                       	
+                                       	var numA1 = num6 + "" +num7;
+                                       	console.log("이제 추가하려는 시간의 시작시간 : " + numA1);
+                                       	
+                                    	var numX1 = 0;
+                                    	var numX1_1 = 0;
+                                    	var numX1_2 = 0;
+                                       	var numX2 = 0;
+                                       	var numX2_1 = 0;
+                                       	var numX2_2 = 0;
+                                       	
+                                       	var sumX1 = 0;
+                                       	var sumX2 = 0;
+                                    	// 현재 선택된 영화들의 시작과 끝 시간을 차례대로 가져옴
+                                    	// 이제 이거를 숫자로 만든 뒤 >= && <= && 으로 비교를 해야함
+                                    	
+                                    	var num8 = num6 + ":" + num7; // 시간형 07:00 String값
+                                    	var num9 = document.getElementById("dropdownMenu4"); // 1관 2관 2관을 구분하기 위함
+                                    	num9.options[num9.selectedIndex].text
                                     	function parse(str) {
                                     	    var y = str.substr(0, 4);
                                     	    var m = str.substr(5, 2);
@@ -831,30 +981,205 @@ pointer-events: none;
                                     	    return new Date(y,m-1,d);
                                     	}
                                     	var dateA = parse(num5);
-                                    	var dateB = new Date();
                                     	
-                                    	dateB = moment(dateA).format('YY/MM/DD');
+                                    	var num10 = num5 +"/"+ num6 + "/"+  num7 + "/00";
+                                    	console.log("num10 : " + num10);
                                     	
-                                    	var Stime = num4.split("~")[0];
-                                    	var Etime = num4.split("~")[1];
+                                    	// 날짜 + 시간을 가져옴
+                                    	// 2020/09/17/12/40/00 
+                                    	function parse2(str) {
+                                    	    var y = str.substr(0, 4);
+                                    	    var m = str.substr(5, 2);
+                                    	    var d = str.substr(8, 2);
+                                    	    var hh = str.substr(11,2);
+                                    	    var mm = str.substr(14,2);
+                                    	    var ss = str.substr(17,2);
+                                    	    console.log(y);
+                                    	    console.log(m);
+                                    	    console.log(d);
+                                    	    console.log(hh);
+                                    	    console.log(mm);
+                                    	    console.log(ss);
+                                    	    return new Date(y,m-1,d,hh,mm,ss);
+                                    	}
+                                    	var dateB = parse2(num10);
+                                    	console.log("num10 : " + num10);
+                                    	console.log("date B : " + dateB);
+                                    	
+                                    	
+                                   
+                                    	var dateE4 = 0;
+                                    	
+                                    	<%
+                                    	for (int i = 0; i < list_movieRes.size(); i++) { 
+                                    	%>
+                                    	
+										numX1 = <%="'" + list_movieRes.get(i).getStartTime() + "'"%>;
+										numX2 = <%="'" + list_movieRes.get(i).getEndTime() + "'"%>;   
+										
+										numX1_1 = numX1.substr(0,2);
+										numX1_2 = numX1.substr(3,2);
+										numX2_1 = numX2.substr(0,2);
+										numX2_2 = numX2.substr(3,2);
+										
+										
+										sumX1 = numX1_1 + numX1_2; // int형 현재 선택된 시작시간
+										sumX2 = numX2_1 + numX2_2; // int형 현재 선택된 종료시간
+										console.log("sumX1 : " + sumX1);
+										console.log("sumX2 : " + sumX2);
+										
+										<% Date dateS1 = list_movieRes.get(i).getResDate(); %>; //문제4
+										<% 
+										MovieManagerMain main = new MovieManagerMain();
+										
+										String dateE5 = main.result001(dateS1);
+										
+										
+										%>
+										
+										var dateE4 = <%=dateE5%>;
+										
+										
+										
+										
+										
+										
+										var movieName = $(".dropdownMenu1_01").val();
+										var obj0 = {movieName : movieName , startTime : numA1};
+										
+										
+										var dateEnd;
+										$.ajax({ 
+        									url: "MovieArrAjaxselect1.do",
+        									type: "post",
+        									data: JSON.stringify(obj0),
+        									async:false,
+        									contentType: "application/json; charset=utf-8",
+        									success: function(data) {
+        										dateEnd = data;
+        										console.log("아자스 직후 : " + dateEnd);
+        										},
+        										error: function(errorThrown) {
+        										alert("상영등록에 실패했습니다.")
+        										},
+        									}); 
+										
+										console.log("dateE4 : " + dateE4);
+										console.log("아자스 나온 후 dateEnd : " + dateEnd);
+										console.log("str4 : " + str4);
+										console.log("str5 : " + str5);
+										if(str4 == dateE4){ // 날짜값을 int로 환산해서 비교함 동일한 경우 아래로
+											if(num3 == <%=list_movieRes.get(i).getRoomNo()%>){ // 현재 추가하려는 상영 영화관과 for문속의 영호관을 비교함 맞을시 아래로
+												console.log("numA1 : " + numA1); // for문의 상영 시작 값
+												console.log("sumX1 : " + sumX1); // for문의 상영 종료 값
+												console.log("sumX2 : " + sumX2); // 추가하려는 상영의 시작 값
+												if(numA1 >= sumX1 && dateEnd <= sumX2){ // 1차 검사 추가하려는 상영의 시작시간이 선택된 시간보다 빠르고 종료시간보다 느릴경우
+													alert("해당 시간대는 이미 영화 상영 예정입니다.");
+													return;
+													} else if(dateEnd >= sumX1 && numA1 <= sumX2){// 2차 검사 추가하려는 상영의 종료시간이 선택된 시간 사이에 존재함.
+													alert("해당 시간대는 이미 영화 상영 예정입니다.");
+													return;
+													}
+												}
+											}
+										
+										<% }  %>
+										
+										
+										
+                                        if(tableStartTime == null || tableStartTime == ""){
+                                        } else {
+                                        	var moviename = num1; // 영화 이름
+                                        	var roomNo = num3;    // 룸 번호
+                                        	var maName = num2;    // 영화관 지역
+                                       		var resDate = dateA;   // 상영 날짜
+                                       		var startTime = numA1; // 시작 시간
+                                       		var endTime = dateEnd;   // 종료 시간
+                                       		
+                                       		
+                                       		console.log("moviename : " + num1);
+                                       		console.log("roomNo : " + num3);
+                                       		console.log("maName : " + num2);
+                                       		console.log("resDate : " + dateA);
+                                       		console.log("startTime : " + numA1);
+                                       		console.log("endTime : " + dateEnd);
+                                       		
+                                        	for(var key in tableStartTime){
+                                        		console.log("key : " + key, tableStartTime[key].resDate);
+                                        		if(resDate.getTime() == tableStartTime[key].resDate.getTime()){
+                                        			if(maName == tableStartTime[key].maName){
+                                        				if(roomNo == tableStartTime[key].roomNo){
+                                        					alert("startTime : " + startTime + " 뒤에 : " + tableStartTime[key].startTime);
+                                        					if(startTime >= tableStartTime[key].startTime && endTime <= tableStartTime[key].endTime){
+                                        						alert("해당 시간대는 이미 영화 상영 예정입니다.");
+                                        						return;
+                                        					}
+                                        					alert("endTime : " + endTime + " 뒤에 : " + tableStartTime[key].endTime);
+                                        					if(endTime >= tableStartTime[key].startTime && startTime <= tableStartTime[key].endTime){
+                                        						alert("해당 시간대는 이미 영화 상영 예정입니다.");
+                                        						return;
+                                        					}
+                                        				}
+                                        			}
+                                        		}
+                                        		
+                                        		
+                                        	}
+                                        	
+                                        }
+                                    	
+                                    	// 날짜 + 시간을 가져옴
+                                    	// 2020/09/17/12/40/00 
+                                    	function parse2(str) {
+                                    	    var y = str.substr(0, 4);
+                                    	    var m = str.substr(5, 2);
+                                    	    var d = str.substr(8, 2);
+                                    	    var hh = str.substr(11,2);
+                                    	    var mm = str.substr(14,2);
+                                    	    var ss = str.substr(17,2);
+                                    	    console.log(y);
+                                    	    console.log(m);
+                                    	    console.log(d);
+                                    	    console.log(hh);
+                                    	    console.log(mm);
+                                    	    console.log(ss);
+                                    	    return new Date(y,m-1,d,hh,mm,ss);
+                                    	}
+                                    	var dateB = parse2(num10);
+                                    	console.log("num10 : " + num10);
+                                    	console.log("date B : " + dateB);
+                                    	
+                                    	// 이제 dateB와 
+                                    	
+                                    	
+                                    	
+                                    	
+                                    	
+                                    	
+                                    	
+                                    	
+                                    	
                                     	
                                     	if(num2 == "지역을 선택 해 주세요"){
                                     		alert("지역을 선택해 주시기 바랍니다.");
                                     	} else {
-                                    	tableDatas.push({movieName : num1, maName : num2, roomNo: num3 ,startTime: Stime, endTime: Etime, resDate: dateA});
-                                    	
+                                    	tableDatas.push({movieName : num1, maName : num2, roomNo: num3 ,startTime: num8, endTime: dateEnd, resDate: dateA});
+                                    	tableStartTime.push({movieName : num1, maName : num2, roomNo: num3, startTime: numA1, endTime: dateEnd, resDate: dateA});
+                                    	console.log(tableStartTime);
                                     	
                                     	
                                     	console.log(tableDatas);
                                     	$("#movie-table").append("<tr><td name='movieName'>" + num1 + "</td>" + 
                                    								 "<td name='maName'>" + num2 + "</td>" +
-                                   								 "<td name='roomNo'>" + num3 + "</td>" +
-                                   								 "<td name='movieTime'>" + num4 + "</td>" +
+                                   								 "<td name='roomNo'>" + num9.options[num9.selectedIndex].text + "</td>" +
+                                   								 "<td name='movieTime'>" + num8 + "</td>" +
                                    								 "<td name='resDate'>" + num5 + "</td></tr>");
                                     	}
                                     
                                     
-                                    }
+                                    }// 이 괄호가 else 의 끝
+                                    
+                                }
         								
         								function MovieManagerResinsert() { 
         								$.ajax({ 
@@ -864,12 +1189,14 @@ pointer-events: none;
         									contentType: "application/json; charset=utf-8",
         									success: function(data) {
         										alert("상영등록이 성공하였습니다!");
+        										location.href="MovieManagerScreenInsert.do";
         										},
         										error: function(errorThrown) {
         										alert("상영등록에 실패했습니다.")
         										},
         									}); 
         								}
+                                   
                                     </script>
                                     
                                   
@@ -931,9 +1258,6 @@ pointer-events: none;
             </footer>
         </div>
     </div>
-
-
-
 
 
 

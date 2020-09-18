@@ -15,6 +15,7 @@ import com.kh.kass.movie.model.vo.Movie_Area;
 import com.kh.kass.movie.model.vo.Movie_Genre;
 import com.kh.kass.movie.model.vo.Movie_Res;
 import com.kh.kass.movie.model.vo.Movie_Res_Room;
+import com.kh.kass.movie.model.vo.Movie_Room;
 import com.kh.kass.movie.model.vo.Movie_Sales;
 
 @Repository("MovieManagerDao")
@@ -76,6 +77,7 @@ public class MovieManagerDao {
 	}
 
 	public ArrayList<Movie> deleteSelectMovie(int movieNo) {
+		System.out.println("여기는 다오 : " + movieNo);
 		return (ArrayList)sqlSession.selectList("movieManagerMapper.deleteSelectMovie",movieNo);
 	}
 
@@ -142,6 +144,10 @@ public class MovieManagerDao {
 
 	public ArrayList<Movie_Res> selectmovResList3(Movie_Res movie_ResList2) {
 		return (ArrayList)sqlSession.selectList("movieManagerMapper.selectmovResList3",movie_ResList2);
+	}
+
+	public ArrayList<Movie_Room> selectRoomNo(String ma_name) {
+		return (ArrayList)sqlSession.selectList("movieManagerMapper.selectRoomList",ma_name);
 	}
 	
 	

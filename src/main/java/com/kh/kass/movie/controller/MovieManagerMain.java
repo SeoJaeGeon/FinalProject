@@ -30,6 +30,7 @@ import com.kh.kass.movie.model.vo.Movie_Area;
 import com.kh.kass.movie.model.vo.Movie_Genre;
 import com.kh.kass.movie.model.vo.Movie_Res;
 import com.kh.kass.movie.model.vo.Movie_Res_Room;
+import com.kh.kass.movie.model.vo.Movie_Room;
 import com.kh.kass.movie.model.vo.Movie_Sales;
 import com.kh.kass.reservation.model.exception.ResException;
 
@@ -47,6 +48,11 @@ public class MovieManagerMain {
 		// 아래는 상영관 페이지 불러오기
 		System.out.println("상영관 정보를 불러옴");
 		ArrayList<Movie_Area> MOVIE_AREA = movService.movListAREA();
+		
+		
+		
+		
+		
 		if(MOVIE_AREA != null) {
 			mv.addObject("MOVIE_AREA",MOVIE_AREA);
 		}
@@ -97,6 +103,14 @@ public class MovieManagerMain {
 		
 		// resultOX = 1일시 실패안뜸 0일시 정보등록 실패뜸
 		int resultOX = 2;
+		
+		// 영화 장르를 전체 DB에서 불러오기
+		ArrayList<Movie_Genre> movieGenreList = movService.selectMovieGenre();
+		for(int i = 0; i<movieGenreList.size();i++) {
+			System.out.println("movieGenre : " + movieGenreList.get(i));
+		}
+		
+		mv.addObject("movieGenreList",movieGenreList); // 영화 장르 리스트 전체
 		
 		//System.out.println(movieList.get(0).toString());
 		if (movieList != null) {
@@ -155,6 +169,14 @@ public class MovieManagerMain {
 		public ModelAndView MovieManagerUpdatePageName(ModelAndView mv, String MovieName) {
 			System.out.println("MovieName : " + MovieName);
 			ArrayList<Movie> movieListName = movService.movListName(MovieName);
+			if(movieListName.isEmpty() || MovieName == null) {
+				ArrayList<Movie> movieList = movService.movList();
+				int resultOX = 4;
+				mv.addObject("resultOX",resultOX);
+				mv.addObject("movieList", movieList);
+				mv.setViewName("MovieManager/MovieManagerInsert");
+				return mv;
+			}
 			ArrayList<Movie> movieList = movService.movList(); // 1번을 가져옴
 			
 			System.out.println("movieNo 찾기전");
@@ -326,7 +348,6 @@ public class MovieManagerMain {
 		// movie_Res 1번의 선택된 리스트를 불러옴
 		ArrayList<Movie_Res>movie_ResList = movService.selectmovResList(movieListName.get(0).getMovieNo());
 		System.out.println("처음 movie_ResList : " + movie_ResList);
-		System.out.println("처음 movieListName : " + movieListName);
 		
 		
 		
@@ -357,7 +378,7 @@ public class MovieManagerMain {
 		
 		// 아래부터는 선택된 값 1개를 가져옴
 		ArrayList<Movie> movieListName = movService.movListName(MovieName);
-		ArrayList<Movie> movieList = movService.movList(); // 1번을 가져옴
+		ArrayList<Movie> movieList = movService.movList(); // 전체를 가져옴
 		
 		System.out.println("movieNo 찾기전");
 		int movieNo = movieListName.get(0).getMovieNo(); // 선택된 movieNo를 변수로 저장
@@ -371,13 +392,6 @@ public class MovieManagerMain {
 		// movie_Res 선택된 리스트를 불러옴
 		ArrayList<Movie_Res>movie_ResList = movService.selectmovResList(movieNo);
 		System.out.println("선택 movie_ResList : " + movie_ResList);
-		if(movie_ResList == null) {
-			
-		}
-		System.out.println();
-				
-				
-				
 		
 		ArrayList<Attachment> movieAttachment1 = movService.movAttachmentList1(movieNo); // 포스터가 있는 어태치를 가져옴
 		
@@ -471,7 +485,9 @@ public class MovieManagerMain {
 		String MovieName = obj;
 		System.out.println("MovieName : " + MovieName);
 		
+		
 		ArrayList<Movie> movieListName = movService.movListName(MovieName);
+		
 		System.out.println(movieListName);
 		System.out.println("movieNo 찾기전");
 		int movieNo = movieListName.get(0).getMovieNo(); // 선택된 movieNo를 변수로 저장
@@ -483,8 +499,105 @@ public class MovieManagerMain {
 		
 		return root;
 	}
+	
+	// 영화 상영추가에서 검색하면 바뀌는 곳
+	@RequestMapping("MovieManagerResAjaxSearch.do")
+	public ModelAndView MovieManagerResAjaxSearch(
+			HttpServletRequest request, ModelAndView mv, String search) {
+		System.out.println("검색하면 들어오는 Ajax 컨트롤러");
+		
+		ArrayList<Movie> movieListName = movService.movListName(search);
+		if(movieListName.isEmpty() || movieListName == null) {
+			ArrayList<Movie> movieList = movService.movList();
+			int resultOX = 5;
+			mv.addObject("resultOX",resultOX);
+			mv.addObject("movieList", movieList);
+			mv.setViewName("MovieManager/MovieManagerInsert");
+			return mv;
+		}
+		
+		ArrayList<Movie> movListFile = movService.movListON(); // movie전체와 전체 파일들을 가져옴
+		ArrayList<Movie> movieList1 = movService.movList1(); // 1번을 가져옴
+		
+		System.out.println("movListFile : " + movListFile.get(0).getAttachList().get(0).getRenameFileName());
+		System.out.println("이게 보임");
+		
+		// 아래부터는 선택된 값 1개를 가져옴
+		ArrayList<Movie> movieList = movService.movList(); // 전체를 가져옴
+		
+		System.out.println("movieNo 찾기전");
+		int movieNo = movieListName.get(0).getMovieNo(); // 선택된 movieNo를 변수로 저장
+		System.out.println("movieNo : " + movieNo);
+		System.out.println("movieAttachment 찾으려고 하는중");
+		
+		// 아래는 상영관 페이지 불러오기
+		System.out.println("상영관 정보를 불러옴");
+		ArrayList<Movie_Area> MOVIE_AREA = movService.movListAREA();
+		
+		// movie_Res 선택된 리스트를 불러옴
+		ArrayList<Movie_Res>movie_ResList = movService.selectmovResList(movieNo);
+		System.out.println("선택 movie_ResList : " + movie_ResList);
+		
+		ArrayList<Attachment> movieAttachment1 = movService.movAttachmentList1(movieNo); // 포스터가 있는 어태치를 가져옴
+		
+		if(movieAttachment1 == null) { // 포스터가 없다면
+			throw new ResException("movie Attachment 사진 동영상 불러오기 실패.");
+		}
+		System.out.println("Attachment1 : " + movieAttachment1.get(0));
 		
 		
+		mv.addObject("movieResList", movie_ResList);// 선택된 resList 보내줌
+		mv.addObject("movieArea",MOVIE_AREA); // 상영관 List 보내줌
+		mv.addObject("movieAttachment1",movieAttachment1); // 파일들 ArrayList로 가져옴 포스터
+		mv.addObject("movieListName", movieListName); // 클릭 이름 가져옴
+		mv.addObject("movieList", movieList);      // 전체를 가져옴
+		mv.addObject("movListFile", movListFile);
+		mv.setViewName("MovieManager/MovieManagerScreenInsert");
+		return mv;
+	}
+	
+	// 영화 아래쪽 이름 바꾸면 개봉날짜를 출력하는 Ajax 컨트롤러
+		@ResponseBody	
+		@RequestMapping("MovieManagerResAjax2.do")
+		public String MovieManagerResAjax2(
+				HttpServletRequest request,
+				@RequestBody String obj) {
+			System.out.println("아래 이름 바꾸면 들어오는 달력 Ajax 컨트롤러");
+			System.out.println("obj : " + obj);
+			String MovieName = obj;
+			System.out.println("MovieName : " + MovieName);
+			
+			ArrayList<Movie> movieListName = movService.movListName(MovieName);
+			System.out.println(movieListName);
+			System.out.println("movieNo 찾기전");
+			int movieNo = movieListName.get(0).getMovieNo(); // 선택된 movieNo를 변수로 저장
+			System.out.println("movieNo : " + movieNo);
+			System.out.println("movieAttachment 찾으려고 하는중");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			String strDate = transFormat.format(movieListName.get(0).getMovieRdate());
+			System.out.println("strDate : " + strDate);
+			return strDate;
+		}
+		
+	// 영화 지역을 변경하면 ajax으로 영화관의 value를 바꾸려는 ajax 컨트롤러
+	@ResponseBody	
+	@RequestMapping("MovieManagerResRoomNoAjax.do")
+	public ArrayList<Movie_Room> MovieManagerResRoomNoAjax(
+			HttpServletRequest request,
+			@RequestBody String obj) {
+		System.out.println("영화지역을 바꾸면 들어오는 Ajax 컨트롤러");
+		System.out.println("obj : " + obj);
+		String MovieName = obj;
+		ArrayList<Movie_Room> movieRoom = movService.movRoomList(obj);
+		System.out.println("movieRoom : " + movieRoom);
+		
+		return movieRoom;
+	}
+	
+	
+	
+	
+	
 		
 	// 영화 상영지역 상영추가 누르면 insert 하기위해 오는 컨트롤러
 	@ResponseBody	
@@ -500,14 +613,62 @@ public class MovieManagerMain {
 			System.out.println(s.getStartTime());
 			System.out.println(s.getEndTime());
 			System.out.println(s.getResDate());
-			System.out.println();
+			
+			ArrayList<Movie> movieListName = movService.movListName(s.getMovieName());
+			System.out.println("movieListName : " + movieListName);
+			System.out.println("time : " + movieListName.get(0).getMovieStime());
+			
+			// 시작 시간을 int로 변환
+			String movieStime1 = s.getStartTime().split(":")[0];
+			String movieStime2 = s.getStartTime().split(":")[1];
+			int movieStime3 = Integer.parseInt(movieStime1)*100;
+			int movieStime4 = Integer.parseInt(movieStime2);
+			int start_time = movieStime3 + movieStime4;
+			System.out.println("movieStime : " +  start_time);
+			
+			String movieEtime = movieListName.get(0).getMovieStime();
+			// 끝 시간을 int로 변환
+			int movieEtime1 = Integer.parseInt(movieEtime.split("분")[0]);
+			System.out.println("movieEtime1 : " + movieEtime1);
+			
+			int h = movieEtime1 / 60 * 100; // 앞의자리
+			int m = movieEtime1 % 60; // 뒤의자리
+			int end_time = 0;
+			end_time =  start_time + (h + m);
+			if(end_time % 100 > 59) {
+				end_time += 100; //만약에 계산한 분의 값이 59분을 넘어버리면 시간을 1시간 더 늘려야 하니 +100을 한 것이다.
+				end_time -= 60; // 만약에 시간을 1시간 올렸으니 결국 뒤에 분은 마이너스 60을 해주면 계산이 된다.
+			}
+			String start_timeString = "";
+			String end_timeString = "";
+			
+			// start time을 String으로 만듬
+			if(start_time < 1000) {
+				start_timeString = "0" + start_time;
+			} else {
+				start_timeString = start_time +"";
+			}
+			
+			// end time을 String으로 만듬
+			if(end_time < 1000) {
+				end_timeString = "0" + end_time;
+			} else {
+				end_timeString = end_time + "";
+			}
+			
+			String s1 = start_timeString.substring(0,2);
+			String s2 = start_timeString.substring(2,4);
+			
+			String e1 = end_timeString.substring(0,2);
+			String e2 = end_timeString.substring(2,4);
+			
+			String sumString1 = s1 + ":" + s2;
+			String sumString2 = e1 + ":" + e2;
+			s.setStartTime(sumString1);
+			s.setEndTime(sumString2);
+			int resResult = movService.insertMovieRes(s);
 		}
 		
-		// for문으로 table_datas의 배열을 1개씩 넘겨서 차례대로 insert 시킴
-		for(int i = 0; i < table_Datas.size(); i++) {
-			
-		int resResult = movService.insertMovieRes(table_Datas.get(i));
-		}
 		
 		
 		
@@ -716,6 +877,72 @@ public class MovieManagerMain {
 				mv.setViewName("MovieManager/MovieManagerCancel");
 				return mv;
 			}
+			
+			
+			// 영화 상영 취소 지역 변경 버튼 눌렀는데 날짜값이 없으면 들어가는 페이지
+		/*@ResponseBody*/
+		@RequestMapping("MovieManagerCancelInsertbutton2.do")
+		public ModelAndView MovieManagerCancelInsertbutton2(ModelAndView mv, 
+				HttpServletRequest request,
+				/*@RequestBody */String itemList) {
+			System.out.println("영화 상영 취소 지역 변경 버튼 누르면 오는 페이지");
+			// 지역명과 영화이름을 split으로 각각 변수에 담음
+			String MovieAreaName = itemList.split(",")[0];
+			String MovieName = itemList.split(",")[1];
+			System.out.println("MovieAreaName : " + MovieAreaName);
+			System.out.println("MovieName : " + MovieName);
+			
+			// 아래는 전체를 가져옴
+			ArrayList<Movie> movListFile = movService.movListON(); // movie전체와 전체 파일들을 가져옴
+			ArrayList<Movie> movieList1 = movService.movList1(); // 1번을 가져옴
+			
+			System.out.println("movListFile : " + movListFile.get(0).getAttachList().get(0).getRenameFileName());
+			System.out.println("이게 보임");
+			
+			// 아래부터는 선택된 값 1개를 가져옴
+			ArrayList<Movie> movieListName = movService.movListName(MovieName);
+			ArrayList<Movie> movieList = movService.movList(); // 1번을 가져옴
+			
+			System.out.println("movieNo 찾기전");
+			int movieNo = movieListName.get(0).getMovieNo(); // 선택된 movieNo를 변수로 저장
+			System.out.println("movieNo : " + movieNo);
+			System.out.println("movieAttachment 찾으려고 하는중");
+			
+			// 아래는 상영관 페이지 불러오기
+			System.out.println("상영관 정보를 불러옴");
+			ArrayList<Movie_Area> MOVIE_AREA = movService.movListAREA();
+			
+			// movie_Res 선택된 리스트를 불러옴
+			ArrayList<Movie_Res>movie_ResList1 = movService.selectmovResList(movieNo);
+			System.out.println("선택 movie_ResList : " + movie_ResList1);
+			// 가져온 movie_Res를 영화관지역을 선택한 것으로 set하고 다시 select 해옴
+			Movie_Res movie_ResList2;
+			movie_ResList2 = movie_ResList1.get(0);
+			movie_ResList2.setMaName(MovieAreaName);
+			System.out.println("movie_ResList2 : " + movie_ResList2);
+			
+			ArrayList<Movie_Res>movie_ResList3 = movService.selectmovResList2(movie_ResList2); // 여기를 수정해야함
+			System.out.println("movie_ResList3 : " + movie_ResList3);
+			
+					
+			
+			ArrayList<Attachment> movieAttachment1 = movService.movAttachmentList1(movieNo); // 포스터가 있는 어태치를 가져옴
+			
+			if(movieAttachment1 == null) { // 포스터가 없다면
+				throw new ResException("movie Attachment 사진 동영상 불러오기 실패.");
+			}
+			System.out.println("Attachment1 : " + movieAttachment1.get(0));
+			
+			mv.addObject("MovieAreaName",MovieAreaName); // 선택된 상영관 이름 보내줌
+			mv.addObject("movieResList", movie_ResList3);// 선택된 resList 보내줌
+			mv.addObject("movieArea",MOVIE_AREA); // 상영관 List 보내줌
+			mv.addObject("movieAttachment1",movieAttachment1); // 파일들 ArrayList로 가져옴 포스터
+			mv.addObject("movieListName", movieListName); // 클릭 이름 가져옴
+			mv.addObject("movieList", movieList);      // 전체를 가져옴
+			mv.addObject("movListFile", movListFile);
+			mv.setViewName("MovieManager/MovieManagerCancel");
+			return mv;
+		}
 	
 			
 	// 영화 상영 취소 상영취소 버튼을 눌렀을때 Movie_res를 삭제하는 페이지
@@ -828,7 +1055,7 @@ public class MovieManagerMain {
 	
 	
 		
-	ModelAndView mv = new ModelAndView("MovieManager/MovieManagerSales");
+	ModelAndView mv = new ModelAndView("MovieManager/MovieManagerInsert");
  
             System.out.println("경로 : " + SAVE_PATH);
             System.out.println("경로 : " + SAVE_PATH2);
@@ -1273,7 +1500,12 @@ public class MovieManagerMain {
 	                e.printStackTrace();
 	            }
 			}
+		
+		
+   		
 		}
+		int resultOX = 3;
+   		mv.addObject("resultOX",resultOX);
 		return mv;
 	}
 	
@@ -1299,7 +1531,91 @@ public class MovieManagerMain {
 				f.delete();
 		}
 		
-	
 		
+		
+		// 상영 추가에서 date를 String으로 바꿔주는 메소드
+		public String result001(Date date) {
+			
+			DateFormat sdFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			String today = sdFormat.format(date);
+			return today;
+		}
+		
+		// 상영 추가에서 String을 int로 바꿔주는 메소드
+		public int result002(String date) {
+			int result = Integer.parseInt(date);
+			System.out.println("여기 result : " + result);
+			return result;
+		}
+		
+		
+		@ResponseBody	
+		@RequestMapping("MovieArrAjaxselect1.do")
+		public int MovieArrAjaxselect1(
+				HttpServletRequest request,
+				@RequestBody Movie_Res arr){
+			System.out.println("이쪽 아자스에 입장함");
+			System.out.println(arr.getMovieName());
+			System.out.println(arr.getStartTime());
+			ArrayList<Movie> resultMovie = movService.movListName(arr.getMovieName());
+			System.out.println("resultMovie : " + resultMovie);
+			
+			// 시작 시간을 int로 변환
+			
+			String movieStime1 = arr.getStartTime().substring(0,2);
+			System.out.println("확인 : " + arr.getStartTime());
+			String movieStime2 = arr.getStartTime().substring(2,4);
+			int movieStime3 = Integer.parseInt(movieStime1)*100;
+			int movieStime4 = Integer.parseInt(movieStime2);
+			
+			
+			int start_time = Integer.parseInt(arr.getStartTime());
+			System.out.println("movieStime : " +  start_time);
+			String movieEtime = resultMovie.get(0).getMovieStime();
+			// 끝 시간을 int로 변환
+			int movieEtime1 = Integer.parseInt(movieEtime.split("분")[0]);
+			System.out.println("movieEtime1 : " + movieEtime1);
+			
+			int h = movieEtime1 / 60 * 100; // 앞의자리
+			int m = movieEtime1 % 60; // 뒤의자리
+			int end_time = 0;
+			end_time =  start_time + (h + m);
+			if(end_time % 100 > 59) {
+				end_time += 100; //만약에 계산한 분의 값이 59분을 넘어버리면 시간을 1시간 더 늘려야 하니 +100을 한 것이다.
+				end_time -= 60; // 만약에 시간을 1시간 올렸으니 결국 뒤에 분은 마이너스 60을 해주면 계산이 된다.
+			}
+			String start_timeString = "";
+			String end_timeString = "";
+			
+			// start time을 String으로 만듬
+			if(start_time < 1000) {
+				start_timeString = "0" + start_time;
+			} else {
+				start_timeString = start_time +"";
+			}
+			
+			// end time을 String으로 만듬
+			if(end_time < 1000) {
+				end_timeString = "0" + end_time;
+			} else {
+				end_timeString = end_time + "";
+			}
+			
+			String s1 = start_timeString.substring(0,2);
+			String s2 = start_timeString.substring(2,4);
+			
+			String e1 = end_timeString.substring(0,2);
+			String e2 = end_timeString.substring(2,4);
+			
+			String sumString1 = s1 + ":" + s2;
+			String sumString2 = e1 + "" + e2;
+			
+			System.out.println("sumString1 : " + sumString1);
+			System.out.println("sumString2 : " + sumString2);
+			int result = Integer.parseInt(sumString2);
+			
+			return result;
+		}
+	
 
 }
