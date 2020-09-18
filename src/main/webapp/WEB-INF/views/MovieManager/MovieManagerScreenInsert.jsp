@@ -934,7 +934,8 @@ margin: auto;
                                     <script>
                                     var tableDatas = [];
                                     var tableStartTime = [];
-                                    var tableMovie
+                                    var tableMovie;
+                                    var resultNum = 0;
                                     function table_make(){
                                     // 특정 버튼을 누르면 테이블의 td 가 1줄씩 추가되는데 이 모든것을 다 controller로 가져가야함
                                     	var num1 = $(".dropdownMenu1_01").val(); // 영화 이름
@@ -1009,9 +1010,31 @@ margin: auto;
                                     	
                                    
                                     	var dateE4 = 0;
-                                    	
+                                    	var dateEnd; // 끝값
+                                    	var movieName = $(".dropdownMenu1_01").val();
+                                    	var obj0 = {movieName : movieName , startTime : numA1};
                                     	<%
-                                    	for (int i = 0; i < list_movieRes.size(); i++) { 
+                                    	if(list_movieRes.size() == 0){
+                                    	%>	
+                                    	if(resultNum==0){
+                                    		$.ajax({ 
+            									url: "MovieArrAjaxselect1.do",
+            									type: "post",
+            									data: JSON.stringify(obj0),
+            									async:false,
+            									contentType: "application/json; charset=utf-8",
+            									success: function(data) {
+            										dateEnd = data;
+            										console.log("아자스 직후 : " + dateEnd);
+            										},
+            										error: function(errorThrown) {
+            										alert("상영등록에 실패했습니다.")
+            										},
+            									});
+                                    	}
+                                    	resultNum = 1;
+                                     <%	} else{
+                                    	for (int i = 0; i < list_movieRes.size(); i++) {
                                     	%>
                                     	console.log("서재건의 테스트 공간");
 										numX1 = <%="'" + list_movieRes.get(i).getStartTime() + "'"%>;
@@ -1044,11 +1067,11 @@ margin: auto;
 										
 										
 										
-										var movieName = $(".dropdownMenu1_01").val();
-										var obj0 = {movieName : movieName , startTime : numA1};
 										
 										
-										var dateEnd;
+										
+										
+										
 										$.ajax({ 
         									url: "MovieArrAjaxselect1.do",
         									type: "post",
@@ -1083,7 +1106,8 @@ margin: auto;
 												}
 											}
 										
-										<% }  %>
+										<% }
+                                    	}%>
 										
 										
 										
