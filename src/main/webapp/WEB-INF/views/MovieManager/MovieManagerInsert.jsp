@@ -43,7 +43,17 @@
 		} else if(result == 1){
 			alert("영화 정보 등록에 성공하였습니다!!");
 			console.log("resultOX == 1");
+		} else if(result == 3){
+			alert("영화 정보 수정에 성공하였습니다!!");
+			location.href="MovieManagerUpdatePage.do";
+		} else if(result == 4){
+			alert("해당 영화의 이름은 존재하지 않습니다!");
+			location.href="MovieManagerUpdatePage.do";
+		} else if(result == 5){
+			alert('해당 영화의 이름은 존재하지 않습니다!');
+			location.href="MovieManagerScreenInsert.do";
 		}
+		
 	}
 	</script>
 
@@ -189,13 +199,15 @@
         }
 
         header {
-            width: 100%;
+            width: 1500px;
             height: 150px;
+            margin: auto;
         }
 
         nav {
-            width: 100%;
+            width: 1500px;
             height: 70px;
+            margin: auto;
         }
 
         #content {
@@ -208,6 +220,7 @@
             height: 150px;
             float: left;
             background: rgb(145, 145, 145);
+            margin: auto;
         }
 
         header>section {
@@ -560,11 +573,11 @@
                         	<option value="19">청소년 관람불가</option>
                         </select></div>
                         <div class="movie-div" id="movie-div-id4"><br>프로듀서<br><input type="text" name="movieProducer" required></div>
-                        <div class="movie-div" id="movie-div-id5"><br>영화 장르<br><select name="genreCode" required>
-                        	<option value="1">액션, SF</option>
-                        	<option value="2">공포, 스릴러</option>
-                        	<option value="3">미스터리</option>
-                        	<option value="4">판타지</option>
+                        <div class="movie-div" id="movie-div-id5"><br>영화 장르<br>
+                        <select name="genreCode"  required>
+                        <c:forEach var="movieGenreList" items="${ movieGenreList }">
+                        	<option value="${ movieGenreList.genreCode }">${ movieGenreList.genreName }</option>
+                        </c:forEach>
                         </select></div>
                         <div class="movie-div" id="movie-div-id6"><br>배우<br><input type="text" name="movieActor" required></div>
                         <div class="movie-div" id="movie-div-id7"><br>개봉 날짜<br><input type="date" name="movieRdate" required></div>

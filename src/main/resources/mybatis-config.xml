@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.kass.goods.model.vo.Goods" alias="Goods"/>
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
 		
+		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Room" alias="Movie_Room"/>
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Res_Room" alias="Movie_Res_Room"/>
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Sales" alias="Movie_Sales"/>
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Genre" alias="Movie_Genre"/>

@@ -10,6 +10,7 @@ import com.kh.kass.movie.model.vo.Movie_Area;
 import com.kh.kass.movie.model.vo.Movie_Genre;
 import com.kh.kass.movie.model.vo.Movie_Res;
 import com.kh.kass.movie.model.vo.Movie_Res_Room;
+import com.kh.kass.movie.model.vo.Movie_Room;
 import com.kh.kass.movie.model.vo.Movie_Sales;
 
 public interface MovieManagerService {
@@ -87,5 +88,7 @@ public interface MovieManagerService {
 
 	// 영화 상영 취소 날짜를 돌렸을 때 들어가는 페이지
 	public ArrayList<Movie_Res> selectmovResList3(Movie_Res movie_ResList2);
+
+	public ArrayList<Movie_Room> movRoomList(String ma_name);
 	
 }
