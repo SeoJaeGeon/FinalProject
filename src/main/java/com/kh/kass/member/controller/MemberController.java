@@ -119,6 +119,7 @@ public class MemberController {
 		return mv;
 	}
 
+	// 인증번호 확인
 	@RequestMapping("emailCheck.do")
 	public ModelAndView emailCheck(Auth au, ModelAndView mv) {
 		System.out.println(au);
@@ -130,11 +131,13 @@ public class MemberController {
 		mv.addAllObjects(map);
 
 		mv.setViewName("jsonView");
-		int result2 = mService.deleteAuth(au);
+
+		mService.deleteAuth(au);
 
 		return mv;
 	}
 
+	// 이메일 전송 메소드
 	private void sendEmail(String email, String authNum) {
 		// String host = "smtp.gmail.com"; // smtp 서버
 		String subject = "KASS CINEMA 인증 코드";
@@ -165,7 +168,6 @@ public class MemberController {
 			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
 			// 보내는 사람 설정
 
-//			InternetAddress[] address1 = { new InternetAddress(to1) };
 			InternetAddress receiveUser = new InternetAddress(to1);
 			msg.setRecipient(Message.RecipientType.TO, receiveUser);
 			msg.setSubject(subject); // 제목 설정
@@ -199,13 +201,16 @@ public class MemberController {
 		Member m = new Member(userId, userPwd);
 
 		Member loginUser = mService.loginMember(m);
-
+		
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 		} else {
-			rd.addFlashAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
-
+			loginUser = new Member();
+			loginUser.setUserId(null);
+			model.addAttribute("loginUser",loginUser);
+//			rd.addFlashAttribute("msg", "존재하지 않는 아이디거나 아이디 또는  비밀번호가 틀렸습니다.");
 		}
+		System.out.println(loginUser);
 		return "redirect:home.do";
 	}
 
@@ -284,8 +289,8 @@ public class MemberController {
 	@RequestMapping("myKass.do")
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) {
 		Member m = (Member) session.getAttribute("loginUser");
-		int userNo = m.getUserNo();
 
+		int userNo = m.getUserNo();
 		ArrayList<VodPurchase> list = mService.selectRecommendVod(userNo);
 
 		System.out.println("마이페이지용 카운트 userNo" + userNo);
@@ -535,8 +540,7 @@ public class MemberController {
 
 		ArrayList<MoviePurchase> list = mService.selectMovieList(userNo, pi);
 		System.out.println("영화 예매리스트!" + list);
-		//System.out.println(list.size()+"사이즈?");
-
+		// System.out.println(list.size()+"사이즈?");
 
 		if (list != null) {
 			mv.addObject("list", list);

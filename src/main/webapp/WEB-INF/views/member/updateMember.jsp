@@ -38,7 +38,7 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
 	padding-bottom: 100px;
 	overflow: hidden;

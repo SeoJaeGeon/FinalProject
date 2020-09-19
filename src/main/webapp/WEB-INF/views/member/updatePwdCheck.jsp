@@ -37,7 +37,7 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
 	overflow: hidden;
 	margin-bottom: 100px;
@@ -155,8 +155,8 @@ header>section {
 					<section class="content-2-1">
 						<div class="my-2">
 							<div class="my-2-1">
-								<h2>회원정보를 수정하시려면 비밀번호를 입력하셔야 합니다.</h2>
-								<p>회원님의 개인정보 보호를 위한 본인 확인 절차이오니, KASS CINEMA 로그인 시 사용하시는
+								<h2 class="notice">회원정보를 수정하시려면 비밀번호를 입력하셔야 합니다.</h2>
+								<p class="notice">회원님의 개인정보 보호를 위한 본인 확인 절차이오니, KASS CINEMA 로그인 시 사용하시는
 									비밀번호를 입력해 주세요.</p>
 								<form id="pwdCheckForm" name="pwdCheckForm" method="post"
 									action="mupdateView.do">

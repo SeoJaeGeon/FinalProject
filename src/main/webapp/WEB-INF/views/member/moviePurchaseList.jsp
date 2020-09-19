@@ -190,6 +190,7 @@ header>section {
 							</c:if>
 						</table>
 						<!-- 페이징바 -->
+						<c:if test="${ pi.listCount ne 0 }">
 						<div class="pagination">
 							<div class="pageOuterDiv">
 								<div class="pageInnerDiv">
@@ -232,6 +233,7 @@ header>section {
 								</div>
 							</div>
 						</div>
+						</c:if>
 					</section>
 				</section>
 			</section>

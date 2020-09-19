@@ -45,9 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		Member loginUser = mDao.selectMember(m);
 
-		if (!bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+		if(loginUser == null) {
 			loginUser = null;
-
+		} else if (!bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+			loginUser = null;
 		}
 
 		return loginUser;

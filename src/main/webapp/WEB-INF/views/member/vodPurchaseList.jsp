@@ -36,7 +36,7 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
 	overflow: hidden;
 	margin-bottom: 100px;
@@ -189,6 +189,7 @@ header>section {
 
 						</table>
 						<!-- 페이징바 -->
+						<c:if test="${ pi.listCount ne 0 }">
 						<div class="pagination">
 							<div class="pageOuterDiv">
 								<div class="pageInnerDiv">
@@ -232,6 +233,7 @@ header>section {
 								</div>
 							</div>
 						</div>
+						</c:if>
 					</section>
 				</section>
 			</section>
