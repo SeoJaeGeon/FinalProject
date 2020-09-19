@@ -471,6 +471,7 @@
 	margin-left:60px;
 	border: 1px solid black;
 	background-color: white;
+	position : relative;
 }
 
 #thumbnailImg1{
@@ -514,7 +515,16 @@ margin: auto;
  margin: auto;
 }
 
-
+.thumbnail-text{
+	position : absolute;
+	top : 0;
+	right : 37%;
+	color : white;
+	font-size : 30px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
     </style>
     
 </head>
@@ -672,7 +682,7 @@ margin: auto;
                                 <!-- 영화 선택 -->
                                
                             <c:forEach var="movieListName" items="${movieListName}">
-                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this.value);" name="dd6">
+                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this);" name="dd6">
                                             <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
                                             
 		                    <c:forEach var="list" items="${ movListFile }">
@@ -699,11 +709,14 @@ margin: auto;
                             
                             
                             
-                            function movieNameChangebottom(obj){
+							function movieNameChangebottom(obj){
+                            	
+                            	
+                            	
                             	$.ajax({ 
 									url: "MovieManagerResAjax.do",
 									type: "post",
-									data: obj,
+									data: obj.value,
 									contentType: "application/json; charset=utf-8",
 									success: function(data) {
 										var image = document.getElementById("thumbnailImg1");
@@ -719,11 +732,15 @@ margin: auto;
                             	$.ajax({ 
 									url: "MovieManagerResAjax2.do",
 									type: "post",
-									data: obj,
+									data: obj.value,
 									contentType: "application/json; charset=utf-8",
 									success: function(data) {
 										var date1 = document.getElementById("dateText01");
 										date1.value = + data;
+										var date2 = data.substr(0,4);
+										date2 = date2 + "-" + data.substr(4,2);
+										date2 = date2 + "-" + data.substr(6,2);
+										$(".thumbnail-text").text(date2);
 										},
 										error: function(errorThrown) {
 										alert("상영등록에 실패했습니다.")
@@ -732,6 +749,7 @@ margin: auto;
                             	
                             	
 								}
+                            
                             </script>
                             
                             
@@ -896,6 +914,7 @@ margin: auto;
                                     
                             </div>
                             <div id="imgdiv1">
+                            <span class="thumbnail-text"> ${movieListName[0].movieRdate} </span>
                             <img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
                             </div>
 
@@ -1226,9 +1245,6 @@ margin: auto;
         								}
                                    
                                     </script>
-                                    
-                                  
-                            
                             </div>
 
                             <div class="manager-formQ1" id="manager06">
@@ -1237,24 +1253,12 @@ margin: auto;
                             </div>
 
                         </div>
-                        
-
-
-
-                        
                     </div>
-                   
                 </div>
-               
             </div>
-          
-
             <!--아래부터 캘린더 코드-->
 
             <!-- 위 까지가 지점 선택 영역-->
-
-
-
         </div>
         
     </div>  
@@ -1285,10 +1289,6 @@ margin: auto;
             </footer>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>
