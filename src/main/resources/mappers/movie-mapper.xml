@@ -238,7 +238,7 @@
     join movie_area using(ma_no)
     where movie_No=#{movieNo}
     and RES_DATE >= sysdate-1
-    ORDER by res_date ASC
+    ORDER by res_date asc, ma_no asc, room_no asc, start_time asc
 	</select>
 	<select id="selectMovieResList2" resultMap="movieResList">
 	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
@@ -248,7 +248,7 @@
     where movie_No=#{movieNo}
     and RES_DATE >= sysdate-1
     and MA_NAME =#{maName}
-    ORDER by res_date ASC
+    ORDER by res_date asc, ma_no asc, room_no asc, start_time asc
 	</select>
 	<select id="selectmovResList3" resultMap="movieResList">
 	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
@@ -258,7 +258,7 @@
     where movie_No=#{movieNo}
     and RES_DATE = #{resDate}
     and MA_NAME =#{maName}
-    ORDER by res_date ASC
+    ORDER by res_date asc, ma_no asc, room_no asc, start_time asc
 	</select>
 	
 	<!-- movie_res 리스트 추가하는 sql문 재건이랑 sql 시퀸스 이름을 맞춰야함 -->
