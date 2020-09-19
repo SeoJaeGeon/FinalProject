@@ -642,7 +642,18 @@ margin: auto;
                             		<tr>
                                         <td style="width:350px"><%=listMovieName.get(l).getMovieName() %></td> <!-- 영화 제목 들어갈 곳-->
                                         <td><%=list_movieRes.get(k).getResDate() %></td>
-                                        <td><%=list_movieRes.get(k).getRoomNo() %>관</td> <!-- 관이 들어갈 곳-->
+                                        <td>
+                                        <% pageContext.setAttribute("test", list_movieRes.get(k).getRoomNo()); %>
+                                        <c:if test="${ test mod 3 eq 1 }">
+                                        1관
+                                        </c:if>
+                                        <c:if test="${ test mod 3 eq 2 }">
+                                        2관
+                                        </c:if>
+                                        <c:if test="${ test mod 3 eq 0 }">
+                                        3관
+                                        </c:if>
+                                        </td> <!-- 관이 들어갈 곳-->
                                         <td><%=list_movieRes.get(k).getStartTime() %>&nbsp~&nbsp<%=list_movieRes.get(k).getEndTime() %></td> <!-- 시간 -->
                                         <td><%=list_movieRes.get(k).getMaName() %></td> <!-- 지점 명 -->
                                     </tr>
@@ -926,6 +937,7 @@ margin: auto;
 	                                    </tbody>
                                     </table>
                                     <script>
+                                    
                                     var tableDatas = [];
                                     var tableStartTime = [];
                                     var tableMovie;
@@ -1220,7 +1232,6 @@ margin: auto;
                             </div>
 
                             <div class="manager-formQ1" id="manager06">
-                           
                                 <button type="button" class="btn btn-primary" onclick="table_make()" id="movie-manager04-button1">목록에 추가</button>
                                 <button type="submit" class="btn btn-primary" onclick="MovieManagerResinsert()"id="movie-manager04-button2">상영 개시</button>
                             </div>
