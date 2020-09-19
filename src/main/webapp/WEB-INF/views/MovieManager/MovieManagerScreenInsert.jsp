@@ -472,6 +472,7 @@
 	border: 1px solid black;
 	background-color: white;
 	position : relative;
+
 }
 
 .thumbnail-text{
@@ -526,7 +527,16 @@ margin: auto;
  margin: auto;
 }
 
-
+.thumbnail-text{
+	position : absolute;
+	top : 0;
+	right : 37%;
+	color : white;
+	font-size : 30px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
     </style>
     
 </head>
@@ -711,6 +721,7 @@ margin: auto;
                             
                             
                             
+
                             function movieNameChangebottom(obj){
                             	
                             	
@@ -1247,9 +1258,6 @@ margin: auto;
         								}
                                    
                                     </script>
-                                    
-                                  
-                            
                             </div>
 
                             <div class="manager-formQ1" id="manager06">
@@ -1258,24 +1266,12 @@ margin: auto;
                             </div>
 
                         </div>
-                        
-
-
-
-                        
                     </div>
-                   
                 </div>
-               
             </div>
-          
-
             <!--아래부터 캘린더 코드-->
 
             <!-- 위 까지가 지점 선택 영역-->
-
-
-
         </div>
         
     </div>  
@@ -1306,10 +1302,6 @@ margin: auto;
             </footer>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>
