@@ -472,6 +472,18 @@
 	border: 1px solid black;
 	background-color: white;
 	position : relative;
+
+}
+
+.thumbnail-text{
+	position : absolute;
+	top : 0;
+	right : 37%;
+	color : white;
+	font-size : 30px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
 }
 
 #thumbnailImg1{
@@ -682,8 +694,8 @@ margin: auto;
                                 <!-- 영화 선택 -->
                                
                             <c:forEach var="movieListName" items="${movieListName}">
-                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this);" name="dd6">
-                                            <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
+                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this);" name="dsds">
+                                            <option value="${movieListName.movieName}" name="${ movieListName.movieRdate } id="dropdown-a">${movieListName.movieName}</option>
                                             
 		                    <c:forEach var="list" items="${ movListFile }">
 	                    		<c:if test="${ movieListName.movieNo ne list.movieNo }">
@@ -709,7 +721,8 @@ margin: auto;
                             
                             
                             
-							function movieNameChangebottom(obj){
+
+                            function movieNameChangebottom(obj){
                             	
                             	
                             	
@@ -914,8 +927,8 @@ margin: auto;
                                     
                             </div>
                             <div id="imgdiv1">
-                            <span class="thumbnail-text"> ${movieListName[0].movieRdate} </span>
-                            <img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+                            	<span class="thumbnail-text"> ${movieListName[0].movieRdate} </span>
+                            	<img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
                             </div>
 
 
