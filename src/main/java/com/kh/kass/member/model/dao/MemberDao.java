@@ -117,6 +117,7 @@ public class MemberDao {
 	public ArrayList<MoviePurchase> selectMovieList(int userNo, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		System.out.println("uestNo : " + userNo);
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMovieList", userNo, rowBounds);
 	}
 

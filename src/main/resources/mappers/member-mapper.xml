@@ -87,7 +87,7 @@
 
 	<!-- 영화예매 -->
 	<resultMap id="moviePurchaseResultSet" type="MoviePurchase">
-		<id property="resNo" column="RES_NO" />
+		<result property="resNo" column="RES_NO" />
 		<result property="userNo" column="USER_NO" />
 		<result property="urNo" column="UR_NO" />
 		<result property="movieNo" column="MOVIE_NO" />

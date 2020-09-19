@@ -535,6 +535,8 @@ public class MemberController {
 
 		ArrayList<MoviePurchase> list = mService.selectMovieList(userNo, pi);
 		System.out.println("영화 예매리스트!" + list);
+		//System.out.println(list.size()+"사이즈?");
+
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -547,7 +549,7 @@ public class MemberController {
 		return mv;
 	}
 
-	// 내가 쓴 영화 리뷰
+	// 내가 쓴 영화 리뷰3
 	@RequestMapping("movieReviewList.do")
 	public ModelAndView movieReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
 			HttpSession session) {
