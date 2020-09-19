@@ -182,6 +182,11 @@ public class MovieManagerServiceImpl implements MovieManagerService{
 	public ArrayList<Movie_Room> movRoomList(String ma_name) {
 		return mDao.selectRoomNo(ma_name);
 	}
+
+	@Override
+	public ArrayList<Movie_Sales> selectMovieTebalAjax(int maNo) {
+		return mDao.selectTableList(maNo);
+	}
 	
 
 }

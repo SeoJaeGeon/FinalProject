@@ -471,6 +471,18 @@
 	margin-left:60px;
 	border: 1px solid black;
 	background-color: white;
+	position : relative;
+}
+
+.thumbnail-text{
+	position : absolute;
+	top : 0;
+	right : 37%;
+	color : white;
+	font-size : 30px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
 }
 
 #thumbnailImg1{
@@ -509,6 +521,12 @@ margin: auto;
 	margin-top:40px;
 }
 
+#stay3{
+ width:1500px;
+ margin: auto;
+}
+
+
     </style>
     
 </head>
@@ -526,7 +544,9 @@ margin: auto;
      <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
+        <div id="stay3">
         <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+        </div>
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
@@ -634,7 +654,18 @@ margin: auto;
                             		<tr>
                                         <td style="width:350px"><%=listMovieName.get(l).getMovieName() %></td> <!-- 영화 제목 들어갈 곳-->
                                         <td><%=list_movieRes.get(k).getResDate() %></td>
-                                        <td><%=list_movieRes.get(k).getRoomNo() %>관</td> <!-- 관이 들어갈 곳-->
+                                        <td>
+                                        <% pageContext.setAttribute("test", list_movieRes.get(k).getRoomNo()); %>
+                                        <c:if test="${ test mod 3 eq 1 }">
+                                        1관
+                                        </c:if>
+                                        <c:if test="${ test mod 3 eq 2 }">
+                                        2관
+                                        </c:if>
+                                        <c:if test="${ test mod 3 eq 0 }">
+                                        3관
+                                        </c:if>
+                                        </td> <!-- 관이 들어갈 곳-->
                                         <td><%=list_movieRes.get(k).getStartTime() %>&nbsp~&nbsp<%=list_movieRes.get(k).getEndTime() %></td> <!-- 시간 -->
                                         <td><%=list_movieRes.get(k).getMaName() %></td> <!-- 지점 명 -->
                                     </tr>
@@ -653,8 +684,8 @@ margin: auto;
                                 <!-- 영화 선택 -->
                                
                             <c:forEach var="movieListName" items="${movieListName}">
-                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this.value);" name="dd6">
-                                            <option value="${movieListName.movieName}" id="dropdown-a">${movieListName.movieName}</option>
+                                    <select id="dropdownMenu1" class="dropdownMenu1_01" onchange="movieNameChangebottom(this);" name="dsds">
+                                            <option value="${movieListName.movieName}" name="${ movieListName.movieRdate } id="dropdown-a">${movieListName.movieName}</option>
                                             
 		                    <c:forEach var="list" items="${ movListFile }">
 	                    		<c:if test="${ movieListName.movieNo ne list.movieNo }">
@@ -681,10 +712,13 @@ margin: auto;
                             
                             
                             function movieNameChangebottom(obj){
+                            	
+                            	
+                            	
                             	$.ajax({ 
 									url: "MovieManagerResAjax.do",
 									type: "post",
-									data: obj,
+									data: obj.value,
 									contentType: "application/json; charset=utf-8",
 									success: function(data) {
 										var image = document.getElementById("thumbnailImg1");
@@ -700,11 +734,15 @@ margin: auto;
                             	$.ajax({ 
 									url: "MovieManagerResAjax2.do",
 									type: "post",
-									data: obj,
+									data: obj.value,
 									contentType: "application/json; charset=utf-8",
 									success: function(data) {
 										var date1 = document.getElementById("dateText01");
 										date1.value = + data;
+										var date2 = data.substr(0,4);
+										date2 = date2 + "-" + data.substr(4,2);
+										date2 = date2 + "-" + data.substr(6,2);
+										$(".thumbnail-text").text(date2);
 										},
 										error: function(errorThrown) {
 										alert("상영등록에 실패했습니다.")
@@ -713,6 +751,7 @@ margin: auto;
                             	
                             	
 								}
+                            
                             </script>
                             
                             
@@ -875,23 +914,10 @@ margin: auto;
                                       <option value="50">50분</option>
                                     </select>
                                     
-                                    
-                                  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
                             </div>
                             <div id="imgdiv1">
-                            <img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+                            	<span class="thumbnail-text"> ${movieListName[0].movieRdate} </span>
+                            	<img id="thumbnailImg1" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
                             </div>
 
 
@@ -932,6 +958,7 @@ margin: auto;
 	                                    </tbody>
                                     </table>
                                     <script>
+                                    
                                     var tableDatas = [];
                                     var tableStartTime = [];
                                     var tableMovie;
@@ -1133,12 +1160,10 @@ margin: auto;
                                         		if(resDate.getTime() == tableStartTime[key].resDate.getTime()){
                                         			if(maName == tableStartTime[key].maName){
                                         				if(roomNo == tableStartTime[key].roomNo){
-                                        					alert("startTime : " + startTime + " 뒤에 : " + tableStartTime[key].startTime);
                                         					if(startTime >= tableStartTime[key].startTime && endTime <= tableStartTime[key].endTime){
                                         						alert("해당 시간대는 이미 영화 상영 예정입니다.");
                                         						return;
                                         					}
-                                        					alert("endTime : " + endTime + " 뒤에 : " + tableStartTime[key].endTime);
                                         					if(endTime >= tableStartTime[key].startTime && startTime <= tableStartTime[key].endTime){
                                         						alert("해당 시간대는 이미 영화 상영 예정입니다.");
                                         						return;
@@ -1228,7 +1253,6 @@ margin: auto;
                             </div>
 
                             <div class="manager-formQ1" id="manager06">
-                           
                                 <button type="button" class="btn btn-primary" onclick="table_make()" id="movie-manager04-button1">목록에 추가</button>
                                 <button type="submit" class="btn btn-primary" onclick="MovieManagerResinsert()"id="movie-manager04-button2">상영 개시</button>
                             </div>

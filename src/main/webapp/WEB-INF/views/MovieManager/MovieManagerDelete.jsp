@@ -329,6 +329,11 @@ margin-top:-20px;
 	
 }
 
+#stay3{
+ width:1500px;
+ margin: auto;
+}
+
 
     </style>
 </head>
