@@ -671,7 +671,7 @@ input:checked+.slider:before {
 	</div>
 
 	<script>
-	if($("#searchList").val() != null){
+	if(${ searchList.size() != 0 }){
 		var $text = $(".movie-list-util");
 		var $h2 = $("<h2 id='h'>").text($('#mainSearch').val() + " 에 대한 검색결과입니다.");
 		$text.append($h2);
@@ -681,7 +681,18 @@ input:checked+.slider:before {
 		$('.high').css('display','none');
 		$('.middle').css('display','none');
 		$('.low').css('display','none');
-		$('.searchView').css('display','none');			
+		$('.searchView').css('display','none');	
+	}else if(${ searchList.size() == 0 } && $("#mainSearch").val() != ''){
+		var $text = $(".movie-list-util");
+		var $h2 = $("<h2 id='h'>").text($('#mainSearch').val() + " 에 대한 검색결과입니다.");
+		$text.append($h2);
+		$('.top_Menu li').removeClass('on')
+		$('.viewChk').css('display','none');
+		$('.favor').css('display','none');
+		$('.high').css('display','none');
+		$('.middle').css('display','none');
+		$('.low').css('display','none');
+		$('.searchView').css('display','none');
 	}
 		movie_check();
 		
@@ -728,7 +739,7 @@ input:checked+.slider:before {
 					$('.high').css('display','');
 					$('.middle').css('display','none');
 					$('.low').css('display','none');
-					$('.searchView').css('display','none');					
+					$('.searchView').css('display','none');				
 				}
 			}else if(menu_value == 'b'){
 				$('.viewChk').css('display','none');
@@ -832,7 +843,11 @@ input:checked+.slider:before {
 							$thirdDiv.append($span);
 							
 							$fourthDiv.append($secondSpan);
-							$a.append($i);
+							if(data[i].movieRstatus == 'Y' && diffTime < 0){
+								$a.append($i);
+							}else if(data[i].movieRstatus == 'Y' && diffTime > 0){
+								$a.append($i);
+							}
 							$fourthDiv.append($a);
 							
 							$li.append($firstDiv);
