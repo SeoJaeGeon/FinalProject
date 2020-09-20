@@ -417,7 +417,6 @@ a:visited {
 <div id="wrap_stay">
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
-	
 
 	<section id="content">
 		<jsp:include page="../../views/common/productMenu.jsp" />
