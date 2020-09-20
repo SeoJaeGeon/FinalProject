@@ -7,9 +7,15 @@
 <meta charset="UTF-8">
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>KASS CINEMA</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>Insert title here</title>
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+        crossorigin="anonymous"> -->
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
 <style>
 header, nav, section, article, aside, footer {
 	box-sizing: border-box;
@@ -22,25 +28,25 @@ body {
 }
 
 header {
-	width: 1500px;
+	width: 100%;
 	height: 150px;
 }
 
 nav {
-	width: 1500px;
+	width: 100%;
 	height: 50px;
 }
 
 .content {
-	/* width: 100%; */
-	width: 1500px;
+	width: 100%;
+	heigt: 100%;
 	margin: auto;
 	border: 1px solid red;
 	overflow: hidden;
 }
 
 footer {
-	width: 1500px;
+	width: 100%;
 	height: 150px;
 	float: left;
 	background: lightgray;
@@ -94,14 +100,10 @@ header>section {
 	background: lightgray;
 }
 
-/* #stay_footer_inner {
+#stay_footer_inner {
 	width: 1500px;
 	height: 150px;
 	display: block;
-	margin: auto;
-} */
-#stay_footer_inner {
-	width: 1500px;
 	margin: auto;
 }
 
@@ -110,6 +112,47 @@ header>section {
 	margin: auto;
 }
 /* 영역 나누기 */
+
+/* sidemenu */
+.listArrange {
+	font-size: 12px;
+}
+
+.myMenu {
+	margin-top: 50px;
+	margin-right: 60px;
+	margin-left: 20px;
+	float: left;
+}
+
+.list {
+	list-style-image: url("../../images/list4.PNG");
+	margin-bottom: 40px;
+	margin-top: 10px;
+}
+
+a {
+	color: rgb(114, 114, 114);
+	text-decoration: none;
+}
+
+a:hover {
+	color: rgb(31, 67, 97);
+}
+
+.menuTitle {
+	border-top: 1px solid rgb(201, 201, 201);
+	padding-bottom: 0px;
+}
+
+h4 {
+	margin-bottom: 0px;
+}
+
+ul>li {
+	font-size: 14px;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -135,13 +178,6 @@ body {
 	font-size: 15px;
 	color: #444;
 	font-weight: 400;
-}
-
-#contents {
-	width: 100%;
-	margin: 0 auto;
-	margin-left: 70px;
-	padding: 50px 0 0 0;
 }
 
 .content1 {
@@ -212,8 +248,6 @@ table {
 	width: 100%;
 	box-sizing: border-box;
 	margin: auto;
-	margin-top: 50px;
-	vertical-align: middle;
 }
 
 tr, th, td, form, table {
@@ -241,17 +275,14 @@ table th, table td {
 
 label {
 	margin-left: 50px;
-	width: 300px;
-	height: 50px;
 }
 
 input {
 	padding: 6px 12px;
-	width: 300px;
-	height: 50px;
+	width: 200px;
+	height: 100%;
 	background: #fff;
-	border: 1px solid;
-	height: 50px;
+	border: 1px solid
 }
 
 #img-file {
@@ -295,7 +326,7 @@ input[type=file] {
 	line-height: 46px;
 	color: #fff;
 	border: 0;
-	background: #503396;
+	background: rgb(31, 69, 97);
 }
 
 .button.img {
@@ -306,6 +337,17 @@ input[type=file] {
 	border: 0;
 	background: #503396;
 	margin-top: 20px;
+}
+
+.button.delete {
+	height: 46px;
+	padding: 0 30px;
+	line-height: 46px;
+	color: #fff;
+	border: 0;
+	background: rgb(231, 76, 60);
+	margin-right: 100px;
+	float: right;
 }
 
 .button {
@@ -324,6 +366,7 @@ button {
 	overflow: visible;
 	font-size: 1em;
 }
+
 /*----------------------------------------------------------*/
 #img1, #img2, #img3 {
 	width: 100%;
@@ -359,6 +402,7 @@ button {
 	width: 100%;
 	height: 100%;
 	float: left;
+	padding-bottom: 20px;
 }
 /*================================================*/
 img {
@@ -372,7 +416,6 @@ img {
 </style>
 </head>
 <body>
-
 	<c:if test="${ !empty msg }">
 		<script>
 			alert('${msg}');
@@ -380,58 +423,65 @@ img {
 		<c:remove var="msg" />
 
 	</c:if>
+	<jsp:include page="../../views/common/manager.jsp" />
 
-	<div id="wrap_stay">
-		<jsp:include page="../../views/common/manager.jsp" />
-	</div>
 	<jsp:include page="../../views/common/productMenu.jsp" />
-
 	<section id="content">
+
 		<div class="content1">
 			<h2 class="title">스낵 상품 등록</h2>
 
-			<form action="sinsert.do" method="post" enctype="multipart/form-data">
+			<form action="supdate.do" method="post" enctype="multipart/form-data">
 				<div id="divNewPrdtArea">
+					<input type="text" name="goodsNo" value="${ Goods.goodsNo }">
 					<div class="store-list">
 						<div class="left">
 							<table class="proTable">
 								<tr>
 									<td><label class="label1">카테고리 </label> <select
-										name="snCateNo" id="categoryKey"
-										style="width: 300px; height: 40px;">
-											<option selected value="0">카테고리 선택</option>
-											<option value="1">팝콘</option>
-											<option value="2">음료</option>
-											<option value="3">콤보</option>
+										name="gCateNo" id="categoryKey">
+											<option value="1"
+												<c:if test="${Goods.gCateNo == 1}"> selected</c:if>>디즈니</option>
+											<option value="2"
+												<c:if test="${Goods.gCateNo == 2}"> selected</c:if>>픽사</option>
+											<option value="3"
+												<c:if test="${Goods.gCateNo == 3}"> selected</c:if>>마블</option>
+
 									</select></td>
+
 								</tr>
 								<tr>
 									<td colspan="2"><label class="label2">상품명 </label> <input
-										type="text" name="snackName" size="30"></td>
+										type="text" name="goodsName" value="${ Goods.goodsName }"
+										size="30"></td>
 								</tr>
 								<tr>
 									<td><label class="label3">가격 </label> <input type="number"
-										name="snackPrice"></td>
+										min="0" name="goodsPrice" value="${ Goods.goodsPrice }"
+										size="2"></td>
 								</tr>
 								<tr>
-									<td><label class="label4">상품 설명</label> <textarea
-											style="resize: none;" id="meno" min="0" name="snackMemo"
-											size="500" rows="10" cols="40"></textarea></td>
+									<td><label class="label4">재고 </label> <input type="number"
+										min="0" name="goodsStock" value="${ Goods.goodsPrice }"
+										size="2"></td>
+								</tr>
+								<tr>
+									<td><label class="label5">상품 설명</label> <textarea
+											style="resize: none;" id="memo" min="0" name="goodsMemo"
+											size="500" rows="10" cols="40">${ Goods.goodsMemo }</textarea></td>
 								</tr>
 							</table>
 						</div>
-						<!-- <div class="right">
-                            <input type="file" name="uplodeFile" id="img-file">
-                        </div> -->
 						<div class="right">
 							<div id="right_sub">
 								<div id="midmain-1">
-									<img id="new1">
-									<button type="button" class="button img" id="contentImg1">사진등록</button>
+									<img id="new2"
+										src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }">
+									<button type="button" class="button img" id="contentImg2">사진등록</button>
 								</div>
 
 								<div id="fileArea" hidden>
-									<input type="file" id="Img1" name="uploadFile"
+									<input type="file" id="Img2" name="uploadFile"
 										onchange="loadImg(this,1)" accept="image/*"
 										style="display: none;">
 								</div>
@@ -439,44 +489,52 @@ img {
 						</div>
 					</div>
 					<div class="btn_wrap">
-						<button class="button cancel" type="reset">취소</button>
-						<button class="button insert" type="submit">등록</button>
+						<button type="button" class="button cancel"
+							onclick="location.href='${ ManagerGoodsList }'">목록으로</button>
+						<button type="submit" class="button insert"
+							onclick="location.href='${ gupdate }'">수정</button>
+					</div>
+
+					<div class="btn_wrap">
+						<c:url var="gdelete" value="gdelete.do">
+							<c:param name="goodsNo" value="${ Goods.goodsNo }" />
+						</c:url>
+						<button type="button" class="button delete"
+							onclick="location.href='${ gdelete }'">삭제</button>
 					</div>
 				</div>
 			</form>
 
-
 			<script>
-					$("#contentImg1").click(function() {
-						$("#Img1").click();
-					});
+				$("#contentImg2").click(function() {
+					$("#Img2").click();
+				});
 
-					// input type="file" 태그에 이미지 파일이 첨부 되었을 때
-					// div에 미리보기 표현하기
-					function loadImg(value, num) {
-						// value => this : input type="file"
-						// num => 각 번호에 맞춰 위의 미리보기 img에 적용 시킬 숫자
+				// input type="file" 태그에 이미지 파일이 첨부 되었을 때
+				// div에 미리보기 표현하기
+				function loadImg(value, num) {
+					// value => this : input type="file"
+					// num => 각 번호에 맞춰 위의 미리보기 img에 적용 시킬 숫자
 
-						// file이 존재한다면
-						if(value.files && value.files[0]){
-							// 파일을 읽어들일 수 있는 FileReader 객체 생성
-							var reader = new FileReader();
-							
-							// 파일 읽기가 다 완료 되었을 때 실행 되는 메소드
-							reader.onload = function(e){
-								switch(num){
-								case 1:
-									$("#new1").attr("src", e.target.result);
-									break;
-								}
+					// file이 존재한다면
+					if (value.files && value.files[0]) {
+						// 파일을 읽어들일 수 있는 FileReader 객체 생성
+						var reader = new FileReader();
+
+						// 파일 읽기가 다 완료 되었을 때 실행 되는 메소드
+						reader.onload = function(e) {
+							switch (num) {
+							case 1:
+								$("#new2").attr("src", e.target.result);
+								break;
 							}
-							
-							// 파일 읽기 하는 메소드
-							reader.readAsDataURL(value.files[0]);
 						}
-					}
-				</script>
 
+						// 파일 읽기 하는 메소드
+						reader.readAsDataURL(value.files[0]);
+					}
+				}
+			</script>
 
 		</div>
 	</section>

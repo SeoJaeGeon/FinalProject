@@ -524,7 +524,7 @@ pagination {
 								<a class="pageNone">&lt;</a>
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="goodsPurchaseList.do">
+								<c:url var="before" value="productpList.do">
 									<c:param name="page" value="${ pi.currentPage -1 }" />
 								</c:url>
 								<a class="pageOne" href="${ before }">&lt;</a>
@@ -537,7 +537,7 @@ pagination {
 									<a class="pageNone">${ p }</a>
 								</c:if>
 								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="productList.do">
+									<c:url var="pagination" value="productcList.do">
 										<c:param name="page" value="${ p }" />
 									</c:url>
 									<a class="pageOne" href="${ pagination }">${ p }</a>
@@ -549,7 +549,7 @@ pagination {
 								<a class="pageNone">&gt;</a>
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="after" value="productList.do">
+								<c:url var="after" value="productcList.do">
 									<c:param name="page" value="${ pi.currentPage + 1 }" />
 								</c:url>
 								<a class="pageOne" href="${ after }">&gt;</a>

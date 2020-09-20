@@ -56,7 +56,7 @@
 			<table>
 				<tr>
 					<td>
-						<h2>스낵 관리</h2>
+						<h2>상품 관리</h2>
 					</td>
 				</tr>
 				<tr>
@@ -67,8 +67,12 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="sInsertSnack.do">상품 등록</a></li>
-							<li><a href="sUpdateSnack.do">상품 수정 및 삭제</a></li>
+							<li><a href="sInsertSnack.do">스낵 상품 등록</a></li>
+							<li><a href="sUpdateSnack.do">스낵 수정 및 삭제</a></li>
+						</ul>
+						<ul class="list" style="-webkit-padding-start: 10px;">
+							<li><a href="gInsertGoods.do">굿즈 상품 등록</a></li>
+							<li><a href="gUpdateGoods.do">굿즈 수정 및 삭제</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -80,7 +84,14 @@
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="deleteSelectSnack.do">판매 종료 상품</a></li>
+							<li><a href="ManagerdeleteSnackList.do">스낵 판매 종료 상품</a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ul class="list" style="-webkit-padding-start: 10px;">
+							<li><a href="ManagerdeleteGoodsList.do">굿즈 판매 종료 상품</a></li>
 						</ul>
 					</td>
 				</tr>

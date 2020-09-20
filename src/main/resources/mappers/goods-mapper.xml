@@ -1,5 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="goodsMapper">
+  <resultMap type="Goods" id="goodsResultSet">
+		<id property="" column="" />
+		<result property="goodsNo" column="GOODS_NO" />
+		<result property="goodsName" column="GOODS_NAME" />
+		<result property="goodsPrice" column="GOODS_PRICE" />
+		<result property="goodsStock" column="GOODS_STOCK" />
+		<result property="goodsMemo" column="GOODS_MEMO" />
+		<result property="goodsStatus" column="GOODS_STATUS" />
+		<result property="gCateNo" column="G_CATE_NO" />
+		<result property="gCateName" column="G_CATE_NAME" />
+		
+		<association property="attachment" javaType="Attachment">
+			<result property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<result property="movieNo" column="MOVIE_NO" />
+			<result property="userNo" column="USER_NO" />
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+		</association>
+	</resultMap>
+	
+	<resultMap id="AttachmentResultSet" type="Attachment">
+		<id property="fileNo" column="FILE_NO" />
+		<result property="sortCode" column="SORT_CODE" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="originFileName" column="ORIGIN_FILENAME" />
+		<result property="renameFileName" column="RENAME_FILENAME" />
+		<result property="fileStatus" column="FILE_STATUS" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="snackNo" column="SNACK_NO" />
+		<result property="goodsNo" column="GOODS_NO" />
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM GOODS
+		WHERE GOODS_STATUS='Y'
+	</select>
+	
+	<select id="selectList" resultMap="goodsResultSet">
+		SELECT *
+		FROM GOODS
+		JOIN ATTACHMENT USING(GOODS_NO)
+		WHERE GOODS_STATUS='Y'
+		ORDER BY GOODS_NO DESC 
+	</select>
+	
+	<insert id="insertGoods" parameterType="Goods">
+		INSERT INTO GOODS
+		VALUES(SEQ_GOODS_NO.NEXTVAL, #{goodsName}, #{goodsPrice}, #{goodsStock}, #{goodsMemo}, DEFAULT, #{gCateNo})
+	</insert>
+	
+	<insert id="insertGoodsImg" parameterType="Attachment">
+		INSERT INTO ATTACHMENT
+		(FILE_NO, SORT_CODE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS, MOVIE_NO, USER_NO, SNACK_NO, GOODS_NO)
+	 	VALUES(SEQ_FILE_NO.NEXTVAL, 60, #{filePath}, #{originFileName}, #{renameFileName}, DEFAULT, NULL, NULL, NULL, SEQ_GOODS_NO.CURRVAL)
+	</insert>
+	
+	<insert id="insertGoodsImg2" parameterType="Attachment">
+		INSERT INTO ATTACHMENT
+		(FILE_NO, SORT_CODE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS, MOVIE_NO, USER_NO, SNACK_NO, GOODS_NO)
+	 	VALUES(SEQ_FILE_NO.NEXTVAL, 70, #{filePath}, #{originFileName}, #{renameFileName}, DEFAULT, NULL, NULL, NULL, SEQ_GOODS_NO.CURRVAL)
+	</insert>
+	
+	<select id="selectOne" parameterType="_int" resultMap="goodsResultSet"> 
+		SELECT *
+		FROM GOODS
+		JOIN ATTACHMENT USING(GOODS_NO)
+		WHERE GOODS_NO=#{goodsNo}
+		AND GOODS_STATUS='Y'
+	</select>
+	
+	<select id="selectAtt" parameterType="_int" resultMap="AttachmentResultSet">
+		SELECT *
+		FROM ATTACHMENT
+		WHERE GOODS_NO = #{goodsNo}
+	</select>
+	
+	
 </mapper>

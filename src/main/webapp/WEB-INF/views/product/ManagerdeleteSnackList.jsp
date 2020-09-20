@@ -320,6 +320,7 @@ a:visited {
 	height: 240px;
 }
 
+
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
@@ -346,120 +347,15 @@ a:visited {
 	text-decoration: none;
 	border: 1px solid #e4e4e4;
 }
-
---------------------------------------------------------------------------
-/* 페이징 바 */
-.
-pagination {
-	/* border: 1px solid rgb(16, 157, 182); */
-	width: 300px;
-	height: 50px;
-	margin: auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
-}
-
-.pageOne {
-	border: 1px solid rgb(224, 224, 224);
-	display: inline-block;
-	text-decoration: none;
-	text-align: center;
-	width: 30px;
-	height: 30px;
-	padding-top: 7px;
-	padding-left: 3px;
-	padding-right: 3px;
-	border-radius: 5px;
-	color: rgb(51, 51, 51);
-}
-
-.pageOne:hover {
-	border: 1px solid rgb(151, 151, 151);
-	color: rgb(51, 51, 51);
-	text-decoration: none;
-}
-
-.pageNone {
-	border: 1px solid rgb(224, 224, 224);
-	background: rgb(241, 241, 241);
-	display: inline-block;
-	text-decoration: none;
-	text-align: center;
-	width: 30px;
-	height: 30px;
-	padding-top: 7px;
-	padding-left: 3px;
-	padding-right: 3px;
-	border-radius: 5px;
-	color: rgb(51, 51, 51);
-}
-.pageInnerDiv {
-    width: auto;
-    margin: auto;
-    text-align: center;
-    margin-bottom: 30px;
-}
-/* 페이징 바 */
 </style>
 </head>
 <body>
-	<div id="wrap_stay">
-		<jsp:include page="../../views/common/white.jsp" />
+<div id="wrap_stay">
+		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
+	<jsp:include page="../../views/common/productMenu.jsp" />
 
 	<section id="content">
-		<aside class="myMenu">
-			<table>
-				<tr>
-					<td>
-						<h2>Store</h2>
-					</td>
-				</tr>
-				<tr>
-					<td class="menuTitle">
-						<h4>스낵</h4>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="productpList.do">팝콘</a></li>
-							<li><a href="productdList.do">음료</a></li>
-							<li><a href="productcList.do">콤보</a></li>
-							<li><a href="#">장바구니</a></li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td class="menuTitle">
-						<h4>굿즈</h4>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">디즈니</a></li>
-							<li><a href="#">픽사</a></li>
-							<li><a href="#">마블</a></li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td class="menuTitle">
-						<h4>Store 내역</h4>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">스낵 구매 내역</a></li>
-							<li><a href="#">굿즈 구매 내역</a></li>
-						</ul>
-					</td>
-				</tr>
-			</table>
-		</aside>
-
 		<div class="container">
 			<div class="page-util">
 				<div class="location">
@@ -467,15 +363,6 @@ pagination {
 				</div>
 			</div>
 		</div>
-		<div class="content1">
-			<h2 class="title">스토어</h2>
-			<div class="tab_List">
-				<ul class="top_Menu">
-					<li class="on"><a href="#"> 스낵 </a></li>
-					<li><a href="#"> 음료 </a></li>
-					<li><a href="#"> 콤보 </a></li>
-				</ul>
-			</div>
 
 			<div id="divNewPrdtArea">
 				<div class="store-list">
@@ -487,15 +374,13 @@ pagination {
 						</c:if>
 						<c:if test="${ list ne null }">
 							<c:forEach var="Snack" items="${ list }">
-								<c:url var="sdetail" value="sdetail.do">
+								<c:url var="supdate" value="supdateSnack.do">
 									<c:param name="snackNo" value="${ Snack.snackNo }" />
-									<c:param name="page" value="${ pi.currentPage }" />
 								</c:url>
-								<li class><a href="${ sdetail }" title="스낵" class="product">
+								<li class>
+									<a href="${ supdate }" title="스낵" class="product">
 										<div class="img">
-											<img class="snackImg"
-												src="${ contextPath }/${Snack.attachment.filePath}/${ Snack.attachment.renameFileName }"
-												class="img img2">
+											<img class="snackImg" src="${ contextPath }/${Snack.attachment.filePath}/${ Snack.attachment.renameFileName }" class="img img2">
 										</div>
 										<div class="info">
 											<div class="tit">
@@ -513,52 +398,19 @@ pagination {
 							</c:forEach>
 						</c:if>
 					</ul>
+					
 				</div>
 
-				<!-- 페이징 처리 -->
-				<div class="pagination">
-					<div class="pageOuterDiv">
-						<div class="pageInnerDiv">
-							<!-- 이전 -->
-							<c:if test="${ pi.currentPage <= 1 }">
-								<a class="pageNone">&lt;</a>
-							</c:if>
-							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="goodsPurchaseList.do">
-									<c:param name="page" value="${ pi.currentPage -1 }" />
-								</c:url>
-								<a class="pageOne" href="${ before }">&lt;</a>
-							</c:if>
+					<div class="pagination" align="center">
+						<a class="pageOne" href="#">&lt;</a> <a class="pageOne" href="#">1</a>
+						<a class="pageOne" href="#">2</a> <a class="pageOne" href="#">3</a>
+						<a class="pageOne" href="#">4</a> <a class="pageOne" href="#">5</a>
+						<a class="pageOne" href="#">&gt;</a>
 
-							<!-- 페이지 숫자 -->
-							<c:forEach var="p" begin="${ pi.startPage }"
-								end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
-									<a class="pageNone">${ p }</a>
-								</c:if>
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="productList.do">
-										<c:param name="page" value="${ p }" />
-									</c:url>
-									<a class="pageOne" href="${ pagination }">${ p }</a>
-								</c:if>
-							</c:forEach>
-
-							<!-- 이후 -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }">
-								<a class="pageNone">&gt;</a>
-							</c:if>
-							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="after" value="productList.do">
-									<c:param name="page" value="${ pi.currentPage + 1 }" />
-								</c:url>
-								<a class="pageOne" href="${ after }">&gt;</a>
-							</c:if>
-							<!-- 버튼 비활성화 일 때-->
-							<!-- <a class="pageNone">&lt;&lt;</a> -->
-						</div>
+						<!-- 버튼 비활성화 일 때 -->
+						<!-- <a class="pageNone">&lt;&lt;</a> -->
 					</div>
-				</div>
+
 			</div>
 		</div>
 
