@@ -79,6 +79,78 @@ public class GoodsController {
 		}
 		return mv;
 	}
+	
+	// 굿즈 목록 출력
+		@RequestMapping("productPGoodsList.do")
+		public ModelAndView GoodsPList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
+			int currentPage = page != null ? page : 1;
+
+			int listCount = gService.selectListCount();
+			PageInfo pi = PaginationS.getPageInfo(currentPage, listCount);
+
+			System.out.println(listCount);
+
+			ArrayList<Goods> list = gService.selectPList(pi);
+
+			if (list != null) {
+				mv.addObject("list", list);
+				mv.addObject("pi", pi);
+				mv.setViewName("product/productPGoodsList");
+				System.out.println(list);
+
+			} else {
+				throw new GoodsException("상품 목록 조회에 실패하였습니다.");
+			}
+			return mv;
+		}
+		
+		// 굿즈 목록 출력
+		@RequestMapping("productDGoodsList.do")
+		public ModelAndView GoodsDList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
+			int currentPage = page != null ? page : 1;
+
+			int listCount = gService.selectListCount();
+			PageInfo pi = PaginationS.getPageInfo(currentPage, listCount);
+
+			System.out.println(listCount);
+
+			ArrayList<Goods> list = gService.selectDList(pi);
+
+			if (list != null) {
+				mv.addObject("list", list);
+				mv.addObject("pi", pi);
+				mv.setViewName("product/productDGoodsList");
+				System.out.println(list);
+
+			} else {
+				throw new GoodsException("상품 목록 조회에 실패하였습니다.");
+			}
+			return mv;
+		}
+		
+		// 굿즈 목록 출력
+		@RequestMapping("productMGoodsList.do")
+		public ModelAndView GoodsMList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
+			int currentPage = page != null ? page : 1;
+
+			int listCount = gService.selectListCount();
+			PageInfo pi = PaginationS.getPageInfo(currentPage, listCount);
+
+			System.out.println(listCount);
+
+			ArrayList<Goods> list = gService.selectMList(pi);
+
+			if (list != null) {
+				mv.addObject("list", list);
+				mv.addObject("pi", pi);
+				mv.setViewName("product/productMGoodsList");
+				System.out.println(list);
+
+			} else {
+				throw new GoodsException("상품 목록 조회에 실패하였습니다.");
+			}
+			return mv;
+		}
 
 	// 굿즈 등록 화면으로 이동
 	@RequestMapping("gInsertGoods.do")

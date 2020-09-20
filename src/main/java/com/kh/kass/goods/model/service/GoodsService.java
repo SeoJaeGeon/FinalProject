@@ -26,6 +26,12 @@ public interface GoodsService {
 	public ArrayList<Goods> selectList(PageInfo pi);
 
 	int insertGoodsImg2(Attachment att2);
+
+	public ArrayList<Goods> selectPList(PageInfo pi);
+
+	public ArrayList<Goods> selectDList(PageInfo pi);
+
+	public ArrayList<Goods> selectMList(PageInfo pi);
 	
 
 	

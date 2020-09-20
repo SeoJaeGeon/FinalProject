@@ -427,13 +427,12 @@ img {
 	</c:if>
 	<jsp:include page="../../views/common/manager.jsp" />
 
-	<jsp:include page="../../views/common/productMenu.jsp" />
 	<section id="content">
-
+	<jsp:include page="../../views/common/productMenu.jsp" />
 		<div class="content1">
 			<h2 class="title">굿즈 상품 수정</h2>
 
-			<form action="dupdate.do" method="post" enctype="multipart/form-data">
+			<form action="gupdate.do" method="post" enctype="multipart/form-data">
 				<div id="divNewPrdtArea">
 					<input type="hidden" name="goodsNo" value="${ Goods.goodsNo }" >
 					<div class="store-list">
@@ -441,7 +440,7 @@ img {
 							<table class="proTable">
 								<tr>
 									<td><label class="label1">카테고리 </label> <select
-										name="gCateNo" id="categoryKey">
+										name="gCateNo" id="categoryKey" style="width:300px;height:40px;">
 											<option value="1"
 												<c:if test="${Goods.gCateNo == 1}"> selected</c:if>>디즈니</option>
 											<option value="2"

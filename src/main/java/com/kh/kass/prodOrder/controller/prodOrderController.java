@@ -163,7 +163,7 @@ public class prodOrderController {
 		Payment pm = new Payment();
 		
 		pm.setPayPrice(price);
-		pm.setPaySelect("무통장");
+		pm.setPaySelect("카드");
 		pm.setOrderNum(to);
 		
 		int result1 = proService.insertPro(pm);

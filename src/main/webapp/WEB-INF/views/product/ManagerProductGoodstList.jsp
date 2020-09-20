@@ -411,7 +411,7 @@ a:visited {
 		<div class="container">
 			<div class="page-util">
 				<div class="location">
-					<span>HOME > </span> <a href="#" onclick="" title="스토어">스낵</a>
+					<span>HOME > </span> <a href="#" onclick="" title="스토어">굿즈</a>
 				</div>
 			</div>
 		</div>
@@ -431,7 +431,7 @@ a:visited {
 									<c:param name="page" value="${ pi.currentPage }" />
 								</c:url>
 								<li class>
-									<a href="${ gdetail }" title="스낵" class="product">
+									<a href="${ gupdate }" title="굿즈" class="product">
 										<div class="img">
 											<img class="goodsImg" src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }" class="img img2">
 										</div>

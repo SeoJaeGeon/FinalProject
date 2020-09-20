@@ -389,9 +389,9 @@ pagination {
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="productGoodsList.do">디즈니</a></li>
-							<li><a href="productGoodsList.do">픽사</a></li>
-							<li><a href="productGoodsList.do">마블</a></li>
+							<li><a href="productDGoodsList.do">디즈니</a></li>
+							<li><a href="productPGoodsList.do">픽사</a></li>
+							<li><a href="productMGoodsList.do">마블</a></li>
 						</ul>
 					</td>
 				</tr>
