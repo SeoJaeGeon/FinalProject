@@ -51,7 +51,6 @@
 </style>
 </head>
 <body>
-	<section id="content">
 		<aside class="myMenu">
 			<table>
 				<tr>
@@ -97,6 +96,5 @@
 				</tr>
 			</table>
 		</aside>
-	</section>
 </body>
 </html>

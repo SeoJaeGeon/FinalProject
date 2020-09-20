@@ -344,12 +344,12 @@ a:visited {
 	height: 435px;
 	margin-bottom: 40px;
 	text-decoration: none;
+	    border: 1px solid #e4e4e4;
 }
 
 --------------------------------------------------------------------------
 /* 페이징 바 */
-.
-pagination {
+.pagination {
 	/* border: 1px solid rgb(16, 157, 182); */
 	width: 300px;
 	height: 50px;
