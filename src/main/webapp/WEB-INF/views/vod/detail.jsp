@@ -521,9 +521,7 @@
 		</c:url>
 					
 					
-        <a  href="${ vcart }">
-		<button id="cart-btn" type="button" class="btn btn-default">담기</button>
-		</a>
+       <button onclick="cart();" id="cart-btn" type="button" class="btn btn-default">담기</button>
 		
 		
 		
@@ -534,9 +532,7 @@
 				<c:param name="movieNo" value="${ m.movieNo }"/>
 		</c:url>
 		
-      	 <a  href="${ vbuy }">
-        <button id="buy-btn" type="button" class="btn btn-outline-primary">구매하기</button>
-        </a>
+      	 <button onclick="vbuy();" id="buy-btn" type="button" class="btn btn-default">구매하기</button>
         
         <button id="back-btn" type="button" class="btn btn-secondary">목록으로</button>
         
@@ -728,6 +724,29 @@
 			
 		}
         
+function cart() {
+        	
+        	if(${ empty loginUser}  == false){
+				location.href="${vcart}";
+        		
+        	}else{
+        		alert("로그인 해주세요.")
+        	}
+			
+		}
+		
+		
+function vbuy() {
+	
+	if(${ empty loginUser}  == false){
+		location.href="${vbuy}";
+		
+	}else{
+		alert("로그인 해주세요.")
+	}
+	
+}
+        
    </script>
    <!-- 스틸컷 자바스크립@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
    <!-- 스틸컷 자바스크립@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
@@ -736,11 +755,13 @@
    <br><br><br>
 
    <!--리뷰$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+   
+   
     <div id="review-div">
     　　　리뷰
+   <c:if test="${ ck > 1 }">
     <hr>
     <div id="line2-div" style="position: absolute; height: 600px; top: 100px; left: 485px;"><img id="line2" style="height: 600px;" src="../수업자료/sample/image/줄.PNG"></div>
-    
     
      <c:forEach var="v" items="${ vr }">
     <div id="review" style="margin-right: 50px;">
@@ -756,6 +777,7 @@
         <div id="userreview"><span>${v.reeContent }</span></div>
     </div>
     </c:forEach>
+    </c:if>
 
 
 

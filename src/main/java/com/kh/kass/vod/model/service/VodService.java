@@ -45,7 +45,11 @@ public interface VodService {
 	
 	public ArrayList<Movie> searchlist1(String search);
 	
+	public ArrayList<Movie> searchlist2(String search);
+	
 	public int vodvod(int movieNo);
+	
+	public int vodvod1(int movieNo);
 	
 	public int selectListCount1(int userNo);
 	

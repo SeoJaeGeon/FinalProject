@@ -68,12 +68,20 @@
 	
 	
 	 <select id="selectList" resultMap="movieManagerResultSet">
-		SELECT *
-		FROM MOVIE
-		JOIN ATTACHMENT USING(MOVIE_NO)
-		WHERE GENRE_CODE LIKE '%' || #{category} || '%'
-		
-	
+	 SELECT *
+      FROM MOVIE
+      JOIN ATTACHMENT USING(MOVIE_NO)
+      WHERE MOVIE_RSTATUS = 'N'
+      AND FILE_STATUS = 'Y'
+      AND SORT_CODE = 20
+      AND GENRE_CODE LIKE '%' || #{category} || '%'
+      AND  MOVIE_VOD_STATUS = 'Y'
+      
+      
+      
+    
+	 
+	 
 	</select> 
 	
 	<select id="selectvr"  resultMap="vodreview11">
@@ -109,8 +117,12 @@
 	
 	 <select id="selectListCount" resultType="_int">
 	  SELECT COUNT(*)
-		FROM MOVIE
-		WHERE GENRE_CODE LIKE '%' || #{category} || '%'
+      FROM MOVIE
+      JOIN ATTACHMENT USING(MOVIE_NO)
+      WHERE MOVIE_RSTATUS = 'N'
+      AND FILE_STATUS = 'Y'
+      AND SORT_CODE = 20
+      AND GENRE_CODE LIKE '%' || #{category} || '%'
 		
 	
 	</select>
@@ -199,11 +211,27 @@
 	</select> 
 	
 	<select id="searchlist1" resultMap="movieManagerResultSet">
-		SELECT MOVIE_NO,MOVIE_NAME , MOVIE_AGE ,GENRE_CODE,MOVIE_PRICE,MOVIE_LINK,MOVIE_FOREMAN
-		,MOVIE_PRODUCER ,MOVIE_ACTOR ,MOVIE_STIME ,MOVIE_COUNTRY ,MOVIE_CONTENT
-		FROM MOVIE
-        WHERE MOVIE_NAME LIKE '%' ||  #{search} || '%'
-        AND MOVIE_VOD_STATUS = 'N'
+		 SELECT *
+      FROM MOVIE
+      JOIN ATTACHMENT USING(MOVIE_NO)
+      WHERE MOVIE_RSTATUS = 'N'
+      AND MOVIE_NAME LIKE '%' || #{search}   || '%'
+      AND FILE_STATUS = 'Y'
+      AND SORT_CODE = 20
+      AND  MOVIE_VOD_STATUS = 'N'
+	
+	</select> 
+	
+	
+	<select id="searchlist2" resultMap="movieManagerResultSet">
+		 SELECT *
+      FROM MOVIE
+      JOIN ATTACHMENT USING(MOVIE_NO)
+      WHERE MOVIE_RSTATUS = 'N'
+      AND MOVIE_NAME LIKE '%' || #{search}   || '%'
+      AND FILE_STATUS = 'Y'
+      AND SORT_CODE = 20
+      AND  MOVIE_VOD_STATUS = 'Y'
 	
 	</select> 
 	
@@ -212,6 +240,13 @@
 	 <select id="vodvod" resultType="_int">
 		UPDATE MOVIE
 		SET MOVIE_VOD_STATUS = 'Y'
+		WHERE MOVIE_NO = #{movieNo}
+	
+	</select> 
+	
+	 <select id="vodvod1" resultType="_int">
+		UPDATE MOVIE
+		SET MOVIE_VOD_STATUS = 'N'
 		WHERE MOVIE_NO = #{movieNo}
 	
 	</select> 
