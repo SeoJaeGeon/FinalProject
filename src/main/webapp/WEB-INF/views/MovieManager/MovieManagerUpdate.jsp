@@ -171,20 +171,22 @@
             display: block;
         }
 
-        body {
+         body {
             width: 100%;
             background: white;
             margin: auto;
         }
 
         header {
-            width: 100%;
+            width: 1500px;
             height: 150px;
+            margin: auto;
         }
 
         nav {
-            width: 100%;
+            width: 1500px;
             height: 70px;
+            margin: auto;
         }
 
         #content {
@@ -193,10 +195,11 @@
         }
 
         footer {
-            width: 100%;
+            width: 1500px;
             height: 150px;
             float: left;
             background: rgb(145, 145, 145);
+            margin: auto;
         }
 
         header>section {
@@ -526,11 +529,17 @@
        
      /* 배경 이미지 */
      #backimg{
-	width: 100%;
+	width: 1500px;
 	height: 1830px;
 	opacity : 5%;
 	position: absolute;
 	pointer-events: none;
+	margin: auto;
+	}
+	
+	#stay3{
+	 width:1500px;
+	 margin: auto;
 	}
 
     </style>
@@ -550,7 +559,9 @@
         
     <section id="content">
         <div id="stay2">
+        <div id="stay3">
         <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+        </div>
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
@@ -578,13 +589,19 @@
                     }
                     %>	 --%>
                     </c:forEach>	
-                    	</select></div>
+                    	</select>
+                    	<input type="text" id="search01" style="width: 235px;"><button type="button" onclick="Search();">검색</button>
+                    	</div>
                     	<!-- movieName 바뀌면 전체가 바뀌는 function -->
                     	<script>
                     	function movieNameChange(obj){   		
                   		return location.href="MovieManagerUpdatePageName.do?MovieName="+obj;
                     	}
-                    	 
+                    	// 검색 버튼을 누르면 오는 div
+                    	function Search(){
+                    		var search = $("#search01").val();
+                    	return location.href="MovieManagerUpdatePageName.do?MovieName="+search;
+                    	}
                     	
                     	</script>
                     
@@ -627,7 +644,7 @@
                         </c:forEach>
                         </select></div>
                         <div class="movie-div" id="movie-div-id6"><br>배우<br><input type="text" name="movieActor" value="${ movieList1.movieActor }" required></div>
-                        <div class="movie-div" id="movie-div-id7"><br>개봉 날짜<br><input type="date" name="movieRdate" value="${ movieList1.movieRdate }" required></div>
+                        <div class="movie-div" id="movie-div-id7"><br>개봉 날짜<br><input type="date" name="movieRdate" value="${ movieList1.movieRdate }" readonly="readonly" required></div>
                         <div class="movie-div" id="movie-div-id8"><br>상영 시간<br><input type="text" name="movieStime" value="${ movieList1.movieStime }" required></div>
                         <div class="movie-div" id="movie-div-id9"><br>개봉 상태<br><select name="movieRstatus" required>
                         	<option value="Y">상영등록 가능</option>
@@ -678,20 +695,16 @@
                     
                     <!-- 이미지 클릭 시 파일 추가 function -->
                      <script>
+                     
+                     document.addEventListener('keydown', function(event) {
+                    	  if (event.keyCode === 13) {
+                    	    event.preventDefault();
+                    	  };
+                    	}, true);
+                     
+                     
                      function test1(){
-                    	 /* if(document.getElementById("upImgFile1").value == ""){
-                    		 alert("포스터 파일을 새로 수정시켜야 합니다.");
-                    	 } else if( document.getElementById("upImgFile2").value == ""){
-                    		 alert("스틸컷 1번 파일을 새로 수정시켜야 합니다.");
-                    	 } else if( document.getElementById("upImgFile3").value == "") {
-                    		 alert("스틸컷 2번 파일을 새로 수정시켜야 합니다.");
-                    	 } else if(document.getElementById("upImgFile4").value == ""){
-                    		 alert("스틸컷 3번 파일을 새로 수정시켜야 합니다.");
-                    	 } else if(document.getElementById("upvodFile5").value == ""){
-                    		 alert("VOD 파일을 새로 수정시켜야 합니다.");
-                    	 } else { */
                     		 $("#movie-manager04-button3").click();
-                    	/*  } */
                      }
                      window.onload = function () {
                     	 console.log("시작 test1값 : " + document.getElementById("upImgFile1").value);

@@ -1,6 +1,7 @@
 package com.kh.kass.member.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,9 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		Member loginUser = mDao.selectMember(m);
 
-		if (!bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+		if (loginUser == null) {
 			loginUser = null;
-
+		} else if (!bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+			loginUser = null;
 		}
 
 		return loginUser;
@@ -143,7 +145,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectMovieList(userNo, pi);
 	}
 
-
 	@Override
 	public int selectMovieReviewListCount(int userNo) {
 		return mDao.selectMovieReviewListCount(userNo);
@@ -153,7 +154,7 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<MyMovieReview> selectMovieReviewList(int userNo, PageInfo pi) {
 		return mDao.selectMovieReviewList(userNo, pi);
 	}
-	
+
 	@Override
 	public int insertMovieReview(Review r) {
 		return mDao.insertMovieReview(r);
@@ -170,11 +171,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int selectSnackPurchaseListCount(int userNo) {
-		return mDao.selectSnackPurchaseListCount(userNo);
-	}
-
-	@Override
 	public int selectVodListCount(int userNo) {
 		return mDao.selectVodListCount(userNo);
 	}
@@ -186,7 +182,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertVodReview(Review r) {
-		return  mDao.insertVodReview(r);
+		return mDao.insertVodReview(r);
 	}
 
 	@Override
@@ -213,7 +209,12 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<VodPurchase> selectVodList(int userNo, PageInfo pi) {
 		return mDao.selectVodList(userNo, pi);
 	}
-	
+
+	@Override
+	public int selectSnackPurchaseListCount(int userNo) {
+		return mDao.selectSnackPurchaseListCount(userNo);
+	}
+
 	@Override
 	public ArrayList<SnackPurchase> selectSnackPurchaseList(int userNo, PageInfo pi) {
 		return mDao.selectSnackPurchaseList(userNo, pi);
@@ -225,6 +226,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public ArrayList<SnackPurchase> selectSnackPurchaseDetailCount() {
+		return mDao.selectSnackPurchaseDetailCount();
+	}
+
+	@Override
 	public int selectGoodsPurchaseListCount(int userNo) {
 		return mDao.selectGoodsPurchaseListCount(userNo);
 	}
@@ -233,11 +239,25 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<GoodsPurchase> selectGoodsPurchaseList(int userNo, PageInfo pi) {
 		return mDao.selectGoodsPurchaseList(userNo, pi);
 	}
-	
+
 	@Override
 	public ArrayList<GoodsPurchase> selectGoodsPurchasDetail(GoodsPurchase gp) {
 		return mDao.selectGoodsPurchaseDetail(gp);
 	}
 
+	@Override
+	public ArrayList<GoodsPurchase> selectGoodsPurchaseDetailCount() {
+		return mDao.selectGoodsPurchaseDetailCount();
+	}
+
+	@Override
+	public ArrayList<VodPurchase> selectRecommendVod(int userNo) {
+		return mDao.selectRecommendVod(userNo);
+	}
+
+	@Override
+	public int updateSnackCodeStatus(int codeNo) {
+		return mDao.updateSnackCodeStatus(codeNo);
+	}
 
 }

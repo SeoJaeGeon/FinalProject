@@ -37,8 +37,8 @@ nav {
 .content {
 	width: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -190,7 +190,7 @@ header>section {
 											<tr>
 												<td class="left">비밀번호</td>
 												<td><input type="password" name="userPwd"
-													class="userPwd" id="userPwd"></td>
+													class="userPwd" id="userPwd1"></td>
 											</tr>
 										</table> <input type="hidden" name="userNo"
 										value="${ loginUser.userNo }"> <input type="hidden"
@@ -231,12 +231,12 @@ header>section {
 			}
 
 			/* 공란 검사 변수*/
-			var pwd = $.trim($("#userPwd").val());
+			var pwd = $.trim($("#userPwd1").val());
 
 			/* 공란 검사 */
 			if (!pwd) {
 				alert("비밀번호를  입력해주세요.");
-				$("#userPwd").focus();
+				$("#userPwd1").focus();
 				return false;
 			}
 

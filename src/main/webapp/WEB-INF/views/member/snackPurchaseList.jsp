@@ -38,8 +38,8 @@ nav {
 	width: 100%;
 	height: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -147,14 +147,23 @@ header>section {
 										</c:if>
 										<c:if test="${ list ne null }">
 											<c:forEach var="spl" items="${ list }">
+
 												<c:url var="spDetail" value="snackPurchaseDetail.do">
 													<c:param name="orderNum" value="${ spl.orderNum }" />
 													<c:param name="page" value="${ pi.currentPage }" />
 												</c:url>
 												<tr onclick="location.href='${spDetail}'">
-													<td scope="row" class="no">${ spl.orderNum }</td>
-													<td class="proName">${ spl.prodOrderList[0].snackName }
-														외 3개</td>
+													<td class="no">${ spl.orderNum }</td>
+													<td id="${spl.orderNum} " class="proName">${ spl.prodOrderList[0].snackName }
+														<c:forEach var="count" items="${ counting }">
+															<c:if test="${ spl.orderNum eq count.orderNum }">
+																<c:if test="${ count.detailCount-1 ne 0 }">
+																	외 ${ count.detailCount-1 }개
+																</c:if>
+															</c:if>
+														</c:forEach>
+
+													</td>
 													<td class="purchaseDate">${ spl.payDate }</td>
 													<td class="expDate">~${ spl.prodOrderList[0].codeTerm }</td>
 												</tr>
@@ -163,6 +172,7 @@ header>section {
 										</c:if>
 
 									</table> <!-- 페이징바 -->
+									<c:if test="${ pi.listCount ne 0 }">
 									<div class="pagination">
 										<div class="pageOuterDiv">
 											<div class="pageInnerDiv">
@@ -206,6 +216,7 @@ header>section {
 											</div>
 										</div>
 									</div>
+									</c:if>
 								</td>
 							</tr>
 						</table>
@@ -220,5 +231,6 @@ header>section {
 		</div>
 	</div>
 </body>
+
 
 </html>

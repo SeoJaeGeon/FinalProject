@@ -268,6 +268,7 @@ a:hover {
 				id="logo_img">
 			</a>
 		</section>
+		
 
 		<section id="header-3">
 			<c:if test="${ empty sessionScope.loginUser }">
@@ -344,10 +345,14 @@ a:hover {
 		}
 
 		function back() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 
 		function close_pop() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 

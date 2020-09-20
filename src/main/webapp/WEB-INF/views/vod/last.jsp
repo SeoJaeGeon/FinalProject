@@ -76,9 +76,12 @@
 
                 <div id="radio">
                     
-                    <input id="xhdwkd" type="radio" name="rufwp" value="xhdwkd"  checked aria-label="Radio button for following text input"><label for="xhdwkd"  style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;">무통장입금</label>
-                    <input id="kakao" type="radio"  name="rufwp" value="kao" aria-label="Radio button for following text input"><label for="kakao" style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;" >카카오페이</label>
+                    <input id="xhdwkd" type="radio" name="rufwp" value="무통장"  checked aria-label="Radio button for following text input"><label for="xhdwkd"  style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;">무통장입금</label>
+                    <input id="kakao" type="radio"  name="rufwp" value="카드" aria-label="Radio button for following text input"><label for="kakao" style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;" >카카오페이</label>
                     <input type="hidden" name="movieNo" value=${m.movieNo }>
+                    <input type="hidden" name="payPrice" value=${m.moviePrice }>
+              
+                    <input type="hidden" name="userNo" value=${loginUser.userNo  }>
                 </div>
 
             </div>

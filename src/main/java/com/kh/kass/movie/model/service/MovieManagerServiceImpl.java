@@ -14,6 +14,7 @@ import com.kh.kass.movie.model.vo.Movie_Area;
 import com.kh.kass.movie.model.vo.Movie_Genre;
 import com.kh.kass.movie.model.vo.Movie_Res;
 import com.kh.kass.movie.model.vo.Movie_Res_Room;
+import com.kh.kass.movie.model.vo.Movie_Room;
 import com.kh.kass.movie.model.vo.Movie_Sales;
 
 @Service("MovieManagerService")
@@ -177,6 +178,15 @@ public class MovieManagerServiceImpl implements MovieManagerService{
 		return mDao.selectmovResList3(movie_ResList2);
 	}
 
+	@Override
+	public ArrayList<Movie_Room> movRoomList(String ma_name) {
+		return mDao.selectRoomNo(ma_name);
+	}
+
+	@Override
+	public ArrayList<Movie_Sales> selectMovieTebalAjax(int maNo) {
+		return mDao.selectTableList(maNo);
+	}
 	
 
 }

@@ -6,13 +6,16 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link href="${ contextPath }/resources/css/member/myVODReviewList.css" rel="stylesheet" type="text/css">
-	<title>내가 쓴 VOD 리뷰</title>
-	<style>
-		header, nav, section, article, aside, footer {
+<meta charset="UTF-8">
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="${ contextPath }/resources/css/member/myVODReviewList.css"
+	rel="stylesheet" type="text/css">
+<title>내가 쓴 VOD 리뷰</title>
+<style>
+header, nav, section, article, aside, footer {
 	box-sizing: border-box;
 	display: block;
 }
@@ -34,10 +37,10 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -138,31 +141,37 @@ header>section {
 								<c:forEach var="vrv" items="${ list }">
 									<tr>
 									<tr>
-										<td class="left"><img src="${ contextPath }/resources/images/movie_image/${ vrv.attachment.renameFileName }"
-											 class="poster"></td>
+										<td class="left"><img
+											src="${ contextPath }/resources/images/movie_image/${ vrv.attachment.renameFileName }"
+											class="poster"></td>
 										<td class="right">
 											<div>
 												<div class="movieTitle">${ vrv.movieName }</div>
-												<p class="idDate">
-													<span class="writerDate">${ vrv.reEnrollDate }</span>
-												</p>
+
+												<div class="writerDate">${ vrv.reEnrollDate }</div>
+
 												<div class="reviewContent">${ vrv.reContent }</div>
 											</div>
 											<div class="bottomTdDiv">
 												<div>
 													<div class="scoreDiv">
 														<c:if test="${ vrv.reScore eq 'G'}">
-															<img src="${ contextPath }/resources/images/up_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
+															<img src="${ contextPath }/resources/images/up_white.png"
+																class="score">&nbsp;&nbsp;<span class="scoreText">좋았어요</span>
 														</c:if>
 														<c:if test="${ vrv.reScore eq 'B'}">
-															<img src="${ contextPath }/resources/images/down_white.png" class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
+															<img
+																src="${ contextPath }/resources/images/down_white.png"
+																class="score">&nbsp;&nbsp;<span class="scoreText">별로에요</span>
 														</c:if>
 													</div>
 												</div>
 												<div class="buttons">
-													<a href="javascript:openReviewUpdateForm(${ vrv.movieNo },'${ vrv.movieName }', '${ vrv.reContent }', '${ vrv.reScore }');"
-													 id="update" class="update">수정</a>
-													<a href="javascript:deleteReview(${ vrv.movieNo },'${ vrv.movieName }');" id="delete" class="delete">삭제</a>
+													<a
+														href="javascript:openReviewUpdateForm(${ vrv.movieNo },'${ vrv.movieName }', '${ vrv.reContent }', '${ vrv.reScore }');"
+														id="update" class="update">수정</a> <a
+														href="javascript:deleteReview(${ vrv.movieNo },'${ vrv.movieName }');"
+														id="delete" class="delete">삭제</a>
 												</div>
 											</div>
 										</td>
@@ -172,6 +181,7 @@ header>section {
 
 						</table>
 						<!-- 페이징바 -->
+						<c:if test="${ pi.listCount ne 0 }">
 						<div class="pagination">
 							<div class="pageOuterDiv">
 								<div class="pageInnerDiv">
@@ -187,7 +197,8 @@ header>section {
 									</c:if>
 
 									<!-- 페이지 숫자 -->
-									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+									<c:forEach var="p" begin="${ pi.startPage }"
+										end="${ pi.endPage }">
 										<c:if test="${ p eq pi.currentPage }">
 											<a class="pageNone">${ p }</a>
 										</c:if>
@@ -214,12 +225,14 @@ header>section {
 								</div>
 							</div>
 						</div>
+						</c:if>
 					</section>
 				</section>
 			</section>
 		</div>
 	</div>
-	<div id="myModal" class="modal" data-backdrop="static" data-keyboard="false">
+	<div id="myModal" class="modal" data-backdrop="static"
+		data-keyboard="false">
 		<div class="contentDiv">
 			<div class="contentModal">
 				<form id="rupdateForm" name="rupdateForm" method="post">
@@ -235,11 +248,11 @@ header>section {
 							<td class="side tr2">
 								<div class="tabs cf">
 
-									<input type="radio" name="tabs" id="tab1" value="G" onclick="change(this.value);">
-
-									<label for="tab1">
+									<input type="radio" name="tabs" id="tab1" value="G"
+										onclick="change(this.value);"> <label for="tab1">
 										<div class="scoreDiv2">
-											<img src="${ contextPath }/resources/images/up_black.png" class="scoreImg goodImg">
+											<img src="${ contextPath }/resources/images/up_black.png"
+												class="scoreImg goodImg">
 										</div> <span class="scoreText2 goodText">좋았어요^^</span>
 									</label>
 								</div>
@@ -247,34 +260,39 @@ header>section {
 							<td class="tr2">
 								<div class="imgAlign">
 									<c:if test="${ loginUser.attachment.renameFileName != null }">
-										<img src="${ contextPath }/resources/images/muploadFiles/${ loginUser.attachment.renameFileName }" class="profileImg">
+										<img
+											src="${ contextPath }/resources/images/muploadFiles/${ loginUser.attachment.renameFileName }"
+											class="profileImg">
 									</c:if>
 									<c:if test="${ loginUser.attachment.renameFileName == null }">
-										<img src="${ contextPath }/resources/images/defaultPropfieImg.png" class="profileImg" id="profileImg">
+										<img
+											src="${ contextPath }/resources/images/defaultPropfieImg.png"
+											class="profileImg" id="profileImg">
 									</c:if>
 								</div>
 							</td>
 							<td class="side tr2">
 								<div class="tabs cf">
 
-									<input type="radio" name="tabs" id="tab2" value="B" onclick="change(this.value);">
-
-									<label for="tab2">
+									<input type="radio" name="tabs" id="tab2" value="B"
+										onclick="change(this.value);"> <label for="tab2">
 										<div class="scoreDiv2">
-											<img src="${ contextPath }/resources/images/down_white.png" class="scoreImg badImg">
+											<img src="${ contextPath }/resources/images/down_white.png"
+												class="scoreImg badImg">
 										</div> <span class="scoreText2 badText">별로에요;;</span>
 									</label>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="3"><textarea cols="80" rows="5" maxlength="190" placeholder="내용을 입력해주세요." name="reContent" class="rContent"
-								 id="rContent" required></textarea></td>
+							<td colspan="3"><textarea cols="80" rows="5" maxlength="190"
+									placeholder="내용을 입력해주세요." name="reContent" class="rContent"
+									id="rContent" required></textarea></td>
 						</tr>
 						<tr>
 							<td colspan="3">
 								<div id="textLimit" class="textLimit" id="textLimit">
-									(<span class="count" id="count">0</span> / 최대 280글자)
+									(<span class="count" id="count">0</span> / 최대 190글자)
 								</div>
 							</td>
 						</tr>
@@ -290,10 +308,9 @@ header>section {
 	</div>
 
 	<script>
-
-
 		// 리뷰작성 모달
-		function openReviewUpdateForm(movieNo, movieName, reContent, reScore, event) {
+		function openReviewUpdateForm(movieNo, movieName, reContent, reScore,
+				event) {
 
 			$("#modalMovieNo").val(movieNo);
 			$("#modalMovieName").text(movieName);
@@ -302,15 +319,15 @@ header>section {
 			if (reScore == "G") {
 				$("#tab1").prop('checked', true);
 				$(".goodImg").attr("src",
-					"${ contextPath }/resources/images/up_black.png");
+						"${ contextPath }/resources/images/up_black.png");
 				$(".badImg").attr("src",
-					"${ contextPath }/resources/images/down_white.png");
+						"${ contextPath }/resources/images/down_white.png");
 			} else {
 				$("#tab2").prop('checked', true);
 				$(".goodImg").attr("src",
-					"${ contextPath }/resources/images/up_white.png");
+						"${ contextPath }/resources/images/up_white.png");
 				$(".badImg").attr("src",
-					"${ contextPath }/resources/images/down_black.png");
+						"${ contextPath }/resources/images/down_black.png");
 
 			}
 			//document.getElementById("myModal").style.display = "block";
@@ -328,19 +345,19 @@ header>section {
 
 			if (value == "G") {
 				$(".goodImg").attr("src",
-					"${ contextPath }/resources/images/up_black.png");
+						"${ contextPath }/resources/images/up_black.png");
 				$(".badImg").attr("src",
-					"${ contextPath }/resources/images/down_white.png");
+						"${ contextPath }/resources/images/down_white.png");
 			} else {
 				$(".goodImg").attr("src",
-					"${ contextPath }/resources/images/up_white.png");
+						"${ contextPath }/resources/images/up_white.png");
 				$(".badImg").attr("src",
-					"${ contextPath }/resources/images/down_black.png");
+						"${ contextPath }/resources/images/down_black.png");
 			}
 		}
 
 		// 글자수 실시간 카운팅
-		$("#rContent").keyup(function (e) {
+		$("#rContent").keyup(function(e) {
 			var rContent = $(this).val();
 			$("#count").html(rContent.length);
 			console.log(rContent.length);
@@ -373,15 +390,16 @@ header>section {
 			var rupdateForm = $("form[name=rupdateForm]").serialize();
 
 			$.ajax({
-				url: "vrupdate.do",
-				data: rupdateForm,
-				type: "post",
-				success: function (data) {
+				url : "vrupdate.do",
+				data : rupdateForm,
+				type : "post",
+				async:false,
+				success : function(data) {
 					$("#myModal").hide();
 					alert("리뷰가 수정되었습니다.");
 
 				},
-				error: function (e) {
+				error : function(e) {
 					console.log(e);
 					console.log("통신 실패!");
 				}
@@ -398,9 +416,7 @@ header>section {
 				alert("리뷰가 삭제되었습니다.");
 			}
 
-
 		}
-
 	</script>
 	<div id="stay_footer">
 		<div id="stay_footer_inner">

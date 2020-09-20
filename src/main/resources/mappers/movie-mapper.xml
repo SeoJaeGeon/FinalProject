@@ -82,6 +82,12 @@
 		<result property="pryPrice" column="PAY_PRICE"/>
 	</resultMap>
 	
+	<resultMap id="movieTableSales" type="Movie_Sales">
+		<id property="payDate" column="PAY_DATE"/>
+		<result property="pryPrice" column="ABC"/>
+		<result property="maName" column="MA_NAME"/>
+	</resultMap>
+	
 	<resultMap id="movieSales2" type="Movie_Sales">
 		<id property="pryPrice" column="PAY_PRICE"/>
 	</resultMap>
@@ -90,6 +96,15 @@
 		<id property="resInfo" column="RES_INFO"/>
 		<result property="roomChair" column="ROOM_CHAIR"/>
 	</resultMap>
+	
+	<resultMap id="movieRoomselect" type="Movie_Room">
+		<id property="roomNo" column="ROOM_NO"/>
+		<result property="roomNumber" column="ROOM_NUMBER"/>
+		<result property="roomChair" column="ROOM_CHAIR"/>
+		<result property="maNo" column="MA_NO"/>
+	</resultMap>
+	
+	
 	
 	
 	<select id="movieList" resultMap="movieManagerResultSet">
@@ -201,6 +216,7 @@
 		FROM MOVIE
 		JOIN ATTACHMENT USING (MOVIE_NO)
 		WHERE FILE_STATUS = 'Y'
+	    and MOVIE_RSTATUS = 'Y'
 		and SORT_CODE = 20
 		
 	</select>
@@ -223,7 +239,7 @@
     join movie_area using(ma_no)
     where movie_No=#{movieNo}
     and RES_DATE >= sysdate-1
-    ORDER by res_date ASC
+    ORDER by res_date asc, ma_no asc, room_no asc, start_time asc
 	</select>
 	<select id="selectMovieResList2" resultMap="movieResList">
 	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
@@ -233,7 +249,7 @@
     where movie_No=#{movieNo}
     and RES_DATE >= sysdate-1
     and MA_NAME =#{maName}
-    ORDER by res_date ASC
+    ORDER by res_date asc, ma_no asc, room_no asc, start_time asc
 	</select>
 	<select id="selectmovResList3" resultMap="movieResList">
 	select res_No, movie_No, res_date, room_no, res_info, start_time, end_time, ma_name
@@ -243,7 +259,7 @@
     where movie_No=#{movieNo}
     and RES_DATE = #{resDate}
     and MA_NAME =#{maName}
-    ORDER by res_date ASC
+    ORDER by res_date asc, ma_no asc, room_no asc, start_time asc
 	</select>
 	
 	<!-- movie_res 리스트 추가하는 sql문 재건이랑 sql 시퀸스 이름을 맞춰야함 -->
@@ -308,7 +324,8 @@
 	join movie_room using (room_no)
 	join movie_area using (ma_no)
 	where ma_no = #{maNo}
-	and PAY_DATE = #{payDate}
+	and PAY_DATE >= #{payDate}
+	
 	</select>
 	
 	<select id="selectRoomChk" resultMap="movieRoomChk">
@@ -322,6 +339,31 @@
 	<delete id="deleteMovieRoom">
 	delete from MOVIE_RES where RES_NO = #{i}
 	</delete>
+	
+	
+	<!-- movie Room의 roomNo을 알기위한 sql -->
+	<select id="selectRoomList" resultMap="movieRoomselect">
+	select room_no, room_number, room_chair, ma_no
+	from movie_room
+	join movie_area USING(ma_no)
+	where ma_name = #{ma_name}
+	</select>
+	
+	<select id="selectTableAjaxList" resultMap="movieTableSales">
+	select a.*
+	from (
+	select TO_CHAR(PAY_DATE,'YYYY-MM--DD'), sum(PAY_PRICE) as ABC
+		from payment
+		join user_resmovie using(ur_no)
+		join movie_res using(res_no)
+		join movie_room using (room_no)
+		join movie_area using (ma_no)
+		where MA_NO = #{maNo}
+	    GROUP BY TO_CHAR(PAY_DATE,'YYYY-MM--DD')
+	    ORDER by 1 DESC) a
+	    where 5 >= rownum
+	</select>
+	
 </mapper>
 
 

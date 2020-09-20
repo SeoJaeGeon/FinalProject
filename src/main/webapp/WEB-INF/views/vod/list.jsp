@@ -205,6 +205,71 @@
         #moviePrice{ color: black;
             font-size: 15px;
         }
+        
+        .pagination {
+    /* border: 1px solid rgb(16, 157, 182); */
+    
+   
+}
+
+.pageInnerDiv {
+    width:auto;
+    margin: auto;
+    text-align: center;
+}
+
+.pageOne {
+    border: 1px solid rgb(224, 224, 224);
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding-top: 7px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+}
+
+.pageOne:hover {
+    border: 1px solid rgb(151, 151, 151);
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+
+}
+
+.pageNone {
+    border: 1px solid rgb(224, 224, 224);
+    background: rgb(241, 241, 241);
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding-top: 7px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+}
+      
+      
+      #stay_footer {
+	width: 100%;
+	height: 150px;
+	background: lightgray;
+}
+
+#stay_footer_inner {
+	width: 1500px;
+	height: 150px;
+	display: block;
+	margin: auto;
+}
+
+
+
 
 
 
@@ -213,8 +278,8 @@
 <body>
 
    <c:import url="../common/white2.jsp"/>
-   
-    <div id="t">　VOD</div>
+   <div class="wrap">
+    <div id="t">VOD</div>
     <div class="menu">
         
             <table>
@@ -224,14 +289,17 @@
                         <ul class="list" style="-webkit-padding-start:10px;">
                             <li style="font-weight: bold;">장르별</li>
                             <hr>
-                            <li style="width: 30px;"><a class="bb" href="#">전체</a></li><br>
-                            <li style="width: 30px;"><a class="bb" href="#">액션</a></li><br>
-                            <li style="width: 40px;"><a class="bb" href="#">코미디</a></li><br>
-                            <li style="width: 40px;"><a class="bb" href="#">드라마</a></li><br>
-                            <li style="width: 30px;"><a class="bb" href="#">멜로</a></li><br>
-                            <li style="width: 30px;"><a class="bb" href="#">공포</a></li><br>
-                            <li style="width: 60px;"><a  class="bb" href="#">SF/판타지</a></li><br>
-                            <li style="width: 70px;"><a class="bb"  href="#">애니메이션</a></li><br><br><br><br><br><br>
+                            	
+                            <li style="width: 30px;"><a class="bb" href="#" onclick="cate1(); return false;">전체</a></li><br>
+                            <li style="width: 40px;"><a class="bb" href="#" onclick="cate2(); return false;">드라마</a></li><br>
+                            <li style="width: 40px;"><a class="bb" href="#" onclick="cate3(); return false;">코미디</a></li><br>
+                            <li style="width: 40px;"><a class="bb" href="#" onclick="cate4(); return false;">스릴러</a></li><br>
+                            <li style="width: 30px;"><a class="bb" href="#" onclick="cate5(); return false;">액션</a></li><br>
+                            <li style="width: 30px;"><a class="bb" href="#" onclick="cate6(); return false;">SF</a></li><br>
+                            <li style="width: 60px;"><a  class="bb" href="#" onclick="cate7(); return false;">공포</a></li><br>
+                            <li style="width: 70px;"><a class="bb"  href="#" onclick="cate8(); return false;">미스터리</a></li><br>
+                            <li style="width: 70px;"><a class="bb"  href="#" onclick="cate9(); return false;">판타지</a></li><br><br><br>
+                            
                         </ul>
                     </td>
                 </tr>
@@ -243,14 +311,17 @@
                             <hr>
                             
                             <c:url var="mycart" value="mycart.do">
-    						<c:param name="userNo" value="${ loginUser.userNo }"/>
+    							<c:param name="userNo" value="${ loginUser.userNo }"/>
+			
+							</c:url>
+							
+							<c:url var="mywish" value="mywish.do">
+    							<c:param name="userNo" value="${ loginUser.userNo }"/>
 			
 							</c:url>
 								
                             <li><a class="bb" href="${ mycart }">VOD 장바구니</a></li><br>
-                            
-                            
-                            <li><a  class="bb" href="#">VOD 위시리스트</a></li>
+                            <li><a  class="bb" href="${ mywish }">VOD 위시리스트</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -261,21 +332,21 @@
     <div id="vod-div">
 
         
-        <form>
-            <input id="search" type="text" class="form-control" placeholder="VOD 제목입력">
+        <form action="vsearch.do" method="post" id="vodpayForm">
+            <input id="search" name="search" type="text" class="form-control" placeholder="VOD 제목입력">
             <input id="search-btn" type="submit" class="btn btn-primary" value="검색"></input>
         </form>
 
-        <a class="ca" href="#"><div id="cate1"></div>
+        <a class="ca" href="#" onclick="listlist1(); return false;"><div id="cate1"></div>
         <div id="cate1text">개봉순</div></a>
 
-        <a class="ca" href="#"><div id="cate2"></div>
+        <a class="ca" href="#" onclick="listlist2(); return false;"><div id="cate2"></div>
          <div id="cate2text">판매순</div></a>
 
-         <a class="ca" href="#"><div id="cate3"></div>
+         <a class="ca" href="#" onclick="listlist3(); return false;"><div id="cate3"></div>
          <div id="cate3text">평점순</div></a>
 
-         <a class="ca" href="#"><div id="cate4"></div>
+         <a class="ca" href="#" onclick="listlist4(); return false;"><div id="cate4"></div>
          <div id="cate4text">가격순</div></a>
                                       
 </div>
@@ -310,60 +381,231 @@
 
          
           <!-- 페이징 -->
-            <div style="display: block; width: 100px; height: 200px; ">
+          <!--   <div style="display: block; width: 100px; height: 200px; ">
 
 
-               <c:if test="${ pi.currentPage <= 1 }">
-					[이전] &nbsp;
-				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="vlist.do">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>
-					<a href="${ before }">[이전]</a> &nbsp;
-				</c:if>
-
-
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:if test="${ p eq pi.currentPage }">
-						<font color="red" size="4">[ ${ p } ]</font>
-					</c:if>
-					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="vlist.do">
-						<c:param name="page" value="${ p }"/>
-						</c:url>
-						<a href="${ pagination }">${ p }</a> &nbsp;
-					</c:if>
-				</c:forEach>
-
-
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					[다음]
-				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="vlist.do">
-					
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url>
-					<a href="${ after }">[다음]</a>
-				</c:if>				
-	
-			</div>
+             
+                <div class="pagingbar" style=" float: left; margin-top: 50px;     margin-left: 470px;">
+                    <nav aria-label="Page navigation example" class="text">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             
-            </div>
+            </div> -->
+        
+        
+        
+        <c:if test="${ empty pp }">
+		
+		
+		
+		
+			<div class="pagination" style="display: block; width: 800px; height: 200px; ">
+							<div class="pageOuterDiv" style="  margin-top: 50px;     margin-left: 470px;">
+								<div class="pageInnerDiv">
+									<!-- 이전 -->
+									<c:if test="${ pi.currentPage <= 1 }">
+										<a class="pageNone">&lt;</a>
+									</c:if>
+									<c:if test="${ pi.currentPage > 1 }">
+										<c:url var="before" value="vlist.do">
+											<c:param name="page" value="${ pi.currentPage - 1 }"/>
+											<c:param name="testa" value="${ cate }" />
+										d</c:url>
+										<a class="pageOne" href="${ before }">&lt;</a>
+									</c:if>
+
+
+
+									<!-- 페이지 숫자 -->
+									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+										<c:if test="${ p eq pi.currentPage }">
+											<a class="pageNone">${ p }</a>
+										</c:if>
+										<c:if test="${ p ne pi.currentPage }">
+											<c:url var="pagination" value="vlist.do">
+													<c:param name="page" value="${ p }" />
+													<c:param name="testa" value="${ cate }" />
+											</c:url>
+											<a class="pageOne" href="${ pagination }">${ p }</a>
+										</c:if>
+									</c:forEach>
+
+
+
+
+
+									<!-- 이후 -->
+									
+									
+									<c:if test="${ pi.currentPage >= pi.maxPage }">
+										<a class="pageNone">&gt;</a>
+									</c:if>
+									
+									
+									<c:if test="${ pi.currentPage < pi.maxPage }">
+										<c:url var="after" value="vlist.do">
+												<c:param name="page" value="${ pi.currentPage + 1 }"/>
+												<c:param name="testa" value="${ cate }" />
+										</c:url>
+										<a class="pageOne" href="${ after }">&gt;</a>
+									</c:if>
+									<!-- 버튼 비활성화 일 때-->
+									<!-- <a class="pageNone">&lt;&lt;</a> -->
+								</div>
+							</div>
+						</div>
+        </c:if>
+        
+        
+	<input type="hidden" id="category" value="${cate }">
+	<input type="hidden" id="listlist" value="${listlist }">
+	
+<script>
+
+console.log($("#category").val());
+					function cate1() {
+						
+						console.log("전체");
+						var testa = $("#category");
+						testa.val("0")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate2() {
+						
+						console.log("드라마");
+						var testa = $("#category");
+						testa.val("1")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate3() {
+						
+						console.log("코미디");
+						var testa = $("#category");
+						testa.val("2")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate4() {
+						
+						console.log("스릴러");
+						var testa = $("#category");
+						testa.val("3")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate5() {
+						
+						console.log("액션");
+						var testa = $("#category");
+						testa.val("4")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate6() {
+						
+						console.log("SF");
+						var testa = $("#category");
+						testa.val("5")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate7() {
+						
+						console.log("공포");
+						var testa = $("#category");
+						testa.val("6")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate8() {
+						
+						console.log("미스터리");
+						var testa = $("#category");
+						testa.val("7")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					function cate9() {
+						
+						console.log("판타지");
+						var testa = $("#category");
+						testa.val("8")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					
+					
+					<!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ-->
+					
+				function listlist1() {
+						
+						console.log("개봉순");
+						var testa = $("#listlist");
+						testa.val("8")
+						console.log("확인 : "+testa.val());
+						location.href="vlist.do?testa="+testa.val();
+					}
+					
+				function listlist1() {
+					
+					console.log("판매순");
+					var testa = $("#listlist");
+					testa.val("8")
+					console.log("확인 : "+testa.val());
+					location.href="vlist.do?testa="+testa.val();
+				}
+				
+				function listlist1() {
+					
+					console.log("평점순");
+					var testa = $("#listlist");
+					testa.val("8")
+					console.log("확인 : "+testa.val());
+					location.href="vlist.do?testa="+testa.val();
+				}
+				
+				function listlist1() {
+					
+					console.log("가격순");
+					var testa = $("#listlist");
+					testa.val("8")
+					console.log("확인 : "+testa.val());
+					location.href="vlist.do?testa="+testa.val();
+				}
+</script>        
+        
         
 
-
-
-
-
+</div>
 
 </div>
 
 
-
-
-
+	<div id="stay_footer" class="footer">
+		<div id="stay_footer_inner">
+			<jsp:include page="../../views/common/footer.jsp" />
+		</div>
+	</div>
+	
 
 
 

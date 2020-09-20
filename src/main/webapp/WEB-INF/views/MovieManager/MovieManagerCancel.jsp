@@ -96,13 +96,15 @@
         }
 
         header {
-            width: 100%;
+            width: 1500px;
             height: 150px;
+            margin: auto;
         }
 
         nav {
-            width: 100%;
+            width: 1500px;
             height: 70px;
+            margin: auto;
         }
 
         #content {
@@ -115,8 +117,8 @@
             height: 150px;
             float: left;
             background: rgb(145, 145, 145);
+            margin: auto;
         }
-
         #footer1 {
             width: 80%;
             height: 30%;
@@ -321,9 +323,11 @@
         }
 
         .datepicker{
-            top:520px !important;
+            top:-960px !important;
             width: 660px;
             height: 630px;
+            
+		    position: relative;
         }
 
         .datepicker table tr td, .datepicker table tr th {
@@ -394,12 +398,19 @@
         }
         
         #backimg{
-		width: 100%;
+		width: 1500px;
 		height:1100px;
 		opacity : 5%;
 		position: absolute;
 		pointer-events: none;
+		margin: auto;
 		}
+		
+		#stay3{
+		 width:1500px;
+		 margin: auto;
+		}
+		
     </style>
 </head>
 
@@ -413,7 +424,9 @@
     <jsp:include page="../../views/common/manager.jsp" />
     <section id="content">
         <div id="stay2">
+        <div id="stay3">
         <img id="backimg" src="<%=request.getContextPath()%><%=ATClist1.get(0).getFilePath()%><%=ATClist1.get(0).getRenameFileName()%>">
+        </div>
             <div id="wrap_stay">
                 <div class="content1">
                     <!-- 내부 시작 부분 -->
@@ -437,7 +450,7 @@
                                         </div>
                             </div>
                              <!-- 위 까지가 캘린더 코드 -->
-                            <div id="table_list1"  style="overflow:scroll">
+                            <div id="table_list1"  style="overflow:auto;">
                             	<table class="table table-striped" id="table-02">
                                 <thead>
                                     <tr>
@@ -506,13 +519,14 @@
                          console.log("check : " + check);
                          
                          if(check == ""){
-                            alert("삭제할 게시글을 선택해주세요");
+                            alert("삭제할 상영정보를 선택해주세요");
                             return false;
                          }else{
-                            confirm("선택한 게시글을 삭제하시겠습니까?");
+                            confirm("선택한 상영정보를 삭제하시겠습니까?");
                             location.href = "MovieManagerCancelOfButton.do?check="+ check;
                         }
-                           alert("선택된 게시글가 삭제되었습니다");
+                           alert("선택된 상영정보가 삭제되었습니다");
+                            location.href = "MovieManagerCancel.do";
                         }
                        
                        
@@ -585,9 +599,6 @@
                             	}
                             	var dateA = parse(num5);
                             	
-                            	
-                            	
-                            	
 	                            		var list_AreaName = document.getElementById("dropdownMenu2");
 	                                	var list_MovieName = document.getElementById("dropdownMenu1");
 	                                	var itemList = list_AreaName.value;
@@ -640,6 +651,14 @@
         										},
         									});  --%>
         								}
+                            	// 날짜가 선택 안되고 이름이랑 지역만 선택됨
+                            	var list_AreaName1 = document.getElementById("dropdownMenu2");
+                            	var list_MovieName1 = document.getElementById("dropdownMenu1");
+                            	var itemList = list_AreaName1.value;
+                            	itemList += "," + list_MovieName1.value;
+                            	return location.href="MovieManagerCancelInsertbutton2.do?itemList="+itemList;
+                            	
+                            	
                             	}
                             	/* select 된 지역과 영화 이름을 변수로 가져옴*/
                             </script>

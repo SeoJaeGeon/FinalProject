@@ -54,6 +54,8 @@ import com.kh.kass.member.model.vo.Withdrawal;
 import com.kh.kass.review.model.vo.Review;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
+import oracle.jdbc.dcn.DatabaseChangeListener;
+
 @SessionAttributes({ "loginUser", "msg" })
 @Controller
 public class MemberController {
@@ -117,6 +119,7 @@ public class MemberController {
 		return mv;
 	}
 
+	// 인증번호 확인
 	@RequestMapping("emailCheck.do")
 	public ModelAndView emailCheck(Auth au, ModelAndView mv) {
 		System.out.println(au);
@@ -128,11 +131,13 @@ public class MemberController {
 		mv.addAllObjects(map);
 
 		mv.setViewName("jsonView");
-		int result2 = mService.deleteAuth(au);
+
+		mService.deleteAuth(au);
 
 		return mv;
 	}
 
+	// 이메일 전송 메소드
 	private void sendEmail(String email, String authNum) {
 		// String host = "smtp.gmail.com"; // smtp 서버
 		String subject = "KASS CINEMA 인증 코드";
@@ -163,7 +168,6 @@ public class MemberController {
 			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
 			// 보내는 사람 설정
 
-//			InternetAddress[] address1 = { new InternetAddress(to1) };
 			InternetAddress receiveUser = new InternetAddress(to1);
 			msg.setRecipient(Message.RecipientType.TO, receiveUser);
 			msg.setSubject(subject); // 제목 설정
@@ -197,13 +201,13 @@ public class MemberController {
 		Member m = new Member(userId, userPwd);
 
 		Member loginUser = mService.loginMember(m);
-
+		
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 		} else {
-			rd.addFlashAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
-
+			rd.addFlashAttribute("msg", "존재하지 않는 아이디거나 아이디 또는  비밀번호가 틀렸습니다.");
 		}
+		System.out.println(loginUser);
 		return "redirect:home.do";
 	}
 
@@ -282,8 +286,10 @@ public class MemberController {
 	@RequestMapping("myKass.do")
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) {
 		Member m = (Member) session.getAttribute("loginUser");
+
 		int userNo = m.getUserNo();
-		
+		ArrayList<VodPurchase> list = mService.selectRecommendVod(userNo);
+
 		System.out.println("마이페이지용 카운트 userNo" + userNo);
 
 		int moviePurchaseCount = mService.selectMovieListCount(userNo);
@@ -292,12 +298,11 @@ public class MemberController {
 		int vodReviewCount = mService.selectVodReviewListCount(userNo);
 		// int vodWishlistCount = mService.selectMovieListCount(userNo);
 
+		mv.addObject("list", list);
 		mv.addObject("moviePurchaseCount", moviePurchaseCount);
 		mv.addObject("vodPurchaseCount", vodPurchaseCount);
 		mv.addObject("movieReviewCount", movieReviewCount);
 		mv.addObject("vodReviewCount", vodReviewCount);
-		//mv.addObject("list", list);
-
 		mv.setViewName("member/myPage");
 
 		return mv;
@@ -343,7 +348,7 @@ public class MemberController {
 		Attachment att = mService.selectAtt(m.getUserNo());
 
 		String renameFileName;
-		if (att == null) { // 한번도 사진이 업데이트 된 적 없을 
+		if (att == null) { // 한번도 사진이 업데이트 된 적 없을
 			if (!file.getOriginalFilename().equals("")) {
 				renameFileName = saveFile(file, request);
 
@@ -365,7 +370,7 @@ public class MemberController {
 					}
 				}
 			}
-		} else { // 입력 된 사진이 있을 
+		} else { // 입력 된 사진이 있을
 
 			if (file != null && !file.isEmpty()) { // INPU
 				renameFileName = saveFile(file, request);
@@ -531,6 +536,7 @@ public class MemberController {
 
 		ArrayList<MoviePurchase> list = mService.selectMovieList(userNo, pi);
 		System.out.println("영화 예매리스트!" + list);
+		// System.out.println(list.size()+"사이즈?");
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -543,7 +549,7 @@ public class MemberController {
 		return mv;
 	}
 
-	// 내가 쓴 영화 리뷰
+	// 내가 쓴 영화 리뷰3
 	@RequestMapping("movieReviewList.do")
 	public ModelAndView movieReviewList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
 			HttpSession session) {
@@ -640,6 +646,7 @@ public class MemberController {
 		Member m = (Member) session.getAttribute("loginUser");
 		int userNo = m.getUserNo();
 
+		System.out.println(userNo + "vod 유저번호");
 		int currentPage = page != null ? page : 1;
 
 		int listCount = mService.selectVodListCount(userNo);
@@ -789,16 +796,19 @@ public class MemberController {
 		int currentPage = page != null ? page : 1;
 
 		int listCount = mService.selectSnackPurchaseListCount(userNo);
-
 		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
 
 		System.out.println(listCount);
+
+		ArrayList<SnackPurchase> counting = mService.selectSnackPurchaseDetailCount();
+		System.out.println(counting + "counting");
 
 		ArrayList<SnackPurchase> list = mService.selectSnackPurchaseList(userNo, pi);
 		System.out.println("스낵구매리스트!" + list);
 
 		if (list != null) {
 			mv.addObject("list", list);
+			mv.addObject("counting", counting);
 			mv.addObject("pi", pi);
 			mv.setViewName("member/snackPurchaseList");
 		} else {
@@ -834,6 +844,23 @@ public class MemberController {
 		System.out.println("스낵구매상세리스트!" + detailList);
 
 		if (detailList != null) {
+
+			for (int i = 0; i < detailList.size(); i++) {
+				Date payDate = detailList.get(i).getPayDate();
+				Date codeTerm = detailList.get(i).getProdOrderList().get(i).getCodeTerm();
+
+				for (int j = 0; j < detailList.get(i).getProdOrderList().size(); j++) {
+					int codeNo = detailList.get(i).getProdOrderList().get(j).getCodeNo();
+
+					int compare = payDate.compareTo(codeTerm);
+
+					if (compare > 0) {
+						int result = mService.updateSnackCodeStatus(codeNo);
+						System.out.println("코드 상태 업데이트함?" + result);
+					}
+				}
+			}
+
 			mv.addObject("detailList", detailList);
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("member/snackPurchaseDetail");
@@ -859,11 +886,15 @@ public class MemberController {
 
 		System.out.println(listCount);
 
+		ArrayList<GoodsPurchase> counting = mService.selectGoodsPurchaseDetailCount();
+		System.out.println(counting + "counting");
+
 		ArrayList<GoodsPurchase> list = mService.selectGoodsPurchaseList(userNo, pi);
 		System.out.println("굿즈구매리스트!" + list);
 
 		if (list != null) {
 			mv.addObject("list", list);
+			mv.addObject("counting", counting);
 			mv.addObject("pi", pi);
 			mv.setViewName("member/goodsPurchaseList");
 		} else {

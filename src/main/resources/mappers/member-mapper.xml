@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 	<resultMap id="memberResultSet" type="Member">
-		<id property="" column="" />
-		<result property="userNo" column="USER_NO" />
-		<result property="userId" column="USER_ID" />
-		<result property="userPwd" column="USER_PWD" />
-		<result property="userPwdQ" column="USER_PWD_Q" />
-		<result property="userPwdA" column="USER_PWD_A" />
-		<result property="userName" column="USER_NAME" />
-		<result property="userBirth" column="USER_BIRTH" />
-		<result property="userAddr" column="USER_ADDR" />
-		<result property="userPhone" column="USER_PHONE" />
-		<result property="userEmail" column="USER_EMAIL" />
-		<result property="userStatus" column="USER_STATUS" />
-		<result property="userEnrollDate" column="USER_ENROLL_DATE" />
-		<result property="userModifyDate" column="USER_MODIFY_DATE" />
+			<id property="" column="" />
+			<result property="userNo" column="USER_NO" />
+			<result property="userId" column="USER_ID" />
+			<result property="userPwd" column="USER_PWD" />
+			<result property="userPwdQ" column="USER_PWD_Q" />
+			<result property="userPwdA" column="USER_PWD_A" />
+			<result property="userName" column="USER_NAME" />
+			<result property="userBirth" column="USER_BIRTH" />
+			<result property="userAddr" column="USER_ADDR" />
+			<result property="userPhone" column="USER_PHONE" />
+			<result property="userEmail" column="USER_EMAIL" />
+			<result property="userStatus" column="USER_STATUS" />
+			<result property="userEnrollDate" column="USER_ENROLL_DATE" />
+			<result property="userModifyDate" column="USER_MODIFY_DATE" />
 		<association property="attachment" javaType="Attachment">
 			<result property="fileNo" column="FILE_NO" />
 			<result property="sortCode" column="SORT_CODE" />
@@ -24,7 +24,6 @@
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
 			<result property="movieNo" column="MOVIE_NO" />
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -55,8 +54,6 @@
 		<id property="authNo" column="AUTH_NO" />
 		<result property="userEmail" column="EMAIL" />
 		<result property="auth" column="AUTH_NUM" />
-
-
 	</resultMap>
 
 	<!-- 리뷰 -->
@@ -78,8 +75,6 @@
 			<result property="originFileName" column="ORIGIN_FILENAME" />
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
-			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -87,7 +82,7 @@
 
 	<!-- 영화예매 -->
 	<resultMap id="moviePurchaseResultSet" type="MoviePurchase">
-		<id property="resNo" column="RES_NO" />
+		<result property="resNo" column="RES_NO" />
 		<result property="userNo" column="USER_NO" />
 		<result property="urNo" column="UR_NO" />
 		<result property="movieNo" column="MOVIE_NO" />
@@ -108,8 +103,6 @@
 			<result property="originFileName" column="ORIGIN_FILENAME" />
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
-			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -132,8 +125,6 @@
 			<result property="originFileName" column="ORIGIN_FILENAME" />
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
-			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -148,6 +139,8 @@
 		<result property="paySelect" column="PAY_SELECT" />
 		<result property="payDate" column="PAY_DATE" />
 		<result property="refund" column="REFUND" />
+		<result property="detailCount" column="counting" />
+
 		<collection property="prodOrderList"
 			javaType="java.util.ArrayList" resultMap="prodOrderResultSet" />
 	</resultMap>
@@ -160,10 +153,7 @@
 		<result property="paySelect" column="PAY_SELECT" />
 		<result property="payDate" column="PAY_DATE" />
 		<result property="refund" column="REFUND" />
-		<!-- <association property="delivery" javaType="com.kh.kass.prodOrder.model.vo.Delivery"> 
-			<result property="deNo" column="D_NO" /> <result property="deName" column="D_NAME" 
-			/> <result property="dePhone" column="D_PHONE" /> <result property="deAddress" 
-			column="D_ADDRESS" /> <result property="deMemo" column="D_MEMO" /> </association> -->
+		<result property="detailCount" column="counting" />
 		<collection property="prodOrderList"
 			javaType="java.util.ArrayList" resultMap="prodOrderResultSet" />
 	</resultMap>
@@ -473,10 +463,9 @@
 		AND PROD_ORDER.USER_NO =
 		#{userNo}
 		AND UR_NO IS NULL
-		AND ORDER_NUM IS
+		AND ORDER_NUM IS NULL
+		AND MOVIE_NO IS NOT
 		NULL
-		AND MOVIE_NO IS NOT NULL
-		ORDER BY PAY_NO DESC
 	</select>
 
 	<select id="selectVodPurchaseList"
@@ -625,6 +614,19 @@
 		ORDER BY ORDER_NO
 	</select>
 
+	<select id="selectSnackPurchaseDetailCount"
+		resultMap="snackPurchaseResultSet">
+		SELECT ORDER_NUM, COUNT(ORDER_NUM) AS COUNTING
+		FROM PAYMENT A
+		JOIN PROD_ORDER USING(PAY_NO)
+		WHERE ORDER_NUM IS NOT NULL
+		AND SNACK_NO IS NOT NULL
+		AND GOODS_NO IS NULL
+		AND MOVIE_NO IS NULL
+		GROUP BY(ORDER_NUM)
+		ORDER BY ORDER_NUM DESC
+	</select>
+
 	<select id="selectGoodsPurchaseListCount" parameterType="_int"
 		resultType="_int">
 		SELECT COUNT(DISTINCT ORDER_NUM)
@@ -662,10 +664,52 @@
 		#{prodOrderList[0].userNo}
 		AND ORDER_NUM = #{orderNum}
 	</select>
+	
+	<select id="selectGoodsPurchaseDetailCount" resultMap="goodsPurchaseResultSet">
+		SELECT ORDER_NUM, COUNT(ORDER_NUM) AS COUNTING
+		FROM PAYMENT
+		JOIN PROD_ORDER USING(PAY_NO) 
+        WHERE ORDER_NUM IS NOT NULL 
+        AND GOODS_NO IS NOT NULL
+        AND SNACK_NO IS NULL
+        AND MOVIE_NO IS NULL
+        GROUP BY(ORDER_NUM)
+        ORDER BY ORDER_NUM DESC
+	</select>
 
+	<select id="selectRecommendVod" parameterType="_int"
+		resultMap="vodPurchaseResultSet">
+		SELECT *
+		FROM (SELECT *
+		FROM MOVIE
+		JOIN ATTACHMENT USING(MOVIE_NO)
+		JOIN GENRE USING (GENRE_CODE)
+		WHERE SORT_CODE = 20
+		AND GENRE_NAME = (SELECT GENRE_NAME
+		FROM (SELECT *
+		FROM PROD_ORDER
+		JOIN PAYMENT USING(PAY_NO)
+		JOIN MOVIE USING(MOVIE_NO)
+		JOIN GENRE USING (GENRE_CODE)
+		JOIN ATTACHMENT USING(MOVIE_NO)
+		LEFT JOIN REVIEW USING(MOVIE_NO)
+		WHERE SORT_CODE = 20
+		AND PROD_ORDER.USER_NO = #{userNo}
+		AND UR_NO IS NULL
+		AND ORDER_NUM IS NULL
+		AND MOVIE_NO IS NOT NULL
+		ORDER BY PAY_NO DESC ) A
+		WHERE SORT_CODE = 20
+		AND ROWNUM = 1)
+		ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE ROWNUM <![CDATA[ <= ]]>
+		3
+	</select>
 
-
-
-
+	<update id="updateSnackCodeStatus" parameterType="_int">
+		UPDATE SNACK_CODE SET 
+		CODE_STATUS = 'N'
+		WHERE CODE_NO = #{ codeNo }
+	</update>
 
 </mapper>

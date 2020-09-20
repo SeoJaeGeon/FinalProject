@@ -20,6 +20,10 @@
 <body>
 
 <h1>확인 페이지 </h1>
+<script>
+	alert("${msg}");
+
+</script>
 
 
     

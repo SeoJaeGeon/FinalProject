@@ -8,8 +8,8 @@ import lombok.Data;
 public class Movie_Sales {
 	private int maNo;
 	private Date payDate;
-	
 	private int pryPrice;
+	private String maName;
 	
 	public Movie_Sales() {}
 
@@ -30,6 +30,22 @@ public class Movie_Sales {
 		super();
 		this.pryPrice = pryPrice;
 	}
+
+	public Movie_Sales(Date payDate, int pryPrice) {
+		super();
+		this.payDate = payDate;
+		this.pryPrice = pryPrice;
+	}
+
+	public Movie_Sales(Date payDate, int pryPrice, String maName) {
+		super();
+		this.payDate = payDate;
+		this.pryPrice = pryPrice;
+		this.maName = maName;
+	}
+	
+	
+	
 	
 	
 	

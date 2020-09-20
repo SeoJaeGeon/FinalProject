@@ -272,10 +272,13 @@ a:hover {
 	</header>
 	<nav>
 		<ul id="navi">
+			
 			<li><a href="movieList.do">영화</a></li>
 			<li><a href="resList.do">예매</a></li>
 			<li><a href="placeList.do">극장</a></li>
-			<li><a href="vlist.do">VOD</a></li>
+			<li><a href="#" onclick="cate(); return false;">  VOD</a></li> 
+			<!-- <li><a href="bbb.do">  VOD</a></li> -->
+			<input type="hidden" id="category" value="">
 			<li><a href="productList.do">스토어</a></li>
 		</ul>
 	</nav>
@@ -328,10 +331,14 @@ a:hover {
 		}
 
 		function back() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 
 		function close_pop() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 
@@ -362,6 +369,14 @@ a:hover {
 			}else{
 				alert("검색어를 입력해주세요.");
 			}
+		}
+		
+		function cate() {
+			console.log("전체");
+			var testa = $("#category");
+			testa.val("0")
+			console.log("확인 : "+testa.val());
+			location.href="vlist.do?testa="+testa.val();
 		}
 	</script>
 </body>

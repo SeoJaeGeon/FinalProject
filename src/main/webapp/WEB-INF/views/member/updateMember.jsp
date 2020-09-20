@@ -38,11 +38,11 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
-	border: 1px solid red;
 	padding-bottom: 100px;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {

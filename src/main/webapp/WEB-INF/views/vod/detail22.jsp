@@ -70,8 +70,23 @@ ul{
                         <ul class="list" style="-webkit-padding-start:10px;">
                             <li style="font-weight: bold;">MY VOD</li>
                             <hr>
-                            <li><a class="bb" href="mycart.do">VOD 장바구니</a></li><br>
-                            <li><a  class="bb" href="#">VOD 위시리스트</a></li>
+                            
+                            <c:url var="mycart" value="mycart.do">
+    							<c:param name="userNo" value="${ loginUser.userNo }"/>
+			
+							</c:url>
+							
+							<c:url var="mywish" value="mywish.do">
+    							<c:param name="userNo" value="${ loginUser.userNo }"/>
+			
+							</c:url>
+                            
+                            
+                            
+                            
+                            
+                              <li><a class="bb" href="${ mycart }">VOD 장바구니</a></li><br>
+                            <li><a  class="bb" href="${ mywish }">VOD 위시리스트</a></li>
                         </ul>
                     </td>
                 </tr>

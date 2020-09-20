@@ -53,13 +53,15 @@
         }
 
         header {
-            width: 100%;
+            width: 1500px;
             height: 150px;
+            margin: auto;
         }
 
         nav {
-            width: 100%;
+            width: 1500px;
             height: 70px;
+            margin: auto;
         }
 
         #content {
@@ -72,6 +74,7 @@
             height: 150px;
             float: left;
             background: rgb(145, 145, 145);
+            margin: auto;
         }
 
         header>section {
@@ -326,6 +329,11 @@ margin-top:-20px;
 	
 }
 
+#stay3{
+ width:1500px;
+ margin: auto;
+}
+
 
     </style>
 </head>
@@ -350,7 +358,18 @@ margin-top:-20px;
 									<img class="deleteImg" src="<%=request.getContextPath()%>${ movListFile.attachList[0].filePath }${ movListFile.attachList[0].renameFileName }">
 									<input type="hidden" value="${ movListFile.movieNo }" id="movieNo"/>
 								<div class="tit-area">
-									<p class="age">${ movListFile.movieAge }세 이용가</p>
+								<c:if test="${ movListFile.movieAge eq 12}">
+									<p class="age" style="color: #0000bf;">${ movListFile.movieAge }세 이용가</p>
+								</c:if>
+								<c:if test="${ movListFile.movieAge eq 15}">
+									<p class="age" style="color: #d2d27b;">${ movListFile.movieAge }세 이용가</p>
+								</c:if>
+								<c:if test="${ movListFile.movieAge eq 19}">
+									<p class="age" style="color: #ff2626;">청소년 관람불가</p>
+								</c:if>
+								<c:if test="${ movListFile.movieAge eq 0}">
+									<p class="age" style="color: #54ab54;">전체 이용가</p>
+								</c:if>
 								</div>
 								<div class="btn-util">
 								<c:if test="${ movListFile.movieRstatus eq 'Y' }">
