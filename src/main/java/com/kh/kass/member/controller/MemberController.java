@@ -62,6 +62,7 @@ import oracle.jdbc.dcn.DatabaseChangeListener;
 public class MemberController {
 	@Autowired
 	private MemberService mService;
+	@Autowired
 	private VodService vService;
 
 
@@ -299,21 +300,20 @@ public class MemberController {
 		int vodPurchaseCount = mService.selectVodListCount(userNo);
 		int movieReviewCount = mService.selectMovieReviewListCount(userNo);
 		int vodReviewCount = mService.selectVodReviewListCount(userNo);
-		//int vodWishlistCount = vService.selectListCount1(userNo);
+		int vodWishlistCount = vService.selectListCount1(userNo);
+		
 		System.out.println(moviePurchaseCount);
 		System.out.println(vodPurchaseCount);
 		System.out.println(movieReviewCount);
 		System.out.println(vodReviewCount);
-		//System.out.println(vodWishlistCount);
-
-		
+		System.out.println(vodWishlistCount);
 		
 		mv.addObject("list", list);
 		mv.addObject("moviePurchaseCount", moviePurchaseCount);
 		mv.addObject("vodPurchaseCount", vodPurchaseCount);
 		mv.addObject("movieReviewCount", movieReviewCount);
 		mv.addObject("vodReviewCount", vodReviewCount);
-		//mv.addObject("vodWishlistCount", vodWishlistCount);
+		mv.addObject("vodWishlistCount", vodWishlistCount);
 
 		mv.setViewName("member/myPage");
 
