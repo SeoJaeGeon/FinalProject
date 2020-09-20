@@ -82,17 +82,29 @@ p {
     margin-bottom: 100px;
 }
 
-.cart {
+.goCartDiv {
+    display: block;
     width: 200px;
-    height: 110px;
-    border-radius: 100px;
-    border: 1px solid rgb(31, 69, 97);
+    height: 300px;
     float: left;
     font-weight: bold;
     margin-left: 8%;
-    padding-top: 90px;
 }
 
+.cart {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    float: left;
+}
+
+.goCartText {
+    float: left;
+    width: 100%;
+    margin-top: 50px;
+    font-size: 20px;
+}
 a {
 	text-decoration: none;
 }

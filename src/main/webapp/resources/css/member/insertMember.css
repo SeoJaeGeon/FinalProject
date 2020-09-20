@@ -96,6 +96,7 @@ button {
     background: rgb(31, 69, 97);
     font-weight: bold;
     color: white;
+    cursor: pointer;
 
 }
 

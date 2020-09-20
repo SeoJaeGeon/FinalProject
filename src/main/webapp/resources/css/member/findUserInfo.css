@@ -110,6 +110,7 @@ input {
     background: rgb(31, 69, 97);
     color: white;
     margin: auto;
+    cursor: pointer;
 }
 
 .button {
@@ -126,6 +127,7 @@ input {
     background: rgb(31, 69, 97);
     color: white;
     margin: auto;
+    cursor: pointer;
 }
 
 /* wrapper */

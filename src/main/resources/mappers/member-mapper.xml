@@ -24,7 +24,6 @@
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
 			<result property="movieNo" column="MOVIE_NO" />
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -55,8 +54,6 @@
 		<id property="authNo" column="AUTH_NO" />
 		<result property="userEmail" column="EMAIL" />
 		<result property="auth" column="AUTH_NUM" />
-
-
 	</resultMap>
 
 	<!-- 리뷰 -->
@@ -78,8 +75,6 @@
 			<result property="originFileName" column="ORIGIN_FILENAME" />
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
-			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -108,8 +103,6 @@
 			<result property="originFileName" column="ORIGIN_FILENAME" />
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
-			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -132,8 +125,6 @@
 			<result property="originFileName" column="ORIGIN_FILENAME" />
 			<result property="renameFileName" column="RENAME_FILENAME" />
 			<result property="fileStatus" column="FILE_STATUS" />
-			<!-- <result property="movieNo" column="MOVIE_NO" /> -->
-			<!-- <result property="userNo" column="USER_NO" /> -->
 			<result property="snackNo" column="SNACK_NO" />
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
@@ -163,11 +154,6 @@
 		<result property="payDate" column="PAY_DATE" />
 		<result property="refund" column="REFUND" />
 		<result property="detailCount" column="counting" />
-
-		<!-- <association property="delivery" javaType="com.kh.kass.prodOrder.model.vo.Delivery"> 
-			<result property="deNo" column="D_NO" /> <result property="deName" column="D_NAME" 
-			/> <result property="dePhone" column="D_PHONE" /> <result property="deAddress" 
-			column="D_ADDRESS" /> <result property="deMemo" column="D_MEMO" /> </association> -->
 		<collection property="prodOrderList"
 			javaType="java.util.ArrayList" resultMap="prodOrderResultSet" />
 	</resultMap>
