@@ -41,12 +41,12 @@ public class GoodsDao {
 	}
 
 
-	public Goods selectGoods(int goodsNo) {
-		return sqlSession.selectOne("goodsMapper.selectOne", goodsNo);
+	public ArrayList<Goods> selectGoods(int goodsNo) {
+		return (ArrayList)sqlSession.selectList("goodsMapper.selectOne", goodsNo);
 	}
 
 	public Attachment selectAtt(int goodsNo) {
-		return sqlSession.selectOne("goodsMapper.selectOne", goodsNo);
+		return sqlSession.selectOne("goodsMapper.selectAtt", goodsNo);
 	}
 
 	public int updateImg(Attachment att) {

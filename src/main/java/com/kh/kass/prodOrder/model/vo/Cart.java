@@ -1,4 +1,4 @@
-package com.kh.kass.cart.model.vo;
+package com.kh.kass.prodOrder.model.vo;
 
 import lombok.Data;
 

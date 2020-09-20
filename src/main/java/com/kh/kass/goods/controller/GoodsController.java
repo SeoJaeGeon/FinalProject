@@ -170,24 +170,27 @@ public class GoodsController {
 
 	// 굿즈 상세 페이지로 이동
 	@RequestMapping("gdetail.do")
-	public String goodsDetail(int goodsNo, Goods g, Model model) {
-		g = gService.selectGoods(goodsNo);
+	public ModelAndView goodsDetail(int goodsNo, Goods g, ModelAndView model) {
+		ArrayList<Goods> goods = gService.selectGoods(goodsNo);
+		System.out.println("goods : " + goods);
+		/*g = gService.selectGoods(goodsNo);*/
 
-		if (g != null) {
-			model.addAttribute("Goods", g);
+		if (goods != null) {
+			model.addObject("Goods", goods);
+			model.setViewName("goods/detailGoods");
 			System.out.println(goodsNo);
-			return "goods/detailGoods";
 		} else {
-			model.addAttribute("msg", "굿즈 상세조회에 실패하였습니다.");
-			return "common/errorPage";
+			 throw new GoodsException("굿즈 불러오기를 실패했습니다.");
+			
 		}
+		return model;
 	}
 
 	// 굿즈 수정 페이지로 이동
 	@RequestMapping("gupdateGoods.do")
 	public ModelAndView goodsUpdateView(ModelAndView mv, int goodsNo) {
 		System.out.println("굿즈 수정 페이지 컨틀롤러 들어옴");
-		Goods goods = gService.selectGoods(goodsNo);
+		ArrayList<Goods> goods = gService.selectGoods(goodsNo);
 		System.out.println(goods);
 		mv.addObject("Goods", goods).setViewName("goods/updateGoods");
 		return mv;

@@ -24,26 +24,33 @@ header, nav, section, article, aside, footer {
 
 body {
 	width: 100%;
+	background: white;
 	margin: auto;
 }
 
 header {
-	width: 100%;
+	width: 1500px;
 	height: 150px;
 }
 
 nav {
-	width: 100%;
+	width: 1500px;
 	height: 50px;
 }
-
+  #content {
+            /* width: 100%; */
+            width: 1500px;
+            border: 8px solid red;
+            margin: auto;
+        }
 .content {
-	width: 100%;
-	heigt: 100%;
+	/* width: 100%; */
+	width: 1500px;
 	margin: auto;
 	border: 1px solid red;
 	overflow: hidden;
 }
+
 
 footer {
 	width: 100%;
@@ -73,6 +80,11 @@ header>section {
 	height: 100%;
 }
 
+#stay_footer_inner {
+	width: 1500px;
+	margin: auto;
+}
+
 #footer1 {
 	width: 80%;
 	height: 30%;
@@ -98,13 +110,6 @@ header>section {
 	width: 100%;
 	height: 150px;
 	background: lightgray;
-}
-
-#stay_footer_inner {
-	width: 1500px;
-	height: 150px;
-	display: block;
-	margin: auto;
 }
 
 #wrap_stay {
@@ -275,14 +280,17 @@ table th, table td {
 
 label {
 	margin-left: 50px;
+	width: 300px;
+	height: 50px;
 }
 
 input {
 	padding: 6px 12px;
-	width: 200px;
-	height: 100%;
+	width: 300px;
+	height: 50px;
 	background: #fff;
-	border: 1px solid
+	border: 1px solid;
+	height: 50px;
 }
 
 #img-file {
@@ -423,17 +431,19 @@ img {
 		<c:remove var="msg" />
 
 	</c:if>
-	<jsp:include page="../../views/common/manager.jsp" />
+	<div id="wrap_stay">
+		<jsp:include page="../../views/common/manager.jsp" />
+	</div>
 
 	<jsp:include page="../../views/common/productMenu.jsp" />
 	<section id="content">
 
 		<div class="content1">
-			<h2 class="title">스낵 상품 등록</h2>
+			<h2 class="title">스낵 상품 수정</h2>
 
 			<form action="supdate.do" method="post" enctype="multipart/form-data">
 				<div id="divNewPrdtArea">
-					<input type="text" name="snackNo" value="${ Snack.snackNo }">
+					<input type="hidden" name="snackNo" value="${ Snack.snackNo }">
 					<div class="store-list">
 						<div class="left">
 							<table class="proTable">

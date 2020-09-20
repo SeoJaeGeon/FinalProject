@@ -41,7 +41,6 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
 }
 
@@ -168,7 +167,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -325,9 +323,9 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .img2 {
@@ -346,7 +344,6 @@ a:visited {
 	height: 435px;
 	margin-bottom: 40px;
 	text-decoration: none;
-	border: 1px solid #e4e4e4;
 }
 
 --------------------------------------------------------------------------
@@ -362,7 +359,6 @@ pagination {
 }
 
 .pageOne {
-	border: 1px solid rgb(224, 224, 224);
 	display: inline-block;
 	text-decoration: none;
 	text-align: center;
@@ -376,13 +372,11 @@ pagination {
 }
 
 .pageOne:hover {
-	border: 1px solid rgb(151, 151, 151);
 	color: rgb(51, 51, 51);
 	text-decoration: none;
 }
 
 .pageNone {
-	border: 1px solid rgb(224, 224, 224);
 	background: rgb(241, 241, 241);
 	display: inline-block;
 	text-decoration: none;
@@ -440,9 +434,9 @@ pagination {
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">디즈니</a></li>
-							<li><a href="#">픽사</a></li>
-							<li><a href="#">마블</a></li>
+							<li><a href="productGoodsList.do">디즈니</a></li>
+							<li><a href="productGoodsList.do">픽사</a></li>
+							<li><a href="productGoodsList.do">마블</a></li>
 						</ul>
 					</td>
 				</tr>

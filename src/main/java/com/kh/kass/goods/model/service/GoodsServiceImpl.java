@@ -28,7 +28,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Goods selectGoods(int goodsNo) {
+	public ArrayList<Goods> selectGoods(int goodsNo) {
 		return gDao.selectGoods(goodsNo);
 	}
 

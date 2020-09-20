@@ -41,7 +41,6 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
 }
 
@@ -168,7 +167,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -277,7 +275,6 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
 }
@@ -379,7 +376,7 @@ pagination {
 						<ul class="list" style="-webkit-padding-start: 10px;">
 							<li><a href="productpList.do">팝콘</a></li>
 							<li><a href="productdList.do">음료</a></li>
-							<li><a href="productcList.do">세트</a></li>
+							<li><a href="productcList.do">콤보</a></li>
 							<li><a href="#">장바구니</a></li>
 						</ul>
 					</td>
@@ -392,9 +389,9 @@ pagination {
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">디즈니</a></li>
-							<li><a href="#">픽사</a></li>
-							<li><a href="#">마블</a></li>
+							<li><a href="productGoodsList.do">디즈니</a></li>
+							<li><a href="productGoodsList.do">픽사</a></li>
+							<li><a href="productGoodsList.do">마블</a></li>
 						</ul>
 					</td>
 				</tr>

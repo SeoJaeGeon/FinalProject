@@ -28,21 +28,20 @@ body {
 }
 
 header {
-	width: 100%;
+	width: 1500px;
 	height: 150px;
 }
 
 nav {
-	width: 100%;
+	width: 1500px;
 	height: 50px;
 }
 
-.content {
-	width: 100%;
-	heigt: 100%;
+#content {
+	/* width: 100%; */
+	width: 1500px;
+	border: 8px solid red;
 	margin: auto;
-	border: 1px solid red;
-	overflow: hidden;
 }
 
 footer {
@@ -275,14 +274,17 @@ table th, table td {
 
 label {
 	margin-left: 50px;
+	width: 300px;
+	height: 50px;
 }
 
 input {
 	padding: 6px 12px;
-	width: 200px;
-	height: 100%;
+	width: 300px;
+	height: 50px;
 	background: #fff;
-	border: 1px solid
+	border: 1px solid;
+	height: 50px;
 }
 
 #img-file {
@@ -429,11 +431,11 @@ img {
 	<section id="content">
 
 		<div class="content1">
-			<h2 class="title">스낵 상품 등록</h2>
+			<h2 class="title">굿즈 상품 수정</h2>
 
-			<form action="supdate.do" method="post" enctype="multipart/form-data">
+			<form action="dupdate.do" method="post" enctype="multipart/form-data">
 				<div id="divNewPrdtArea">
-					<input type="text" name="goodsNo" value="${ Goods.goodsNo }">
+					<input type="hidden" name="goodsNo" value="${ Goods.goodsNo }" >
 					<div class="store-list">
 						<div class="left">
 							<table class="proTable">

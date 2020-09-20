@@ -20,20 +20,25 @@ body {
 }
 
 header {
-	width: 100%;
+	width: 1500px;
 	height: 150px;
 }
 
 nav {
-	width: 100%;
+	width: 1500px;
 	height: 50px;
+}
+
+#content {
+	/* width: 100%; */
+	width: 1500px;
+	margin: auto;
 }
 
 .content {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
 }
 
@@ -160,7 +165,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -311,14 +315,13 @@ a:visited {
 .goodsImg {
 	width: 208px;
 	height: 240px;
-	display: block; 
-	margin: auto; 
+	display: block;
+	margin: auto;
 }
 
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 }
 
 .img2 {
@@ -339,6 +342,59 @@ a:visited {
 	text-decoration: none;
 	border: 1px solid #e4e4e4;
 }
+/* 페이징 바 */
+.
+pagination {
+	/* border: 1px solid rgb(16, 157, 182); */
+	width: 300px;
+	height: 50px;
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+.pageOne {
+	border: 1px solid rgb(224, 224, 224);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
+}
+
+.pageOne:hover {
+	border: 1px solid rgb(151, 151, 151);
+	color: rgb(51, 51, 51);
+	text-decoration: none;
+}
+
+.pageNone {
+	border: 1px solid rgb(224, 224, 224);
+	background: rgb(241, 241, 241);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
+}
+
+.pageInnerDiv {
+	width: auto;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 30px;
+}
+/* 페이징 바 */
 </style>
 </head>
 <body>
@@ -364,7 +420,7 @@ a:visited {
 						<ul class="list" style="-webkit-padding-start: 10px;">
 							<li><a href="productpList.do">팝콘</a></li>
 							<li><a href="productdList.do">음료</a></li>
-							<li><a href="productcList.do">세트</a></li>
+							<li><a href="productcList.do">콤보</a></li>
 							<li><a href="#">장바구니</a></li>
 						</ul>
 					</td>
@@ -377,9 +433,9 @@ a:visited {
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">디즈니</a></li>
-							<li><a href="#">픽사</a></li>
-							<li><a href="#">마블</a></li>
+							<li><a href="productGoodsList.do">디즈니</a></li>
+							<li><a href="productGoodsList.do">픽사</a></li>
+							<li><a href="productGoodsList.do">마블</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -408,13 +464,6 @@ a:visited {
 		</div>
 		<div class="content1">
 			<h2 class="title">스토어</h2>
-			<div class="tab_List">
-				<ul class="top_Menu">
-					<li class="on"><a href="#"> 디즈니 </a></li>
-					<li><a href="#"> 픽사 </a></li>
-					<li><a href="#"> 마블 </a></li>
-				</ul>
-			</div>
 
 			<div id="divNewPrdtArea">
 				<div class="store-list">
@@ -424,37 +473,37 @@ a:visited {
 								<h1 width="100%" align="center">상품 준비중 입니다.</h1>
 							</div>
 						</c:if>
-							<c:if test="${ list ne null }">
+						<c:if test="${ list ne null }">
 							<c:forEach var="Goods" items="${ list }">
-								<c:url var="sdetail" value="gdetail.do">
+								<c:url var="gdetail" value="gdetail.do">
 									<c:param name="goodsNo" value="${ Goods.goodsNo }" />
 									<c:param name="page" value="${ pi.currentPage }" />
 								</c:url>
-						<li class>
-						<a href="#" title="카라멜팝콘" class="product">
-								<div class="img">
-									<img class="goodsImg" src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }" class="img img2" alt="카라멜팝콘">
-								</div>
-								<div class="info">
-									<div class="tit">
-										<p class="name">${ Goods.goodsName }</p>
-										<p class="bundle">${ Goods.goodsMeno }</p>
-									</div>
-									<div class="price">
-										<p class="original">${ Goods.goodsPrice }</p>
-										<p class="sale">
-											<em>${ Goods.goodsPrice }</em> <span>원</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li>
-						</c:forEach>
+								<li class><a href="${ gdetail }" title="카라멜팝콘" class="product">
+										<div class="img">
+											<img class="goodsImg"
+												src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }"
+												class="img img2" alt="카라멜팝콘">
+										</div>
+										<div class="info">
+											<div class="tit">
+												<p class="name">${ Goods.goodsName }</p>
+												<p class="bundle">${ Goods.goodsMemo }</p>
+											</div>
+											<div class="price">
+												<p class="original">${ Goods.goodsPrice }</p>
+												<p class="sale">
+													<em>${ Goods.goodsPrice }</em> <span>원</span>
+												</p>
+											</div>
+										</div>
+								</a></li>
+							</c:forEach>
 						</c:if>
 					</ul>
 				</div>
-				
-					<!-- 페이징 처리 -->
+
+				<!-- 페이징 처리 -->
 				<div class="pagination">
 					<div class="pageOuterDiv">
 						<div class="pageInnerDiv">
