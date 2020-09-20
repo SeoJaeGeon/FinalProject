@@ -34,9 +34,10 @@ nav {
 }
 
 #content {
-	/* width: 100%; */
 	width: 1500px;
+	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 footer {
@@ -768,8 +769,11 @@ p {
 
 .goods_sub {
 	position: relative;
-	width: 80%;
+	width: 70%;
 	vertical-align: top;
+	display: block;
+	margin: 0 auto;
+	
 }
 </style>
 <body>

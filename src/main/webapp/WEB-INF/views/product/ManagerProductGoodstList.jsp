@@ -142,7 +142,6 @@ a:hover {
 }
 
 .menuTitle {
-	border-top: 1px solid rgb(201, 201, 201);
 	padding-bottom: 0px;
 }
 
@@ -169,7 +168,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -327,9 +325,9 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .img2 {
@@ -352,8 +350,6 @@ a:visited {
 }
 
 --------------------------------------------------------------------------
-
-
 /* 페이징 바 */
 .pagination {
 	/* border: 1px solid rgb(16, 157, 182); */

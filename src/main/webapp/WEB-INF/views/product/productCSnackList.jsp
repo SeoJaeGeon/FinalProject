@@ -277,6 +277,7 @@ a:visited {
 	width: 1500px;
 	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .img2 {

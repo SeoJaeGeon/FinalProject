@@ -41,9 +41,15 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
+}
+
+#content {
+	width: 1500px;
+	disply: block;
+	margin: auto;
 	overflow: hidden;
 }
+
 
 footer {
 	width: 100%;
@@ -168,7 +174,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -324,9 +329,9 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .img2 {
@@ -398,6 +403,13 @@ a:visited {
     border-radius: 5px;
     color: rgb(51, 51, 51);
 }
+
+.pageInnerDiv {
+    width: auto;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
 /* 페이징 바 */
 </style>
 </head>
@@ -405,9 +417,10 @@ a:visited {
 <div id="wrap_stay">
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
-	<jsp:include page="../../views/common/productMenu.jsp" />
+	
 
 	<section id="content">
+		<jsp:include page="../../views/common/productMenu.jsp" />
 		<div class="container">
 			<div class="page-util">
 				<div class="location">

@@ -44,6 +44,13 @@ nav {
 	overflow: hidden;
 }
 
+#content {
+	width: 1500px;
+	disply: block;
+	margin: auto;
+	overflow: hidden;
+}
+
 footer {
 	width: 100%;
 	height: 150px;
