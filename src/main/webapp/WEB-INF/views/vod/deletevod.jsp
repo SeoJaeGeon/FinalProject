@@ -344,11 +344,11 @@ margin-top:-20px;
      <jsp:include page="../../views/common/manager.jsp" />
      <br><br><br><br><br><br>
      <br><br>
-     <h1>VOD 등록</h1>
+     <h1>VOD 삭제</h1>
     <section id="content">
         <div id="stay2">
             <div id="wrap_stay">
-               <form action="insertvod.do" method="post" id="vodpayForm">
+               <form action="deletevod.do" method="post" id="vodpayForm">
             <input style="width: 800px; margin: auto;" id="search" name="search" type="text" class="form-control" placeholder="VOD 제목입력">
             
             
@@ -369,10 +369,10 @@ margin-top:-20px;
             
             <label style="margin-top: 50px; margin-left: 110px;" >${ v.movieName }</label>
             <label style="margin-left: 480px;">18,000</label>
-            <c:url var="bdetail" value="vodvod.do">
+            <c:url var="bdetail" value="vodvod1.do">
 			   <c:param name="movieNo" value="${ v.movieNo }" />
 			</c:url>
-			<a  style="margin-left:250px;"  href="${ bdetail}">등록</a> 
+			<a  style="margin-left:250px;"  href="${ bdetail}">삭제</a> 
             
             
             

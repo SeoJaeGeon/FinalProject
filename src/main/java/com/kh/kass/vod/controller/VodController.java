@@ -134,9 +134,9 @@ public class VodController {
 			}
 
 			}
-		System.out.println(vr.size()+"사이즈사이즈");
-		System.out.println(vr.get(1).getReeScore());
 		
+		
+		int check = 0;
 		
 		
 		if(m != null) {
@@ -144,7 +144,12 @@ public class VodController {
 			mv.addObject("b", b);
 			mv.addObject("bb", bb);
 			mv.addObject("m", m);
-			mv.addObject("vr", vr);
+			if(vr.size() != 0) {
+				mv.addObject("vr", vr);
+			}else {
+				mv.addObject("ck", check);
+			}
+			
 			mv.setViewName("vod/detail");
 		} else {
 			throw new VodException("게시글 목록 조회에 실패하였습니다");
@@ -158,6 +163,9 @@ public class VodController {
 	public ModelAndView vwish(ModelAndView mv ,VodWish vw ) {
 		
 		Movie result = vService.selectwishVod(vw);
+		
+		
+		
 		
 		if(result != null) {
 			mv.addObject("msg", "이미 등록 된 vod입니다 ");
@@ -439,14 +447,16 @@ public class VodController {
 	
 	
 	
-
+//v vod 등록 등록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//v vod 등록 등록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//v vod 등록 등록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping("insertvod.do")
 	public ModelAndView insertvod(ModelAndView mv, String search  ) {
 		
 		
 		ArrayList<Movie> list = vService.searchlist1(search);
 		
-		
+		System.out.println(list.size());
 		
 		if(list != null) {
 			mv.addObject("search" , search);
@@ -478,6 +488,53 @@ public class VodController {
 		return mv;
 		
 	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222
+	
+	
+	
+	@RequestMapping("deletevod.do")
+	public ModelAndView deletevod(ModelAndView mv, String search  ) {
+		
+		
+		ArrayList<Movie> list = vService.searchlist2(search);
+		
+		System.out.println(list.size());
+		
+		if(list != null) {
+			mv.addObject("search" , search);
+			mv.addObject("list", list);
+			mv.setViewName("vod/deletevod");
+		} else {
+			throw new VodException("게시글 목록 조회에 실패하였습니다");
+		}
+		return mv;
+		
+	}
+	
+	
+	@RequestMapping("vodvod1.do")
+	public ModelAndView vodvod1(ModelAndView mv, int movieNo  ) {
+		
+		
+		int result = vService.vodvod1(movieNo);
+		
+		
+		
+		if(result >0 ) {
+			
+			mv.addObject("msg", "vod삭제완료");
+			mv.setViewName("vod/deletevod");
+		} else {
+			throw new VodException("게시글 목록 조회에 실패하였습니다");
+		}
+		return mv;
+		
+	}
+	
+	
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
 	
 	
 	

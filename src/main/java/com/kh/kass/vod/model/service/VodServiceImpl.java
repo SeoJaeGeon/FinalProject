@@ -110,14 +110,27 @@ public class VodServiceImpl implements VodService {
 	@Override
 	public ArrayList<Movie> searchlist1(String search) {
 
-		return vDao.searchlist(search);
+		return vDao.searchlist1(search);
 	}
 	
+	
+
+	@Override
+	public ArrayList<Movie> searchlist2(String search) {
+
+		return vDao.searchlist2(search);
+	}
 	
 	@Override
 	public int vodvod(int movieNo) {
 		
 		return vDao.vodvod(movieNo);
+	}
+	
+	@Override
+	public int vodvod1(int movieNo) {
+		
+		return vDao.vodvod1(movieNo);
 	}
 	
 	
