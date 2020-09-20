@@ -110,7 +110,7 @@
 	
 	<insert id="insertSnackCode">
 		INSERT INTO
-		SNACK_CODE VALUES(SEQ_CODE_NO.NEXTVAL, #{ orderNo }, ADD_MONTH(STSDATE, 6), DEFAULT, #{ prodCode } )
+		SNACK_CODE VALUES(SEQ_CODE_NO.NEXTVAL, #{ orderNo }, ADD_MONTH(SYSDATE, 6), DEFAULT, #{ prodCode } )
 	</insert>
 	
 </mapper>
