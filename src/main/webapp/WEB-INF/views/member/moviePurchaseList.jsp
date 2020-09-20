@@ -305,6 +305,7 @@ header>section {
 
 	<script>
 		$(document).ready(function () {
+			// 예매 취소 버튼 처리
 			$(".oneBox").each(function () {
 				var startDate = $(this).find(".startDate").text();
 				var year = startDate.split("-")[0];
@@ -315,11 +316,8 @@ header>section {
 				var hour = startTime.split(":")[0];
 				var minute = startTime.split(":")[1];
 
-				//console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
-
 				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
 				var today = new Date();
-				//console.log(resultDate);
 
 				if (today < resultDate) {
 					$(this).find(".cancel").show();
@@ -333,7 +331,7 @@ header>section {
 
 		// 리뷰작성 view
 		function openReviewInsertForm(startDate, startTime, movieNo, movieName) {
-
+				// 상영 시작 전 리뷰 작성 처리
 				var year = startDate.split("-")[0];
 				var month = startDate.split("-")[1];
 				var date = startDate.split("-")[2];
