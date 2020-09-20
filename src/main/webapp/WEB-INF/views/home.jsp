@@ -435,7 +435,8 @@ header>section {
 					</div>
 					<div class="btn-util">
 						<span class="movie_statusY">상영중</span> 
-						<a class="resBtn" href="resList.do">예매하기</a>
+						<button class="resBtn">
+                        <input type="hidden" value="${ movieFavorList[0].movieNo }" id="movieNum"/>예매하기</button>
 					</div>
 				</article>
 				</c:if>
@@ -456,7 +457,8 @@ header>section {
 					</div>
 					<div class="btn-util">
 						<span class="movie_statusY">상영중</span> 
-						<a class="resBtn" href="resList.do">예매하기</a>
+						<button class="resBtn">
+                        <input type="hidden" value="${ movieFavorList[1].movieNo }" id="movieNum"/>예매하기</button>
 					</div>
 				</article>
 				</c:if>
@@ -470,14 +472,15 @@ header>section {
 					</div>
 					<div class="tit-area">
 						<p class="movie-grade">${ movieFavorList[2].movieAge }</p>
-						<p class="tit">${ movieFavorList[0].movieName }</p>
+						<p class="tit">${ movieFavorList[2].movieName }</p>
 					</div>
 					<div class="rate-date">
 						<span class="date"> 개봉일 : ${ movieFavorList[2].movieRdate } </span>
 					</div>
 					<div class="btn-util">
 						<span class="movie_statusY">상영중</span> 
-						<a class="resBtn" href="resList.do">예매하기</a>
+						<button class="resBtn">
+                        <input type="hidden" value="${ movieFavorList[2].movieNo }" id="movieNum"/>예매하기</button>
 					</div>
 				</article>
 				</c:if>
@@ -588,6 +591,10 @@ header>section {
 		location.href="movieInfo.do?movieNo="+movieNo;
 	});
    
+   $('.resBtn').click(function(){
+		var movieNum = $(this).children("#movieNum").val();
+		location.href="resList.do?movieNum="+movieNum;
+	});
    </script>
 </body>
 </html>
