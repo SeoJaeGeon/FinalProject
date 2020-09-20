@@ -94,5 +94,7 @@ public interface MovieManagerService {
 	public ArrayList<Movie_Sales> selectMovieTebalAjax(int maNo);
 
 	public ArrayList<Movie> movListON2();
+
+	public ArrayList<Movie_Res> selectMovResListAll();
 	
 }

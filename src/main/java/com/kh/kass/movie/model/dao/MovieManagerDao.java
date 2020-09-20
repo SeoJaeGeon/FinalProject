@@ -158,6 +158,10 @@ public class MovieManagerDao {
 	public ArrayList<Movie> selectmovListOn2() {
 		return (ArrayList)sqlSession.selectList("movieManagerMapper.movListOn2");
 	}
+
+	public ArrayList<Movie_Res> selectMovResListAll() {
+		return (ArrayList)sqlSession.selectList("movieManagerMapper.movListAll");
+	}
 	
 	
 }

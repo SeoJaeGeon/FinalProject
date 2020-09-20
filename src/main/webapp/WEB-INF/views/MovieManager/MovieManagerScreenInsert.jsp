@@ -653,7 +653,9 @@ margin: auto;
                                 <tbody>
                                     
                             <% 
-	                            ArrayList<Movie_Res> list_movieRes = (ArrayList<Movie_Res>)request.getAttribute("movieResList");
+                            
+                            	ArrayList<Movie_Res> movie_ResListAll = (ArrayList<Movie_Res>)request.getAttribute("movie_ResListAll"); // 모든 movie_res의 값들
+	                            ArrayList<Movie_Res> list_movieRes = (ArrayList<Movie_Res>)request.getAttribute("movieResList"); // 지금 비교하는 값들을 모두 이걸 참조함
 	                            ArrayList<Movie> listMovieName = (ArrayList<Movie>)request.getAttribute("movieListName");
 	                           
 	                           	int l = 0;
@@ -1134,12 +1136,12 @@ margin: auto;
                                      <%	
                                      } else{
                                     	 
-                                     for (int i = 0; i < list_movieRes.size(); i++) {
+                                     for (int i = 0; i < movie_ResListAll.size(); i++) {
                                      
                                      %>
                                     	console.log("서재건의 테스트 공간");
-										numX1 = <%="'" + list_movieRes.get(i).getStartTime() + "'"%>;
-										numX2 = <%="'" + list_movieRes.get(i).getEndTime() + "'"%>;   
+										numX1 = <%="'" + movie_ResListAll.get(i).getStartTime() + "'"%>;
+										numX2 = <%="'" + movie_ResListAll.get(i).getEndTime() + "'"%>;   
 										
 										numX1_1 = numX1.substr(0,2);
 										numX1_2 = numX1.substr(3,2);
@@ -1152,7 +1154,7 @@ margin: auto;
 										console.log("sumX1 : " + sumX1);
 										console.log("sumX2 : " + sumX2);
 										
-										<% Date dateS1 = list_movieRes.get(i).getResDate(); %>; //문제4
+										<% Date dateS1 = movie_ResListAll.get(i).getResDate(); %>; //문제4
 										<% 
 										MovieManagerMain main = new MovieManagerMain();
 										
@@ -1193,7 +1195,7 @@ margin: auto;
 										console.log("str4 : " + str4);
 										console.log("str5 : " + str5);
 										if(str4 == dateE4){ // 날짜값을 int로 환산해서 비교함 동일한 경우 아래로
-											if(num3 == <%=list_movieRes.get(i).getRoomNo()%>){ // 현재 추가하려는 상영 영화관과 for문속의 영호관을 비교함 맞을시 아래로
+											if(num3 == <%=movie_ResListAll.get(i).getRoomNo()%>){ // 현재 추가하려는 상영 영화관과 for문속의 영호관을 비교함 맞을시 아래로
 												console.log("numA1 : " + numA1); // for문의 상영 시작 값
 												console.log("sumX1 : " + sumX1); // for문의 상영 종료 값
 												console.log("sumX2 : " + sumX2); // 추가하려는 상영의 시작 값
