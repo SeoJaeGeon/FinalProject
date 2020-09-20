@@ -85,5 +85,35 @@
 		WHERE GOODS_NO = #{goodsNo}
 	</select>
 	
+	<select id="selectdList" resultMap="goodsResultSet">
+		SELECT *
+		FROM GOODS
+		JOIN
+		ATTACHMENT USING(GOODS_NO)
+		WHERE GOODS_STATUS='Y'
+		AND G_CATE_NO=1
+		ORDER BY GOODS_NO DESC
+	</select>
+	
+	<select id="selectpList" resultMap="goodsResultSet">
+		SELECT *
+		FROM GOODS
+		JOIN
+		ATTACHMENT USING(GOODS_NO)
+		WHERE GOODS_STATUS='Y'
+		AND G_CATE_NO=2
+		ORDER BY GOODS_NO DESC
+	</select>
+	
+	<select id="selectmList" resultMap="goodsResultSet">
+		SELECT *
+		FROM GOODS
+		JOIN
+		ATTACHMENT GOODS(GOODS_NO)
+		WHERE GOODS_STATUS='Y'
+		AND G_CATE_NO=3
+		ORDER BY GOODS_NO DESC
+	</select>
+	
 	
 </mapper>

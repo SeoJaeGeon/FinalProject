@@ -62,6 +62,21 @@ public class GoodsServiceImpl implements GoodsService {
 		return gDao.insertGoodsImg2(att2);
 	}
 
+	@Override
+	public ArrayList<Goods> selectPList(PageInfo pi) {
+		return gDao.selectPist(pi);
+	}
+
+	@Override
+	public ArrayList<Goods> selectDList(PageInfo pi) {
+		return gDao.selectDList(pi);
+	}
+
+	@Override
+	public ArrayList<Goods> selectMList(PageInfo pi) {
+		return gDao.selectMList(pi);
+	}
+
 	
 
 

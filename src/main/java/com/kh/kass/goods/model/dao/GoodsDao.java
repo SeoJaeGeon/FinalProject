@@ -57,6 +57,24 @@ public class GoodsDao {
 		return sqlSession.update("goodsMapper.updateGoods", g);
 	}
 
+	public ArrayList<Goods> selectPist(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("goodsMapper.selectpList", null, rowBounds);
+	}
+
+	public ArrayList<Goods> selectDList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("goodsMapper.selectdList", null, rowBounds);
+	}
+
+	public ArrayList<Goods> selectMList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("goodsMapper.selectmList", null, rowBounds);
+	}
+
 
 
 }
