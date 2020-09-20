@@ -37,10 +37,10 @@ nav {
 
 .content {
 	width: 100%;
-	heigt: 100%;
+	height: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 footer {
@@ -157,25 +157,29 @@ header>section {
 													<td class="code">${ spd.prodCode }</td>
 													<td class="proName">${ spd.snackName }</td>
 													<td class="count">${ spd.orderCount }</td>
-													<td class="price">${ spd.snackPrice }원</td>
+													<td class="price"><span class="snackPrice">${ spd.snackPrice }</span>원<input
+														type="hidden" value="${ spd.codeStatus }"
+														class="statusValue"></td>
+
 													<c:if test="${ spd.codeStatus eq 'Y' }">
 														<td class="userStatus status">사용 가능</td>
 													</c:if>
 													<c:if test="${ spd.codeStatus eq 'N' }">
 														<td class="userStatus status">사용 불가</td>
 													</c:if>
+
 												</tr>
 											</c:forEach>
 										</c:if>
 										<tr>
-											<td colspan="2" class="test">
-												<input type="text" class="payDate" value="${ detailList[0].payDate }">
+											<td colspan="3" class="test"><input type="hidden"
+												class="payDate" value="${ detailList[0].payDate }">
 											</td>
 
 											<td class="test"><span class="allPriceText">합계 :</span>
 											</td>
 
-											<td colspan="2" class="test"><span class="allPrice">${ detailList[0].payPrice }</span>
+											<td colspan="1" class="test"><span class="allPrice">${ detailList[0].payPrice }</span>
 												<span class="test1">원</span></td>
 
 										</tr>
@@ -214,50 +218,40 @@ header>section {
 		$(document).ready(
 			function () {
 				// 가격 000,000처리
-				var price = $(".allPrice").text();
+				 var price = $(".allPrice").text();
 
-				$(".allPrice").text(comma(price));
+				$(".allPrice").text(comma(price)); 
 				
-				var payDate = $(".payDate").val();
+				// 날짜 지나면 사용불가
+				
+				
+				 $(".oneBox").each(function () {
+					var price = $(this).find(".snackPrice").text();
 
-				payDate = new Date(payDate);
+					$(this).find(".snackPrice").text(comma(price));
+					/* var codeStatus = $(this).find(".statusValue").val();
+					console.log(codeStatus);
 
-				payDate.setMonth(payDate.getMonth() + 6);
+					var payDate = $(".payDate").val();
 
-				console.log("dd"+payDate)
+					payDate = new Date(payDate);
 
-				var today = new Date();
+					payDate.setMonth(payDate.getMonth() + 6);
 
-				if (today < payDate) {
-					$(".userStatus").text("사용 가능");
-				} else {
-					$(".userStatus").text("사용 불가");
-				}
+					console.log("dd"+payDate)
+
+					var today = new Date();
+
+					 if (codeStatus == 'Y'  || today < payDate ) {
+						 $(this).find(".userStatus").text("사용 가능");
+					} else {
+						 $(this).find(".userStatus").text("사용 불가");
+					} */
+					
+				});
+				
+				
 			}
-			
-			/* $(".oneBox").each(function () {
-				var startDate = $(this).find(".startDate").text();
-				var year = startDate.split("-")[0];
-				var month = startDate.split("-")[1];
-				var date = startDate.split("-")[2];
-
-				var startTime = $(this).find(".startTime").text();
-				var hour = startTime.split(":")[0];
-				var minute = startTime.split(":")[1];
-
-				console.log(year + "년" + month + "월" + date + "일 " + hour + "시 " + minute + "분");
-
-				var resultDate = new Date(year, month - 1, date, hour, minute, '00');
-				var today = new Date();
-				console.log(resultDate);
-
-				if (today < resultDate) {
-					$(this).find(".cancel").show();
-				} else {
-					$(this).find(".cancel").hide();
-				}
-
-			}); */
 		);
 		
 	</script>

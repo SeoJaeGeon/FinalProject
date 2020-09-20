@@ -14,13 +14,13 @@ public class Movie_Res {
    private String endTime; // 상영종료 시간
 
    private String maName; // 영화관지점 이름
-   
+   private String movieName; // 영화 이름
    	
    
    
     public Movie_Res(){}
 
-
+    
 
 
 	public Movie_Res(int resNo, int movieNo, Date resDate, int roomNo, String resInfo, String startTime, String endTime,
@@ -35,6 +35,20 @@ public class Movie_Res {
 		this.endTime = endTime;
 		this.maName = maName;
 	}
+
+
+
+
+	public Movie_Res(int movieNo, String movieName) {
+		super();
+		this.movieNo = movieNo;
+		this.movieName = movieName;
+	}
+
+
+	
+
+	
 
 
 

@@ -107,8 +107,7 @@ public class ResController {
 	}
 
 	@RequestMapping("resList.do")
-	public ModelAndView resSelectAll(ModelAndView mv) {
-		
+	public ModelAndView resSelectAll(ModelAndView mv, String movieNum) {
 		ArrayList<Reservation> resList = resService.resSelectAll();
 		ArrayList<Movie> movList = resService.movSelectAll();
 		ArrayList<Reservation> ocList = resService.aSelectAll();
@@ -117,6 +116,7 @@ public class ResController {
 			mv.addObject("resList", resList);
 			mv.addObject("movList", movList);
 			mv.addObject("ocList", ocList);
+			mv.addObject("movieNum", movieNum);
 			mv.setViewName("reservation/resList");
 		} else {
 			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");
@@ -139,8 +139,6 @@ public class ResController {
 	@RequestMapping(value = "playMovieSel.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String playMovieSelect(int title,int area,int cinema,String time) throws ParseException {
-		
-		/*System.out.println("들어온 값 : " + title+ ", " + area+ ", " + cinema + ", " + time);*/
 		
 		Date date = null;
 		
@@ -202,7 +200,7 @@ public class ResController {
 		}
 		int compare = today.compareTo(mDate);
 		boolean movieStatus = false;
-		if(compare > 0) {
+		if(compare >= 0) {
 			movieStatus= false;
 		}else if(compare <0) {
 			movieStatus = true;
@@ -221,7 +219,7 @@ public class ResController {
 			mv.addObject("movieStatus", movieStatus);
 			mv.setViewName("reservation/movieInfo");
 		} else {
-			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");// 다른거눌러서 그래요 리뷰가없어요
+			throw new ResException("영화 정보 불러오기를 실패했습니다.");
 		}
 		
 		return mv;
@@ -267,7 +265,7 @@ public class ResController {
 			
 			mv.setViewName("reservation/resSeat");
 		} else {
-			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");
+			throw new ResException("영화 예약를 실패했습니다.");
 		}
 		
 		return mv;

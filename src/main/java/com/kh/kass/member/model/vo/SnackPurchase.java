@@ -21,5 +21,7 @@ public class SnackPurchase {
 	private String paySelect;
 	private Date payDate;
 	private String refund;
+	private int detailCount; // 상세 카운팅
 	private ArrayList<ProductOrder> prodOrderList;
+
 }
