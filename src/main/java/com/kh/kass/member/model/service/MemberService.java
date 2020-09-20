@@ -143,4 +143,5 @@ public interface MemberService {
 
 	// 스낵 status 수정
 	public int updateSnackCodeStatus(int codeNo);
+
 }
