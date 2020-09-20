@@ -205,10 +205,7 @@ public class MemberController {
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 		} else {
-			loginUser = new Member();
-			loginUser.setUserId(null);
-			model.addAttribute("loginUser",loginUser);
-//			rd.addFlashAttribute("msg", "존재하지 않는 아이디거나 아이디 또는  비밀번호가 틀렸습니다.");
+			rd.addFlashAttribute("msg", "존재하지 않는 아이디거나 아이디 또는  비밀번호가 틀렸습니다.");
 		}
 		System.out.println(loginUser);
 		return "redirect:home.do";
@@ -331,7 +328,6 @@ public class MemberController {
 		 * Member loginUser = (Member) model.getAttribute("loginUser");
 		 * m.setUserId(loginUser.getUserId());
 		 */
-		System.out.println("비밀번호확인m" + m);
 		boolean isEmpty = mService.checkPwd(m) == 0 ? true : false;
 
 		Map map = new HashMap();
