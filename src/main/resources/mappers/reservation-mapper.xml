@@ -146,6 +146,7 @@
 		AND MOC_NO = #{mocNo}
 		AND MA_NO = #{maNo}
 		AND RES_DATE = #{resDate}
+        AND TO_DATE((TO_CHAR(RES_DATE,'YYYY/MM/DD')|| '/' || START_TIME),'YYYY/MM/DD/hh24:mI') >  SYSDATE
 		ORDER BY START_TIME, ROOM_NUMBER
 	</select>
 	
