@@ -61,7 +61,7 @@
 	border-bottom: 1px solid #ddd;
 }
 
-.table tr:hover td {
+.table tr:hover td:not(.noneTd) {
 	background: rgb(230, 230, 230);
 	cursor: pointer;
 }

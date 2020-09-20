@@ -221,6 +221,16 @@
 		
 	</select>
 	
+	<!-- 영화 정보 삭제 N값도 있어야 하기 때문에 만듬 -->
+	<select id="movListOn2" resultMap="movResultSet">
+	SELECT *
+		FROM MOVIE
+		JOIN ATTACHMENT USING (MOVIE_NO)
+		WHERE FILE_STATUS = 'Y'
+		and SORT_CODE = 20
+		
+	</select>
+	
 	<select id="deleteSelectMovie" resultMap="movieManagerResultSet">
 	select *
 	from movie

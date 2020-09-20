@@ -12,8 +12,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class VodReview{
-   private int rScore; // 주문이력번호
-   private int rContent; // 주문번호
+   private String reeScore; 
+   private String reeContent; 
    
    
 }

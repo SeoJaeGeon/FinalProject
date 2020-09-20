@@ -1,7 +1,6 @@
 package com.kh.kass.member.model.service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;

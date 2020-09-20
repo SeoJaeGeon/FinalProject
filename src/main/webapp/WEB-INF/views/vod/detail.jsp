@@ -483,22 +483,22 @@
     <div id="info-div">   <!-- 영화정보 div -->
         <!-- 영화 제목 포스터---------------------->
         <div id="movieName">${m.movieName }</div><!--영화 제목 div-->
-        <div id="movieImg-div"><img id="movieImg" src="../수업자료/sample/image/city1.PNG"></div> <!-- 영화 이미지 div-->
+        <div id="movieImg-div"><img id="movieImg" src="${ contextPath }${ m.attachList[1].filePath }${ m.attachList[0].renameFileName }"></div> <!-- 영화 이미지 div-->
         
         
 
         <!-- 좋아요 싫어요 ----------------------->
         <div id="GB1">관람객 평 </div>
-        <div id="GB2"><span>${ loginUser.userName }</span></div>
-        <div id="GB3"><span>${ loginUser.userNo }</span></div>
+        <div id="GB2"><span>좋아요 ${g}</span></div>
+        <div id="GB3"><span>별로에요 ${b}</span></div>
 
         <!-- 영화 상세 정보 --------------------->
         <div id="line"><hr></div> <!-- 라인 -->
-        <div id="detail1" ><span>감독 : 연상호 / 프로듀서 : 김연호 / 배우 : 강동원, 이정현</span></div>
-        <div id="detail2" ><span>장르 : 액션, 드라마 / 기본 : 15세 이상</span></div>
-        <div id="detail3"><span>상영 시간 : 116분</span></div>
-        <div id="detail4"><span>제작 국가 : 한국</span></div>
-        <div id="detail5"><span>개봉 : 2020.07.15</span></div>
+        <div id="detail1" ><span>감독 : ${ m.movieForeman }</span></div>
+        <div id="detail2" ><span>장르 : ${ bb }</span></div>
+        <div id="detail3"><span>상영 시간 : ${ m.movieStime }</span></div>
+        <div id="detail4"><span>제작 국가 : ${ m.movieCountry }</span></div>
+        <div id="detail5"><span>개봉 : ${ m.movieRdate }</span></div>
         
 
 
@@ -510,7 +510,7 @@
 					
 					
         
-		<button onclick="wish();" id="wish-btn" type="button" class="btn btn-default"><img src="../수업자료/sample/image/city1.PNG" id="search_img">　좋아요</button>
+		<button onclick="wish();" id="wish-btn" type="button" class="btn btn-default">좋아요</button>
 		
 		
 		
@@ -522,7 +522,7 @@
 					
 					
         <a  href="${ vcart }">
-		<button id="cart-btn" type="button" class="btn btn-default"><img src="../수업자료/sample/image/city1.PNG" id="search_img">　담기</button>
+		<button id="cart-btn" type="button" class="btn btn-default">담기</button>
 		</a>
 		
 		
@@ -547,14 +547,9 @@
     <div id="story-div"> <!--  줄거리 -->
     　　　줄거리 
          <hr>
-        <div id="story" ><span>마른 하늘을 달려 <!-- 줄거리 넣는 곳-->
-            나 그대에게 안길 수만 있으면
-            내 몸 부서진대도 좋아
-            설혹 너무 태양 가까이 날아
-          
-            두 다리 모두 녹아 내린다고 해도
-            내맘 그대 마음속으로
-            영원토록 달려갈거야</span></div> 
+        <div id="story" ><span>
+        ${m.movieContent }
+        </span></div> 
         
     </div>
 
@@ -565,7 +560,7 @@
     <div id="trailer-div">
         　　　예고편 
          <hr>
-         <div id="trailer"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/xwaoYLjibeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+         <div id="trailer">${m.movieLink }</div>
     </div>
 
     <br><br><br>
@@ -581,28 +576,20 @@
             <ul id="slider">
                 <li>
                                  
-    <img id="cutimg1" src="../수업자료/sample/image/city1.PNG"> <!-- 이미지 1-->
+    <img id="cutimg1" src="${ contextPath }${ m.attachList[1].filePath }${ m.attachList[1].renameFileName }"> <!-- 이미지 1-->
                 </li>
                 
                 <li>
                  
-    <img  id="cutimg2"  src="../수업자료/sample/image/city1.PNG"> <!-- 이미지 2-->
+    <img  id="cutimg2"  src="${ contextPath }${ m.attachList[1].filePath }${ m.attachList[2].renameFileName }"> <!-- 이미지 2-->
                 </li>
                 
                 <li>
               
-    <img id="cutimg3"  src="../수업자료/sample/image/city1.PNG"> <!-- 이미지 3-->
+    <img id="cutimg3"  src="${ contextPath }${ m.attachList[1].filePath }${ m.attachList[3].renameFileName }"> <!-- 이미지 3-->
                 </li>
                 
-                <li>
-                  
-    <img  id="cutimg4" src="../수업자료/sample/image/city1.PNG"> <!-- 이미지 4-->
-                </li>
-                
-                <li>
-               
-    <img  id="cutimg5"  src="../수업자료/sample/image/city1.PNG"> <!-- 이미지 5-->
-                </li>
+      
                 
                 
             </ul>
@@ -749,35 +736,26 @@
    <br><br><br>
 
    <!--리뷰$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
-   <div id="review-div">
+    <div id="review-div">
     　　　리뷰
     <hr>
     <div id="line2-div" style="position: absolute; height: 600px; top: 100px; left: 485px;"><img id="line2" style="height: 600px;" src="../수업자료/sample/image/줄.PNG"></div>
-    <div id="review">
-        <img id="profileimg"  src="../수업자료/sample/image/city1.PNG" style="width: 80px; height: 80px;">
-        <div id="userid"><span>김근혁</span></div>
-        <div id="gnb"><span>별로에요</span></div>
-        <div id="userreview"><span>개같아서 못보겠어요</span></div>
+    
+    
+     <c:forEach var="v" items="${ vr }">
+    <div id="review" style="margin-right: 50px;">
+    
+      <c:if test="${ v.reeScore eq 'G' }">
+        	<div id="gnb"><span>좋아요</span></div>				
+		</c:if>
+		
+		 <c:if test="${ v.reeScore eq 'B' }">
+				<div id="gnb"><span>별로에요</span></div>				
+		</c:if>
+		
+        <div id="userreview"><span>${v.reeContent }</span></div>
     </div>
-    <div id="review">
-        <img id="profileimg"  src="../수업자료/sample/image/city1.PNG" style="width: 80px; height: 80px;">
-        <div id="userid"><span>김근혁</span></div>
-        <div id="gnb"><span>별로에요</span></div>
-        <div id="userreview"><span>개같아서 못보겠어요</span></div>
-    </div>
-    <div id="review">
-        <img id="profileimg"  src="../수업자료/sample/image/city1.PNG" style="width: 80px; height: 80px;">
-        <div id="userid"><span>김근혁</span></div>
-        <div id="gnb"><span>별로에요</span></div>
-        <div id="userreview"><span>개같아서 못보겠어요</span></div>
-    </div>
-    <div id="review">
-        <img id="profileimg"  src="../수업자료/sample/image/city1.PNG" style="width: 80px; height: 80px;">
-        <div id="userid"><span>김근혁</span></div>
-        <div id="gnb"><span>별로에요</span></div>
-        <div id="userreview"><span>개같아서 못보겠어요</span></div>
-    </div>
-   
+    </c:forEach>
 
 
 
