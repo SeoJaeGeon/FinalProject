@@ -52,6 +52,7 @@ import com.kh.kass.member.model.vo.SnackPurchase;
 import com.kh.kass.member.model.vo.VodPurchase;
 import com.kh.kass.member.model.vo.Withdrawal;
 import com.kh.kass.review.model.vo.Review;
+import com.kh.kass.vod.model.service.VodService;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 import oracle.jdbc.dcn.DatabaseChangeListener;
@@ -61,6 +62,8 @@ import oracle.jdbc.dcn.DatabaseChangeListener;
 public class MemberController {
 	@Autowired
 	private MemberService mService;
+	private VodService vService;
+
 
 	// 회원가입 뷰
 	@RequestMapping("minsertView.do")
@@ -296,13 +299,22 @@ public class MemberController {
 		int vodPurchaseCount = mService.selectVodListCount(userNo);
 		int movieReviewCount = mService.selectMovieReviewListCount(userNo);
 		int vodReviewCount = mService.selectVodReviewListCount(userNo);
-		// int vodWishlistCount = mService.selectMovieListCount(userNo);
+		//int vodWishlistCount = vService.selectListCount1(userNo);
+		System.out.println(moviePurchaseCount);
+		System.out.println(vodPurchaseCount);
+		System.out.println(movieReviewCount);
+		System.out.println(vodReviewCount);
+		//System.out.println(vodWishlistCount);
 
+		
+		
 		mv.addObject("list", list);
 		mv.addObject("moviePurchaseCount", moviePurchaseCount);
 		mv.addObject("vodPurchaseCount", vodPurchaseCount);
 		mv.addObject("movieReviewCount", movieReviewCount);
 		mv.addObject("vodReviewCount", vodReviewCount);
+		//mv.addObject("vodWishlistCount", vodWishlistCount);
+
 		mv.setViewName("member/myPage");
 
 		return mv;

@@ -1,7 +1,6 @@
 package com.kh.kass.member.model.service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.kh.kass.common.Attachment;
 import com.kh.kass.common.Auth;
@@ -144,5 +143,4 @@ public interface MemberService {
 
 	// 스낵 status 수정
 	public int updateSnackCodeStatus(int codeNo);
-
 }

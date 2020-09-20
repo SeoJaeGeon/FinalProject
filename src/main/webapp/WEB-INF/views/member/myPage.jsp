@@ -199,9 +199,13 @@ a:visited {
 											<p class="text">VOD 한줄평</p>
 										</a>
 									</article>
+									<c:url var="wishlist" value="mywish.do">
+										<c:param name="userNo" value="${ loginUser.userNo }" />
+									</c:url>
+
 									<article class="myCount">
-										<a href="vodReviewList.do">
-											<p class="count">${ moviePurchaseCount }</p>
+										<a href="${ wishlist }">
+											<p class="count">${ vodWishlistCount }</p>
 											<p class="text">찜한 VOD</p>
 										</a>
 									</article>
