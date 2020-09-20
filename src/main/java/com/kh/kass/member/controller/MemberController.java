@@ -858,13 +858,13 @@ public class MemberController {
 		if (detailList != null) {
 
 			for (int i = 0; i < detailList.size(); i++) {
-				Date payDate = detailList.get(i).getPayDate();
+				Date today = new Date();
 				Date codeTerm = detailList.get(i).getProdOrderList().get(i).getCodeTerm();
 
 				for (int j = 0; j < detailList.get(i).getProdOrderList().size(); j++) {
 					int codeNo = detailList.get(i).getProdOrderList().get(j).getCodeNo();
 
-					int compare = payDate.compareTo(codeTerm);
+					int compare = today.compareTo(codeTerm);
 
 					if (compare > 0) {
 						int result = mService.updateSnackCodeStatus(codeNo);
@@ -872,7 +872,7 @@ public class MemberController {
 					}
 				}
 			}
-
+			detailList = mService.selectSnackPurchasDetail(sp);
 			mv.addObject("detailList", detailList);
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("member/snackPurchaseDetail");
