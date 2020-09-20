@@ -19,7 +19,11 @@
 		
 
 		<typeAlias type="com.kh.kass.goods.model.vo.Goods" alias="Goods"/>
+		<typeAlias type="com.kh.kass.snack.model.vo.Snack" alias="Snack"/>
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.kass.payment.model.vo.Payment" alias="Payment"/>
+		
+		
 		
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Room" alias="Movie_Room"/>
 		<typeAlias type="com.kh.kass.movie.model.vo.Movie_Res_Room" alias="Movie_Res_Room"/>
@@ -32,8 +36,7 @@
 		<typeAlias type="com.kh.kass.common.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.kass.review.model.vo.Review" alias="Review"/>
 
-		<!-- <typeAlias type="com.kh.kass.snack.model.vo.Snack" alias="Snack"/>
-		 -->
+		
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodOrder" alias="VodOrder"/>
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodWish" alias="VodWish"/>
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodPay" alias="VodPay"/>
@@ -42,13 +45,13 @@
  
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
-		<!-- <mapper resource="mappers/goods-mapper.xml" />-->
+		<mapper resource="mappers/goods-mapper.xml" />
 		<mapper resource="mappers/movie-mapper.xml" />
 		<mapper resource="mappers/reservation-mapper.xml" />
-		<!-- <mapper resource="mappers/review-mapper.xml" />
-		<mapper resource="mappers/snack-mapper.xml" />
-		 -->
+		<!-- <mapper resource="mappers/review-mapper.xml" /> -->
+		 <mapper resource="mappers/snack-mapper.xml" />
 		 <mapper resource="mappers/vod-mapper.xml" />
+		 <mapper resource="mappers/cart-mapper.xml" />
 	</mappers> 
 	
 </configuration>

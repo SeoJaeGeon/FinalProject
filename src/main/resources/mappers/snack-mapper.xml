@@ -8,9 +8,9 @@
 		<result property="snackPrice" column="SNACK_PRICE" />
 		<result property="snackMemo" column="SNACK_MEMO" />
 		<result property="snackStatus" column="SNACK_STATUS" />
-		<result property="sCateNo" column="S_CATE_NO" />
+		<result property="snCateNo" column="S_CATE_NO" />
 		<result property="sCateName" column="S_CATE_NAME" />
-		
+
 		<association property="attachment" javaType="Attachment">
 			<result property="fileNo" column="FILE_NO" />
 			<result property="sortCode" column="SORT_CODE" />
@@ -24,24 +24,131 @@
 			<result property="goodsNo" column="GOODS_NO" />
 		</association>
 	</resultMap>
-	
+
+	<resultMap id="AttachmentResultSet" type="Attachment">
+		<id property="fileNo" column="FILE_NO" />
+		<result property="sortCode" column="SORT_CODE" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="originFileName" column="ORIGIN_FILENAME" />
+		<result property="renameFileName" column="RENAME_FILENAME" />
+		<result property="fileStatus" column="FILE_STATUS" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="snackNo" column="SNACK_NO" />
+		<result property="goodsNo" column="GOODS_NO" />
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		SNACK
+		WHERE SNACK_STATUS='Y'
+	</select>
+
 	<select id="selectList" resultMap="snackResultSet">
 		SELECT *
 		FROM SNACK
-		WHERE S_STATUS='Y'
-		ORDER BY SNACK_NO DESC 
+		JOIN
+		ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_STATUS='Y'
+		ORDER BY SNACK_NO DESC
 	</select>
-	
-	<insert id="insertSnack" parameterType="Sanck">
+
+	<insert id="insertSnack" parameterType="Snack">
 		INSERT INTO SNACK
-		VALUES(SEQ_SNACK_NO.NEXTVAL, #{snackName}, #{snackPrice}, #{snackMemo}, DEFAULT, #{sCateNo})
-		
+		VALUES(SEQ_SNACK_NO.NEXTVAL, #{snackName}, #{snackPrice},
+		#{snackMemo}, DEFAULT, #{snCateNo})
 	</insert>
-	
+
 	<insert id="insertSnackImg" parameterType="Attachment">
 		INSERT INTO ATTACHMENT
-		(FILE_NO, SORT_CODE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME, FILE_STATUS, MOVIE_NO, USER_NO, SNACK_NO, GOODS_NO)
-	 	VALUES(SEQ_FILE_NO.NEXTVAL, 50, #{filePath}, #{originFileName}, #{renameFileName}, DEFAULT, NULL, NULL, #{snackNo}, NULL)
+		(FILE_NO, SORT_CODE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME,
+		FILE_STATUS, MOVIE_NO, USER_NO, SNACK_NO, GOODS_NO)
+		VALUES(SEQ_FILE_NO.NEXTVAL, 50, #{filePath}, #{originFileName},
+		#{renameFileName}, DEFAULT, NULL, NULL, SEQ_SNACK_NO.CURRVAL, NULL)
 	</insert>
-  
+
+	<select id="selectOne" parameterType="_int"
+		resultMap="snackResultSet">
+		SELECT *
+		FROM SNACK
+		JOIN ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_NO=#{snackNo}
+		AND SNACK_STATUS='Y'
+	</select>
+
+	<select id="selectAtt" parameterType="_int"
+		resultMap="AttachmentResultSet">
+		SELECT *
+		FROM ATTACHMENT
+		WHERE SNACK_NO = #{snackNo}
+	</select>
+
+	<update id="updateSnack" parameterType="Snack">
+		UPDATE SNACK
+		SET
+		SNACK_NAME=#{snackName},
+		SNACK_PRICE=#{snackPrice},
+		SNACK_MEMO=#{snackMemo},
+		S_CATE_NO=#{snCateNo}
+		WHERE SNACK_NO=#{snackNo}
+	</update>
+
+	<update id="updateImg" parameterType="Attachment">
+		UPDATE ATTACHMENT
+		SET
+		FILE_PATH=#{filePath},
+		ORIGIN_FILENAME=#{originFileName},
+		RENAME_FILENAME=#{renameFileName}
+		WHERE SNACK_NO=#{snackNo}
+		AND MOVIE_NO
+		IS NULL
+		AND USER_NO IS NULL
+		AND GOODS_NO IS NULL
+	</update>
+
+	<select id="deleteList" resultMap="snackResultSet">
+		SELECT *
+		FROM SNACK
+		JOIN
+		ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_STATUS='N'
+		ORDER BY SNACK_NO DESC
+	</select>
+
+	<update id="deleteSnack" parameterType="Snack">
+		UPDATE SNACK SET
+		SNACK_STATUS='N'
+		WHERE SNACK_NO=#{snackNo}
+	</update>
+
+	<select id="selectpList" resultMap="snackResultSet">
+		SELECT *
+		FROM SNACK
+		JOIN
+		ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_STATUS='Y'
+		AND S_CATE_NO=1
+		ORDER BY SNACK_NO DESC
+	</select>
+
+	<select id="selectdList" resultMap="snackResultSet">
+		SELECT *
+		FROM SNACK
+		JOIN
+		ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_STATUS='Y'
+		AND S_CATE_NO=2
+		ORDER BY SNACK_NO DESC
+	</select>
+
+	<select id="selectcList" resultMap="snackResultSet">
+		SELECT *
+		FROM SNACK
+		JOIN
+		ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_STATUS='Y'
+		AND S_CATE_NO=3
+		ORDER BY SNACK_NO DESC
+	</select>
 </mapper>

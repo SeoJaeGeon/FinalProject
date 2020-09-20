@@ -5,194 +5,315 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>KASS CINEMA</title>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
-<style>
-	
-body {
-	width: 100%;
-	margin: auto;
-}
+    <style>
+        header,
+        nav,
+        section,
+        article,
+        aside,
+        footer {
+            box-sizing: border-box;
+            display: block;
+        }
 
-header {
-	width: 100%;
-	height: 150px;
-}
+        body {
+            width: 100%;
+            background: white;
+            margin: auto;
+        }
 
-nav {
-	width: 100%;
-	height: 50px;
-}
+        header {
+            width: 1500px;
+            height: 150px;
+        }
 
-.content {
-	width: 100%;
-	height: 100%;
-	margin: auto;
-	border: 1px solid red;
-	overflow: hidden;
-}
+        nav {
+            width: 1500px;
+            height: 50px;
+        }
+        
+        #content {
+            /* width: 100%; */
+            width: 1500px;
+            border: 8px solid red;
+            margin: auto;
+        }
 
-footer {
-	width: 100%;
-	height: 150px;
-	float: left;
-	background: lightgray;
-}
+        footer {
+            width: 1500px;
+            height: 150px;
+            float: left;
+            background: lightgray;
+            margin: auto;
+        }
 
-header>section {
-	float: left;
-}
+        header>section {
+            float: left;
+        }
 
-#header-1 {
-	width: 25%;
-	height: 100%;
-	position: relative;
-}
+        #header-1 {
+            width: 25%;
+            height: 100%;
+            position: relative;
+        }
 
-#header-2 {
-	width: 50%;
-	height: 100%;
-	position: relative;
-}
+        #header-2 {
+            width: 50%;
+            height: 100%;
+            position: relative;
+        }
 
-#header-3 {
-	width: 25%;
-	height: 100%;
-}
+        #header-3 {
+            width: 25%;
+            height: 100%;
+        }
+        
+        #stay_footer_inner{
+	        width: 1500px;
+	        margin: auto;
+        }
 
-#footer1 {
-	width: 80%;
-	height: 30%;
-	padding: 1px;
-	width: 80%;
-	float: left;
-}
+        #footer1 {
+            width: 80%;
+            height: 30%;
+            padding: 1px;
+            width: 80%;
+            float: left;
+        }
 
-#footer2 {
-	width: 80%;
-	height: 70%;
-	width: 80%;
-	float: left;
-}
+        #footer2 {
+            width: 80%;
+            height: 70%;
+            width: 80%;
+            float: left;
+        }
 
-#footer3 {
-	width: 20%;
-	height: 70%;
-	float: left;
-}
+        #footer3 {
+            width: 20%;
+            height: 70%;
+            float: left;
+        }
 
-#stay_footer {
-	width: 100%;
-	height: 150px;
-	background: lightgray;
-}
+        .sub_section {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            border: 5px solid purple;
+        }
 
-#stay_footer_inner {
-	width: 1500px;
-	height: 150px;
-	display: block;
-	margin: auto;
-}
+        #img1,
+        #img2,
+        #img3 {
+            width: 500px !important;
+            height: 400px !important;
+            margin: auto;
+        }
 
-#wrap_stay {
-	width: 1500px;
-	margin: auto;
-}
-/* 영역 나누기 */
+        .carousel {
+            width: 100%;
+        }
 
 
-body {
-	width: 100%;
-	margin: auto;
-}
+        /* 검색 창 */
+        #search-form {
+            height: 50px;
+            width: 300px;
+            background: #ffffff;
+            border: 1px solid;
+            margin: auto;
+            margin-top: 40px;
+        }
 
-header {
-	width: 100%;
-	height: 150px;
-}
+        #search_Text {
+            font-size: 16px;
+            width: 80%;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+            float: left;
+            font-family: 'NanumBarunGothic', sans-serif;
+        }
 
-nav {
-	width: 100%;
-	height: 50px;
-}
+        #search_Btn {
+            width: 20%;
+            height: 100%;
+            border: 0px;
+            background: white;
+            outline: none;
+            float: right;
+            color: #ffffff;
+            font-family: 'NanumBarunGothic', sans-serif;
+        }
 
-.content {
-	width: 100%;
-	heigt: 100%;
-	margin: auto;
-	border: 1px solid red;
-	overflow: hidden;
-}
+        /* 검색 창 */
+        #search_img {
+            width: 30px;
+            height: 30px;
+        }
 
-footer {
-	width: 100%;
-	height: 150px;
-	float: left;
-	background: lightgray;
-}
+        /* 로고 */
+        #logo_img {
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+        }
 
-header>section {
-	float: left;
-}
+        /* 로고 */
+        /* 로그인, 회원가입 */
+        .login_bar {
+            float: right;
+            text-decoration: none;
+            color: silver;
+            font-weight: bold;
+            font-size: 21px;
+            margin-right: 50px;
+            margin-top: 20px;
+            font-family: 'NanumBarunGothic', sans-serif;
+        }
 
-#header-1 {
-	width: 25%;
-	height: 100%;
-	position: relative;
-}
+        .login_bar:hover {
+            text-decoration: none;
+            color: gray;
+        }
 
-#header-2 {
-	width: 50%;
-	height: 100%;
-	position: relative;
-}
+        /* 로그인, 회원가입 */
 
-#header-3 {
-	width: 25%;
-	height: 100%;
-}
+        /* 네비게이션 바*/
+        #navi {
 
-#footer1 {
-	width: 80%;
-	height: 30%;
-	padding: 1px;
-	width: 80%;
-	float: left;
-}
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
 
-#footer2 {
-	width: 80%;
-	height: 70%;
-	width: 80%;
-	float: left;
-}
+        #navi>li {
+            display: inline-block;
+            width: 19%;
+            height: 100%;
 
-#footer3 {
-	width: 20%;
-	height: 70%;
-	float: left;
-}
+        }
 
-#stay_footer {
-	width: 100%;
-	height: 150px;
-	background: lightgray;
-}
+        #navi li a {
+            height: 100%;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            padding-top: 5px;
+            color: black;
+            font-weight: bold;
+            font-size: 21px;
+            line-height: 40px;
+        }
 
-#stay_footer_inner {
-	width: 1500px;
-	height: 150px;
-	display: block;
-	margin: auto;
-}
+        #navi li a:hover {
 
-#wrap_stay {
-	width: 1500px;
-	margin: auto;
-}
-/* 영역 나누기 */
+            border-bottom: 1px solid rgb(31, 69, 97);
 
-/* 상단 미니 메뉴바 */
+        }
+
+        /* 네비게이션 바*/
+
+        /* 하단 풋터 부분 */
+        #footer1>a {
+            text-decoration: none;
+            font-weight: 600;
+            line-height: 25px;
+            color: black;
+            margin: 0 10px;
+        }
+
+        #footer1>a:hover {
+            color: white;
+        }
+
+        #footer2>p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        #footer_logo {
+            float: left;
+            margin-right: 30px;
+            width: 300px;
+            height: 50px;
+        }
+
+        #footer3>* {
+            margin-left: 25px;
+        }
+
+        /* 하단 풋터 부분 */
+
+        /* 영역 나누기 */
+        #stay1 {
+            width: 100%;
+            background: white;
+
+        }
+
+        #stay2 {
+            width: 100%;
+            background: white;
+            border: 1px solid red;
+        }
+
+        #stay_footer {
+            width: 100%;
+            height: 150px;
+            background-color: lightgray;
+        }
+
+        #wrap_stay {
+            width: 1500px;
+            margin: auto;
+            border: 1px solid green;
+        }
+
+        .movie {
+            display: inline-block;
+            margin: 0px 50px;
+            border: 1px solid yellow;
+            width: 250px;
+            height: 400px;
+        }
+
+        .poster {
+            width: 100%;
+            height: 300px;
+        }
+
+        .onScrenn {
+            background: rgb(46, 204, 113);
+            width: 70px;
+            height: 30px;
+            color: white;
+            font-size: 15px;
+            float: left;
+            margin-left: 30px;
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 4px
+        }
+
+        .resevation {
+            background: rgb(231, 76, 60);
+            width: 100px;
+            height: 40px;
+            border-radius: 40px;
+            color: white;
+            border: 1px solid rgb(231, 76, 60);
+            margin-left: 30px;
+            margin-top: 25px;
+        }
+
+        /* 영역 나누기 */
+
+        /* 상단 미니 메뉴바 */
         .page-util {
             display: block;
             position: static;
@@ -217,7 +338,7 @@ header>section {
             float: left;
             width: 70px;
             line-height: 46px;
-            margin: 0;
+            margin-left: 20px;
             padding: 0;
 
         }
@@ -575,81 +696,100 @@ header>section {
             height: 100%;
         }
 
-        .top_Menu li a:focus{
+        .top_Menu li a:focus {
             outline: none;
         }
 
         /* 내가 쓴 코드 */
 
-        .tab_wrap.outer{
-            padding-top: 80px;
+        .box-pulldown {
+            overflow: hidden;
+            width: 90%;
         }
-        
-        .tab_wrap {
+
+        .box-pulldown+.box-pulldown {
+            margin-top: 20px;
+        }
+
+        .box-pulldown .tit {
+            overflow: hidden;
+            border-radius: 5px;
+            border: 1px solid #d8d9bd;
+        }
+        .box-pulldown .tit .btn-toggle {
+            display: block;
             position: relative;
-        }
-
-        ul, ol{
-            list-style: none;
+            width: 100%;
+            height: 39px;
             margin: 0;
+            padding: 0 20px;
+            border: 0;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        button { 
+            cursor: pointer;
+            letter-spacing: -.5px;
+            font-weight: 400;
+            font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+            overflow: visible;
+            text-transform: none;
+            font-size: 1em;
+            line-height: 1.15;
+        }
+
+        .box-pulldown .tit .btn-toggle .iconset {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            margin-top: -4px;
+        }
+
+        .ico-arr-toggle-down {
+            overflow: hidden;
+            width: 12px;
+            height: 7px;
+            
+        }
+
+        .iconset {
+            overflow: hidden;
+            display: inline-block;
+            margin: -1px 0 0 0;
             padding: 0;
+            font-size: 0;
+            line-height: 0;
+            vertical-align: middle;
+            background-position: 0 0;
+            background-repeat: no-repeat;
         }
 
-        li {
-            display: list-item;
-            text-align: -webkit-match-parent;
+        .box-pulldown.on .cont {
+            display: block;
         }
 
-        ul{
+        .box-pulldown .cont {
+            display: none;
+            margin: 0;
+            padding: 20px;
+        }
+
+        p {
             display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
-            padding-inline-start: 40px;
-        }
-
-        .tab_wrap.outer > li > .tab_tit {
-            height: 50px;
-            line-height: 50px;
-            font-size: 15px;
-        }
-
-        .tab_wrap > li > .tab_tit {
-            border: none;
-            position: absolute;
-            top: 0;
-        }
-
-        .tab_wrap > li > .tab_tit span {
-            vertical-align: top;
-            white-space: nowrap;
         }
         
-        .contents_mall_detail .pd_tab .active .tab_con {
-            padding: 30px 0;
-        }
-
-        .tab_wrap > li.active > .tab_con {
-            overflow: inherit;
-            position: relative;
-            width: auto;
-            height: auto;
-        }
-
-        .tab_wrap.outer > li > .tab_tit {
-            height: 50px;
-            line-height: 50px;
-            border-bottom: 1px solid #ccc;
-            color: #7f7f7f;
-        }
-</style>
+        
+    </style>
 <body>
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/white.jsp" />
-	</div>
 	
-	<section id="content">
+	  <section id="content">
         <div class="container">
             <div class="page-util">
                 <div class="location">
@@ -665,7 +805,7 @@ header>section {
                 <div class="pd_wrap">
                     <div class="pd_img">
                         <div class="main_img">
-                            <img class src="images/pop.PNG" alt="스위트콤보">
+                            <img src="${ contextPath }/${Snack.attachment.filePath}/${ Snack.attachment.renameFileName }">
                         </div>
                     </div>
                     <!--pd_img-->
@@ -683,20 +823,17 @@ header>section {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row" class="tit" colspan="2">스위트콤보</th>
+                                    <th scope="row" class="tit" colspan="2">${ Snack.snackName }</th>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <span class="txt_price">
-                                            9,000
-                                            <em>원</em>
-                                        </span>
+                                        <span class="txt_price">${ Snack.snackPrice }</span><em>원</em>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">구성품</th>
-                                    <td>오리지널L + 탄산음료M2</td>
+                                    <th scope="row">상품설명</th>
+                                    <td>${ Snack.snackMemo }</td>
                                 </tr>
                                 <tr>
                                     <th scop="row">구매제한</th>
@@ -710,114 +847,152 @@ header>section {
                                     <th scope="row">사용가능 영화관</th>
                                     <td>
                                         <button class="btn_col4 ty3 rnd" title="레이어팝 열기">스위트샵 상품권</button>
-                                        "&nbsp;"
+                                        &nbsp;
                                     </td>
                                 </tr>
                                
                             </tbody>
                         </table>
                         <div class="bx_num">
-                            <button class="btn_mins">삭제</button>
+                            <button class="btn_mins" onclick="btn_minus();">삭제</button>
                             <div class="txt_num">1</div>
-                            <button class="btn_plus">추가</button>
+                            <button class="btn_plus" onclick="btn_plus();">추가</button>
                         </div>
                         <div class="txt_price_wrap">
-                            		총 상품금액
-                            <strong class="txt_price_str">
-                                9,000
-                                <em>원</em>
-                            </strong>
+                           		 총 상품금액
+                            <strong class="txt_price_str">${ Snack.snackPrice }</strong>
+                            <em class="txt_price_str">원</em>
                         </div>
                         <div class="btn_wrap">
                             <button class="btn_col2 ty7">장바구니</button>
-                            <button class="btn_col1 ty7">구매하기</button>
+                            <button class="btn_col1 ty7" onclick="buyBtn();">구매하기</button>
                         </div>
                     </div> <!-- pd_detail -->
                 </div>
 
-                <!-- <div class="content1">
-                    <div class="tab_List">
-                        <ul class="top_Menu">
-                            <li class="on">
-                                <a href="#">
-                                    사용방법
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    주의사항
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-                <ul class="tab_wrap outer pd_tab">
-                    <li class="active">
-                        <button type="button" class="tab_tit" style="width: 50%; left: 0%;">
-                        <span>사용방법</span>
-                    </button>
-                    <div class="tab_con">
-                        <h4 class="hidden">사용방법</h4>
-                        <h5 class="sec_tit">사용방법</h5>
-                        <ul class="list_txt">
-                            <p>
-                                <p>
-                                    <font face="맑은 고딕">
-                                        &nbsp;스토어 상품은 회원만 구매할 수 있습니다.
-                                        <br>
-                                        - 유효기간은 24개월로 사용일 기준입니다.
-                                        <br>
-                                        - 결제가 완료된 상품은 마이시네마 > 예매/구매내역에서 확인 후 Kasscinema 스위트(매점)에서 사용가능합니다.
-                                        <br>
-                                        - 오리지널 팝콘이 기본으로 제공되며, 맛/반반팝콘 변경 시 금액이 추가됩니다.
-                                        <br>
-                                        - 탄산음료가 기본으로 제공되며, 사이즈 및 기타 음료로 변경 시 금액이 추가됩니다. (단, PET음료로 변경불가)
-                                    </font>
-                                </p>
-                            </p>
-                        </ul>
-                    </div>
-                    </li>
-                    <li class="active">
-                        <button type="button" class="tab_tit" style="width: 50%; left: 50%;">
-                            <span>유의사항</span>
+                <div class="box-pulldown">
+                    <div class="tit" >
+                        <button type="button" id="btn_01" class="btn-toggle">
+                            		구매 후 취소
+                            <i class="iconset ico-arr-toggle-down">내용보기</i>
                         </button>
-                        <div class="tab_con">
-                            <h4 class="hidden">유의사항</h4>
-                            <h5 class="sec_txt">취소/환불</h5>
-                            <ul class="list_txt">
-                                <p>
-                                    <p>
-                                        <font face="맑은 고딕">
-                                            &nbsp; 구매하신 상품은 부분환불 및 현금환불이 불가합니다.
-                                            <br>
-                                            - 구매하신 상품은 취소 및 환불이 불가합니다.
-                                        </font>
-                                    </p>
-                                </p>
-                            </ul>
+                    </div>
+                    <div class="cont" id="showtable1" style="display:none;">
+                        <p>
+                            &nbsp;스토어 상품은 회원만 구매할 수 있습니다.
+                            <br>
+                            - 유효기간은 24개월로 사용일 기준입니다.
+                            <br>
+                            - 결제가 완료된 상품은 마이시네마 > 예매/구매내역에서 확인 후 Kasscinema 스위트(매점)에서 사용가능합니다.
+                            <br>
+                            - 오리지널 팝콘이 기본으로 제공되며, 맛/반반팝콘 변경 시 금액이 추가됩니다.
+                            <br>
+                            - 탄산음료가 기본으로 제공되며, 사이즈 및 기타 음료로 변경 시 금액이 추가됩니다. (단, PET음료로 변경불가)
+                        </p>
+                    </div>
+                </div>
+                <div class="box-pulldown">
+                    <div class="tit">
+                        <button type="button" onclick="showhide();" id="btn_02" class="btn-toggle">
+                            		상품 이용 안내
+                            <i class="iconset ico-arr-toggle-down">내용보기</i>
+                        </button>
+                    </div>
+                    <div class="cont" id="showtable2" style="display:none;">
+                        <p>
+                            &nbsp;스토어 상품은 회원만 구매할 수 있습니다.
+                            <br>
+                            - 유효기간은 24개월로 사용일 기준입니다.
+                            <br>
+                            - 결제가 완료된 상품은 마이시네마 > 예매/구매내역에서 확인 후 Kasscinema 스위트(매점)에서 사용가능합니다.
+                            <br>
+                            - 오리지널 팝콘이 기본으로 제공되며, 맛/반반팝콘 변경 시 금액이 추가됩니다.
+                            <br>
+                            - 탄산음료가 기본으로 제공되며, 사이즈 및 기타 음료로 변경 시 금액이 추가됩니다. (단, PET음료로 변경불가)
+                        </p>
+                    </div>
+                </div>
 
-                            <h5 class="sec_txt">기타</h5>
-                            <ul class="list_txt">
-                                <p>
-                                    <p>
-                                        <font face="맑은 고딕">
-                                            &nbsp; 구매하신 상품은 부분환불 및 현금환불이 불가합니다.
-                                            <br>
-                                            - 구매하신 상품은 취소 및 환불이 불가합니다.
-                                        </font>
-                                    </p>
-                                </p>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+                
 
             </div><!-- contents -->
         </div><!-- subsection -->
         <!-- </div> -->
+        
+        
+        <script type="text/javascript">
+        // 보이기
+		var count1 = 0;
+        var count2 = 0;
+        var snackNo = ${ Snack.snackNo };
+        console.log(snackNo);
+        $(function(){
+            $("#btn_01").click(function(){
+            	if(count1 == 0){
+                $("#showtable1").slideDown(300);
+                count1 = 1;
+            	} else {
+            	$("#showtable1").slideUp(300);
+            	count1 = 0;
+            	}
+            });
+            
+            $("#btn_02").click(function(){
+            	if(count2 == 0){
+                $("#showtable2").slideDown(300);
+                count2 = 1;
+            	} else {
+            	$("#showtable2").slideUp(300);
+            	count2 = 0;
+            	}
+            });
+        });
+			
+        var totalPrice = $(".txt_price_wrap").children(".txt_price_str").eq(0).text();
+        var proCount = 1;
+        
+        function btn_plus(){
+        	$(".txt_num").text(Number($(".txt_num").text())+1);
+        	var price = Number($(".txt_price").text());
+        	var num =  Number($(".txt_num").text());
+        	var total = $(".txt_price_wrap").children(".txt_price_str").eq(0);
+        	
+        	
+        	total.text(price*num);
+        	totalPrice = price*num;
+        	proCount = num;
+        	console.log("proCount = " + proCount);
+        	console.log("totalPrice = " + totalPrice);	
+        }
+        
+        function btn_minus(){
+        	if(proCount > 1){
+        		$(".txt_num").text(Number($(".txt_num").text())-1);
+        	}else{
+        		alert("1개 이상의 수량을 선택해주세요.");
+        	}
+        	var price = Number($(".txt_price").text());
+        	var num =  Number($(".txt_num").text());
+        	var total = $(".txt_price_wrap").children(".txt_price_str").eq(0);
+        	
+        	
+        	total.text(price*num);
+        	totalPrice = price*num;
+        	proCount = num;
+        	console.log("proCount = " + proCount);
+        	console.log("totalPrice = " + totalPrice);	
+        }
+        
+        function buyBtn(){
+        	if(${empty loginUser} == false){
+        		location.href="goSnackBuy.do?snackNo="+snackNo+"&proCount="+proCount;        		
+        	}else{
+        		alert("로그인 해주세요");
+        	}
+        }
+		</script>
     </section>
-
+</div>
 	<div id="stay_footer">
 		<div id="stay_footer_inner">
 			<jsp:include page="../../views/common/footer.jsp" />

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cartMapper">
+  <resultMap type="Snack" id="snackResultSet">
+  		<id property="" column="" />
+		<result property="snackNo" column="SNACK_NO" />
+		<result property="snackName" column="SNACK_NAME" />
+		<result property="snackPrice" column="SNACK_PRICE" />
+		<result property="snackMemo" column="SNACK_MEMO" />
+		<result property="snackStatus" column="SNACK_STATUS" />
+		<result property="snCateNo" column="S_CATE_NO" />
+		<result property="sCateName" column="S_CATE_NAME" />
+		
+		<association property="attachment" javaType="Attachment">
+			<result property="fileNo" column="FILE_NO" />
+			<result property="sortCode" column="SORT_CODE" />
+			<result property="filePath" column="FILE_PATH" />
+			<result property="originFileName" column="ORIGIN_FILENAME" />
+			<result property="renameFileName" column="RENAME_FILENAME" />
+			<result property="fileStatus" column="FILE_STATUS" />
+			<result property="movieNo" column="MOVIE_NO" />
+			<result property="userNo" column="USER_NO" />
+			<result property="snackNo" column="SNACK_NO" />
+			<result property="goodsNo" column="GOODS_NO" />
+		</association>
+		
+	</resultMap>
+	<resultMap type="com.kh.kass.payment.model.vo.Payment" id="PaymentResultSet" >
+		<result property="snackNo" column="SNACK_NO" /> 
+		<result property="snackName" column="SNACK_NAME" /> 
+		<result property="snackPrice" column="SNACK_NO" /> 
+	
+		<association property="Payment" javaType="com.kh.kass.payment.model.vo.Payment">
+			<result property="payNo" column="PAY_NO" />
+			<result property="urNo" column="UR_NO" />
+			<result property="orderNum" column="ORDER_NUM" />
+			<result property="payPrice" column="PAY_PRICE" />
+			<result property="paySelect" column="PAY_SELECT" />
+			<result property="payDate" column="PAY_DATE" />
+			<result property="refund" column="REFUND" />
+		</association>
+	</resultMap>
+	
+	<resultMap type="Payment" id="payment001">
+		<result property="payPrice" column="PAY_PRICE"/>
+		<result property="paySelect" column="PAY_SELECT"/>
+	</resultMap>
+	
+	<resultMap type="Payment" id="payment002">
+			<result property="payNo" column="PAY_NO" />
+			<result property="urNo" column="UR_NO" />
+			<result property="orderNum" column="ORDER_NUM" />
+			<result property="payPrice" column="PAY_PRICE" />
+			<result property="paySelect" column="PAY_SELECT" />
+			<result property="payDate" column="PAY_DATE" />
+			<result property="refund" column="REFUND" />
+		</resultMap>
+		
+	<resultMap type="ProdOrder" id="prodorder001">
+		<id property="orderNo" column="ORDER_NO"/>
+		<result property="userId" column="USER_NO" />
+		<result property="snackNo" column="SNACK_NO" />
+		<result property="goodsNo" column="GOODS_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="orderCount" column="ORDER_COUNT" />
+		<result property="deNo" column="D_NO" />
+		<result property="payNo" column="PAY_NO" />
+	</resultMap>
+	
+	<resultMap type="ProdOrder" id="prodorder002">
+		<result property="orderNo" column="maxNo" />
+		
+	</resultMap>
+	
+	
+	<select id="selectOne" resultMap="snackResultSet">
+		SELECT *
+		FROM SNACK
+		JOIN ATTACHMENT USING(SNACK_NO)
+		WHERE SNACK_NO=#{snackNo}
+		AND SNACK_STATUS='Y'
+	</select>
+	
+	
+	<!-- pro로를 insert 하는 곳 무통장을 하는곳 -->
+	<insert id="insertPro" >
+		INSERT INTO
+		PAYMENT VALUES(SEQ_PAY_NO.NEXTVAL, NULL, #{ orderNum }, #{ payPrice }, #{paySelect} , SYSDATE, DEFAULT)
+	</insert>
+	
+	<!-- pro를 select ㅎ는곳 -->
+	<select id="selectPro" resultMap="payment002">
+	select *
+	from payment 
+	where ORDER_NUM = #{orderNum}
+	</select>
+	
+	<!-- prod를 insert 하는곳 -->
+	<insert id="insertPROD">
+		insert into
+		PROD_ORDER values(SEQ_ORDER_NO.nextval, #{userId}, #{snackNo}, null, null, #{orderCount}, null,  #{payNo})
+	</insert>
+	
+	<!--  ORDER를 select 하는곳 -->
+	<select id="selectORDER" resultType="_int">
+	select max(ORDER_NO) as maxNo
+	from prod_order
+	where USER_NO = #{userNo}
+	</select>
+	
+	<insert id="insertSnackCode">
+		INSERT INTO
+		SNACK_CODE VALUES(SEQ_CODE_NO.NEXTVAL, #{ orderNo }, SYSDATE+60, DEFAULT, #{ prodCode } )
+	</insert>
+	
+</mapper>

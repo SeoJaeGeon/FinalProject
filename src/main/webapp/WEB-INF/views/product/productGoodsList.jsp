@@ -416,10 +416,18 @@ header>section {
 
 			<div id="divNewPrdtArea">
 				<div class="store-list">
-				
 					<ul class="list">
-					
-					<c:forEach var="snack" items="${ slist }">
+						<c:if test="${ empty list }">
+							<div>
+								<h1 width="100%" align="center">상품 준비중 입니다.</h1>
+							</div>
+						</c:if>
+							<c:if test="${ list ne null }">
+							<c:forEach var="Goods" items="${ list }">
+								<c:url var="sdetail" value="gdetail.do">
+									<c:param name="goodsNo" value="${ Goods.goodsNo }" />
+									<c:param name="page" value="${ pi.currentPage }" />
+								</c:url>
 						<li class>
 						<a href="#" title="카라멜팝콘" class="product">
 								<div class="img">
@@ -427,20 +435,66 @@ header>section {
 								</div>
 								<div class="info">
 									<div class="tit">
-										<p class="name">칩앤데일 텀블러</p>
-										<p class="bundle">여기는 뭐가 들어가나요</p>
+										<p class="name">${ Goods.goodsName }</p>
+										<p class="bundle">${ Goods.goodsMeno }</p>
 									</div>
 									<div class="price">
-										<p class="original">6000원</p>
+										<p class="original">${ Goods.goodsPrice }</p>
 										<p class="sale">
-											<em>5000</em> <span>원</span>
+											<em>${ Goods.goodsPrice }</em> <span>원</span>
 										</p>
 									</div>
 								</div>
 							</a>
 						</li>
 						</c:forEach>
+						</c:if>
 					</ul>
+				</div>
+				
+					<!-- 페이징 처리 -->
+				<div class="pagination">
+					<div class="pageOuterDiv">
+						<div class="pageInnerDiv">
+							<!-- 이전 -->
+							<c:if test="${ pi.currentPage <= 1 }">
+								<a class="pageNone">&lt;</a>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="before" value="productGoodsList.do">
+									<c:param name="page" value="${ pi.currentPage -1 }" />
+								</c:url>
+								<a class="pageOne" href="${ before }">&lt;</a>
+							</c:if>
+
+							<!-- 페이지 숫자 -->
+							<c:forEach var="p" begin="${ pi.startPage }"
+								end="${ pi.endPage }">
+								<c:if test="${ p eq pi.currentPage }">
+									<a class="pageNone">${ p }</a>
+								</c:if>
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="pagination" value="productGoodsList.do">
+										<c:param name="page" value="${ p }" />
+									</c:url>
+									<a class="pageOne" href="${ pagination }">${ p }</a>
+								</c:if>
+							</c:forEach>
+
+							<!-- 이후 -->
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<a class="pageNone">&gt;</a>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="after" value="productList.do">
+									<c:param name="page" value="${ pi.currentPage + 1 }" />
+								</c:url>
+								<a class="pageOne" href="${ after }">&gt;</a>
+							</c:if>
+							<!-- 버튼 비활성화 일 때-->
+							<!-- <a class="pageNone">&lt;&lt;</a> -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

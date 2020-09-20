@@ -12,4 +12,6 @@ public class ProdOrder {
 	private int orderCount; //수량
 	private int deNo; // 배송번호
 	private int payNo; // 결제번호
+	
+	public ProdOrder() {}
 }
