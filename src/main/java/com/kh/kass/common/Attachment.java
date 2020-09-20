@@ -1,8 +1,18 @@
 package com.kh.kass.common;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Attachment {
 
 
@@ -17,7 +27,7 @@ public class Attachment {
 	private int snackNo; // 상품번호
 	private int goodsNo; // 굿즈번호
 	
-	public Attachment() {}
+	
 	
 	public Attachment(String filePath, String originFileName, String renameFileName, int userNo) {
 		super();
@@ -39,21 +49,6 @@ public class Attachment {
 		this.movieNo = movieNo;
 	}
 
-	public Attachment(int fileNo, String sortCode, String filePath, String originFileName, String renameFileName,
-			String fileStatus, int movieNo, int userNo, int snackNo, int goodsNo) {
-		super();
-		this.fileNo = fileNo;
-		this.sortCode = sortCode;
-		this.filePath = filePath;
-		this.originFileName = originFileName;
-		this.renameFileName = renameFileName;
-		this.fileStatus = fileStatus;
-		this.movieNo = movieNo;
-		this.userNo = userNo;
-		this.snackNo = snackNo;
-		this.goodsNo = goodsNo;
-	}
-	
 	
 	
 	

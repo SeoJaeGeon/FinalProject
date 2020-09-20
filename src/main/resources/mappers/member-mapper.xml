@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 	<resultMap id="memberResultSet" type="Member">
-		<id property="" column="" />
-		<result property="userNo" column="USER_NO" />
-		<result property="userId" column="USER_ID" />
-		<result property="userPwd" column="USER_PWD" />
-		<result property="userPwdQ" column="USER_PWD_Q" />
-		<result property="userPwdA" column="USER_PWD_A" />
-		<result property="userName" column="USER_NAME" />
-		<result property="userBirth" column="USER_BIRTH" />
-		<result property="userAddr" column="USER_ADDR" />
-		<result property="userPhone" column="USER_PHONE" />
-		<result property="userEmail" column="USER_EMAIL" />
-		<result property="userStatus" column="USER_STATUS" />
-		<result property="userEnrollDate" column="USER_ENROLL_DATE" />
-		<result property="userModifyDate" column="USER_MODIFY_DATE" />
+			<id property="" column="" />
+			<result property="userNo" column="USER_NO" />
+			<result property="userId" column="USER_ID" />
+			<result property="userPwd" column="USER_PWD" />
+			<result property="userPwdQ" column="USER_PWD_Q" />
+			<result property="userPwdA" column="USER_PWD_A" />
+			<result property="userName" column="USER_NAME" />
+			<result property="userBirth" column="USER_BIRTH" />
+			<result property="userAddr" column="USER_ADDR" />
+			<result property="userPhone" column="USER_PHONE" />
+			<result property="userEmail" column="USER_EMAIL" />
+			<result property="userStatus" column="USER_STATUS" />
+			<result property="userEnrollDate" column="USER_ENROLL_DATE" />
+			<result property="userModifyDate" column="USER_MODIFY_DATE" />
 		<association property="attachment" javaType="Attachment">
 			<result property="fileNo" column="FILE_NO" />
 			<result property="sortCode" column="SORT_CODE" />

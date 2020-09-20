@@ -167,7 +167,7 @@ li a:hover {
       	   </li>
            <li><a href="#">VOD 설정</a>
            		<ul>
-	           		<li><a href="myinfo.do">VOD 정보 등록</a></li>
+	           		<li><a href="#">VOD 정보 등록</a></li>
 	           		<li><a href="#">VOD 정보 삭제</a></li>
 	           	</ul>
            </li>

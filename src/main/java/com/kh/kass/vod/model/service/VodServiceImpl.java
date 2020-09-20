@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.kh.kass.common.PageInfo;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.vod.model.dao.VodDao;
+import com.kh.kass.vod.model.vo.VodOrder;
+import com.kh.kass.vod.model.vo.VodPay;
 import com.kh.kass.vod.model.vo.VodWish;
 
 
@@ -18,11 +20,11 @@ public class VodServiceImpl implements VodService {
 
 	@Autowired
 	private VodDao vDao;
-/*
+
 	@Override
-	public ArrayList<Movie> selectList(PageInfo pi) {
-		return vDao.selectList(pi);
-	}*/
+	public ArrayList<Movie> selectList(PageInfo pi , int category) {
+		return vDao.selectList(pi , category);
+	}
 
 	@Override
 	public Movie selectMovie(int movieNo) {
@@ -43,17 +45,85 @@ public class VodServiceImpl implements VodService {
 	}
 
 	@Override
-	public int selectListCount() {
+	public int selectListCount(int category) {
 
-		return vDao.selectListCount();
+		return vDao.selectListCount(category);
+	}
+
+	@Override
+	public ArrayList<Movie> wishselectList(PageInfo pi  , int userNo) {
+
+		return vDao.wishselectList(pi , userNo);
 	}
 	
-	/*@Override
-	public ArrayList<Movie> selectList1() {
-		return vDao.selectList();
+	@Override
+	public Movie selectwishVod(VodWish vw) {
+		
+		return vDao.selectwishVod(vw);
 	}
-*/
-
 	
+	@Override
+	public Movie selectcartVod(VodWish vw) {
+		
+		return vDao.selectcartVod(vw);
+	}
+	
+	@Override
+	public int insertpay(VodPay vp) {
+		
+		return vDao.insertpay(vp);
+	}
+	
+	@Override
+	public int selectpay() {
+		
+		return vDao.selectpay();
+	}
+	
+	@Override
+	public int insertorder(VodOrder vo) {
+		
+		return vDao.insertorder(vo);
+	}
+	
+	@Override
+	public ArrayList<Movie> cartselectList(int userNo) {
+
+		return vDao.cartselectList(userNo);
+	}
+	
+	@Override
+	public int cartdelete(int movieNo) {
+		
+		return vDao.cartdelete(movieNo);
+	}
+	
+	
+	@Override
+	public ArrayList<Movie> searchlist(String search) {
+
+		return vDao.searchlist(search);
+	}
+	
+	
+	@Override
+	public ArrayList<Movie> searchlist1(String search) {
+
+		return vDao.searchlist(search);
+	}
+	
+	
+	@Override
+	public int vodvod(int movieNo) {
+		
+		return vDao.vodvod(movieNo);
+	}
+	
+	
+	@Override
+	public int selectListCount1(int userNo) {
+
+		return vDao.selectListCount1(userNo);
+	}
 
 }
