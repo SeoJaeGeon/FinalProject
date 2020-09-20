@@ -35,7 +35,13 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
+	overflow: hidden;
+}
+
+#content {
+	width: 1500px;
+	disply: block;
+	margin: auto;
 	overflow: hidden;
 }
 
@@ -136,7 +142,6 @@ body {
 .content1 {
 	width: 100%;
 	min-height: 1000px;
-	border: 3px solid blueviolet;
 }
 
 .tab_List {
@@ -175,7 +180,6 @@ body {
 	height: 700px;
 	overflow: hidden;
 	margin: 50px 300px;
-	border: 1px solid red;
 	background-color: rgb(224, 224, 224);
 }
 
@@ -185,7 +189,6 @@ div.left {
 	height: 600px;
 	float: left;
 	box-sizing: border-box;
-	border: 1px solid yellow;
 }
 
 div.right {
@@ -193,7 +196,6 @@ div.right {
 	height: 600px;
 	float: right;
 	box-sizing: border-box;
-	border: 1px solid yellowgreen;
 }
 
 table {
@@ -392,11 +394,11 @@ img {
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
-	<jsp:include page="../../views/common/productMenu.jsp" />
 
 	<section id="content">
+		<jsp:include page="../../views/common/productMenu.jsp" />
 		<div class="content1">
-			<h2 class="title">스낵 상품 등록</h2>
+			<h2 class="title">굿즈 상품 등록</h2>
 
 			<form action="ginsert.do" method="post" enctype="multipart/form-data">
 				<div id="divNewPrdtArea">

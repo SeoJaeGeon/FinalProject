@@ -174,7 +174,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -330,9 +329,9 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .img2 {
@@ -403,6 +402,13 @@ a:visited {
     padding-right: 3px;
     border-radius: 5px;
     color: rgb(51, 51, 51);
+}
+
+.pageInnerDiv {
+    width: auto;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
 }
 /* 페이징 바 */
 </style>

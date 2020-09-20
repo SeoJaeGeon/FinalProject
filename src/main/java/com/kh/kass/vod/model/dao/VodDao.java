@@ -116,16 +116,32 @@ public ArrayList<Movie> cartselectList(int userNo) {
 			return (ArrayList)sqlSession.selectList("vodMapper.searchlist" , search);
 		}
 	
+	
+	
 	public ArrayList<Movie> searchlist1(String search) {
 		
 		return (ArrayList)sqlSession.selectList("vodMapper.searchlist1" , search);
 	}
 	
+	public ArrayList<Movie> searchlist2(String search) {
+		
+		return (ArrayList)sqlSession.selectList("vodMapper.searchlist2" , search);
+	}
 	
 	public int vodvod(int movieNo) {
 		
 		return sqlSession.update("vodMapper.vodvod" , movieNo);
 	}
+	
+		public int vodvod1(int movieNo) {
+		
+		return sqlSession.update("vodMapper.vodvod1" , movieNo);
+	}
+	
+	
+	
+	
+	
 	
 	
 	public int selectListCount1(int userNo) {

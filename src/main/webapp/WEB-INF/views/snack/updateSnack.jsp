@@ -37,20 +37,20 @@ nav {
 	width: 1500px;
 	height: 50px;
 }
-  #content {
-            /* width: 100%; */
-            width: 1500px;
-            border: 8px solid red;
-            margin: auto;
-        }
+
+#content {
+	/* width: 100%; */
+	width: 1500px;
+	margin: auto;
+	overflow: hidden;
+	display:block;
+}
+
 .content {
 	/* width: 100%; */
 	width: 1500px;
 	margin: auto;
-	border: 1px solid red;
-	overflow: hidden;
 }
-
 
 footer {
 	width: 100%;
@@ -188,7 +188,6 @@ body {
 .content1 {
 	width: 100%;
 	min-height: 1000px;
-	border: 3px solid blueviolet;
 }
 
 .tab_List {
@@ -227,7 +226,6 @@ body {
 	height: 600px;
 	overflow: hidden;
 	margin: 50px 300px;
-	border: 1px solid red;
 	background-color: rgb(224, 224, 224);
 }
 
@@ -237,7 +235,6 @@ div.left {
 	height: 600px;
 	float: left;
 	box-sizing: border-box;
-	border: 1px solid yellow;
 }
 
 div.right {
@@ -245,7 +242,6 @@ div.right {
 	height: 600px;
 	float: right;
 	box-sizing: border-box;
-	border: 1px solid yellowgreen;
 }
 
 table {
@@ -253,6 +249,8 @@ table {
 	width: 100%;
 	box-sizing: border-box;
 	margin: auto;
+	margin-top: 50px;
+	vertical-align: middle;
 }
 
 tr, th, td, form, table {
@@ -435,9 +433,9 @@ img {
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
 
-	<jsp:include page="../../views/common/productMenu.jsp" />
 	<section id="content">
 
+		<jsp:include page="../../views/common/productMenu.jsp" />
 		<div class="content1">
 			<h2 class="title">스낵 상품 수정</h2>
 
@@ -449,7 +447,7 @@ img {
 							<table class="proTable">
 								<tr>
 									<td><label class="label1">카테고리 </label> <select
-										name="snCateNo" id="categoryKey">
+										name="snCateNo" id="categoryKey" style="width:300px;height:40px;">
 											<option value="1"
 												<c:if test="${Snack.snCateNo == 1}"> selected</c:if>>팝콘</option>
 											<option value="2"

@@ -359,7 +359,7 @@
 		</c:url>
 		<a class="voda" href="${ vdetail }">
         <div id="vod">
-            <img id="vodImg"     src="${ contextPath }${ v.attachList[1].filePath }${ v.attachList[0].renameFileName }">
+            <img id="vodImg"     src="${ contextPath }${ v.attachList[0].filePath }${ v.attachList[0].renameFileName }">
             <br><br>
             <label id="movieName">${v.movieName }</label><br>
             <label id="moviePrice">${v.moviePrice }</label>
