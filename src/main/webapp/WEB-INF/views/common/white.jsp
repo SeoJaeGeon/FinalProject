@@ -294,7 +294,8 @@ a:hover {
 			<li><a href="movieList.do">영화</a></li>
 			<li><a href="resList.do">예매</a></li>
 			<li><a href="placeList.do">극장</a></li>
-			<li><a href="#">VOD</a></li>
+			<li><a href="#" onclick="cate(); return false;">  VOD</a></li>
+			<input type="hidden" id="category" value="">
 			<li><a href="productList.do">스토어</a></li>
 		</ul>
 	</nav>
@@ -383,6 +384,14 @@ a:hover {
 			}else{
 				alert("검색어를 입력해주세요.");
 			}
+		}
+		
+		function cate() {
+			console.log("전체");
+			var testa = $("#category");
+			testa.val("0")
+			console.log("확인 : "+testa.val());
+			location.href="vlist.do?testa="+testa.val();
 		}
 	</script>
 </body>

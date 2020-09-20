@@ -10,6 +10,7 @@ import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.vod.model.dao.VodDao;
 import com.kh.kass.vod.model.vo.VodOrder;
 import com.kh.kass.vod.model.vo.VodPay;
+import com.kh.kass.vod.model.vo.VodReview;
 import com.kh.kass.vod.model.vo.VodWish;
 
 
@@ -126,4 +127,17 @@ public class VodServiceImpl implements VodService {
 		return vDao.selectListCount1(userNo);
 	}
 
+	
+	@Override
+	public ArrayList<VodReview> selectvr(int movieNo) {
+		
+		return vDao.selectvr(movieNo);
+	}
+	
+	
+	@Override
+	public int dddd(VodWish vw ) {
+		
+		return vDao.dddd(vw);
+	}
 }

@@ -17,6 +17,11 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@1.0/nanumbarungothicsubset.css">
      <style>
+     #wrap_stay {
+				width: 1500px;
+				margin: auto;
+     			overflow : hidden;
+			}
         ul{
             list-style-type: none;
             margin: 0;
@@ -31,7 +36,6 @@
 			transition: all 0.5s;
             font-weight: 520;
             font-size: 13px;
-            
 		} 
        
         li .bb:hover {
@@ -277,8 +281,9 @@
 </head>
 <body>
 
-   <c:import url="../common/white2.jsp"/>
-   <div class="wrap">
+   <div id="wrap_stay">
+  		<jsp:include page="../../views/common/white2.jsp"/>
+  		<br clear="div">
     <div id="t">VOD</div>
     <div class="menu">
         
@@ -337,17 +342,7 @@
             <input id="search-btn" type="submit" class="btn btn-primary" value="검색"></input>
         </form>
 
-        <a class="ca" href="#" onclick="listlist1(); return false;"><div id="cate1"></div>
-        <div id="cate1text">개봉순</div></a>
-
-        <a class="ca" href="#" onclick="listlist2(); return false;"><div id="cate2"></div>
-         <div id="cate2text">판매순</div></a>
-
-         <a class="ca" href="#" onclick="listlist3(); return false;"><div id="cate3"></div>
-         <div id="cate3text">평점순</div></a>
-
-         <a class="ca" href="#" onclick="listlist4(); return false;"><div id="cate4"></div>
-         <div id="cate4text">가격순</div></a>
+       
                                       
 </div>
 
@@ -359,14 +354,15 @@
    <c:forEach var="v" items="${ list }">
     	<c:url var="vdetail" value="vdetail.do">
     		<c:param name="movieNo" value="${ v.movieNo }"/>
+    		
 			
 		</c:url>
 		<a class="voda" href="${ vdetail }">
         <div id="vod">
-            <img id="vodImg" src="../수업자료/sample/image/flower1.PNG">
+            <img id="vodImg"     src="${ contextPath }${ v.attachList[1].filePath }${ v.attachList[0].renameFileName }">
             <br><br>
-            <label id="movieName">${v.movieNo }</label><br>
-            <label id="moviePrice">${v.movieName }</label>
+            <label id="movieName">${v.movieName }</label><br>
+            <label id="moviePrice">${v.moviePrice }</label>
           </div> </a>
         </c:forEach>
 
@@ -476,6 +472,9 @@
         
 	<input type="hidden" id="category" value="${cate }">
 	<input type="hidden" id="listlist" value="${listlist }">
+	
+	
+	
 	
 <script>
 
@@ -597,16 +596,19 @@ console.log($("#category").val());
 
 </div>
 
+
+
 </div>
 
 
-	<div id="stay_footer" class="footer">
+	
+	
+<div id="stay_footer">
 		<div id="stay_footer_inner">
 			<jsp:include page="../../views/common/footer.jsp" />
 		</div>
 	</div>
 	
-
 
 
 

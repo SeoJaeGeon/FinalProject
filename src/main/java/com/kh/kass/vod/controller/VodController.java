@@ -90,14 +90,61 @@ public class VodController {
 	@RequestMapping("vdetail.do")
 	public ModelAndView vdetail(ModelAndView mv , @RequestParam("movieNo") int movieNo) {
 		
-		System.out.println(movieNo);
+		
 		Movie m = vService.selectMovie(movieNo);
 		
-		//VodReview vr = vService.selectv
+		String bb ="";
+		if(m.getGenreCode()==1) {
+			bb = "드라마";
+		}
+		if(m.getGenreCode()==2) {
+			bb = "코미디";
+		}
+		if(m.getGenreCode()==3) {
+			bb = "스릴러";
+		}
+		if(m.getGenreCode()==4) {
+			bb = "액션";
+		}
+		if(m.getGenreCode()==5) {
+			bb = "SF";
+		}
+		if(m.getGenreCode()==6) {
+			bb = "공포";
+		}
+		if(m.getGenreCode()==7) {
+			bb = "미스터리";
+		}
+		if(m.getGenreCode()==8) {
+			bb = "판타지";
+		}
+		
+		
+		ArrayList<VodReview> vr = vService.selectvr(movieNo);
+		
+		int g=0;
+		int b=0;
+		
+		for(int i= 0;  i< vr.size(); i++) {
+			
+			if(vr.get(i).getReeScore().equals("G")) {
+				g++;
+			}else {
+				b++;
+			}
+
+			}
+		System.out.println(vr.size()+"사이즈사이즈");
+		System.out.println(vr.get(1).getReeScore());
+		
 		
 		
 		if(m != null) {
+			mv.addObject("g", g);
+			mv.addObject("b", b);
+			mv.addObject("bb", bb);
 			mv.addObject("m", m);
+			mv.addObject("vr", vr);
 			mv.setViewName("vod/detail");
 		} else {
 			throw new VodException("게시글 목록 조회에 실패하였습니다");
@@ -443,10 +490,38 @@ public class VodController {
 	
 	
 	
+	@RequestMapping("dddd.do")
+	public ModelAndView dddd(ModelAndView mv ,int userNo ,int movieNo ,  @RequestParam(value = "page", required = false) Integer page) {
+		
+		VodWish vw = new VodWish(userNo , movieNo);
+		
+		int result = vService.dddd(vw);
+		
+		
+		int currentPage = page != null ? page : 1;
+		
+		// 1. 전체 게시글 개수 리턴 받기
+		int listCount = vService.selectListCount1(userNo);
+		
+		
+		PageInfo pi = PaginationA.getPageInfo(currentPage, listCount);
+		
+		
+		ArrayList<Movie> list = vService.wishselectList(pi , userNo);
+
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.setViewName("vod/vodwishList");
+		} else {
+			throw new VodException("게시글 목록 조회에 실패하였습니다");
+		}
+		
 	
+		return mv;
+	}
 	
-	
-	
+
+
 	
 	
 	

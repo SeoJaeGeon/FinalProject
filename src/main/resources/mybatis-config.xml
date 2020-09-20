@@ -35,6 +35,7 @@
 		<!-- <typeAlias type="com.kh.kass.snack.model.vo.Snack" alias="Snack"/>
 		 -->
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodOrder" alias="VodOrder"/>
+		  <typeAlias type="com.kh.kass.vod.model.vo.VodReview" alias="VodReview"/>
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodWish" alias="VodWish"/>
 		 <typeAlias type="com.kh.kass.vod.model.vo.VodPay" alias="VodPay"/>
 		 <typeAlias type="com.kh.kass.vod.model.vo.Category" alias="Category"/>

@@ -120,36 +120,33 @@ header>section {
 
 		<div class="content">
 			<div class="listArrangeDiv">
-				<p class="listArrange">My KASS > Movie 내역 > VOD 구매 내역</p>
+				<p class="listArrange">My KASS > Movie 내역 > VOD 위시리스트</p>
 			</div>
 			<jsp:include page="../../views/common/memberMenu.jsp" />
 			<section class="rightContent">
 				<section class="content-1">
 					<section class="content-1-1">
-						<h2 class="title">VOD 구매 내역</h2>
+						<h2 class="title">VOD 위시리스트</h2>
 						<table class="contentTable">
-							<c:if test="${ list ne null }">
+							<c:if test="${ empty list }">
 								<tr>
 									<td colspan="2">
-										<div class="emptyList">구매한 VOD가 존재하지 않습니다.</div>
+										<div class="emptyList">위시리스트 VOD가 존재하지 않습니다.</div>
 									</td>
 								</tr>
 							</c:if>
 							
 							
-							<c:if test="${ empty list }">
+							<c:if test="${ list ne null }">
 								<c:forEach var="vpl" items="${ list }">
 									<tr class="oneBox">
 										<td class="left"><img
-											src="${ contextPath }/resources/images/movie_image/${ vpl.attachment.renameFileName }"
+											src="${ contextPath }${ vpl.attachList[1].filePath }${ vpl.attachList[0].renameFileName }"
 											class="poster"></td>
 										<td class="right">
 											<div>
 												<div class="movieTitle">${vpl.movieName}</div>
-												<p class="date">
-													<span class="startDate">${vpl.payDate}</span> ~ <span
-														class="endDate"></span>
-												</p>
+												
 												<p class="priceDiv">
 													<span class="price">${vpl.moviePrice}</span> 원
 												</p>
@@ -160,11 +157,22 @@ header>section {
 												</div>
 												<div>
 													<div class="buttons1">
-														<c:url var="vodDetail" value="vodPurchaseDetail.do">
+														<c:url var="vodDetail" value="mywish.do">
+															
 															<c:param name="movieNo" value="${ vpl.movieNo }" />
 															<c:param name="page" value="${ pi.currentPage }" />
 														</c:url>
-														<button class="vodBtn" onclick="location.href='${vodDetail}'">VOD 바로보기</button>
+														
+													</div>
+													<div class="buttons1">
+													     <c:url var="bdetail" value="dddd.do">
+																<c:param name="userNo" value="${ loginUser.userNo }"/>
+																<c:param name="movieNo" value="${ vpl.movieNo }" />
+																
+														</c:url>
+														<a href="${ bdetail }">
+														<button id="movieCancel" class="cancel" onclick="delete22();">삭제</button>
+														</a>
 													</div>
 												</div>
 											</div>
@@ -187,7 +195,9 @@ header>section {
 										<a class="pageNone">&lt;</a>
 									</c:if>
 									<c:if test="${ pi.currentPage > 1 }">
-										<c:url var="before" value="vodPurchaseList.do">
+										<c:url var="before" value="mywish.do">
+											<c:param name="userNo" value="${ loginUser.userNo }"/>
+										
 											<c:param name="page" value="${ pi.currentPage -1 }" />
 										</c:url>
 										<a class="pageOne" href="${ before }">&lt;</a>
@@ -200,7 +210,8 @@ header>section {
 											<a class="pageNone">${ p }</a>
 										</c:if>
 										<c:if test="${ p ne pi.currentPage }">
-											<c:url var="pagination" value="vodPurchaseList.do">
+											<c:url var="pagination" value="mywish.do">
+												<c:param name="userNo" value="${ loginUser.userNo }"/>
 												<c:param name="page" value="${ p }" />
 											</c:url>
 											<a class="pageOne" href="${ pagination }">${ p }</a>
@@ -212,7 +223,8 @@ header>section {
 										<a class="pageNone">&gt;</a>
 									</c:if>
 									<c:if test="${ pi.currentPage < pi.maxPage }">
-										<c:url var="after" value="vodPurchaseList.do">
+										<c:url var="after" value="mywish.do">
+											<c:param name="userNo" value="${ loginUser.userNo }"/>
 											<c:param name="page" value="${ pi.currentPage + 1 }" />
 										</c:url>
 										<a class="pageOne" href="${ after }">&gt;</a>
@@ -234,6 +246,13 @@ header>section {
 			<jsp:include page="../../views/common/footer.jsp" />
 		</div>
 	</div>
+	
+	<script>
+	
+	
+	
+	
+	</script>
 
 </body>
 
