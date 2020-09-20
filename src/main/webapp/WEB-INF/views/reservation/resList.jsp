@@ -504,8 +504,7 @@ header>section {
 							</div>
 							<div style="width: 100%; height: 20%;">
 								<span style="width: 35%; height: 100%; float: left;">총 금액</span>
-								<span
-									style="text-align: right; width: 65%; height: 100%; display: inline-block; color: red; font-weight: bold;"></span>
+								<span style="text-align: right; width: 65%; height: 100%; display: inline-block; color: red; font-weight: bold;"></span>
 							</div>
 						</div>
 						<div class="movie_sale5">
@@ -528,6 +527,87 @@ header>section {
 	</div>
 
 	<script>
+	window.onload = function(){
+		var num = 1;
+		areaValue = 1;
+		cinemaValue = 1;
+		selectCinema.text("건대");
+		timeValue = $('.movie_DateUl').children('.movie_day_list').eq(0).children('button').val();
+		selectTime.text(timeValue);
+		$('.moc_list_ul').children('.movie_area_list').eq(0).addClass('changeSelect');
+		$('.movie_DateUl').children('.movie_day_list').eq(0).addClass('changeSelect');
+		var length = $(".movie_list_ul").children('.movie_list').children('.movie_title').length;
+		if(${ movieNum != null}){
+			for(var i=0; i<length; i++){
+				if($(".movie_list_ul").children('.movie_list').eq(i).children('.movie_title').children('#movieNo').val() == ${ movieNum = (movieNum != null) ? movieNum : 0}){
+					$(".movie_list_ul").children('.movie_list').eq(i).addClass('changeSelect');
+					titleValue = $(".movie_list_ul").children('.movie_list').eq(i).children('.movie_title').children('#movieNo').val();
+					var imgSrc = $(".movie_list_ul").children('.movie_list').eq(i).children('.movie_title').children('#movPoster').val();
+					var path = '<%=request.getContextPath()%>';
+					var $img = $("<img src='"+path+imgSrc+"' class='posterImg' width='150px' height='200px'/>");
+					$('#movie_poster').html("");
+					$('#movie_poster').append($img);							
+					selectTitle.text($(".movie_list_ul").children('.movie_list').eq(i).children('.movie_title').children('.movie_name').text());
+				}	
+			}			
+		}
+		
+		
+		$.ajax({
+			url : "placeSelect.do",
+			data : {num:num},
+			dataType : "json",
+			async:false,
+			success : function(data){
+				$ul = $(".mop_list_ul");
+				$ul.html("");
+				
+				if(data.length > 0){
+					for(var i in data){
+						var $li = $("<li class='movie_place_list'>");
+						var $btn = $("<button style='border: none; background: none; width: 100%; text-align: left;'>");
+						var $span = $("<span class='movie_area'>").text(data[i].maName);
+						var $input = $("<input type='hidden' value="+data[i].maNo+" id='maNo'>");
+						
+						$btn.append($span);
+						$btn.append($input);
+						$li.append($btn);
+						
+						$ul.append($li);
+					}
+					
+					$(".movie_place_list").click(function() {
+						$('.movie_place_list').removeClass('changeSelect');
+						var list = $(this);
+						var child1 = list.children('button');
+						var child2 = child1.children('.movie_area');
+						list.addClass('changeSelect');
+
+						selectCinema.text(child2.text());
+						
+						cinemaText = child2.text();
+						cinemaValue = child1.children('#maNo').val();
+						
+						placeValue = 0;
+						
+						playMovie();
+					})
+					
+				}else{
+					var $span = $("<span class='movie_area'>").text("정보없음");
+					$ul.append($span);
+				}
+			},
+			error : function(e){
+				alert("error code : " + e.stauts + "\n"
+						+ "message" + e.responseText);
+			}
+		});
+		$('.movie_place_list').eq(0).addClass('changeSelect');
+		
+		playMovie();
+	}
+	
 		var test = $('.movie_title');
 		var test2 = test.children('.movie_old');
 		var titleSize = test2.length;
@@ -595,17 +675,13 @@ header>section {
 				dateUl[0].appendChild(dayList);
 				count++;
 			}
-
 		}
 
 		var selectTitle = $('.movie_sale1').children('#movie_title').children('span');
 		var areaNumber = 0;
-		var selectCinema = $(".movie_sale2").children('div').eq(0).children(
-				'span').eq(1);
-		var selectTime = $(".movie_sale2").children('div').eq(1).children(
-				'span').eq(1);
-		var selectPlace = $(".movie_sale2").children('div').eq(2).children(
-				'span').eq(1);
+		var selectCinema = $(".movie_sale2").children('div').eq(0).children('span').eq(1);
+		var selectTime = $(".movie_sale2").children('div').eq(1).children('span').eq(1);
+		var selectPlace = $(".movie_sale2").children('div').eq(2).children('span').eq(1);
 		
 		var titleText = "";
 		var titleValue = 0;
@@ -625,7 +701,7 @@ header>section {
 			var child3 = child.children('.movie_name');
 			var imgSrc = child.children('#movPoster').val();
 			var path = '<%=request.getContextPath()%>';
-			
+
 			list.addClass('changeSelect');
 
 			selectTitle.text(child3.text());
@@ -643,7 +719,7 @@ header>section {
 			placeValue = 0;
 			playMovie();
 		});
-
+		/* 
 		$(".movie_area_list").click(function() {
 			$('.movie_area_list').removeClass('changeSelect');
 			var list = $(this);
@@ -660,7 +736,7 @@ header>section {
 			placeValue = 0;
 			playMovie();
 		});
-
+		 */
 		$(".movie_day_list").click(function() {
 			$('.movie_day_list').removeClass('changeSelect');
 			var list = $(this);
@@ -679,7 +755,22 @@ header>section {
 		
 		$(function(){
 			$(".movie_area_list").on("click", function(){
+				$('.movie_area_list').removeClass('changeSelect');
+				var list = $(this);
+				var child1 = list.children('button');
+				var child2 = child1.children('.movie_area');
+				list.addClass('changeSelect');
+				selectCinema.text("");
+				cinemaText = "";
+				cinemaValue = 0;
+				
+				areaNumber = $(this).children('button').children('input').val();
+				areaValue = child1.children('#mocNo').val();
+				
+				placeValue = 0;
+				playMovie();
 				var num = areaNumber;
+				
 				
 				$.ajax({
 					url : "placeSelect.do",
@@ -691,7 +782,6 @@ header>section {
 						
 						if(data.length > 0){
 							for(var i in data){
-								console.log(data[i]);
 								var $li = $("<li class='movie_place_list'>");
 								var $btn = $("<button style='border: none; background: none; width: 100%; text-align: left;'>");
 								var $span = $("<span class='movie_area'>").text(data[i].maName);
@@ -703,7 +793,9 @@ header>section {
 								
 								$ul.append($li);
 							}
-							
+							/* 
+								movieCount = $(".mop_list_ul").children(".movie_place_list").length;
+							 */
 							$(".movie_place_list").click(function() {
 								$('.movie_place_list').removeClass('changeSelect');
 								var list = $(this);
@@ -712,8 +804,6 @@ header>section {
 								list.addClass('changeSelect');
 
 								selectCinema.text(child2.text());
-								
-								console.log(selectCinema);
 								
 								cinemaText = child2.text();
 								cinemaValue = child1.children('#maNo').val();
@@ -738,7 +828,7 @@ header>section {
 		
 		function playMovie() {
 			console.log("---------------------------------")
-			console.log("골라진 영화 제목 : " + titleValue);
+			console.log("골라진 영화 번호 : " + titleValue);
 			console.log("골라진 지역 : " + areaValue);
 			console.log("골라진 영화관 : " + cinemaValue);
 			console.log("골라진 영화 시간 : " + timeValue);
@@ -753,6 +843,7 @@ header>section {
 						time:timeValue
 						},
 				dataType : "json",
+				async:false,
 				success : function(data){
 					var $ul = $(".watchingMovie");
 					$ul.html("");
@@ -854,10 +945,6 @@ header>section {
 				}else{
 					ageTest = numAge - movieAge;
 				}
-				console.log("userBirth : " +userBirth);
-				console.log("strBirth : " +strBirth);
-				console.log("movieAge : " +movieAge);
-				console.log("ageTest : " + ageTest);
 	            if(placeValue != 0){
 	            	if(ageTest >= 0){
 	               		location.href="resSeat.do?placeValue="+placeValue;

@@ -530,7 +530,6 @@ input:checked+.slider:before {
 							<div class="movie-list-info">
 								<img src="${ contextPath }${ sList.attachList[0].filePath }${ sList.attachList[0].renameFileName }">
 								<input type="hidden" value="${ sList.movieNo }" id="movieNo"/>
-								<input type="hidden" id="resVal" value="404.0"/>
 							</div>
 							<div class="tit-area">
 								<p class="movie-grade">${ sList.movieAge }</p>
@@ -546,11 +545,13 @@ input:checked+.slider:before {
 							<c:choose>
 								<c:when test="${ sList.movieRstatus == 'Y' && today > write_dt }">
 									<span class="movie_statusY">상영중</span> 
-									<a class="resBtn" href="resList.do">예매하기</a>
+									<button class="resBtn">
+									<input type="hidden" value="${ sList.movieNo }" id="movieNum"/>예매하기</a>
 								</c:when>
 								<c:when test="${ sList.movieRstatus == 'Y' && today < write_dt }">
 									<span class="movie_statusW">개봉예정</span>
-                            	<a class="resBtn" href="resList.do">예매하기</a>
+                            		<button class="resBtn">
+                            		<input type="hidden" value="${ sList.movieNo }" id="movieNum"/>예매하기</button>
 								</c:when>
 								<c:otherwise>
 									<span class="movie_statusN">상영종료</span>
@@ -580,7 +581,8 @@ input:checked+.slider:before {
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusY">상영중</span> 
-								<a class="resBtn" href="resList.do">예매하기</a>
+								<button class="resBtn">
+								<input type="hidden" value="${ movOn.movieNo }" id="movieNum"/>예매하기</button>
 							</div>
 						</li>
 						<c:set var="rankO" value="${ rankO+1 }"/>
@@ -601,7 +603,8 @@ input:checked+.slider:before {
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusW">개봉예정</span>
-                            	<a class="resBtn" href="resList.do">예매하기</a>
+                            	<button class="resBtn">
+                            	<input type="hidden" value="${ movWait.movieNo }" id="movieNum"/>예매하기</button>
 							</div>
 						</li>
 					</c:forEach>
@@ -644,7 +647,8 @@ input:checked+.slider:before {
 							</div>
 							<div class="btn-util">
 								<span class="movie_statusY">상영중</span> 
-                            <a class="resBtn" href="resList.do">예매하기</a>
+                            	<button class="resBtn">
+                            	<input type="hidden" value="${ movFavor.movieNo }" id="movieNum"/>예매하기</button>
 							</div>
 						</li>
 						<c:set var="rankF" value="${ rankF+1 }"/>
@@ -804,13 +808,16 @@ input:checked+.slider:before {
 							var $fourthDiv = $("<div class='btn-util'>");
 							var $secondSpan = '';
 							var $a = '';
+							var $i = '';
 							
 							if(data[i].movieRstatus == 'Y' && diffTime < 0){
 								$secondSpan = $("<span class='movie_statusY'>").text("상영중");
-								$a = $("<a class='resBtn' href='#'>").text("예매하기")
+								$a = $("<button class='resBtn'>").text("예매하기");
+								$i = $("<input type='hidden' id='movieNum'>").val(data[i].movieNo);
 							}else if(data[i].movieRstatus == 'Y' && diffTime > 0){
 								$secondSpan = $("<span class='movie_statusW'>").text("개봉예정");
-								$a = $("<a class='resBtn' href='#'>").text("예매하기")
+								$a = $("<button class='resBtn'>").text("예매하기");
+								$i = $("<input type='hidden' id='movieNum'>").val(data[i].movieNo);
 							}else{
 								$secondSpan = $("<span class='movie_statusN'>").text("상영종료");
 							}
@@ -825,6 +832,7 @@ input:checked+.slider:before {
 							$thirdDiv.append($span);
 							
 							$fourthDiv.append($secondSpan);
+							$a.append($i);
 							$fourthDiv.append($a);
 							
 							$li.append($firstDiv);
@@ -842,6 +850,11 @@ input:checked+.slider:before {
 					$(".movie-list-info").on('click',function(){
 						var movieNo = $(this).children('#movieNo').val();
 						location.href="movieInfo.do?movieNo="+movieNo;
+					});
+					
+					$('.resBtn').click(function(){
+						var movieNum = $(this).children("#movieNum").val();
+						location.href="resList.do?movieNum="+movieNum;
 					});
 					
 					movie_check();
@@ -889,6 +902,10 @@ input:checked+.slider:before {
 			test('a');
 		});
 		
+		$('.resBtn').click(function(){
+			var movieNum = $(this).children("#movieNum").val();
+			location.href="resList.do?movieNum="+movieNum;
+		});
 	</script>
 </body>
 

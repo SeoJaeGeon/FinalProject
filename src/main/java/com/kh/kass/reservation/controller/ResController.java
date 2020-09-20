@@ -43,18 +43,12 @@ public class ResController {
 		ArrayList<Movie> scoreList = resService.scoreList();
 		ArrayList<Movie> totalScoreList = resService.totalScoreList();
 		
-		System.out.println("movListFavor : " + movListFavor);
-		System.out.println("scoreList : " + scoreList);
-		System.out.println("totalScoreList : " + totalScoreList);
-		
-		
 		ArrayList<Movie> avgScore = new ArrayList<>();
 		double avg = 0;
 		for(int i=0; i<scoreList.size(); i++) {
 			if(scoreList.get(i).getMovieNo() == totalScoreList.get(i).getMovieNo()) {
 				Movie m = new Movie();
 				avg = Math.round((scoreList.get(i).getScore() / totalScoreList.get(i).getScore() * 100)*10)/10.0;
-				System.out.println("scoreList : " + scoreList);
 				m = new Movie(scoreList.get(i).getMovieNo(), avg);
 				avgScore.add(m);
 			}
@@ -113,8 +107,7 @@ public class ResController {
 	}
 
 	@RequestMapping("resList.do")
-	public ModelAndView resSelectAll(ModelAndView mv) {
-		
+	public ModelAndView resSelectAll(ModelAndView mv, String movieNum) {
 		ArrayList<Reservation> resList = resService.resSelectAll();
 		ArrayList<Movie> movList = resService.movSelectAll();
 		ArrayList<Reservation> ocList = resService.aSelectAll();
@@ -123,6 +116,7 @@ public class ResController {
 			mv.addObject("resList", resList);
 			mv.addObject("movList", movList);
 			mv.addObject("ocList", ocList);
+			mv.addObject("movieNum", movieNum);
 			mv.setViewName("reservation/resList");
 		} else {
 			throw new ResException("영화 예약리스트 불러오기를 실패했습니다.");
