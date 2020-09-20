@@ -418,7 +418,7 @@ padding-top : 50px;
 				상세페이지</h2>
 			<div class="movie-introduce">
 				<div class="movie-in1">
-					<img src="<%=request.getContextPath()%>${ movInfo[0].attachList[0].filePath }${ movInfo[0].attachList[0].renameFileName }">
+					<img src="${ contextPath }${ movInfo[0].attachList[0].filePath }${ movInfo[0].attachList[0].renameFileName }">
 				</div>
 				<div class="movie-in2">
 					<p class="movie-grade">${ movInfo[0].movieAge }</p>
@@ -437,10 +437,10 @@ padding-top : 50px;
 					</c:choose>
 					<br><br><br>
 					<span class="like-view" style="color: black; margin-right: 100px;">
-						<img src="<%=request.getContextPath()%>/resources/images/up_white.png" style="width:30px; height:30px;"><b> : ${ reviewUp }</b>
+						<img src="${ contextPath }/resources/images/up_white.png" style="width:30px; height:30px;"><b> : ${ reviewUp }</b>
 					</span> 
 					<span class="like-view" style="color: black">
-						<img src="<%=request.getContextPath()%>/resources/images/down_white.png" style="width:30px; height:30px;"><b> : ${ reviewDown }</b>
+						<img src="${ contextPath }/resources/images/down_white.png" style="width:30px; height:30px;"><b> : ${ reviewDown }</b>
 					</span>
 				</div>
 				<div class="movie-in3">
@@ -461,7 +461,7 @@ padding-top : 50px;
 					</span><br>
 					<c:choose>
 						<c:when test="${ movInfo[0].movieRstatus == 'Y' }">
-							<a class="resBtn" href="resList.do">예매하기</a>
+							<button class="resBtn" onclick="goResMovie();">예매하기</a>
 						</c:when>
 					</c:choose>
 
@@ -484,16 +484,16 @@ padding-top : 50px;
 				<div id="demo" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[1].filePath }${ movInfo[0].attachList[1].renameFileName }"
+							<img class="d-block w-100" src="${ contextPath }${ movInfo[0].attachList[1].filePath }${ movInfo[0].attachList[1].renameFileName }"
 								alt="First slide" id="img1">
 							<div class="carousel-caption d-none d-md-bl ock"></div>
 						</div>
 						<div class="carousel-item">
-							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[2].filePath }${ movInfo[0].attachList[2].renameFileName }"
+							<img class="d-block w-100" src="${ contextPath }${ movInfo[0].attachList[2].filePath }${ movInfo[0].attachList[2].renameFileName }"
 								alt="Second slide" id="img2">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block w-100" src="<%=request.getContextPath()%>${ movInfo[0].attachList[3].filePath }${ movInfo[0].attachList[3].renameFileName }"
+							<img class="d-block w-100" src="${ contextPath }${ movInfo[0].attachList[3].filePath }${ movInfo[0].attachList[3].renameFileName }"
 								alt="Third slide" id="img3">
 						</div>
 						<a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -523,7 +523,7 @@ padding-top : 50px;
 						<img src="${ contextPath }/resources/images/defaultPropfieImg.png">
 						</c:if>
 						<c:if test="${ r.renameFileName ne null }">
-							<img src="<%=request.getContextPath()%>${r.filePath}${r.renameFileName}">
+							<img src="${ contextPath }${r.filePath}${r.renameFileName}">
 						</c:if>
 						</div>
 						<div class="rView1-bottom">
@@ -537,10 +537,10 @@ padding-top : 50px;
 						</div>
 						<div class="rView3">
 						<c:if test="${ r.reScore == 'B' }">
-							<img src="<%=request.getContextPath()%>/resources/images/up_white.png" style="width:50px; height:50px;">
+							<img src="${ contextPath }/resources/images/up_white.png" style="width:50px; height:50px;">
 						</c:if>
 						<c:if test="${ r.reScore == 'G' }">
-							<img src="<%=request.getContextPath()%>/resources/images/down_white.png" style="width:50px; height:50px;">
+							<img src="${ contextPath }/resources/images/down_white.png" style="width:50px; height:50px;">
 						</c:if>
 						<br clear="img"><br><br>
 							<span>${ r.reModifyDate }</span>
@@ -612,8 +612,6 @@ padding-top : 50px;
 		function movie_check() {
 			var grade_check = $('.movie-in2').children('.movie-grade');
 
-			console.log(grade_check.text());
-
 			if (grade_check.text() == '19') {
 				grade_check.css('background', 'red');
 			} else if (grade_check.text() == '15') {
@@ -624,6 +622,12 @@ padding-top : 50px;
 				grade_check.text("All");
                 grade_check.css('background', 'green');
 			}
+			
+		}
+		
+		function goResMovie(){			
+			var movieNum = ${ movInfo[0].movieNo };
+			location.href="resList.do?movieNum="+movieNum;
 		}
 	</script>
 </body>
