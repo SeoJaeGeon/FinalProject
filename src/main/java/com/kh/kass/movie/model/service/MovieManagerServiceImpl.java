@@ -192,6 +192,11 @@ public class MovieManagerServiceImpl implements MovieManagerService{
 	public ArrayList<Movie> movListON2() {
 		return mDao.selectmovListOn2();
 	}
+
+	@Override
+	public ArrayList<Movie_Res> selectMovResListAll() {
+		return mDao.selectMovResListAll();
+	}
 	
 
 }

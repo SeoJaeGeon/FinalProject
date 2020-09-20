@@ -379,10 +379,13 @@ public class MovieManagerMain {
 		ArrayList<Movie_Res>movie_ResList = movService.selectmovResList(movieListName.get(0).getMovieNo());
 		System.out.println("처음 movie_ResList : " + movie_ResList);
 		
-		
+		// 2020-09-21 모든 movie_res의 데이터를 가져옴
+		ArrayList<Movie_Res>movie_ResListAll = movService.selectMovResListAll();
+		System.out.println("모든 movie Res : " + movie_ResListAll);
 		
 		
 		if(movie_ResList != null) {
+		mv.addObject("movie_ResListAll",movie_ResListAll);
 		mv.addObject("movieResList",movie_ResList);
 		mv.addObject("movieArea",MOVIE_AREA);
 		mv.addObject("movieAttachment1",movieAttachment1);
@@ -431,6 +434,13 @@ public class MovieManagerMain {
 		System.out.println("Attachment1 : " + movieAttachment1.get(0));
 		
 		
+		// 2020-09-21 모든 movie_res의 데이터를 가져옴
+		ArrayList<Movie_Res>movie_ResListAll = movService.selectMovResListAll();
+		System.out.println("모든 movie Res : " + movie_ResListAll);
+		
+		
+		
+		mv.addObject("movie_ResListAll",movie_ResListAll);
 		mv.addObject("movieResList", movie_ResList);// 선택된 resList 보내줌
 		mv.addObject("movieArea",MOVIE_AREA); // 상영관 List 보내줌
 		mv.addObject("movieAttachment1",movieAttachment1); // 파일들 ArrayList로 가져옴 포스터
@@ -488,11 +498,18 @@ public class MovieManagerMain {
 			
 			ArrayList<Attachment> movieAttachment1 = movService.movAttachmentList1(movieNo); // 포스터가 있는 어태치를 가져옴
 			
+			// 2020-09-21 모든 movie_res의 데이터를 가져옴
+			ArrayList<Movie_Res>movie_ResListAll = movService.selectMovResListAll();
+			System.out.println("모든 movie Res : " + movie_ResListAll);
+			
+			
+			
 			if(movieAttachment1 == null) { // 포스터가 없다면
 				throw new ResException("movie Attachment 사진 동영상 불러오기 실패.");
 			}
 			System.out.println("Attachment1 : " + movieAttachment1.get(0));
 			
+			mv.addObject("movie_ResListAll",movie_ResListAll);
 			mv.addObject("MovieAreaName",MovieAreaName); // 선택된 상영관 이름 보내줌
 			mv.addObject("movieResList", movie_ResList3);// 선택된 resList 보내줌
 			mv.addObject("movieArea",MOVIE_AREA); // 상영관 List 보내줌
@@ -574,6 +591,10 @@ public class MovieManagerMain {
 			throw new ResException("movie Attachment 사진 동영상 불러오기 실패.");
 		}
 		System.out.println("Attachment1 : " + movieAttachment1.get(0));
+		// 2020-09-21 모든 movie_res의 데이터를 가져옴
+		ArrayList<Movie_Res>movie_ResListAll = movService.selectMovResListAll();
+		System.out.println("모든 movie Res : " + movie_ResListAll);
+		mv.addObject("movie_ResListAll",movie_ResListAll);
 		
 		
 		mv.addObject("movieResList", movie_ResList);// 선택된 resList 보내줌
@@ -719,6 +740,11 @@ public class MovieManagerMain {
 		ArrayList<Movie_Res>movie_ResList = movService.selectmovResList(movieListName.get(0).getMovieNo());
 		System.out.println("처음 movie_ResList : " + movie_ResList);
 		System.out.println("처음 movieListName : " + movieListName);
+		
+		// 2020-09-21 모든 movie_res의 데이터를 가져옴
+		ArrayList<Movie_Res>movie_ResListAll = movService.selectMovResListAll();
+		System.out.println("모든 movie Res : " + movie_ResListAll);
+		mv.addObject("movie_ResListAll",movie_ResListAll);
 		
 		
 		mv.addObject("movieResList",movie_ResList);

@@ -374,6 +374,11 @@
 	    where 5 >= rownum
 	</select>
 	
+	<select id="movListAll" resultMap="movieResList">
+	select *
+	from movie_Res
+	</select>
+	
 </mapper>
 
 
