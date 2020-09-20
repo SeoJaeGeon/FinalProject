@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.kh.kass.snack.model.vo.*" %>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>KASS CINEMA</title>
+<title>장바구니</title>
+<title>bb</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@1.0/nanumbarungothicsubset.css">
+
+</head>
 <style>
-<
-style>header, nav, section, article, aside, footer {
+header, nav, section, article, aside, footer {
 	box-sizing: border-box;
 	display: block;
 }
@@ -298,70 +311,6 @@ header>section {
 	margin-left: 30px;
 	margin-top: 25px;
 }
-
-/* 영역 나누기 */
-#stay1 {
-	width: 100%;
-	background: white;
-}
-
-#stay2 {
-	width: 100%;
-	background: white;
-	border: 1px solid red;
-}
-
-#stay_footer {
-	width: 100%;
-	height: 150px;
-	background-color: lightgray;
-}
-
-#wrap_stay {
-	width: 1500px;
-	margin: auto;
-	border: 1px solid green;
-}
-
-.movie {
-	display: inline-block;
-	margin: 0px 50px;
-	border: 1px solid yellow;
-	width: 250px;
-	height: 400px;
-}
-
-.poster {
-	width: 100%;
-	height: 300px;
-}
-
-.onScrenn {
-	background: rgb(46, 204, 113);
-	width: 70px;
-	height: 30px;
-	color: white;
-	font-size: 15px;
-	float: left;
-	margin-left: 30px;
-	margin-top: 30px;
-	text-align: center;
-	padding-top: 4px
-}
-
-.resevation {
-	background: rgb(231, 76, 60);
-	width: 100px;
-	height: 40px;
-	border-radius: 40px;
-	color: white;
-	border: 1px solid rgb(231, 76, 60);
-	margin-left: 30px;
-	margin-top: 25px;
-}
-
-/* 영역 나누기 */
-
 /* 상단 미니 메뉴바 */
 .page-util {
 	display: block;
@@ -387,8 +336,10 @@ header>section {
 	float: left;
 	width: 70px;
 	line-height: 46px;
-	margin-left: 20px;
+	margin: 0 0 50px 60px;
 	padding: 0;
+	/* text-indent: -9999x;
+            들여쓰기 */
 }
 
 .page-util .location a {
@@ -702,6 +653,7 @@ em {
 }
 
 textarea {
+	/* -webkit-writing-mode: horizontal-tb !important; */
 	text-rendering: auto;
 	letter-spacing: normal;
 	word-spacing: normal;
@@ -720,225 +672,9 @@ textarea {
 	font: 400 13.3333px Arial;
 }
 
-/* 결제 영역 */
-h3.tit {
-	margin: 0;
-	padding: 0 0 16px 0;
-	font-size: 1.6em;
-	font-weight: 400;
-	color: #503396;
-	line-height: 1.1;
-}
-
-.mt40 {
-	margin-top: 40px !important;
-}
-
-.store-payment .payment-final {
-	overflow: hidden;
-	margin: 0;
-	padding: 30px;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #333;
-}
-
-.store-payment .payment-final .calc {
-	text-align: center;
-}
-
-.store-payment .payment-final .calc .cell {
-	display: inline-block;
-	min-width: 180px;
-	vertical-align: middle;
-}
-
-.store-payment .payment-final .calc .cell .txt {
-	color: #c4c4c4;
-}
-
-.stroe-payment p {
-	margin: 0;
-	padding: 0;
-}
-
-p {
-	display: block;
-	margin-block-start: 1em;
-	margin-block-end: 1em;
-	margin-inline-start: 0px;
-	margin-inline-end: 0px;
-}
-
-.store-payment .payment-final .calc .cell .price {
-	overflow: hidden;
-	padding-top: 5px;
-}
-
-.store-payment .payment-final .calc .cell .price em {
-	display: inline-block;
-	font-size: 1.6em;
-	font-family: Roboto;
-	line-height: 24px;
-	vertical-align: top;
-	font-weight: 700;
-}
-
-em {
-	font-style: normal;
-}
-
-.store-payment .payment-final .calc .cell .price span {
-	display: inline-block;
-	font-size: 1.0667em;
-	line-height: 24px;
-	vertical-align: top;
-	color: #c4c4c4;
-}
-
-.ico-circle-minus {
-	width: 24px;
-	height: 24px;
-	background-image:
-		url(https://img.megabox.co.kr/static/pc/images/common/ico/ico-circle-minus.png);
-}
-
-.ico-circle-equal {
-	width: 24px;
-	height: 24px;
-	background-image:
-		url(https://img.megabox.co.kr/static/pc/images/common/ico/ico-circle-equal.png);
-}
-
-.iconset {
-	overflow: hidden;
-	display: inline-block;
-	margin: -1px 0 0 0;
-	padding: 0;
-	font-size: 0;
-	line-height: 0;
-	vertical-align: middle;
-	background-position: 0 0;
-	background-repeat: no-repeat;
-}
-
-.store-payment .payment-final .choice {
-	margin: 20px 0 0 0;
-	padding: 20px 0 0 0;
-	text-align: center;
-	border-top: 1px solid #434343;
-}
-
-.store-payment .payment-final .choice .txt {
-	display: inline-block;
-	padding: 0 20px 0 0;
-	vertical-align: top;
-	color: #c4c4c4;
-}
-
-.store-payment .payment-final .choice .cell {
-	display: inline-block;
-	padding: 0 20px;
-	vertical-align: top;
-}
-
-[type=radio] {
-	width: 16px;
-	height: 16px;
-	vertical-align: middle;
-	box-sizing: border-box;
-	padding: 0;
-}
-
-label {
-	display: inline-block;
-	vertical-align: middle;
-	cursor: pointer;
-}
-
-.pt40 {
-	padding-top: 40px !important;
-}
-
-.btn-group {
-	padding: 20px 0 30px 0;
-	margin: 0;
-	text-align: center;
-}
-
-a.button:visited {
-	color: #503396;
-}
-
-.btn-group .button {
-	margin: 0 3px;
-}
-
-.btn_wrap {
-	padding: 20px 0 30px 0;
-	margin: 0;
-	text-align: center;
-}
-
-.btn_wrap .button {
-	margin: 0 3px;
-}
-
-.button .cancel {
-	height: 46px;
-	padding: 0 30px;
-	line-height: 44px;
-}
-
-.button.insert {
-	height: 46px;
-	padding: 0 30px;
-	line-height: 46px;
-	color: #fff;
-	border: 0;
-	background: rgb(31, 69, 97);
-}
-
-.button.img {
-	height: 40px;
-	padding: 0 30px;
-	line-height: 40px;
-	color: #fff;
-	border: 0;
-	background: #503396;
-	margin-top: 20px;
-}
-
-.button.delete {
-	height: 46px;
-	padding: 0 30px;
-	line-height: 46px;
-	color: #fff;
-	border: 0;
-	background: rgb(231, 76, 60);
-	margin-right: 100px;
-	float: right;
-}
-
-.button {
-	display: inline-block;
-	text-align: center;
-	font-weight: 400;
-	border-radius: 4px;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
-	text-decoration: none;
-	vertical-align: middle;
-	cursor: pointer;
-}
-
-button {
-	text-transform: none;
-	overflow: visible;
-	font-size: 1em;
-}
-
+/* 영역 나누기 */
 </style>
-</head>
+
 <body>
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/white.jsp" />
@@ -981,7 +717,7 @@ button {
 										<div class="goods-info">
 											<p class="img">
 												<a href="#" title=""> 
-												<img src="${ contextPath }/${sn.attachment.filePath}/${ sn.attachment.renameFileName }" alt onerror="noImg(this);"
+												<img src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }"
 													width="100px" height="100px">
 												</a>
 											</p>
@@ -990,8 +726,8 @@ button {
 									<th scope="row">
 										<div class="goods-info">
 											<p class="name">
-												<a href="#" title="">${ sn.snackName }</a>
-											<p class="bundle">${ sn.snackMemo }</p>
+												<a href="#" title="러브콤보패키지">러브콤보패키지</a>
+											<p class="bundle">2D 일반 관람권 2매 + 러브콤보</p>
 											</p>
 										</div>
 										<div class="mt10">
@@ -1012,176 +748,64 @@ button {
 						</table>
 					</div>
 					<!-- 장바구니 -->
-					<!-- 장바구니 -->
-					<h3 class="tit mt40">최종결제</h3>
-					<div class="payment-final">
-						<div class="calc">
-							<div class="cell all">
-								<p class="txt">상품 금액</p>
-								<p class="price">
-									<em id="totPrdtAmtView">${ sn.snackPrice }</em> <span>원</span>
-								</p>
-							</div>
-							<i class="iconset ico=circle-double">곱하기</i>
-							<div class="cell sale">
-								<p class="txt">선택 상품 개수</p>
-								<p class="price">
-									<em id="totDcAmtView">${ proCount }</em> <span>개</span>
-								</p>
-							</div>
-							<i class="iconset ico-circle-equal">등호</i>
-							<div class="cell real">
-								<p class="txt">최종 결제금액</p>
-								<p class="price">
-									<em id="lstPayAmtView">${ price }</em> <span>원</span>
-								</p>
-							</div>
-						</div>
-						<div class="choice">
-							<p class="txt">결제수단 선택</p>
-							<div class="cell">
-								<input type="radio" id="radio_choice01" name="radio_choice" value="kakaopay" checked> 
-								<label for="radio_choice01" >카카오페이</label>
-							</div>
-							<div class="cell">
-								<input type="radio" id="radio_choice03" name="radio_choice" value="bank" checked> 
-								<label for="radio_choice03">무통장입금</label>
-							</div>
-							
-						</div>
-					</div>
-					<!-- payment-final -->
-
-					<div class="btn-group pt40">
-						<!-- <a href="javascript:history.back();" class="button large w170px"
-							title="취소">취소</a> 
-						<a href="javascript:fn_storePayCompltChk();" class="button purple large w170px" title="결제">결제</a> -->
-
-						<div class="btn_wrap">
-							<%-- <button type="button" class="button cancel"
-								onclick="location.href='${ productList }'">취소</button> --%>
-								
-								<button type="button" class="button insert" onclick="payment1();">결제</button>
+					<div id="giftDiv" style="display: block;">
+						<h3 class="tit mt40">배송 정보 입력</h3>
+						<div class="table-wrap">
+							<table class="board-form">
+								<caption>배송 정보 입력 표</caption>
+								<colgroup>
+									<col style="width: 145px;">
+									<col>
+									<col style="width: 145px;">
+									<col>
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row"><label for="get_user">받는 분</label></th>
+										<td><input type="text" id="get_user" class="input-text"
+											maxlength="20" alt="받는분"></td>
+										<th scope="rowgroup" rowspan="2"><label
+											for="present_message"> 선물메세지 <br> ( <span
+												id="textareaCnt" class="text-count">0</span> 자/ <em
+												class="font-gblue">70자</em> )
+										</label></th>
+										<td rowspan="2"><textarea rows="5" cols="30"
+												id="present_message" title="선물메세지 입력"
+												placeholder="전달하고자 하는 메세지를 남겨보세요(최대 70자)"
+												class="input-textarea" style="height: 76px;"></textarea>
+											</textarea></td>
+									</tr>
+									<tr>
+										<th scope="row"><label for="phone">수량/휴대폰번호</label></th>
+										<td>
+											<ul class="inputui01">
+												<li class="li01"><select id="get_cnt"
+													class="w100p small" alt="수랭">
+														<option value>선택</option>
+														<option value="1">1</option>
+												</select></li>
+												<li class="li02"><input type="tel" id="phone"
+													placeholder="-없이 입력해 주세요" class="input-text numType"
+													maxlength="11" alt="휴대폰번호"></li>
+												<li><a href="#" id="btnAddGifAcptPsn"
+													class="button purple small btn-modal-open target">추가</a></li>
+												<!-- ::after -->
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script>
-		
-		<% Snack sn = (Snack)request.getAttribute("sn");%>
-		
-		function payment1(){
-		var num1 = <%=sn.getSnackNo()%>;
-		var num3 = ${ proCount };
-		var num4 = ${ price };
-		//alert("시작 : " + num1 + " " + num2 + " " + num3 + " " + num4);
-		//location.href="proMoneyPay.do";
-		location.href="proMoneyPay.do?snackNo=" + num1 + "&proCount=" + num3 + "&price=" + num4;
-		}
-		
-		</script>
-
-		<div id="stay_footer">
-			<div id="stay_footer_inner">
-				<jsp:include page="../../views/common/footer.jsp" />
-			</div>
-		</div>
-		
-		<script>
+	</div>
 	
-			function payment(){
-				var radioVal = $('input[name="radio_choice"]:checked').val();
-				console.log("?"+radioVal);
-				$("#radioChoise").val(radioVal);
-				
-				if(radioVal == 'bank') {
-				
-				/* 총 가격 상품명 상품 개수 */
-				/* var snackNo = ${ sn.snackNo };
-				var snackName = '${ sn.snackName }';
-				var proCount '${ proCount }';
-				var price = ${ price }; */
-				
-				if(radioVal == 'kakaopay'){
-
-			        var IMP = window.IMP; // 생략가능
-			        IMP.init('imp07866238'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-			        var msg;
-			        
-			        IMP.request_pay({
-			            pg : 'kakaopay',
-			            pay_method : 'card',
-			            merchant_uid : 'merchant_' + new Date().getTime(),
-			            name : movieName,
-			            amount : price+"원",
-			            buyer_email : orderEmail,
-			            buyer_name : orderName,
-			            buyer_tel : orderphone,
-			            buyer_addr : address,
-			            buyer_postcode : '123-456'
-			            //m_redirect_url : 'http://www.naver.com'
-			        }, function(rsp) {
-			            if ( rsp.success ) {
-			                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-			                jQuery.ajax({
-			                    url: "movieCard.do", //cross-domain error가 발생하지 않도록 주의해주세요
-			                    type: 'POST',
-			                    dataType: 'json',
-			                    data: {
-			                        imp_uid : rsp.imp_uid,
-			                        userNo : userNo,
-			                        resNo : resNo,
-			                        time : time,
-			                        people : people,
-			                        index_array : index_array,
-			                        placeValue : placeValue,
-			                        people1 : people1,
-			                        people2 : people2,
-			                        price : price
-			                        
-			                        //기타 필요한 데이터가 있으면 추가 전달
-			                    }
-			                }).done(function(data) {
-			                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-			                    if ( everythings_fine ) {
-			                        msg = '결제가 완료되었습니다.';
-			                        msg += '\n고유ID : ' + rsp.imp_uid;
-			                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-			                        msg += '\결제 금액 : ' + rsp.paid_amount;
-			                        msg += '카드 승인번호 : ' + rsp.apply_num;
-			                        
-			                        alert(msg);
-			                    } else {
-			                        //[3] 아직 제대로 결제가 되지 않았습니다.
-			                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-			                    }
-			                });
-			                //성공시 이동할 페이지
-			                location.href="proMoneyPay.do?userNo="+userNo+"&resNo="+resNo+"&index_array="+index_array+"&placeValue="+placeValue+"&people1="+people1+"&people2="+people2+"&price="+price+"&time="+time+"&people="+people+"&radioVal="+radioVal;
-			            } else {
-			                msg = '결제에 실패하였습니다.';
-			                msg += '에러내용 : ' + rsp.error_msg;
-			                //실패시 이동할 페이지
-			                location.href="<%=request.getContextPath()%>";
-			                alert(msg);
-			            }
-			        });
-				}else{
-					location.href="proMoneyPay.do?userNo="+userNo+"&resNo="+resNo+"&index_array="+index_array+"&placeValue="+placeValue+"&people1="+people1+"&people2="+people2+"&price="+price+"&time="+time+"&people="+people+"&radioVal="+radioVal;
-				}
-			}	
-			}
-			
-		</script>
-				
-	<c:if test="${ !empty msg }">
-		<script>
-			alert('${msg}');
-		</script>
-		<c:remove var="msg" />
-
-	</c:if>
+	<div id="stay_footer">
+		<div id="stay_footer_inner">
+			<jsp:include page="../../views/common/footer.jsp" />
+		</div>
 	</div>
 </body>
 </html>

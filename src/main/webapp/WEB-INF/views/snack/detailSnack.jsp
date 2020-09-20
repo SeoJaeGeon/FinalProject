@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>KASS CINEMA</title>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
@@ -39,7 +41,6 @@
         #content {
             /* width: 100%; */
             width: 1500px;
-            border: 8px solid red;
             margin: auto;
         }
 
@@ -102,7 +103,6 @@
             width: 100%;
             padding-top: 20px;
             padding-bottom: 50px;
-            border: 5px solid purple;
         }
 
         #img1,
@@ -259,7 +259,7 @@
         #stay2 {
             width: 100%;
             background: white;
-            border: 1px solid red;
+            /* border: 1px solid red; */
         }
 
         #stay_footer {
@@ -271,7 +271,6 @@
         #wrap_stay {
             width: 1500px;
             margin: auto;
-            border: 1px solid green;
         }
 
         .movie {
@@ -387,7 +386,6 @@
             position: relative;
             margin-bottom: 20px;
             text-align: center;
-            border: 1px solid;
         }
 
         .contents_mall_detail .pd_wrap .pd_img .main_img img{
@@ -864,7 +862,7 @@
                             <em class="txt_price_str">원</em>
                         </div>
                         <div class="btn_wrap">
-                            <button class="btn_col2 ty7">장바구니</button>
+                            <button class="btn_col2 ty7" onclick="cartBtn">장바구니</button>
                             <button class="btn_col1 ty7" onclick="buyBtn();">구매하기</button>
                         </div>
                     </div> <!-- pd_detail -->
@@ -983,6 +981,14 @@
         function buyBtn(){
         	if(${empty loginUser} == false){
         		location.href="goSnackBuy.do?snackNo="+snackNo+"&proCount="+proCount;        		
+        	}else{
+        		alert("로그인 해주세요");
+        	}
+        }
+        
+        function cartBtn(){
+        	if(${empty loginUser} == false){
+        		location.href="goSnackcart.do?snackNo="+snackNo+"&proCount="+proCount;        		
         	}else{
         		alert("로그인 해주세요");
         	}

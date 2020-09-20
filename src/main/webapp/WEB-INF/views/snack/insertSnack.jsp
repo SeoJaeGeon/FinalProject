@@ -18,6 +18,7 @@ header, nav, section, article, aside, footer {
 
 body {
 	width: 100%;
+	background: white;
 	margin: auto;
 }
 
@@ -30,12 +31,15 @@ nav {
 	width: 1500px;
 	height: 50px;
 }
-
+  #content {
+            /* width: 100%; */
+            width: 1500px;
+            margin: auto;
+        }
 .content {
 	/* width: 100%; */
 	width: 1500px;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
 }
 
@@ -94,12 +98,6 @@ header>section {
 	background: lightgray;
 }
 
-/* #stay_footer_inner {
-	width: 1500px;
-	height: 150px;
-	display: block;
-	margin: auto;
-} */
 #stay_footer_inner {
 	width: 1500px;
 	margin: auto;
@@ -147,7 +145,6 @@ body {
 .content1 {
 	width: 100%;
 	min-height: 1000px;
-	border: 3px solid blueviolet;
 }
 
 .tab_List {
@@ -186,7 +183,6 @@ body {
 	height: 600px;
 	overflow: hidden;
 	margin: 50px 300px;
-	border: 1px solid red;
 	background-color: rgb(224, 224, 224);
 }
 
@@ -196,7 +192,6 @@ div.left {
 	height: 600px;
 	float: left;
 	box-sizing: border-box;
-	border: 1px solid yellow;
 }
 
 div.right {
@@ -204,7 +199,6 @@ div.right {
 	height: 600px;
 	float: right;
 	box-sizing: border-box;
-	border: 1px solid yellowgreen;
 }
 
 table {

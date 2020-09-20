@@ -41,7 +41,6 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
 }
 
@@ -168,7 +167,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -277,7 +275,6 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
 }
@@ -314,7 +311,6 @@ pagination {
 }
 
 .pageOne {
-	border: 1px solid rgb(224, 224, 224);
 	display: inline-block;
 	text-decoration: none;
 	text-align: center;
@@ -392,9 +388,9 @@ pagination {
 				<tr>
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
-							<li><a href="#">디즈니</a></li>
-							<li><a href="#">픽사</a></li>
-							<li><a href="#">마블</a></li>
+							<li><a href="productGoodsList.do">디즈니</a></li>
+							<li><a href="productGoodsList.do">픽사</a></li>
+							<li><a href="productGoodsList.do">마블</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -461,8 +457,8 @@ pagination {
 						</c:if>
 					</ul>
 				</div>
-
-				<!-- 페이징 처리 -->
+				
+			<!-- 페이징 처리 -->
 				<div class="pagination">
 					<div class="pageOuterDiv">
 						<div class="pageInnerDiv">
@@ -471,7 +467,7 @@ pagination {
 								<a class="pageNone">&lt;</a>
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="productpList.do">
+								<c:url var="before" value="productcList.do">
 									<c:param name="page" value="${ pi.currentPage -1 }" />
 								</c:url>
 								<a class="pageOne" href="${ before }">&lt;</a>

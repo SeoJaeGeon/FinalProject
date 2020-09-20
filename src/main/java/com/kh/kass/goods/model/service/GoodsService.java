@@ -13,7 +13,7 @@ public interface GoodsService {
 
 	public int insertGoodsImg(Attachment att);
 
-	public Goods selectGoods(int goodsNo);
+	public ArrayList<Goods> selectGoods(int goodsNo);
 
 	public Attachment selectAtt(int goodsNo);
 

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>KASS CINEMA</title>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
@@ -34,7 +36,6 @@ nav {
 #content {
 	/* width: 100%; */
 	width: 1500px;
-	border: 8px solid red;
 	margin: auto;
 }
 
@@ -97,7 +98,6 @@ header>section {
 	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 50px;
-	border: 5px solid purple;
 }
 
 #img1, #img2, #img3 {
@@ -258,13 +258,11 @@ header>section {
 #wrap_stay {
 	width: 1500px;
 	margin: auto;
-	border: 1px solid green;
 }
 
 .movie {
 	display: inline-block;
 	margin: 0px 50px;
-	border: 1px solid yellow;
 	width: 250px;
 	height: 400px;
 }
@@ -293,7 +291,6 @@ header>section {
 	height: 40px;
 	border-radius: 40px;
 	color: white;
-	border: 1px solid rgb(231, 76, 60);
 	margin-left: 30px;
 	margin-top: 25px;
 }
@@ -373,7 +370,6 @@ div {
 	position: relative;
 	margin-bottom: 20px;
 	text-align: center;
-	border: 1px solid;
 }
 
 .contents_mall_detail .pd_wrap .pd_img .main_img img {
@@ -764,6 +760,17 @@ p {
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
 }
+
+.goods-steelImg {
+	width: 100%;
+	height: 600px;
+}
+
+.goods_sub {
+	position: relative;
+	width: 80%;
+	vertical-align: top;
+}
 </style>
 <body>
 	<div id="wrap_stay">
@@ -786,7 +793,8 @@ p {
 						<div class="pd_img">
 							<div class="main_img">
 								<img
-									src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }">
+									src="${ contextPath }${Goods[0].attachment.filePath}/${Goods[0].attachment.renameFileName}">
+
 							</div>
 						</div>
 						<!--pd_img-->
@@ -804,16 +812,16 @@ p {
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="row" class="tit" colspan="2">${ Goods.goodskName }</th>
+										<th scope="row" class="tit" colspan="2">${ Goods[0].goodsName }</th>
 									</tr>
 									<tr>
 										<td></td>
-										<td><span class="txt_price">${ Goods.goodsPrice }</span><em>원</em>
+										<td><span class="txt_price">${ Goods[0].goodsPrice }</span><em>원</em>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">상품설명</th>
-										<td>${ Goods.goodsMemo }</td>
+										<td>${ Goods[0].goodsMemo }</td>
 									</tr>
 									<tr>
 										<th scop="row">구매제한</th>
@@ -826,8 +834,8 @@ p {
 									<tr>
 										<th scope="row">사용가능 영화관</th>
 										<td>
-											<button class="btn_col4 ty3 rnd" title="레이어팝 열기">스위트샵
-												상품권</button> &nbsp;
+											<button class="btn_col4 ty3 rnd" title="레이어팝 열기">모든
+												영화관</button> &nbsp;
 										</td>
 									</tr>
 
@@ -839,61 +847,40 @@ p {
 								<button class="btn_plus" onclick="btn_plus();">추가</button>
 							</div>
 							<div class="txt_price_wrap">
-								총 상품금액 <strong class="txt_price_str">${ Goods.goodsPrice }</strong>
+								총 상품금액 <strong class="txt_price_str">${ Goods[0].goodsPrice }</strong>
 								<em class="txt_price_str">원</em>
 							</div>
+
+
 							<div class="btn_wrap">
-								<button class="btn_col2 ty7">장바구니</button>
+								<button class="btn_col2 ty7" onclick="CartBtn();">장바구니</button>
 								<button class="btn_col1 ty7" onclick="buyBtn();">구매하기</button>
 							</div>
 						</div>
 						<!-- pd_detail -->
 					</div>
-
-			<!-- 		<div class="box-pulldown">
-						<div class="tit">
-							<button type="button" id="btn_01" class="btn-toggle">
-								구매 후 취소 <i class="iconset ico-arr-toggle-down">내용보기</i>
-							</button>
+					
+					<h3 style="margin-top: 25px;; width: 100%; border-bottom: 2px solid black; padding-bottom: 15px">상품 상세보기</h3>
+						<div class="movie-preview">
+							<img class="goods_sub" src="${ contextPath }${Goods[1].attachment.filePath}/${Goods[1].attachment.renameFileName}">
 						</div>
-						<div class="cont" id="showtable1" style="display: none;">
-							<p>
-								&nbsp;스토어 상품은 회원만 구매할 수 있습니다. <br> - 유효기간은 24개월로 사용일 기준입니다.
-								<br> - 결제가 완료된 상품은 마이시네마 > 예매/구매내역에서 확인 후 Kasscinema
-								굿즈에서 확인가능합니다. <br> - 오리지널 팝콘이 기본으로 제공되며, 맛/반반팝콘 변경 시
-								금액이 추가됩니다. <br> - 콤보 주문 시 탄산음료가 기본으로 제공되며, 사이즈 및 기타 음료로 변경 시 금액이
-								추가됩니다. (단, PET음료로 변경불가)
-							</p>
-						</div>
-					</div>
-					<div class="box-pulldown">
-						<div class="tit">
-							<button type="button" onclick="showhide();" id="btn_02"
-								class="btn-toggle">
-								상품 이용 안내 <i class="iconset ico-arr-toggle-down">내용보기</i>
-							</button>
-						</div>
-						<div class="cont" id="showtable2" style="display: none;">
-							<p>
-								&nbsp;스토어 상품은 회원만 구매할 수 있습니다. <br> - 유효기간은 24개월로 사용일 기준입니다.
-								<br> - 결제가 완료된 상품은 마이시네마 > 예매/구매내역에서 확인 후 Kasscinema
-								스위트(매점)에서 사용가능합니다. <br> - 오리지널 팝콘이 기본으로 제공되며, 맛/반반팝콘 변경 시
-								금액이 추가됩니다. <br> - 탄산음료가 기본으로 제공되며, 사이즈 및 기타 음료로 변경 시 금액이
-								추가됩니다. (단, PET음료로 변경불가)
-							</p>
-						</div>
-					</div> -->
-
-
-
+					
 				</div>
 				<!-- contents -->
+
+
 			</div>
 			<!-- subsection -->
 			<!-- </div> -->
+			</section>
+	</div>
+	<div id="stay_footer">
+		<div id="stay_footer_inner">
+			<jsp:include page="../../views/common/footer.jsp" />
+		</div>
+	</div>
 
-
-			<script type="text/javascript">
+		<script type="text/javascript">
         // 보이기
 		var count1 = 0;
         var count2 = 0;
@@ -963,14 +950,18 @@ p {
         		alert("로그인 해주세요");
         	}
         }
+        
+        function CartBtn(){
+        	if(${empty loginUser} == false){
+        		location.href="goSnackcart.do?goodsNo="+goodsNo+"&proCount="+proCount;        		
+        	}else{
+        		alert("로그인 해주세요");
+        	}
+        }
 		</script>
-		</section>
-	</div>
-	<div id="stay_footer">
-		<div id="stay_footer_inner">
-			<jsp:include page="../../views/common/footer.jsp" />
-		</div>
-	</div>
+	
+		
+
 
 </body>
 </html>
