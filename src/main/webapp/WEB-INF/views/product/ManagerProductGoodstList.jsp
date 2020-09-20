@@ -315,9 +315,11 @@ a:visited {
 	outline: none;
 }
 
-.snackImg {
+.goodsImg {
 	width: 208px;
 	height: 240px;
+	display: block; 
+	margin: auto; 
 }
 
 
@@ -347,6 +349,57 @@ a:visited {
 	text-decoration: none;
 	border: 1px solid #e4e4e4;
 }
+
+--------------------------------------------------------------------------
+
+
+/* 페이징 바 */
+.pagination {
+    /* border: 1px solid rgb(16, 157, 182); */
+    width: 300px;
+    height: 50px;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+}
+
+.pageOne {
+    border: 1px solid rgb(224, 224, 224);
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding-top: 7px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+}
+
+.pageOne:hover {
+    border: 1px solid rgb(151, 151, 151);
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+
+}
+
+.pageNone {
+    border: 1px solid rgb(224, 224, 224);
+    background: rgb(241, 241, 241);
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding-top: 7px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+}
+/* 페이징 바 */
 </style>
 </head>
 <body>
@@ -364,7 +417,7 @@ a:visited {
 			</div>
 		</div>
 
-			<div id="divNewPrdtArea">
+			<div id="container">
 				<div class="store-list">
 					<ul class="list">
 						<c:if test="${ empty list }">
@@ -374,11 +427,12 @@ a:visited {
 						</c:if>
 						<c:if test="${ list ne null }">
 							<c:forEach var="Goods" items="${ list }">
-								<c:url var="supdate" value="gupdateGoods.do">
-									<c:param name="snackNo" value="${ Goods.goodsNo }" />
+								<c:url var="gupdate" value="gupdateGoods.do">
+									<c:param name="goodsNo" value="${ Goods.goodsNo }" />
+									<c:param name="page" value="${ pi.currentPage }" />
 								</c:url>
 								<li class>
-									<a href="${ gupdate }" title="스낵" class="product">
+									<a href="${ gdetail }" title="스낵" class="product">
 										<div class="img">
 											<img class="goodsImg" src="${ contextPath }/${Goods.attachment.filePath}/${ Goods.attachment.renameFileName }" class="img img2">
 										</div>
@@ -445,7 +499,6 @@ a:visited {
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 

@@ -318,6 +318,8 @@ a:visited {
 .snackImg {
 	width: 208px;
 	height: 240px;
+	display: block; 
+	margin: auto; 
 }
 
 /* 내가 쓴 코드 */
@@ -469,13 +471,13 @@ pagination {
 		</div>
 		<div class="content1">
 			<h2 class="title">스토어</h2>
-			<div class="tab_List">
+			<!-- <div class="tab_List">
 				<ul class="top_Menu">
 					<li class="on"><a href="#"> 스낵 </a></li>
 					<li><a href="#"> 음료 </a></li>
 					<li><a href="#"> 콤보 </a></li>
 				</ul>
-			</div>
+			</div> -->
 
 			<div id="divNewPrdtArea">
 				<div class="store-list">
