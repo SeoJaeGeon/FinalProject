@@ -474,7 +474,7 @@
 
     
    
-    <c:import url="../common/white2.jsp"/> / /로그인 유저에대한 정보 
+    <c:import url="../common/white2.jsp"/> 
    
     <div id="vod">　VOD</div> <!-- 상단 띠-->
     <br><br>
@@ -509,9 +509,9 @@
 		</c:url>
 					
 					
-        <a  href="${ vwish }">
-		<button id="wish-btn" type="button" class="btn btn-default"><img src="../수업자료/sample/image/city1.PNG" id="search_img">　좋아요</button>
-		</a>
+        
+		<button onclick="wish();" id="wish-btn" type="button" class="btn btn-default"><img src="../수업자료/sample/image/city1.PNG" id="search_img">　좋아요</button>
+		
 		
 		
 		
@@ -537,6 +537,7 @@
       	 <a  href="${ vbuy }">
         <button id="buy-btn" type="button" class="btn btn-outline-primary">구매하기</button>
         </a>
+        
         <button id="back-btn" type="button" class="btn btn-secondary">목록으로</button>
         
         
@@ -729,6 +730,17 @@
             $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
         }
         
+        function wish() {
+        	
+        	if(${ empty loginUser}  == false){
+				location.href="${vwish}";
+        		
+        	}else{
+        		alert("로그인 해주세요.")
+        	}
+			
+		}
+        
    </script>
    <!-- 스틸컷 자바스크립@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
    <!-- 스틸컷 자바스크립@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
@@ -784,6 +796,7 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
+            
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>

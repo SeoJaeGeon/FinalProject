@@ -268,6 +268,7 @@ a:hover {
 				id="logo_img">
 			</a>
 		</section>
+		
 
 		<section id="header-3">
 			<c:if test="${ empty sessionScope.loginUser }">

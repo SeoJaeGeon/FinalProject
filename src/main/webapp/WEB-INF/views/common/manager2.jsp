@@ -47,23 +47,7 @@ header>section {
 	margin-top: 20px;
 }
 /* 로고 */
-/* 로그인, 회원가입 */
-.login_bar {
-	float: right;
-	text-decoration: none;
-	color: silver;
-	font-weight: bold;
-	font-size: 21px;
-	margin-right: 50px;
-	margin-top: 20px;
-	font-family: 'NanumBarunGothic', sans-serif;
-}
 
-.login_bar:hover {
-	text-decoration: none;
-	color: gray;
-}
-/* 로그인, 회원가입 */
 /* 네비게이션 바*/
 #navi {
 	list-style-type: none;
@@ -157,7 +141,7 @@ li a:hover {
 	<header>
 		<section id="header-1">
 			
-				<p id="Manager-p1">관리자 페이지</p>
+				<p id=Manager-p1>관리자 페이지</p>
 			
 		</section>
 		<section id="header-2">
@@ -166,10 +150,7 @@ li a:hover {
 			</a>
 		</section>
 		<section id="header-3">
-				<c:if test="${ loginUser.userId eq 'admin' }">
-						<a href="MovieManagerSalesPage.do" class="login_bar">관리</a>
-						<a href="logout.do" class="login_bar" id="logout_bar">로그아웃</a>
-					</c:if>
+			
 		</section>
 	</header>
 
@@ -186,7 +167,7 @@ li a:hover {
       	   </li>
            <li><a href="#">VOD 설정</a>
            		<ul>
-	           		<li><a href="myinfo.do">VOD 정보 등록</a></li>
+	           		<li><a href="#">VOD 정보 등록</a></li>
 	           		<li><a href="#">VOD 정보 삭제</a></li>
 	           	</ul>
            </li>
@@ -204,7 +185,7 @@ li a:hover {
            </li>
            <li><a href="#">관리</a>
            		<ul>
-	           		<li><a href="MovieManagerSalesPage.do">지점 수익 조회</a></li>
+	           		<li><a href="MovieManagerSalesPage.do">지점 수익 관리</a></li>
 	           		<li><a href="#">영화 예매 취소 관리</a></li>
 	           	</ul>
            </li>

@@ -31,7 +31,9 @@
     
     
     
-      <form action="vpay.do" method="post" id="vodpayForm">
+      <form action="vpaypay.do" method="post" id="vodpayForm"  onsubmit="return validate();" >
+      
+      
     <div id="cart">
         <div id="cate"> 
            
@@ -40,13 +42,19 @@
         </div>
 
 
-
-      <div id="cartvod">
+	<c:forEach var="v" items="${ list }">
+	
+	
+      	<div id="cartvod">
             <div id="vodimg"><img id="movieImg" src="../수업자료/sample/image/city1.PNG"></div>
-            <label style="margin-top: 50px; margin-left: 110px;" >으아으</label>
-            <label style="margin-left: 480px;">18,000</label>
+            <label style="margin-top: 50px; margin-left: 110px;" >${v.movieName }</label>
+            <label style="margin-left: 480px;" id="aa" class="aa" name="aa">18,000</label>
             
         </div>
+        
+        
+        
+        </c:forEach>
 
 
 
@@ -76,9 +84,12 @@
 
                 <div id="radio">
                     
-                    <input id="xhdwkd" type="radio" name="rufwp" value="xhdwkd"  checked aria-label="Radio button for following text input"><label for="xhdwkd"  style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;">무통장입금</label>
-                    <input id="kakao" type="radio"  name="rufwp" value="kao" aria-label="Radio button for following text input"><label for="kakao" style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;" >카카오페이</label>
-                    <input type="hidden" name="movieNo" value=${m.movieNo }>
+                    <input id="xhdwkd" type="radio" name="rufwp" value="무통장"  checked aria-label="Radio button for following text input"><label for="xhdwkd"  style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;">무통장입금</label>
+                    <input id="kakao" type="radio"  name="rufwp" value="카드" aria-label="Radio button for following text input"><label for="kakao" style="margin-left: 5px; font-weight: 300px; color: white; font-size: 12px;" >카카오페이</label>
+                  
+                    <input type="hidden" name="payPrice" value=${sum }>
+                    <input type="hidden" name="userNo" value=${loginUser.userNo  }>
+                    
                 </div>
 
             </div>
@@ -99,6 +110,8 @@
 
 </div>
 </form>
+
+
 
 
 </body>
