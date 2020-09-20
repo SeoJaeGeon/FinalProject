@@ -41,7 +41,13 @@ nav {
 	width: 100%;
 	heigt: 100%;
 	margin: auto;
-	border: 1px solid red;
+	overflow: hidden;
+}
+
+#content {
+	width: 1500px;
+	disply: block;
+	margin: auto;
 	overflow: hidden;
 }
 
@@ -168,7 +174,6 @@ ul {
 .store-list {
 	overflow: hidden;
 	margin: 30px 30px;
-	border: 1px solid red;
 }
 
 .store-list .list li .info {
@@ -400,9 +405,9 @@ a:visited {
 <div id="wrap_stay">
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
-	<jsp:include page="../../views/common/productMenu.jsp" />
 
 	<section id="content">
+		<jsp:include page="../../views/common/productMenu.jsp" />
 		<div class="container">
 			<div class="page-util">
 				<div class="location">

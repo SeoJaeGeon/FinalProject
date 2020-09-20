@@ -31,16 +31,18 @@ nav {
 	width: 1500px;
 	height: 50px;
 }
-  #content {
-            /* width: 100%; */
-            width: 1500px;
-            margin: auto;
-        }
-.content {
+
+#content {
 	/* width: 100%; */
 	width: 1500px;
 	margin: auto;
 	overflow: hidden;
+}
+
+.content {
+	/* width: 100%; */
+	width: 1500px;
+	margin: auto;
 }
 
 footer {
@@ -378,9 +380,9 @@ img {
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
-	<jsp:include page="../../views/common/productMenu.jsp" />
 
 	<section id="content">
+		<jsp:include page="../../views/common/productMenu.jsp" />
 		<div class="content1">
 			<h2 class="title">스낵 상품 등록</h2>
 

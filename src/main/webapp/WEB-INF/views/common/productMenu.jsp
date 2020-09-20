@@ -50,7 +50,7 @@
         }
 </style>
 </head>
-<body>
+<body> <!-- 이거 너가 어사이드 부르는건데 여기다가 id=content해서 덮어주고 거기다 얘 include할때 id=content에 위에서 하니깐 id=content가 두개였음 따로따로 -->
 		<aside class="myMenu">
 			<table>
 				<tr>
