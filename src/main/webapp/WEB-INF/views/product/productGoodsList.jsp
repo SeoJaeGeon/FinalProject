@@ -33,12 +33,6 @@ nav {
 	/* width: 100%; */
 	width: 1500px;
 	margin: auto;
-}
-
-.content {
-	width: 100%;
-	heigt: 100%;
-	margin: auto;
 	overflow: hidden;
 }
 

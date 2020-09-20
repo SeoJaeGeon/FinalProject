@@ -324,9 +324,9 @@ a:visited {
 /* 내가 쓴 코드 */
 #content {
 	width: 1500px;
-	border: 1px solid red;
 	disply: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .img2 {
@@ -346,6 +346,53 @@ a:visited {
 	margin-bottom: 40px;
 	text-decoration: none;
 	border: 1px solid #e4e4e4;
+}
+
+.pagination {
+	/* border: 1px solid rgb(16, 157, 182); */
+	width: 300px;
+	height: 50px;
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+.pageOne {
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
+}
+
+.pageOne:hover {
+	color: rgb(51, 51, 51);
+	text-decoration: none;
+}
+
+.pageNone {
+	background: rgb(241, 241, 241);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
+}
+.pageInnerDiv {
+    width: auto;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
 }
 </style>
 </head>
@@ -401,16 +448,50 @@ a:visited {
 					
 				</div>
 
-					<div class="pagination" align="center">
-						<a class="pageOne" href="#">&lt;</a> <a class="pageOne" href="#">1</a>
-						<a class="pageOne" href="#">2</a> <a class="pageOne" href="#">3</a>
-						<a class="pageOne" href="#">4</a> <a class="pageOne" href="#">5</a>
-						<a class="pageOne" href="#">&gt;</a>
+				<!-- 페이징 처리 -->
+				<div class="pagination">
+					<div class="pageOuterDiv">
+						<div class="pageInnerDiv">
+							<!-- 이전 -->
+							<c:if test="${ pi.currentPage <= 1 }">
+								<a class="pageNone">&lt;</a>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="before" value="goodsPurchaseList.do">
+									<c:param name="page" value="${ pi.currentPage -1 }" />
+								</c:url>
+								<a class="pageOne" href="${ before }">&lt;</a>
+							</c:if>
 
-						<!-- 버튼 비활성화 일 때 -->
-						<!-- <a class="pageNone">&lt;&lt;</a> -->
+							<!-- 페이지 숫자 -->
+							<c:forEach var="p" begin="${ pi.startPage }"
+								end="${ pi.endPage }">
+								<c:if test="${ p eq pi.currentPage }">
+									<a class="pageNone">${ p }</a>
+								</c:if>
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="pagination" value="productList.do">
+										<c:param name="page" value="${ p }" />
+									</c:url>
+									<a class="pageOne" href="${ pagination }">${ p }</a>
+								</c:if>
+							</c:forEach>
+
+							<!-- 이후 -->
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<a class="pageNone">&gt;</a>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="after" value="productList.do">
+									<c:param name="page" value="${ pi.currentPage + 1 }" />
+								</c:url>
+								<a class="pageOne" href="${ after }">&gt;</a>
+							</c:if>
+							<!-- 버튼 비활성화 일 때-->
+							<!-- <a class="pageNone">&lt;&lt;</a> -->
+						</div>
 					</div>
-
+				</div>
 			</div>
 		</div>
 

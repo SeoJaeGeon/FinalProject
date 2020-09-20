@@ -37,13 +37,14 @@ nav {
 	height: 50px;
 }
 
-.content {
-	width: 100%;
-	heigt: 100%;
+#content {
+	/* width: 100%; */
+	width: 1500px;
+	disply: block;
 	margin: auto;
-	border: 1px solid red;
 	overflow: hidden;
 }
+
 
 footer {
 	width: 100%;
@@ -355,60 +356,62 @@ a:visited {
 
 /* 페이징 바 */
 .pagination {
-    /* border: 1px solid rgb(16, 157, 182); */
-    width: 300px;
-    height: 50px;
-    margin: auto;
-    margin-top: 100px;
-    margin-bottom: 100px;
-
+	/* border: 1px solid rgb(16, 157, 182); */
+	width: 300px;
+	height: 50px;
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
 
 .pageOne {
-    border: 1px solid rgb(224, 224, 224);
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    padding-top: 7px;
-    padding-left: 3px;
-    padding-right: 3px;
-    border-radius: 5px;
-    color: rgb(51, 51, 51);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
 }
 
 .pageOne:hover {
-    border: 1px solid rgb(151, 151, 151);
-    color: rgb(51, 51, 51);
-    text-decoration: none;
-
+	color: rgb(51, 51, 51);
+	text-decoration: none;
 }
 
 .pageNone {
-    border: 1px solid rgb(224, 224, 224);
-    background: rgb(241, 241, 241);
-    display: inline-block;
-    text-decoration: none;
+	background: rgb(241, 241, 241);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
+}
+.pageInnerDiv {
+    width: auto;
+    margin: auto;
     text-align: center;
-    width: 30px;
-    height: 30px;
-    padding-top: 7px;
-    padding-left: 3px;
-    padding-right: 3px;
-    border-radius: 5px;
-    color: rgb(51, 51, 51);
+    margin-bottom: 30px;
 }
 /* 페이징 바 */
 </style>
 </head>
 <body>
 <div id="wrap_stay">
-		<jsp:include page="../../views/common/manager.jsp" />
+		<jsp:include page="../../views/common/manager.jsp" /> 
 	</div>
-	<jsp:include page="../../views/common/productMenu.jsp" />
 
 	<section id="content">
+		<jsp:include page="../../views/common/productMenu.jsp" />
+	
 		<div class="container">
 			<div class="page-util">
 				<div class="location">
@@ -501,7 +504,7 @@ a:visited {
 				</div>
 			</div>
 		</div>
-
+		
 	</section>
 	<script>
 		$('.top_Menu li').click(function() {
