@@ -216,6 +216,7 @@
 		FROM MOVIE
 		JOIN ATTACHMENT USING (MOVIE_NO)
 		WHERE FILE_STATUS = 'Y'
+	    and MOVIE_RSTATUS = 'Y'
 		and SORT_CODE = 20
 		
 	</select>
