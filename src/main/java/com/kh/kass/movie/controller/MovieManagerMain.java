@@ -274,7 +274,8 @@ public class MovieManagerMain {
 	@RequestMapping("MovieManagerDeletePage.do")
 	public ModelAndView MovieManagerDeletePage(ModelAndView mv) {
 		
-			ArrayList<Movie> movListFile = movService.movListON();
+			//ArrayList<Movie> movListFile = movService.movListON();
+			ArrayList<Movie> movListFile = movService.movListON2();
 			
 			System.out.println(movListFile.get(0).getAttachList().get(0).getRenameFileName());
 			

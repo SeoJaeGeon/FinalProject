@@ -92,5 +92,7 @@ public interface MovieManagerService {
 	public ArrayList<Movie_Room> movRoomList(String ma_name);
 
 	public ArrayList<Movie_Sales> selectMovieTebalAjax(int maNo);
+
+	public ArrayList<Movie> movListON2();
 	
 }

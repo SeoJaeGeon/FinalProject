@@ -154,6 +154,10 @@ public class MovieManagerDao {
 		System.out.println("maNo 값 : " + maNo);
 		return (ArrayList)sqlSession.selectList("movieManagerMapper.selectTableAjaxList",maNo);
 	}
+
+	public ArrayList<Movie> selectmovListOn2() {
+		return (ArrayList)sqlSession.selectList("movieManagerMapper.movListOn2");
+	}
 	
 	
 }
