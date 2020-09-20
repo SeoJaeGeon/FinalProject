@@ -900,7 +900,6 @@ input:checked+.slider:before {
 		$("#movieCheck").click(function(){
 			tf = $("input:checkbox[id='movieCheck']").is(":checked");
 			test('a');
-			console.log("ㅇㄴ");
 		});
 		
 		$('.resBtn').click(function(){
