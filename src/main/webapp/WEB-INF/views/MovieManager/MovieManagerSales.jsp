@@ -361,7 +361,6 @@
 
         .datepicker{
             top:-990px !important;
-            left: 230px !important;
             width: 650px;
             height: 620px;
             position: relative;
