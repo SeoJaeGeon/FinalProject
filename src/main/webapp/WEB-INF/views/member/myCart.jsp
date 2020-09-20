@@ -122,6 +122,7 @@
 <body>
 	<div id="wrap_stay">
 		<jsp:include page="../../views/common/white.jsp" />
+			<c:url var="vodCart" value="mycart.do"><c:param name="userNo" value="${ loginUser.userNo }"/></c:url>
 
 
 		<div class="content">
@@ -157,7 +158,7 @@
 						<div class="my-2">
 							<div class="my-2-1">
 
-								<a href="#">
+								<a href="${ vodCart }">
 									<div class="goCartDiv"><img class="cart" src="${ contextPath }/resources/images/vodIcon.png">
 										<div class="goCartText">VOD 장바구니<br>바로가기</div>
 									</div>

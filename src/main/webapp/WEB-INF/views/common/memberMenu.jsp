@@ -24,7 +24,7 @@
 		<aside class="myMenu">
 			<c:url var="mrlist" value="movieReviewList.do" />
 			<c:url var="vrlist" value="vodReviewList.do" />
-			<c:url var="wishlist" value="ddd.do" />
+			<c:url var="wishlist" value="mywish.do"><c:param name="userNo" value="${ loginUser.userNo }"/></c:url>
 			<c:url var="mlist" value="moviePurchaseList.do" />
 			<c:url var="vlist" value="vodPurchaseList.do" />
 			<c:url var="slist" value="snackPurchaseList.do" />
@@ -49,7 +49,7 @@
 									리뷰</a></li>
 							<li><a class="aMenu" href="${vrlist}">내가 쓴 VOD
 									리뷰</a></li>
-							<li><a class="aMenu" href="wishlist">내가 찜한 VOD</a></li>
+							<li><a class="aMenu" href="${ wishlist }">내가 찜한 VOD</a></li>
 							<li><a class="aMenu" href="myCartView.do">장바구니</a></li>
 						</ul>
 					</td>
