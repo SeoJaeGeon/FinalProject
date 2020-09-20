@@ -434,7 +434,6 @@
         }
 
         .datepicker{
-         	left: 833px !important;
 		    top: -1284px !important;
 		    
 		    width: 430px;
@@ -1054,7 +1053,9 @@ margin: auto;
                                     	<%
                                     	if(list_movieRes.size() == 0){
                                     	%>	
+                                    	console.log("resultNum 처음 : " + resultNum);
                                     	if(resultNum==0){
+                                    		console.log("resultNum 이 0 이라서 여기 들어옴");
                                     		$.ajax({ 
             									url: "MovieArrAjaxselect1.do",
             									type: "post",
@@ -1062,7 +1063,9 @@ margin: auto;
             									async:false,
             									contentType: "application/json; charset=utf-8",
             									success: function(data) {
+            										
             										dateEnd = data;
+            										
             										console.log("아자스 직후 : " + dateEnd);
             										},
             										error: function(errorThrown) {
@@ -1071,9 +1074,69 @@ margin: auto;
             									});
                                     	}
                                     	resultNum = 1;
-                                     <%	} else{
-                                    	for (int i = 0; i < list_movieRes.size(); i++) {
-                                    	%>
+                                    	console.log("resultNum 끝 : " + resultNum);
+                                    	
+                                    	if(resultNum = 1){
+                                    		console.log("resultNum = 1 이라서 들어옴")
+                                    		var moviename = num1; // 영화 이름
+                                        	var roomNo = num3;    // 룸 번호
+                                        	var maName = num2;    // 영화관 지역
+                                       		var resDate = dateA;   // 상영 날짜
+                                       		var startTime = numA1; // 시작 시간
+                                       		var endTime = dateEnd;   // 종료 시간
+                                       		
+                                       		$.ajax({ 
+            									url: "MovieArrAjaxselect1.do",
+            									type: "post",
+            									data: JSON.stringify(obj0),
+            									async:false,
+            									contentType: "application/json; charset=utf-8",
+            									success: function(data) {
+            										
+            										dateEnd = data;
+            										
+            										console.log("아자스 직후 : " + dateEnd);
+            										},
+            										error: function(errorThrown) {
+            										alert("상영등록에 실패했습니다.")
+            										},
+            									});
+                                       		
+                                       		
+                                       		console.log("moviename : " + num1);
+                                       		console.log("roomNo : " + num3);
+                                       		console.log("maName : " + num2);
+                                       		console.log("resDate : " + dateA);
+                                       		console.log("startTime : " + numA1);
+                                       		console.log("endTime : " + dateEnd);
+                                       		
+                                        	for(var key in tableStartTime){
+                                        		console.log("key1231231312 : " + key, tableStartTime[key].resDate);
+                                        		if(resDate.getTime() == tableStartTime[key].resDate.getTime()){
+                                        			if(maName == tableStartTime[key].maName){
+                                        				if(roomNo == tableStartTime[key].roomNo){
+                                        					if(startTime >= tableStartTime[key].startTime && endTime <= tableStartTime[key].endTime){
+                                        						alert("해당 시간대는 이미 영화 상영 예정입니다.");
+                                        						return;
+                                        					}
+                                        					if(endTime >= tableStartTime[key].startTime && startTime <= tableStartTime[key].endTime){
+                                        						alert("해당 시간대는 이미 영화 상영 예정입니다.");
+                                        						return;
+                                        					}
+                                        				}
+                                        			}
+                                        		}
+                                        		
+                                        		
+                                        	}
+                                    		
+                                    	}
+                                     <%	
+                                     } else{
+                                    	 
+                                     for (int i = 0; i < list_movieRes.size(); i++) {
+                                     
+                                     %>
                                     	console.log("서재건의 테스트 공간");
 										numX1 = <%="'" + list_movieRes.get(i).getStartTime() + "'"%>;
 										numX2 = <%="'" + list_movieRes.get(i).getEndTime() + "'"%>;   
@@ -1150,6 +1213,7 @@ margin: auto;
 										
 										
                                         if(tableStartTime == null || tableStartTime == ""){
+                                        	
                                         } else {
                                         	var moviename = num1; // 영화 이름
                                         	var roomNo = num3;    // 룸 번호
@@ -1223,9 +1287,13 @@ margin: auto;
                                     	if(num2 == "지역을 선택 해 주세요"){
                                     		alert("지역을 선택해 주시기 바랍니다.");
                                     	} else {
+                                    	console.log("마지막 추가쪽 들어옴");
                                     	tableDatas.push({movieName : num1, maName : num2, roomNo: num3 ,startTime: num8, endTime: dateEnd, resDate: dateA});
                                     	tableStartTime.push({movieName : num1, maName : num2, roomNo: num3, startTime: numA1, endTime: dateEnd, resDate: dateA});
-                                    	console.log(tableStartTime);
+                                    	console.log("tableStartTime 추가함 : ");
+                                    	console.log(tableStartTime)
+                                    	console.log("tableDatas 추가함 : ");
+                                    	console.log(tableDatas);
                                     	
                                     	
                                     	console.log(tableDatas);
