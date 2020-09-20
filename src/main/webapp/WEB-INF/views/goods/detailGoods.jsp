@@ -850,7 +850,7 @@ p {
 						<!-- pd_detail -->
 					</div>
 
-					<div class="box-pulldown">
+			<!-- 		<div class="box-pulldown">
 						<div class="tit">
 							<button type="button" id="btn_01" class="btn-toggle">
 								구매 후 취소 <i class="iconset ico-arr-toggle-down">내용보기</i>
@@ -882,7 +882,7 @@ p {
 								추가됩니다. (단, PET음료로 변경불가)
 							</p>
 						</div>
-					</div>
+					</div> -->
 
 
 
@@ -958,7 +958,7 @@ p {
         
         function buyBtn(){
         	if(${empty loginUser} == false){
-        		location.href="goSnackBuy.do?snackNo="+snackNo+"&proCount="+proCount;        		
+        		location.href="goSnackBuy.do?goodsNo="+goodsNo+"&proCount="+proCount;        		
         	}else{
         		alert("로그인 해주세요");
         	}

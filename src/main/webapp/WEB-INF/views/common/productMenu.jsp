@@ -68,11 +68,11 @@
 					<td>
 						<ul class="list" style="-webkit-padding-start: 10px;">
 							<li><a href="sInsertSnack.do">스낵 상품 등록</a></li>
-							<li><a href="sUpdateSnack.do">스낵 수정 및 삭제</a></li>
+							<li><a href="ManagerSnackList.do">스낵 수정 및 삭제</a></li>
 						</ul>
 						<ul class="list" style="-webkit-padding-start: 10px;">
 							<li><a href="gInsertGoods.do">굿즈 상품 등록</a></li>
-							<li><a href="gUpdateGoods.do">굿즈 수정 및 삭제</a></li>
+							<li><a href="ManagerGoodsList.do">굿즈 수정 및 삭제</a></li>
 						</ul>
 					</td>
 				</tr>

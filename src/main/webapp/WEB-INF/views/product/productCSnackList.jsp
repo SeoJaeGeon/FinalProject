@@ -267,57 +267,11 @@ a:visited {
 	min-height: 200px;
 }
 
-.tab_List {
-	margin-top: 20px;
-	width: 100%;
-	height: 50px;
-}
-
-.top_Menu {
-	margin: 0px;
-	padding: 0px;
-	margin-left: 1px;
-	width: 100%;
-	height: 100%;
-}
-
-.top_Menu li {
-	margin: 0px;
-	padding: 0px;
-	width: 430px;
-	height: 100%;
-	list-style: none;
-	float: left;
-	border-bottom: 1px solid rgb(31, 69, 97);
-}
-
-.on {
-	border-left: 1px solid rgb(31, 69, 97) !important;
-	border-right: 1px solid rgb(31, 69, 97) !important;
-	border-top: 1px solid rgb(31, 69, 97) !important;
-	border-bottom: none !important;
-}
-
-.top_Menu li a {
-	display: block;
-	margin-top: 5px;
-	font-style: none;
-	text-decoration: none;
-	color: black;
-	text-align: center;
-	font-size: 18px;
-	font-family: 'NanumBarunGothic', sans-serif;
-	width: 100%;
-	height: 100%;
-}
-
-.top_Menu li a:focus {
-	outline: none;
-}
-
 .snackImg {
 	width: 208px;
 	height: 240px;
+	display: block; 
+	margin: auto; 
 }
 
 /* 내가 쓴 코드 */
@@ -469,13 +423,6 @@ pagination {
 		</div>
 		<div class="content1">
 			<h2 class="title">스토어</h2>
-			<div class="tab_List">
-				<ul class="top_Menu">
-					<li class="on"><a href="#"> 스낵 </a></li>
-					<li><a href="#"> 음료 </a></li>
-					<li><a href="#"> 콤보 </a></li>
-				</ul>
-			</div>
 
 			<div id="divNewPrdtArea">
 				<div class="store-list">

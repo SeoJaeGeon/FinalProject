@@ -841,12 +841,12 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">유효기간</th>
-                                    <td>스위트샵 상품권 24개원</td>
+                                    <td>스위트샵 상품권 6개원</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">사용가능 영화관</th>
                                     <td>
-                                        <button class="btn_col4 ty3 rnd" title="레이어팝 열기">스위트샵 상품권</button>
+                                        <button class="btn_col4 ty3 rnd" title="레이어팝 열기">모든 영화관</button>
                                         &nbsp;
                                     </td>
                                 </tr>
@@ -912,9 +912,6 @@
                         </p>
                     </div>
                 </div>
-
-                
-
             </div><!-- contents -->
         </div><!-- subsection -->
         <!-- </div> -->
