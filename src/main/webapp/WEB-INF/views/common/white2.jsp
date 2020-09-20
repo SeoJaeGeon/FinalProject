@@ -10,7 +10,7 @@
 <title>KASS CINEMA</title>
 
 <style>
-  header,
+  		header,
         nav,
         section,
         article,
@@ -324,19 +324,16 @@ a {
 	</c:if>
 	<header>
 		<section id="header-1">
-			<form id="search-form">
-				<input type="text" id="search_Text" name="search_Text"
-					placeholder="영화 입력">
-				<button type="submit" id="search_Btn" name="search_Btn">
-					<img
-						src="<%=request.getContextPath()%>/resources/images/search.png"
-						id="search_img">
+			<div id="search-form">
+				<input type="text" id="search_Text" name="search_Text" placeholder="영화 입력">
+				<button type="submit" id="search_Btn" name="search_Btn"type="button" onclick="enter();">
+					<img src="${ contextPath }/resources/images/search.png" id="search_img">
 				</button>
-			</form>
+			</div>
 		</section>
 		<section id="header-2">
 			<a href="${ contextPath }"> <img
-				src="<%=request.getContextPath()%>/resources/images/logo_navy.png"
+				src="${ contextPath }/resources/images/logo_navy.png"
 				id="logo_img">
 			</a>
 		</section>
@@ -365,9 +362,10 @@ a {
 		<ul id="navi">
 			<li><a href="movieList.do">영화</a></li>
 			<li><a href="resList.do">예매</a></li>
-			<li><a href="#">극장</a></li>
-			<li><a href="#">VOD</a></li>
-			<li><a href="#">스토어</a></li>
+			<li><a href="placeList.do">극장</a></li>
+			<li><a href="#" onclick="cate(); return false;">  VOD</a></li>
+			<input type="hidden" id="category" value="">
+			<li><a href="productList.do">스토어</a></li>
 		</ul>
 	</nav>
 
@@ -378,7 +376,7 @@ a {
 				<span class="loginTitle">로그인</span> <span class="close"
 					onclick="close_pop();">X</span>
 			</div>
-			<div>
+			<div class="imgDiv">
 				<a href="javascript:back();"> <img class="logoImg"
 					src="${ contextPath }/resources/images/logo_navy.png">
 				</a>
@@ -417,10 +415,14 @@ a {
 		}
 
 		function back() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 
 		function close_pop() {
+			$("#userId").val("");
+			$("#userPwd").val("");
 			document.getElementById("myloginModal").style.display = "none";
 		}
 
@@ -441,6 +443,24 @@ a {
 			}
 
 			return true;
+		}
+		
+		function enter(){
+			var searchText = $("#search_Text").val();
+			if(searchText != '' && searchText != ' '){
+				location.href="movieList.do?searchText="+searchText;
+				$("#search_Text").val("");
+			}else{
+				alert("검색어를 입력해주세요.");
+			}
+		}
+		
+		function cate() {
+			console.log("전체");
+			var testa = $("#category");
+			testa.val("0")
+			console.log("확인 : "+testa.val());
+			location.href="vlist.do?testa="+testa.val();
 		}
 	</script>
 </body>

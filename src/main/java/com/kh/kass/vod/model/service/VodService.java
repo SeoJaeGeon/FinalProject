@@ -6,6 +6,7 @@ import com.kh.kass.common.PageInfo;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.vod.model.vo.VodOrder;
 import com.kh.kass.vod.model.vo.VodPay;
+import com.kh.kass.vod.model.vo.VodReview;
 import com.kh.kass.vod.model.vo.VodWish;
 
 
@@ -47,5 +48,9 @@ public interface VodService {
 	public int vodvod(int movieNo);
 	
 	public int selectListCount1(int userNo);
+	
+	public ArrayList<VodReview> selectvr(int movieNo);
+	
+	public int dddd(VodWish vw );
 	
 }

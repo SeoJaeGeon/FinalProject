@@ -12,6 +12,7 @@ import com.kh.kass.common.PageInfo;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.vod.model.vo.VodOrder;
 import com.kh.kass.vod.model.vo.VodPay;
+import com.kh.kass.vod.model.vo.VodReview;
 import com.kh.kass.vod.model.vo.VodWish;
 
 
@@ -131,6 +132,16 @@ public ArrayList<Movie> cartselectList(int userNo) {
 		
 			return sqlSession.selectOne("vodMapper.selectListCount1" ,userNo);		
 		
+	}
+	
+	public ArrayList<VodReview> selectvr(int movieNo) {
+		
+		return (ArrayList)sqlSession.selectList("vodMapper.selectvr" , movieNo);
+	}
+	
+	public int dddd(VodWish vw ) {
+		
+			return sqlSession.insert("vodMapper.dddd",vw);
 	}
 
 	

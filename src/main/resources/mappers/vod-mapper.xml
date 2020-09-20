@@ -60,20 +60,35 @@
 		<id property="payNo" column="PAY_NO" />
 	</resultMap>
 	
+	<resultMap id="vodreview11" type="VodReview">
+		<id property="reeScore" column="R_SCORE" />
+		<id property="reeContent" column="R_CONTENT" />
+	</resultMap>
+	
 	
 	
 	 <select id="selectList" resultMap="movieManagerResultSet">
 		SELECT *
 		FROM MOVIE
+		JOIN ATTACHMENT USING(MOVIE_NO)
 		WHERE GENRE_CODE LIKE '%' || #{category} || '%'
+		
 	
 	</select> 
+	
+	<select id="selectvr"  resultMap="vodreview11">
+		SELECT R_SCORE , R_CONTENT
+		FROM REVIEW
+		WHERE MOVIE_NO = #{movieNo}
+		
+	</select>
 	
 	
 	
 	<select id="selectOne"  resultMap="movieManagerResultSet">
 		SELECT *
 		FROM MOVIE
+		JOIN ATTACHMENT USING(MOVIE_NO)
 		WHERE MOVIE_NO=#{movieNo}
 		
 	</select>
@@ -100,13 +115,14 @@
 	
 	</select>
 	
+	<!-- fdsfsdfdsfsdfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdssd -->
 	  <select id="wishselectList" resultMap="movieManagerResultSet">
-	  SELECT MV.MOVIE_NO,MV.MOVIE_NAME , MV.MOVIE_AGE ,MV.GENRE_CODE,MV.MOVIE_PRICE,MV.MOVIE_LINK,MV.MOVIE_FOREMAN
-		,MV.MOVIE_PRODUCER ,MV.MOVIE_ACTOR ,MV.MOVIE_STIME ,MV.MOVIE_COUNTRY ,MV.MOVIE_CONTENT
+	  SELECT *
 		FROM MEMBER M
 		JOIN VOD_WISHLIST V ON (M.USER_NO = V.USER_NO)
 		JOIN MOVIE MV ON(MV.MOVIE_NO = V.MOVIE_NO)
-		WHERE  M.USER_NO =#{userNo}
+		JOIN ATTACHMENT A ON (A.MOVIE_NO = MV.MOVIE_NO)
+		WHERE  M.USER_NO = #{userNo}
 	
 	</select>
 	
@@ -210,5 +226,14 @@
 	
 	</select>
 	
+	
+	
+	<select id="dddd" resultType="_int">
+	 	 DELETE 
+		FROM VOD_WISHLIST
+        WHERE MOVIE_NO = #{movieNo}
+        AND USER_NO = #{userNo}
+	
+	</select>
 
 </mapper>
