@@ -269,25 +269,15 @@
 					userBirth : birth,
 					userPhone : phone
 				},
-
-				// 그냥 아이디값
 				dataType : "json",
 				success : function(data) {
 					console.log("성공!");
 					if (data != null) {
-						console.log("data" + data);
-
-						console.log("id : " + data.userId);
-						console.log("date : " + data.userEnrollDate)
 
 						$('#myModal').show();
 
 						var beforeId = data.userId;
-						var afterId = beforeId
-								.substring(0, beforeId.length - 3)
-								+ "***";
-
-						console.log(afterId);
+						var afterId = beforeId.substring(0, beforeId.length - 3) + "***";
 
 						$("#resultId").text("회원님의 아이디는 " + afterId + "입니다.");
 						$("#resultDate").text("가입일 : " + data.userEnrollDate);
