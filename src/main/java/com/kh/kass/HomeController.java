@@ -42,6 +42,7 @@ public class HomeController {
 		ArrayList<Movie> movieFavorList = resService.movieFavorList();
 		ArrayList<Movie> scoreList = resService.mScoreList();
 		ArrayList<Movie> totalScoreList = resService.mTotalScoreList();
+		ArrayList<Snack> snackList = sService.selectMList();
 		
 		ArrayList<Movie> avgScore = new ArrayList<>();
 		double avg = 0;
@@ -64,9 +65,14 @@ public class HomeController {
 		
 		Collections.sort(movieFavorList);
 		
+		for (Snack s : snackList) {
+			System.out.println("스낵 리스트 : " + s);
+		}
+		
 		if (movieDateList != null || movieFavorList != null) {
 			mv.addObject("movieDateList", movieDateList);
 			mv.addObject("movieFavorList", movieFavorList);
+			mv.addObject("snackList", snackList);
 			mv.setViewName("home");
 		} else {
 			throw new ResException("영화 리스트 불러오기를 실패했습니다.");
@@ -75,20 +81,5 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping("homeS.do")
-	public ModelAndView snackSelectAll(ModelAndView mv, String searchText) {
-		ArrayList<Snack> list = sService.selectMList();
-		
-		if (list != null) {
-			mv.addObject("list", list);
-			mv.setViewName("product/productSnackList");
-			System.out.println(list);
-			mv.setViewName("home");
-
-		} else {
-			throw new SnackException("상품 목록 조회에 실패하였습니다.");
-		}
-		return mv;
-	}
 	
 }

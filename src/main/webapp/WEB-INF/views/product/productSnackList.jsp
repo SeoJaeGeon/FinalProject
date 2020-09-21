@@ -487,7 +487,8 @@ a:visited {
 									<c:param name="snackNo" value="${ Snack.snackNo }" />
 									<c:param name="page" value="${ pi.currentPage }" />
 								</c:url>
-								<li class><a href="${ sdetail }" title="스낵" class="product">
+								<li>
+								<a href="${ sdetail }" title="스낵" class="product">
 										<div class="img">
 											<img class="snackImg"
 												src="${ contextPath }/${Snack.attachment.filePath}/${ Snack.attachment.renameFileName }"
@@ -505,7 +506,8 @@ a:visited {
 												</p>
 											</div>
 										</div>
-								</a></li>
+								</a>
+								</li>
 							</c:forEach>
 						</c:if>
 					</ul>
