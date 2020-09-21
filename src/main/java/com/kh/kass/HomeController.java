@@ -56,7 +56,20 @@ public class HomeController {
 			}
 		}
 		
+		for(int i=0; i<movieFavorList.size(); i++) {
+			System.out.println("movieFavorList.get(i).getScore() : " + movieFavorList.get(i).getScore());			
+		}
+		
 		Collections.sort(movieFavorList);
+		ArrayList<Movie> newFavorList = new ArrayList<>();
+		newFavorList.add(movieFavorList.get(0));
+		newFavorList.add(movieFavorList.get(1));
+		newFavorList.add(movieFavorList.get(2));
+		System.out.println("1. "+newFavorList.get(0));
+		System.out.println("2. "+newFavorList.get(1));
+		System.out.println("3. "+newFavorList.get(2));
+		
+		
 		
 		if (movieDateList != null || movieFavorList != null) {
 			mv.addObject("movieDateList", movieDateList);

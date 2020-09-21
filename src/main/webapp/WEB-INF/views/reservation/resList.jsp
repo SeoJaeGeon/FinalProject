@@ -109,6 +109,19 @@ header>section {
 	background: rgb(234, 227, 227);
 }
 
+#retryBtn{
+	position : absolute;
+	top : 5px;
+	right : 15px;
+	background : silver;
+	color : white;
+	font-size : 20px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	border-radius : 10px;
+	font-weight : bold;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
+
 .movie_station {
 	margin: auto;
 	margin-top: 145px;
@@ -311,6 +324,7 @@ header>section {
 	float: left;
 	width: 40%;
 	height: 50px;
+	position : relative;
 }
 
 .div_50p {
@@ -407,7 +421,8 @@ header>section {
 						<div class="movie_text select1">영화</div>
 						<div class="movie_text select2">지점</div>
 						<div class="movie_text select3">날짜</div>
-						<div class="movie_text select4">시간</div>
+						<div class="movie_text select4">시간
+				<button type="button" id="retryBtn" onclick="retryBtn();">다시 선택</button></div>
 					</div>
 					<div class="movie_station">
 						<div class="movie_select">
@@ -530,8 +545,6 @@ header>section {
 	window.onload = function(){
 		var num = 1;
 		areaValue = 1;
-		cinemaValue = 1;
-		selectCinema.text("건대");
 		timeValue = $('.movie_DateUl').children('.movie_day_list').eq(0).children('button').val();
 		selectTime.text(timeValue);
 		$('.moc_list_ul').children('.movie_area_list').eq(0).addClass('changeSelect');
@@ -603,7 +616,6 @@ header>section {
 						+ "message" + e.responseText);
 			}
 		});
-		$('.movie_place_list').eq(0).addClass('changeSelect');
 		
 		playMovie();
 	}
@@ -719,24 +731,7 @@ header>section {
 			placeValue = 0;
 			playMovie();
 		});
-		/* 
-		$(".movie_area_list").click(function() {
-			$('.movie_area_list').removeClass('changeSelect');
-			var list = $(this);
-			var child1 = list.children('button');
-			var child2 = child1.children('.movie_area');
-			list.addClass('changeSelect');
-			selectCinema.text("");
-			cinemaText = "";
-			cinemaValue = 0;
-			
-			areaNumber = $(this).children('button').children('input').val();
-			areaValue = child1.children('#mocNo').val();
-			
-			placeValue = 0;
-			playMovie();
-		});
-		 */
+		
 		$(".movie_day_list").click(function() {
 			$('.movie_day_list').removeClass('changeSelect');
 			var list = $(this);
@@ -850,6 +845,8 @@ header>section {
 					
 					if(data.length > 0){
 						for(i in data){
+							var $path = $("<input type='hidden' id='playPath'>").val(data[i].movie.attachList[0].filePath);
+							var $img = $("<input type='hidden' id='playImg'>").val(data[i].movie.attachList[0].renameFileName);
 							var $input = $("<input type='hidden' id='resNo'/>").text(data[i].resNo);
 							var $li = $("<li class='movie_time_list'>");
 							var $playBtn = $("<button class='movie_play'>");
@@ -906,6 +903,8 @@ header>section {
 							
 							$li.append($input);
 							$li.append($playBtn);
+							$li.append($path);
+							$li.append($img);
 							
 							$ul.append($li);
 						}
@@ -914,9 +913,23 @@ header>section {
 							$('.movie_time_list').removeClass('changeSelect');
 							var list = $(this);
 							var child1 = list.children('button').children('div').children('span').eq(1).text();
+							var child2 = list.children('button').children('.info').children('span').eq(0).text();
+							var child3 = list.children('button').children('.title').children('strong').text();
+							var con = '<%=request.getContextPath()%>';
+							var path = list.children('#playPath').val();
+							var img = list.children('#playImg').val();
+							console.log(child2);
+							console.log(child3);
+							console.log(path);
+							console.log(img);
 							list.addClass('changeSelect');
 
 							selectPlace.text(child1);
+							selectCinema.text(child2);
+							selectTitle.text(child3);
+							var $img = $("<img src='"+con+path+img+"' class='posterImg' width='150px' height='200px'/>");
+							$('#movie_poster').html("");
+							$('#movie_poster').append($img);
 							placeText = child1;
 							
 							placeValue = $(this).children('#resNo').text();
@@ -971,6 +984,10 @@ header>section {
 		    var birthdaymd = birth.substr(4, 4);
 		    var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
 		    return age;
+		}
+		
+		function retryBtn(){
+			location.href="resList.do";
 		}
 		
 	</script>

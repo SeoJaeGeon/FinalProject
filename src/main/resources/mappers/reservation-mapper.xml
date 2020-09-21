@@ -142,11 +142,17 @@
       JOIN MOVIE_ROOM USING (ROOM_NO)
       JOIN MOVIE_AREA USING (MA_NO)
       JOIN MOVIE_CITY USING (MOC_NO)
-      WHERE MOVIE_NO = #{movie.movieNo}
-      AND MOC_NO = #{mocNo}
+	  JOIN ATTACHMENT USING (MOVIE_NO)
+      WHERE TO_DATE((TO_CHAR(RES_DATE,'YYYY/MM/DD')|| '/' || START_TIME),'YYYY/MM/DD/hh24:mI') >  SYSDATE
+      <if test="maNo > 0">
       AND MA_NO = #{maNo}
+      </if>
+      AND MOC_NO = #{mocNo}
       AND RES_DATE = #{resDate}
-        AND TO_DATE((TO_CHAR(RES_DATE,'YYYY/MM/DD')|| '/' || START_TIME),'YYYY/MM/DD/hh24:mI') >  SYSDATE
+      AND SORT_CODE = 20
+      <if test="movie.movieNo > 0">
+      AND MOVIE_NO = #{movie.movieNo}
+      </if>
       ORDER BY START_TIME, ROOM_NUMBER
    </select>
    
@@ -302,20 +308,17 @@
    </select>
    
    <select id="movieFavorList" resultMap="movResultSet">
-      SELECT ROWNUM, a.*
-           FROM( 
            SELECT MOVIE_NO, MOVIE_NAME, MOVIE_AGE, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME,   COUNT(DECODE(R_SCORE,'G',1)) AS GOOD_SCORE
          FROM MOVIE
          JOIN ATTACHMENT USING (MOVIE_NO)
            LEFT JOIN REVIEW USING (MOVIE_NO)
            WHERE MOVIE_RSTATUS = 'Y'
-         AND TO_CHAR(SYSDATE,'YYYYMMDD') > MOVIE_RDATE
-         AND FILE_STATUS = 'Y'
-         AND SORT_CODE = 20
+	         AND TO_CHAR(SYSDATE,'YYYYMMDD') > MOVIE_RDATE
+	         AND FILE_STATUS = 'Y'
+	         AND SORT_CODE = 20
            AND (R_SORT = 'M' OR R_SORT IS NULL)
            GROUP BY MOVIE_NO, MOVIE_NAME, MOVIE_AGE, MOVIE_RDATE, FILE_PATH, ORIGIN_FILENAME, RENAME_FILENAME
-           ORDER BY  COUNT(R_SCORE) DESC) a
-      WHERE 3 >= ROWNUM
+           ORDER BY  COUNT(R_SCORE) DESC, MOVIE_RDATE DESC
    </select>
    
    <select id="placeList" resultMap="resResultSet">
@@ -346,29 +349,25 @@
    </select>
    
    <select id="mScoreList" resultMap="movResultSet">
-      SELECT ROWNUM, a.*
-      FROM(SELECT MOVIE_NO,  COUNT(DECODE(R_SCORE,'G',1)) AS GOOD_SCORE
-            FROM MOVIE
-              LEFT JOIN REVIEW USING(MOVIE_NO)
-              WHERE TO_CHAR(SYSDATE,'YYYYMMDD') > MOVIE_RDATE
-              AND (R_SORT = 'M' OR R_SORT IS NULL)
-              AND MOVIE_RSTATUS = 'Y'
-              GROUP BY MOVIE_NO
-              ORDER BY MOVIE_NO) a
-      WHERE 3 >= ROWNUM
+      SELECT MOVIE_NO,  COUNT(DECODE(R_SCORE,'G',1)) AS GOOD_SCORE
+      FROM MOVIE
+        LEFT JOIN REVIEW USING(MOVIE_NO)
+        WHERE TO_CHAR(SYSDATE,'YYYYMMDD') > MOVIE_RDATE
+        AND (R_SORT = 'M' OR R_SORT IS NULL)
+        AND MOVIE_RSTATUS = 'Y'
+        GROUP BY MOVIE_NO, MOVIE_RDATE
+        ORDER BY  MOVIE_NO, GOOD_SCORE DESC
    </select>
    
    <select id="mTotalScoreList" resultMap="movResultSet">
-      SELECT ROWNUM, a.*
-      FROM(SELECT MOVIE_NO,  COUNT(R_SCORE) AS GOOD_SCORE
-            FROM MOVIE
-              LEFT JOIN REVIEW USING(MOVIE_NO)
-              WHERE TO_CHAR(SYSDATE,'YYYYMMDD') > MOVIE_RDATE
-              AND (R_SORT = 'M' OR R_SORT IS NULL)
-              AND MOVIE_RSTATUS = 'Y'
-              GROUP BY MOVIE_NO
-              ORDER BY MOVIE_NO) a
-      WHERE 3 >= ROWNUM
+      SELECT MOVIE_NO,  COUNT(R_SCORE) AS GOOD_SCORE
+      FROM MOVIE
+        LEFT JOIN REVIEW USING(MOVIE_NO)
+        WHERE TO_CHAR(SYSDATE,'YYYYMMDD') > MOVIE_RDATE
+        AND (R_SORT = 'M' OR R_SORT IS NULL)
+        AND MOVIE_RSTATUS = 'Y'
+        GROUP BY MOVIE_NO, MOVIE_RDATE
+        ORDER BY MOVIE_NO,  GOOD_SCORE DESC
    </select>
    
 </mapper>
