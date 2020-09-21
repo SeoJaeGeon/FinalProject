@@ -169,13 +169,13 @@ public class VodController {
 		
 		if(result != null) {
 			mv.addObject("msg", "이미 등록 된 vod입니다 ");
-			mv.setViewName("vod/test");
+			mv.setViewName("home");
 		
 		}else {
 			int result2 = vService.vwish(vw);
 			
 			mv.addObject("msg", "vod 위시 저장 완료");
-			mv.setViewName("vod/test");
+			mv.setViewName("home");
 			
 		}
 	
@@ -249,7 +249,7 @@ public class VodController {
 			VodOrder vo = new VodOrder(userNo , movieNo , payNo);
 			int result2 = vService.insertorder(vo);
 			if(result2 >0) {
-				mv.setViewName("vod/test");
+				mv.setViewName("home");
 			}
 			
 			
@@ -293,7 +293,7 @@ public class VodController {
 			}
 			
 			if(result2 >0) {
-				mv.setViewName("vod/test");
+				mv.setViewName("home");
 			}
 			
 		}else {
@@ -362,13 +362,13 @@ public class VodController {
 		
 		if(result != null) {
 			mv.addObject("msg", "이미 등록 된 vod입니다 ");
-			mv.setViewName("vod/test");
+			mv.setViewName("home");
 		
 		}else {
 			int result2 = vService.vcart(vw);
 			
 			mv.addObject("msg", "vod 장바구니 저장 완료");
-			mv.setViewName("vod/test");
+			mv.setViewName("home");
 			
 		}
 	
@@ -541,6 +541,12 @@ public class VodController {
 	@RequestMapping("myinfo.do")
 	public String myInfoView() {
 		return "vod/insertvod";
+	}
+	
+
+	@RequestMapping("myinfoo.do")
+	public String myInfoView2() {
+		return "vod/deletevod";
 	}
 	
 	
