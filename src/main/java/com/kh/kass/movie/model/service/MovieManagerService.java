@@ -96,5 +96,6 @@ public interface MovieManagerService {
 	public ArrayList<Movie> movListON2();
 
 	public ArrayList<Movie_Res> selectMovResListAll();
+
 	
 }
