@@ -603,11 +603,7 @@ console.log($("#category").val());
 
 	
 	
-<div id="stay_footer">
-		<div id="stay_footer_inner">
-			<jsp:include page="../../views/common/footer.jsp" />
-		</div>
-	</div>
+
 	
 
 

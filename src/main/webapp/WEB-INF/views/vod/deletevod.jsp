@@ -335,6 +335,39 @@ margin-top:-20px;
 }
 
 
+
+        #cart{
+            margin: auto;
+          
+            width: 1000px;
+            height: 400px;
+      
+
+        }
+      
+        #cartvod{
+            
+            margin: auto;
+            margin-top: 10px;
+            border: rgb(0,0,0,0.2) 1px solid;
+            width: 970px;
+            height: 130px;
+            border-radius: 5px;
+        }
+        #vodimg{
+           
+            width: 95px;
+            height: 110px;
+            float: left; 
+            margin-left: 50px;
+             margin-top: 10px;
+        }
+        #movieImg{
+            width: 95px;
+            height: 110px;
+        }
+
+
     </style>
 </head>
 
@@ -345,9 +378,7 @@ margin-top:-20px;
      <br><br><br><br><br><br>
      <br><br>
      <h1>VOD 삭제</h1>
-    <section id="content">
-        <div id="stay2">
-            <div id="wrap_stay">
+  
                <form action="deletevod.do" method="post" id="vodpayForm">
             <input style="width: 800px; margin: auto;" id="search" name="search" type="text" class="form-control" placeholder="VOD 제목입력">
             
@@ -357,10 +388,10 @@ margin-top:-20px;
    
    
    
-    <c:forEach var="v" items="${ list }">
+   
     
     
-    <div style="margin-left:300px;"   id="cart">
+  <%--   <div style="margin-left:300px;"   id="cart">
     
       <div id="cartvod">
       
@@ -369,23 +400,38 @@ margin-top:-20px;
             
             <label style="margin-top: 50px; margin-left: 110px;" >${ v.movieName }</label>
             <label style="margin-left: 480px;">18,000</label>
-            <c:url var="bdetail" value="vodvod1.do">
+            <c:url var="bdetail" value="vodvod.do">
 			   <c:param name="movieNo" value="${ v.movieNo }" />
 			</c:url>
-			<a  style="margin-left:250px;"  href="${ bdetail}">삭제</a> 
+			<a  style="margin-left:250px;"  href="${ bdetail}">등록</a> 
             
             
             
         </div>
-	  </div>
+	  </div> --%>
+	  
+	  
+	  
+	   <div id="cart">
+     <c:forEach var="v" items="${ list }">
+      <div id="cartvod">
+            <div id="vodimg"><img id="movieImg" src="${ contextPath }${ v.attachList[0].filePath }${ v.attachList[0].renameFileName }"></div>
+            <label style="margin-top: 50px; margin-left: 110px;" >${ v.movieName }</label>
+             <c:url var="bdetail" value="vodvod1.do">
+			   <c:param name="movieNo" value="${ v.movieNo }" />
+			</c:url>
+           <a style="margin-left: 480px;" href="${ bdetail}" >삭제</a> 
+            
+        </div>
      </c:forEach>
-               
-              </div>
+        
+        
         </div>
-    </section>
-    <br><br><br>
+        
+        
     
-    <div id="stay_footer">
+    <BR><BR><BR><BR>
+    <%-- <div id="stay_footer">
         <div id="wrap_stay">
             <footer>
                 <div id="footer1">
@@ -409,7 +455,7 @@ margin-top:-20px;
                 </div>
             </footer>
         </div>
-    </div>
+    </div> --%>
     
 
     
