@@ -22,83 +22,83 @@
 
 <style>
 header, nav, section, article, aside, footer {
-   box-sizing: border-box;
-   display: block;
+	box-sizing: border-box;
+	display: block;
 }
 
 body {
-   width: 100%;
-   background: black;
-   margin: auto;
+	width: 100%;
+	background: black;
+	margin: auto;
 }
 
 header {
-   width: 100%;
-   height: 150px;
+	width: 100%;
+	height: 150px;
 }
 
 nav {
-   width: 100%;
-   height: 50px;
+	width: 100%;
+	height: 50px;
 }
 
 #content {
-   width: 100%;
+	width: 100%;
 }
 
 footer {
-   width: 100%;
-   height: 150px;
-   float: left;
-   background: lightgray;
+	width: 100%;
+	height: 150px;
+	float: left;
+	background: lightgray;
 }
 
 header>section {
-   float: left;
+	float: left;
 }
 
 #header-1 {
-   width: 25%;
-   height: 100%;
-   position: relative;
+	width: 25%;
+	height: 100%;
+	position: relative;
 }
 
 #header-2 {
-   width: 50%;
-   height: 100%;
-   position: relative;
+	width: 50%;
+	height: 100%;
+	position: relative;
 }
 
 #header-3 {
-   width: 25%;
-   height: 100%;
+	width: 25%;
+	height: 100%;
 }
 
 #footer1 {
-   width: 80%;
-   height: 30%;
-   padding: 1px;
-   width: 80%;
-   float: left;
+	width: 80%;
+	height: 30%;
+	padding: 1px;
+	width: 80%;
+	float: left;
 }
 
 #footer2 {
-   width: 80%;
-   height: 70%;
-   width: 80%;
-   float: left;
+	width: 80%;
+	height: 70%;
+	width: 80%;
+	float: left;
 }
 
 #footer3 {
-   width: 20%;
-   height: 70%;
-   float: left;
+	width: 20%;
+	height: 70%;
+	float: left;
 }
 
 .content1 {
-   width: 100%;
-   height: 800px;
-   padding-top: 55px;
+	width: 100%;
+	height: 800px;
+	padding-top: 55px;
 }
 
 .content2, .content1-1 {
@@ -108,62 +108,62 @@ header>section {
 }
 
 #causalImg {
-   width: 500px !important;
-   height: 600px !important;
-   margin: auto;
+	width: 500px !important;
+	height: 600px !important;
+	margin: auto;
 	cursor: pointer;
 }
 
 .carousel {
-   width: 100%;
+	width: 100%;
 }
 
 /* 영역 나누기 */
 #stay1 {
-   width: 100%;
-   background: black;
+	width: 100%;
+	background: black;
 }
 
 #stay2 {
-   width: 100%;
-   background: black;
+	width: 100%;
+	background: black;
 }
 
 #stay3 {
-   width: 100%;
-   background: white;
+	width: 100%;
+	background: white;
 }
 
 #stay4 {
-   width: 100%;
-   background: rgb(31, 69, 97);
+	width: 100%;
+	background: rgb(31, 69, 97);
 }
 
 #stay_footer {
-   width: 100%;
-   height: 150px;
-   background: lightgray;
+	width: 100%;
+	height: 150px;
+	background: lightgray;
 }
 
 #wrap_stay {
-   width: 1500px;
-   margin: auto;
+	width: 1500px;
+	margin: auto;
 }
 /* 영역 나누기 */
 /* 영화 예매 사진 */
 .title {
-   color: white;
-   font-weight: bold;
-   margin-bottom: 30px;
-   padding-top: 30px;
+	color: white;
+	font-weight: bold;
+	margin-bottom: 30px;
+	padding-top: 30px;
 }
 
 .movie {
-   display: inline-block;
-   margin: 50px 50px;
-   margin-bottom: 50px;
-   width: 250px;
-   height: 380px;
+	display: inline-block;
+	margin: 50px 50px;
+	margin-bottom: 50px;
+	width: 250px;
+	height: 380px;
 }
 
 .no-img {
@@ -172,42 +172,42 @@ header>section {
 	width: 280px;
 	height: 520px;
 	border: 1px solid silver;
-	border-radius : 10px;
-	overflow : hidden;
-	position : relative;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
 }
 
 .no-rank {
-	position : absolute;
-	top : 10px;
-	left : 15px;
-	color : white;
-	font-size : 30px;
+	position: absolute;
+	top: 10px;
+	left: 15px;
+	color: white;
+	font-size: 30px;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	font-weight : bold;
+	font-weight: bold;
 	font-family: 'NanumBarunGothic', sans-serif;
 }
 
-.like{
-	position : absolute;
-	top : 10px;
-	right : 15px;
-	color : purple;
-	font-size : 25px;
+.like {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	color: purple;
+	font-size: 25px;
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-	font-weight : bold;
+	font-weight: bold;
 	font-family: 'NanumBarunGothic', sans-serif;
-	text-align : left;
+	text-align: left;
 }
 
-.car-rank{
-	position : absolute;
-	top : 10px;
-	left : 550px;
-	color : white;
-	font-size : 50px;
+.car-rank {
+	position: absolute;
+	top: 10px;
+	left: 550px;
+	color: white;
+	font-size: 50px;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	font-weight : bold;
+	font-weight: bold;
 	font-family: 'NanumBarunGothic', sans-serif;
 }
 
@@ -220,9 +220,9 @@ header>section {
 .movie-list-info img {
 	width: 98%;
 	height: 98%;
-	margin-left : 1%;
-	margin-top : 1%;
-	border-radius : 10px;
+	margin-left: 1%;
+	margin-top: 1%;
+	border-radius: 10px;
 }
 
 .tit-area {
@@ -240,8 +240,8 @@ header>section {
 	color: white;
 	font-size: 15px;
 	font-weight: bold;
-	height : 27px;
-	width : 27px;
+	height: 27px;
+	width: 27px;
 }
 
 .tit {
@@ -253,7 +253,7 @@ header>section {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	color : white;
+	color: white;
 }
 
 .rate-date {
@@ -267,7 +267,7 @@ header>section {
 	text-align: center;
 	font-size: 15px;
 	font-weight: bold;
-	color : white;
+	color: white;
 }
 
 .btn-util {
@@ -275,12 +275,11 @@ header>section {
 	height: 10%;
 }
 
-
 /* 상영중 */
 .movie_statusY {
 	float: left;
 	margin-bottom: 5px;
-	margin-left : 5px;
+	margin-left: 5px;
 	padding-top: 7px;
 	background: rgb(46, 204, 113);
 	color: white;
@@ -289,7 +288,7 @@ header>section {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
-	border-radius : 10px;
+	border-radius: 10px;
 	cursor: default;
 }
 /* 상영중 */
@@ -297,7 +296,7 @@ header>section {
 .movie_statusW {
 	float: left;
 	margin-bottom: 5px;
-	margin-left : 5px;
+	margin-left: 5px;
 	padding-top: 7px;
 	background: rgb(52, 152, 219);
 	color: white;
@@ -306,7 +305,7 @@ header>section {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
-	border-radius : 10px;
+	border-radius: 10px;
 	cursor: default;
 }
 /* 개봉예정 */
@@ -314,7 +313,7 @@ header>section {
 .movie_statusN {
 	float: left;
 	margin-bottom: 5px;
-	margin-left : 5px;
+	margin-left: 5px;
 	padding-top: 7px;
 	background: rgb(231, 76, 60);
 	color: white;
@@ -323,7 +322,7 @@ header>section {
 	text-align: center;
 	font-size: 19px;
 	font-family: 'NanumBarunGothic', sans-serif;
-	border-radius : 10px;
+	border-radius: 10px;
 	cursor: default;
 }
 /* 상영종료 */
@@ -331,7 +330,7 @@ header>section {
 	float: right;
 	text-decoration: none;
 	margin-bottom: 5px;
-	margin-right : 5px;
+	margin-right: 5px;
 	padding-top: 7px;
 	color: white;
 	background: rgb(231, 76, 60);
@@ -353,8 +352,82 @@ header>section {
 	outline: none;
 }
 
-
 /* 영화 예매 사진 */
+
+/* 스낵 영역 */
+.snackImg {
+	width: 208px;
+	height: 240px;
+	display: block;
+	margin: auto;
+}
+
+/* 내가 쓴 코드 */
+.img2 {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	/* border: 1px solid aqua; */
+}
+
+.product {
+	width: 230px;
+	border-radius: 10px;
+	display: block;
+	height: 435px;
+	margin-bottom: 40px;
+	text-decoration: none;
+	border: 1px solid #e4e4e4;
+}
+
+.snackImg {
+	width: 208px;
+	height: 240px;
+	display: block;
+	margin: auto;
+}
+
+.info .price .sale em {
+	font-family: Roboto;
+	font-size: 1.6em;
+	font-weight: 400;
+	vertical-align: middle;
+}
+
+.info {
+	padding: 0 19px;
+	border-top: 1px solid #e4e4e4;
+	line-height: 1.3;
+}
+
+p {
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+
+.name .bundle .original .sale {
+	color: rgb(114, 114, 114);
+	text-decoration: none;
+}
+
+.tit-txt {
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 5px;
+	width: 220px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* color: white; */
+}
+
+
 </style>
 </head>
 <body>
@@ -492,32 +565,70 @@ header>section {
          <div id="wrap_stay">
             <section class="content1-1">
                <h1 class="title" style="color: black;"># 스낵</h1>
+               
                <article class="movie">
-                  <a href="#">
-                     <div class="photoDiv">
-                        <img src="${ contextPath }/resources/images/pop1.jpeg" class="poster">
-                        <p>팝콘</p>
-                     </div>
-                  </a>
+                  <a href="${ sdetail }" title="스낵" class="product">
+						<div class="img">
+							<img class="snackImg" src="${ contextPath }/${snackList[0].attachment.filePath}/${ snackList[0].attachment.renameFileName }" class="img img2">
+							<input type="hidden" value="${ snackList[0].snackNo }" id="snackNo"/>
+						</div>
+						<div class="info">
+							<div class="tit-txt">
+								<p class="name">${ snackList[0].snackName }</p>
+								<p class="bundle"><%-- ${ snackList[0].snackMemo } --%><br></p>
+							</div>
+							<div class="price">
+								<p class="original">${ snackList[0].snackMemo }</p>
+								<p class="sale">
+									<em>${ snackList[0].snackPrice }</em> <span>원</span>
+								</p>
+							</div>
+						</div> 
+					</a>
                </article>
+               
                <article class="movie">
-                  <a href="#">
-                     <div class="photoDiv">
-                        <img src="${ contextPath }/resources/images/pop2.jpeg" class="poster">
-                        <p>토르망치</p>
-                     </div>
-                  </a>
-
+                  <a href="${ sdetail }" title="스낵" class="product">
+						<div class="img">
+							<img class="snackImg" src="${ contextPath }/${snackList[1].attachment.filePath}/${ snackList[1].attachment.renameFileName }" class="img img2">
+							<input type="hidden" value="${ snackList[1].snackNo }" id="snackNo"/>
+						</div>
+						<div class="info">
+							<div class="tit-txt">
+								<p class="name">${ snackList[1].snackName }</p>
+								<p class="bundle"><%-- ${ snackList[1].snackMemo } --%><br></p>
+							</div>
+							<div class="price">
+								<p class="original">${ snackList[1].snackMemo }</p>
+								<p class="sale">
+									<em>${ snackList[1].snackPrice }</em> <span>원</span>
+								</p>
+							</div>
+						</div>
+					</a>
                </article>
+               
                <article class="movie">
-                  <a href="#">
-                     <div class="photoDiv">
-                        <img src="${ contextPath }/resources/images/pop3.jpeg" class="poster">
-                        <p>뱃지</p>
-                     </div>
-                  </a>
-
+                  <a href="${ sdetail }" title="스낵" class="product">
+						<div class="img">
+							<img class="snackImg" src="${ contextPath }/${snackList[2].attachment.filePath}/${ snackList[2].attachment.renameFileName }" class="img img2">
+							<input type="hidden" value="${ snackList[2].snackNo }" id="snackNo"/>
+						</div>
+						<div class="info">
+							<div class="tit-txt">
+								<p class="name">${ snackList[2].snackName }</p>
+								<p class="bundle"><%-- ${ snackList[2].snackMemo } --%><br></p>
+							</div>
+							<div class="price">
+								<p class="original">${ snackList[2].snackMemo }</p>
+								<p class="sale">
+									<em>${ snackList[2].snackPrice }</em> <span>원</span>
+								</p>
+							</div>
+						</div>
+					</a>
                </article>
+               
             </section>
          </div>
       </div>
@@ -594,6 +705,11 @@ header>section {
    $('.resBtn').click(function(){
 		var movieNum = $(this).children("#movieNum").val();
 		location.href="resList.do?movieNum="+movieNum;
+	});
+   
+   $(".img").on('click',function(){
+		var snackNo = $(this).children('#snackNo').val();
+		location.href="sdatil.do?snackNo="+snackNo;
 	});
    </script>
 </body>
