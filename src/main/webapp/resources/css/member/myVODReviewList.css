@@ -29,7 +29,9 @@ a:visited {
     margin-inline-end: 0px;
     font-weight: bold;
 }
-
+.topTd{
+    border-bottom: 1px dashed black;
+}
 .contentTable {
     border-collapse: collapse;
     border-top: 1px solid black;

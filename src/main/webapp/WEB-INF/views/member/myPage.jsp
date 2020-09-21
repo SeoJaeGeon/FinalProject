@@ -155,7 +155,7 @@ a:visited {
 						<div class="my-2">
 							<div class="my-2-1">
 								<div class="movieRecommendDiv">
-									<h2 class="myTitle">▶ 회원님이 최근에 본 VOD와 장르가 비슷해요!</h2>
+									<h2 class="myTitle">▶ 회원님이 최근에 본 VOD와 장르가 비슷한 영화에요!</h2>
 									<div class="movies">
 										<c:forEach var="rclist" items="${ list }">
 											<article class="movie">
