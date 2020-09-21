@@ -151,11 +151,18 @@ public class ResController {
 			date = java.sql.Date.valueOf(mergeStr);
 		}
 		
+		System.out.println("title : " + title);
+		System.out.println("area : " + area);
+		System.out.println("cinema : " + cinema);
+		System.out.println("date : " + date);
+		
+		
 		Movie mov = new Movie(title);
 		
 		Reservation res = new Reservation(mov, area, cinema, date);
 		
 		ArrayList<Reservation> playList = resService.playMovieSelect(res);
+		System.out.println("playList : " + playList);
 		
 		Gson gson = new Gson();
 		
