@@ -22,7 +22,7 @@
 
     
     
-   <jsp:include page="../../views/common/white.jsp" />
+   <jsp:include page="../../views/common/white2.jsp" />
     <div id="vod">　VOD 장바구니</div> <!-- 상단 띠-->
     <br>
     <button id="buy-btn" type="button" class="btn btn-outline-primary">VOD 더 담기</button>
@@ -56,7 +56,7 @@
 		        class="ck" name="ck" id="ck" onclick="check2();" value="${v.movieNo }">
 		        
 		        
-		        <div id="vodimg"><img id="movieImg" src="../수업자료/sample/image/city1.PNG"></div>
+		        <div id="vodimg"><img id="movieImg" src="${ contextPath }${ v.attachList[0].filePath }${ v.attachList[0].renameFileName }"></div>
 		        <label style="margin-top: 50px; margin-left: 114px;" >${v.movieName }</label>
 		        <label style="margin-left: 485px;">${v.moviePrice }</label>
 		       
@@ -135,11 +135,7 @@ function check2() {
 	            arr.push(document.getElementsByName("ck")[i].value);
 	        }
 	    }
-		alert(arr[0]);
-		alert(arr[1]);
-		alert(arr[2]);
-		alert(arr[3]);
-		alert(arr[4]);
+		
 		location.href="cdelete.do?movieNo="+checkBoxArr +"&aa="+userNo;
 	} 
 	

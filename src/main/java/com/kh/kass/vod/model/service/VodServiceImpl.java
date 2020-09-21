@@ -34,6 +34,12 @@ public class VodServiceImpl implements VodService {
 	}
 	
 	@Override
+	public Movie selectMovie1(int movieNo) {
+		
+		return vDao.selectMovie1(movieNo);
+	}
+	
+	@Override
 	public int vwish(VodWish vw) {
 		
 		return vDao.vwish(vw);

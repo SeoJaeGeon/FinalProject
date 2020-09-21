@@ -249,7 +249,7 @@ public class VodController {
 			VodOrder vo = new VodOrder(userNo , movieNo , payNo);
 			int result2 = vService.insertorder(vo);
 			if(result2 >0) {
-				mv.setViewName("home");
+				mv.setViewName("vod/paylast");
 			}
 			
 			
@@ -293,7 +293,7 @@ public class VodController {
 			}
 			
 			if(result2 >0) {
-				mv.setViewName("home");
+				mv.setViewName("vod/paylast");
 			}
 			
 		}else {

@@ -187,10 +187,14 @@
 	
 	<select id="cartselectList" resultMap="movieManagerResultSet">
 	 
-			SELECT *
-			FROM CART
-			left join movie using(movie_No)
-			WHERE USER_NO = #{userNo}
+			    SELECT *
+      FROM CART
+      left join movie using(movie_No)
+       JOIN ATTACHMENT USING(MOVIE_NO)
+      WHERE MOVIE_RSTATUS = 'N'
+      AND FILE_STATUS = 'Y'
+      AND SORT_CODE = 20
+      AND  MOVIE_VOD_STATUS = 'Y'
 	
 	</select>
 	
