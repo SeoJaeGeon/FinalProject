@@ -441,7 +441,7 @@ a:visited {
 												<p class="bundle">${ Goods.goodsPrice }</p>
 											</div>
 											<div class="price">
-												<p class="original">${ Goods.goodsMemo }</p>
+												<p class="original"><br><br><%-- ${ Snack.snackPrice }원 --%></p>
 												<p class="sale">
 													<em>${ Goods.goodsPrice }</em> <span>원</span>
 												</p>

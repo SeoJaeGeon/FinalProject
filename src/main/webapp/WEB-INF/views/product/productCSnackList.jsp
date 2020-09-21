@@ -447,7 +447,7 @@ pagination {
 												<p class="bundle">${ Snack.snackMemo }</p>
 											</div>
 											<div class="price">
-												<p class="original">${ Snack.snackPrice }원</p>
+												<p class="original"><br><br><%-- ${ Snack.snackPrice }원 --%></p>
 												<p class="sale">
 													<em>${ Snack.snackPrice }</em> <span>원</span>
 												</p>
