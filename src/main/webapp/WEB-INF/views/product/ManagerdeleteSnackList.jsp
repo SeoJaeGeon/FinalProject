@@ -402,7 +402,7 @@ a:visited {
 </style>
 </head>
 <body>
-<div id="wrap_stay">
+	<div id="wrap_stay">
 		<jsp:include page="../../views/common/manager.jsp" />
 	</div>
 
@@ -450,7 +450,6 @@ a:visited {
 							</c:forEach>
 						</c:if>
 					</ul>
-					
 				</div>
 
 				<!-- 페이징 처리 -->
@@ -462,7 +461,7 @@ a:visited {
 								<a class="pageNone">&lt;</a>
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="goodsPurchaseList.do">
+								<c:url var="before" value="ManagerdeleteSnackList.do">
 									<c:param name="page" value="${ pi.currentPage -1 }" />
 								</c:url>
 								<a class="pageOne" href="${ before }">&lt;</a>
@@ -475,7 +474,7 @@ a:visited {
 									<a class="pageNone">${ p }</a>
 								</c:if>
 								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="productList.do">
+									<c:url var="pagination" value="ManagerdeleteSnackList.do">
 										<c:param name="page" value="${ p }" />
 									</c:url>
 									<a class="pageOne" href="${ pagination }">${ p }</a>
@@ -487,7 +486,7 @@ a:visited {
 								<a class="pageNone">&gt;</a>
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="after" value="productList.do">
+								<c:url var="after" value="ManagerdeleteSnackList.do">
 									<c:param name="page" value="${ pi.currentPage + 1 }" />
 								</c:url>
 								<a class="pageOne" href="${ after }">&gt;</a>
@@ -498,7 +497,6 @@ a:visited {
 					</div>
 				</div>
 			</div>
-		</div>
 
 	</section>
 	<script>

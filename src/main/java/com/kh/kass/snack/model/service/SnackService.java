@@ -42,6 +42,8 @@ public interface SnackService {
 	public ArrayList<Snack> selectdpList(PageInfo pi);
 
 	public ArrayList<Snack> selectcpList(PageInfo pi);
+
+	public ArrayList<Snack> selectMList();
 	
 	
 	

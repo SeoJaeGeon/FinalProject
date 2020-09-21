@@ -80,6 +80,11 @@ public class SnackServiceImpl implements SnackService{
 		return sDao.selectcList(pi);
 	}
 
+	@Override
+	public ArrayList<Snack> selectMList() {
+		return sDao.selectmList();
+	}
+
 
 	
 

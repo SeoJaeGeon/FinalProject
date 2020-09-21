@@ -18,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.kass.movie.model.vo.Movie;
 import com.kh.kass.reservation.model.exception.ResException;
 import com.kh.kass.reservation.model.service.ResService;
+import com.kh.kass.snack.model.exception.SnackException;
+import com.kh.kass.snack.model.service.SnackService;
+import com.kh.kass.snack.model.vo.Snack;
 
 /**
  * Handles requests for the application home page.
@@ -30,6 +33,9 @@ public class HomeController {
 	@Autowired
 	private ResService resService;
 
+	@Autowired
+	private SnackService sService;
+	
 	@RequestMapping("home.do")
 	public ModelAndView movieSelectAll(ModelAndView mv, String searchText) {
 		ArrayList<Movie> movieDateList = resService.movieDateList();
@@ -66,6 +72,22 @@ public class HomeController {
 			throw new ResException("영화 리스트 불러오기를 실패했습니다.");
 		}
 		
+		return mv;
+	}
+	
+	@RequestMapping("homeS.do")
+	public ModelAndView snackSelectAll(ModelAndView mv, String searchText) {
+		ArrayList<Snack> list = sService.selectMList();
+		
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.setViewName("product/productSnackList");
+			System.out.println(list);
+			mv.setViewName("home");
+
+		} else {
+			throw new SnackException("상품 목록 조회에 실패하였습니다.");
+		}
 		return mv;
 	}
 	

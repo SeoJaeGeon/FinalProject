@@ -499,7 +499,6 @@ a:visited {
 					</div>
 				</div>
 			</div>
-		</div>
 		
 	</section>
 	<script>

@@ -151,4 +151,15 @@
 		AND S_CATE_NO=3
 		ORDER BY SNACK_NO DESC
 	</select>
+	
+	<select id="selectmList" resultMap="snackResultSet">
+		<![CDATA[SELECT a.*
+		FROM (
+		    SELECT *
+		    FROM SNACK
+		    JOIN ATTACHMENT USING(SNACK_NO)
+		    WHERE SNACK_STATUS='Y'
+		    ORDER BY SNACK_NO DESC) a
+		    WHERE ROWNUM <= 3 ]]>
+	</select>
 </mapper>
