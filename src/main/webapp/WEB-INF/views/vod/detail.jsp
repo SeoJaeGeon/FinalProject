@@ -20,7 +20,7 @@
     
      #vod{/* 상단 바 */
             margin: auto;
-            margin-top : 25px;
+            margin-top : 25px;`	`szzx`s
             width: 1500px;
             height: 70px;
             background-color: rgb(31, 69, 97);
@@ -759,9 +759,9 @@ function vbuy() {
    
     <div id="review-div">
     　　　리뷰
-   <c:if test="${ ck > 1 }">
+   
     <hr>
-    <div id="line2-div" style="position: absolute; height: 600px; top: 100px; left: 485px;"><img id="line2" style="height: 600px;" src="../수업자료/sample/image/줄.PNG"></div>
+    <div id="line2-div" style="position: absolute; height: 600px; top: 100px; left: 485px;"></div>
     
      <c:forEach var="v" items="${ vr }">
     <div id="review" style="margin-right: 50px;">
@@ -777,7 +777,7 @@ function vbuy() {
         <div id="userreview"><span>${v.reeContent }</span></div>
     </div>
     </c:forEach>
-    </c:if>
+  
 
 
 

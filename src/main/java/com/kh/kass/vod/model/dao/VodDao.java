@@ -39,6 +39,11 @@ public class VodDao {
 		return sqlSession.selectOne("vodMapper.selectOne", movieNo);
 	}
 	
+public Movie selectMovie1(int movieNo) {
+		
+		return sqlSession.selectOne("vodMapper.selectOne1", movieNo);
+	}
+	
 	public int vwish(VodWish vw) {
 		
 		return sqlSession.insert("vodMapper.insertwish" , vw);

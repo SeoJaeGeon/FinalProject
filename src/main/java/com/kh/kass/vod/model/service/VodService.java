@@ -17,6 +17,8 @@ public interface VodService {
 	
 	public Movie selectMovie(int movieNo);
 	
+	public Movie selectMovie1(int movieNo);
+	
 	public int vwish(VodWish vw);
 	
 	public int vcart(VodWish vw);

@@ -21,7 +21,7 @@
 
     
     
-   
+    <jsp:include page="../../views/common/white2.jsp" />
     <div id="vod"> 주문/결제</div> <!-- 상단 띠-->
     <br>
     <button id="buy-btn" type="button" class="btn btn-outline-primary">내 장바구니</button>
@@ -37,7 +37,7 @@
     <div id="cart">
         <div id="cate"> 
            
-            <label style="margin-left: 260px;"> ${m.movieName }</label>
+            <label style="margin-left: 260px;"> 제목</label>
             <label style="margin-left: 480px;"> 가격</label>
         </div>
 
@@ -46,9 +46,9 @@
 	
 	
       	<div id="cartvod">
-            <div id="vodimg"><img id="movieImg" src="../수업자료/sample/image/city1.PNG"></div>
+            <div id="vodimg"><img id="movieImg" src="${ contextPath }${ v.attachList[0].filePath }${ v.attachList[0].renameFileName }"></div>
             <label style="margin-top: 50px; margin-left: 110px;" >${v.movieName }</label>
-            <label style="margin-left: 480px;" id="aa" class="aa" name="aa">18,000</label>
+            <label style="margin-left: 480px;" id="aa" class="aa" name="aa">${v.moviePrice }</label>
             
         </div>
         
@@ -78,7 +78,7 @@
             
             <div id="right">
                 <label style="font-weight: bold; font-size: 15px; color: white; margin-left: 25px;">총 상품 금액</label>
-                <label  id="price">1,8000</label>
+                <label  id="price">${sum }</label>
                 <label style="font-weight: bold; font-size: 20px; color: white;">　원</label>
                 <div style="width: 300px; margin-left: 30px;"><hr></div>
 

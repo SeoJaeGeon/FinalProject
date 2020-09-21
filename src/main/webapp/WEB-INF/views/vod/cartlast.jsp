@@ -21,7 +21,7 @@
 
     
     
-   
+    <jsp:include page="../../views/common/white2.jsp" />
     <div id="vod"> 주문/결제</div> <!-- 상단 띠-->
     <br>
     <button id="buy-btn" type="button" class="btn btn-outline-primary">내 장바구니</button>
@@ -42,7 +42,7 @@
 
 
       <div id="cartvod">
-            <div id="vodimg"><img id="movieImg" src="../수업자료/sample/image/city1.PNG"></div>
+            <div id="vodimg"><img id="movieImg" src="${ contextPath }${ v.attachList[0].filePath }${ v.attachList[0].renameFileName }"></div>
             <label style="margin-top: 50px; margin-left: 110px;" >으아으</label>
             <label style="margin-left: 480px;">18,000</label>
             
