@@ -80,6 +80,10 @@ public class SnackDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("snackMapper.selectcList", null, rowBounds);
 	}
+
+	public ArrayList<Snack> selectmList() {
+		return (ArrayList)sqlSession.selectList("snackMapper.selectmList", null);
+	}
 	
 	
 
