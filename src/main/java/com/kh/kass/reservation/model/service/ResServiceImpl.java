@@ -140,5 +140,10 @@ public class ResServiceImpl implements ResService {
 		return resDao.mTotalScoreList();
 	}
 
+	@Override
+	public ArrayList<Movie> movieNList() {
+		return resDao.movieNList();
+	}
+
 
 }

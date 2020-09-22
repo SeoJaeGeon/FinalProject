@@ -160,7 +160,7 @@ header>section {
 
 .movie {
 	display: inline-block;
-	margin: 50px 50px;
+	margin: 50px 60px;
 	margin-bottom: 50px;
 	width: 250px;
 	height: 380px;
@@ -254,6 +254,7 @@ header>section {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	color: white;
+	marign-top : 12px !important;
 }
 
 .rate-date {
@@ -402,7 +403,7 @@ header>section {
 	line-height: 1.3;
 }
 
-p {
+.stay3 > p {
 	display: block;
 	margin-block-start: 1em;
 	margin-block-end: 1em;
@@ -523,7 +524,7 @@ p {
 					</div>
 					<div class="tit-area">
 						<p class="movie-grade">${ movieFavorList[1].movieAge }</p>
-						<p class="tit">${ movieFavorList[1].movieName }</p>
+						<p class="tit">${ movieFavorList[1].movieName }</span>
 					</div>
 					<div class="rate-date">
 						<span class="date"> 개봉일 : ${ movieFavorList[1].movieRdate } </span>
@@ -636,30 +637,68 @@ p {
          <div id="wrap_stay">
             <section class="content1-1">
                <h1 class="title"># VOD</h1>
-               <article class="movie">
-                  <a href="#">
-                     <div class="photoDiv">
-                        <img src="${ contextPath }/resources/images/aladin.jpeg" class="poster">
-                        <p>알라딘</p>
-                     </div>
-                  </a>
-               </article>
-               <article class="movie">
-                  <a href="#">
-                     <div class="photoDiv">
-                        <img src="${ contextPath }/resources/images/spirit.jpg" class="poster">
-                        <p>미녀와 야수</p>
-                     </div>
-                  </a>
-               </article>
-               <article class="movie">
-                  <a href="#">
-                     <div class="photoDiv">
-                        <img src="${ contextPath }/resources/images/begina.jpeg" class="poster">
-                        <p>비긴어게인</p>
-                     </div>
-                  </a>
-               </article>
+               
+               <c:if test="${ movieNoList[0] != null }">
+               <article class="no-img">
+					<div class="no-rank"><I>1</I></div>
+					<div class="like"><b>👍</b><span> ${ movieNoList[0].score }%</span></div>
+					<div class="movie-list-info">
+						<img src="${ contextPath }${ movieNoList[0].attachList[0].filePath }${ movieNoList[0].attachList[0].renameFileName }">
+						<input type="hidden" value="${ movieNoList[0].movieNo }" id="movieNo"/>
+					</div>
+					<div class="tit-area">
+						<p class="movie-grade">${ movieNoList[0].movieAge }</p>
+						<p class="tit">${ movieNoList[0].movieName }</p>
+					</div>
+					<div class="rate-date">
+						<span class="date"> 개봉일 : ${ movieNoList[0].movieRdate } </span>
+					</div>
+					<div class="btn-util">
+						<span class="movie_statusN">상영종료</span> 
+					</div>
+				</article>
+				</c:if>
+				<c:if test="${ movieNoList[1] != null }">
+               <article class="no-img">
+					<div class="no-rank"><I>2</I></div>
+					<div class="like"><b>👍</b><span> ${ movieNoList[1].score }%</span></div>
+					<div class="movie-list-info">
+						<img src="${ contextPath }${ movieNoList[1].attachList[0].filePath }${ movieNoList[1].attachList[0].renameFileName }">
+						<input type="hidden" value="${ movieNoList[1].movieNo }" id="movieNo"/>
+					</div>
+					<div class="tit-area">
+						<p class="movie-grade">${ movieNoList[1].movieAge }</p>
+						<p class="tit">${ movieNoList[1].movieName }</p>
+					</div>
+					<div class="rate-date">
+						<span class="date"> 개봉일 : ${ movieNoList[1].movieRdate } </span>
+					</div>
+					<div class="btn-util">
+						<span class="movie_statusN">상영종료</span> 
+					</div>
+				</article>
+				</c:if>
+				<c:if test="${ movieNoList[2] != null }">
+               <article class="no-img">
+					<div class="no-rank"><I>3</I></div>
+					<div class="like"><b>👍</b><span> ${ movieNoList[2].score }%</span></div>
+					<div class="movie-list-info">
+						<img src="${ contextPath }${ movieNoList[2].attachList[0].filePath }${ movieNoList[2].attachList[0].renameFileName }">
+						<input type="hidden" value="${ movieNoList[2].movieNo }" id="movieNo"/>
+					</div>
+					<div class="tit-area">
+						<p class="movie-grade">${ movieNoList[2].movieAge }</p>
+						<p class="tit">${ movieNoList[2].movieName }</p>
+					</div>
+					<div class="rate-date">
+						<span class="date"> 개봉일 : ${ movieNoList[2].movieRdate } </span>
+					</div>
+					<div class="btn-util">
+						<span class="movie_statusN">상영종료</span> 
+					</div>
+				</article>
+				</c:if>
+				
             </section>
          </div>
       </div>
@@ -673,6 +712,7 @@ p {
    <script>
    
    movie_check();
+   movie_check2();
    
    function movie_check() {
 		var grade_check = $('.content2').children('.no-img').children('.tit-area').children('.movie-grade');
@@ -688,6 +728,24 @@ p {
 			} else if (grade_check.eq(i).text() == '0') {
 				grade_check.eq(i).text("All");
                grade_check.eq(i).css('background', 'green');
+			}
+		}
+	}
+   
+   function movie_check2() {
+		var grade_check = $('.content1-1').children('.no-img').children('.tit-area').children('.movie-grade');
+		var titleSize = $('.no-img').length;
+
+		for (var i = 0; i < titleSize; i++) {
+			if (grade_check.eq(i).text() == '19') {
+				grade_check.eq(i).css('background', 'red');
+			} else if (grade_check.eq(i).text() == '15') {
+				grade_check.eq(i).css('background', 'orange');
+			} else if (grade_check.eq(i).text() == '12') {
+				grade_check.eq(i).css('background', 'skyblue');
+			} else if (grade_check.eq(i).text() == '0') {
+				grade_check.eq(i).text("All");
+              grade_check.eq(i).css('background', 'green');
 			}
 		}
 	}
@@ -709,7 +767,7 @@ p {
    
    $(".img").on('click',function(){
 		var snackNo = $(this).children('#snackNo').val();
-		location.href="sdatil.do?snackNo="+snackNo;
+		console.log(snackNo);
 	});
    </script>
 </body>

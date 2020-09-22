@@ -370,4 +370,15 @@
         ORDER BY MOVIE_NO,  GOOD_SCORE DESC
    </select>
    
+   <select id="movieNList" resultMap="movResultSet">
+      SELECT *
+      FROM MOVIE
+      JOIN GENRE USING(GENRE_CODE)
+      JOIN ATTACHMENT USING (MOVIE_NO)
+      WHERE MOVIE_RSTATUS = 'N'
+      AND FILE_STATUS = 'Y'
+      AND SORT_CODE = 20
+      ORDER BY MOVIE_RDATE DESC
+   </select>
+   
 </mapper>
