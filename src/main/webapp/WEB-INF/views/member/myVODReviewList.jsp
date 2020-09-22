@@ -129,7 +129,7 @@ header>section {
 				<section class="content-1">
 					<section class="content-1-1">
 						<h2 class="title">내가 쓴 VOD 리뷰</h2>
-						<hr>
+						
 						<table class="contentTable">
 							<c:if test="${ empty list }">
 								<tr>

@@ -205,7 +205,6 @@ li a:hover {
            <li><a href="#">관리</a>
            		<ul>
 	           		<li><a href="MovieManagerSalesPage.do">지점 수익 조회</a></li>
-	           		<li><a href="#">영화 예매 취소 관리</a></li>
 	           	</ul>
            </li>
        </ul>
