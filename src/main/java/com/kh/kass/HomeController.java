@@ -43,6 +43,7 @@ public class HomeController {
 		ArrayList<Movie> scoreList = resService.mScoreList();
 		ArrayList<Movie> totalScoreList = resService.mTotalScoreList();
 		ArrayList<Snack> snackList = sService.selectMList();
+		ArrayList<Movie> movieNoList = resService.movieNList();
 		
 		ArrayList<Movie> avgScore = new ArrayList<>();
 		double avg = 0;
@@ -72,11 +73,6 @@ public class HomeController {
 		newFavorList.add(movieFavorList.get(0));
 		newFavorList.add(movieFavorList.get(1));
 		newFavorList.add(movieFavorList.get(2));
-		System.out.println("1. "+newFavorList.get(0));
-		System.out.println("2. "+newFavorList.get(1));
-		System.out.println("3. "+newFavorList.get(2));
-		
-		
 		
 		for (Snack s : snackList) {
 			System.out.println("스낵 리스트 : " + s);
@@ -86,6 +82,7 @@ public class HomeController {
 			mv.addObject("movieDateList", movieDateList);
 			mv.addObject("movieFavorList", movieFavorList);
 			mv.addObject("snackList", snackList);
+			mv.addObject("movieNoList", movieNoList);
 			mv.setViewName("home");
 		} else {
 			throw new ResException("영화 리스트 불러오기를 실패했습니다.");

@@ -126,6 +126,10 @@ public class ResDao {
 	public ArrayList<Movie> mTotalScoreList() {
 		return (ArrayList)sqlSession.selectList("resMapper.mTotalScoreList");
 	}
+
+	public ArrayList<Movie> movieNList() {
+		return (ArrayList)sqlSession.selectList("resMapper.movieNList");
+	}
 	
 
 }

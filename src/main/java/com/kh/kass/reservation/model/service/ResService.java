@@ -55,5 +55,7 @@ public interface ResService {
 	public ArrayList<Movie> mScoreList();
 
 	public ArrayList<Movie> mTotalScoreList();
+
+	public ArrayList<Movie> movieNList();
 	
 }
