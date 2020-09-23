@@ -70,9 +70,11 @@ public class HomeController {
 		
 		Collections.sort(movieFavorList);
 		ArrayList<Movie> newFavorList = new ArrayList<>();
-		newFavorList.add(movieFavorList.get(0));
-		newFavorList.add(movieFavorList.get(1));
-		newFavorList.add(movieFavorList.get(2));
+		if(movieFavorList.isEmpty()) {
+			newFavorList.add(movieFavorList.get(0));
+			newFavorList.add(movieFavorList.get(1));
+			newFavorList.add(movieFavorList.get(2));			
+		}
 		
 		for (Snack s : snackList) {
 			System.out.println("스낵 리스트 : " + s);
